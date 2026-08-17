@@ -1,0 +1,128 @@
+.intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.intro-container.phase-loading {
+  background-color: #111111;
+}
+
+.intro-container.phase-blackout {
+  background-color: #111111;
+}
+
+.intro-container.phase-ribbons {
+  background-color: #f3ebd7;
+}
+
+/* Percentage Text */
+.percentage-text {
+  font-family: var(--font-family);
+  font-size: 8rem;
+  font-weight: 700;
+  color: #f3ebd7;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.percentage-text.hidden {
+  opacity: 0;
+}
+
+/* Marquee Ribbons */
+.ribbons-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.intro-container.phase-ribbons .ribbons-container {
+  opacity: 1;
+}
+
+.ribbon {
+  background-color: #111111;
+  color: #f3ebd7;
+  padding: 1.5rem 0;
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.ribbon-top {
+  transform: rotate(4deg);
+}
+
+.ribbon-bottom {
+  transform: rotate(-4deg);
+}
+
+.marquee-content {
+  display: flex;
+  font-size: 6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.marquee-content span {
+  padding-right: 2rem;
+}
+
+.marquee-content-left {
+  animation: marquee-left 15s linear infinite;
+  width: fit-content;
+}
+
+.marquee-content-right {
+  animation: marquee-right 15s linear infinite;
+  width: fit-content;
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* Slide Up Animation */
+.intro-container.phase-exit {
+  transform: translateY(-100%);
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  background-color: #f3ebd7; /* keep beige as it slides up */
+}
+
+@media (max-width: 768px) {
+  .percentage-text {
+    font-size: 5rem;
+  }
+  .marquee-content {
+    font-size: 4rem;
+  }
+  .ribbon {
+    padding: 1rem 0;
+  }
+}

@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+@font-face {
+  font-family: 'Brexon';
+  src: url('../assets/fonts/Brexon-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-maroon);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding-bottom: 5vh;
+}
+
+.hero-text-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Left half of screen */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-left: 2vw; /* Shifted firmly to the left corner */
+  z-index: 5;
+  pointer-events: none; /* Let clicks pass through if needed, though no buttons here */
+}
+
+.hero-text-content {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.hero-name {
+  font-family: 'Brexon', sans-serif;
+  font-size: 11vw; /* Made very big */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  white-space: nowrap; /* Force one line */
+  text-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+}
+
+.name-bright {
+  color: #ffffff; /* Bright white */
+}
+
+.name-light {
+  color: #a0a0a0; /* Light gray */
+}
+
+.hero-stars-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+  box-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: #a0a0a0; 
+  text-transform: uppercase;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hero-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 1px;
+}
+
+.btn-white {
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-white:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+}
+
+.btn-black {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-black:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-3px) scale(1.05);
+}
+
+.avatar-wrapper {
+  pointer-events: auto;
+  position: absolute;
+  bottom: 0;
+  right: -10%; /* Push right slightly */
+  width: 1200px; /* Fully cover screen */
+  height: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: -15rem; /* Tuck deeper to center face */
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(0%) drop-shadow(0 20px 40px rgba(0,0,0,0.8)); /* Default in color */
+  transition: filter 0.4s ease-out, transform 0.4s ease-out;
+  cursor: pointer;
+}
+
+.avatar-img:hover {
+  filter: grayscale(100%) drop-shadow(0 30px 60px rgba(255,255,255,0.1)); /* Black & white on hover */
+  transform: scale(1.02);
+}
+
+
+@media (max-width: 768px) {
+  .hero-bg-text {
+    font-size: 35vw;
+  }
+  .avatar-wrapper {
+    width: 250px;
+    height: 350px;
+  }
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+}

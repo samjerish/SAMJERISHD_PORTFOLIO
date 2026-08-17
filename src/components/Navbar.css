@@ -1,0 +1,133 @@
+/* Navigation Toggle Button */
+.nav-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-toggle:hover {
+  background-color: #ffffff;
+}
+
+.nav-toggle:hover .hamburger,
+.nav-toggle:hover .hamburger::before,
+.nav-toggle:hover .hamburger::after {
+  background-color: #000000;
+}
+
+/* Hamburger Icon */
+.hamburger {
+  position: relative;
+  width: 20px;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  transform: translateY(-6px);
+}
+
+.hamburger::after {
+  transform: translateY(6px);
+}
+
+/* Open State for Hamburger */
+.nav-toggle.menu-open .hamburger {
+  background-color: transparent;
+}
+.nav-toggle.menu-open:hover .hamburger {
+  background-color: transparent;
+}
+.nav-toggle.menu-open .hamburger::before {
+  transform: rotate(45deg);
+}
+.nav-toggle.menu-open .hamburger::after {
+  transform: rotate(-45deg);
+}
+
+/* Full Screen Overlay */
+.control-center-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.control-center-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Navigation Links */
+.control-center-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  transform: translateY(30px);
+  transition: transform 0.4s ease;
+}
+
+.control-center-overlay.open .control-center-nav {
+  transform: translateY(0);
+}
+
+.control-center-nav a {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #a0a0a0;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.control-center-nav a:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+  .control-center-nav a {
+    font-size: 2.5rem;
+  }
+}
