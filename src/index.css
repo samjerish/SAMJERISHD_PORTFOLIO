@@ -37,6 +37,11 @@ body {
   width: 100vw;
 }
 
+/* Custom interactive cursor for links/buttons */
+a, button, [role="button"], input, select, textarea {
+  /* cursor styles removed in favor of CustomCursor component */
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -57,7 +62,6 @@ body {
 
 /* Base button styles */
 button {
-  cursor: pointer;
   border: none;
   background: none;
   font-family: var(--font-family);

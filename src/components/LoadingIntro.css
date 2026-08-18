@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +21,7 @@
 }
 
 .intro-container.phase-ribbons {
-  background-color: #f3ebd7;
+  background-color: #ffffff;
 }
 
 /* Percentage Text */
@@ -29,7 +29,7 @@
   font-family: var(--font-family);
   font-size: 8rem;
   font-weight: 700;
-  color: #f3ebd7;
+  color: #ffffff;
   opacity: 1;
   transition: opacity 0.2s ease;
 }
@@ -55,18 +55,20 @@
   pointer-events: none;
 }
 
-.intro-container.phase-ribbons .ribbons-container {
+.intro-container.phase-ribbons .ribbons-container,
+.intro-container.phase-exit .ribbons-container {
   opacity: 1;
 }
 
 .ribbon {
   background-color: #111111;
-  color: #f3ebd7;
+  color: #ffffff;
   padding: 1.5rem 0;
   display: flex;
   white-space: nowrap;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 1.8s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .ribbon-top {
@@ -108,11 +110,19 @@
   100% { transform: translateX(0%); }
 }
 
-/* Slide Up Animation */
+/* Zoom Out Animation */
 .intro-container.phase-exit {
-  transform: translateY(-100%);
-  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
-  background-color: #f3ebd7; /* keep beige as it slides up */
+  background-color: transparent;
+  pointer-events: none;
+  transition: background-color 0.8s ease;
+}
+
+.intro-container.phase-exit .ribbon-top {
+  transform: rotate(4deg) scale(5) translateY(-80vh);
+}
+
+.intro-container.phase-exit .ribbon-bottom {
+  transform: rotate(-4deg) scale(5) translateY(80vh);
 }
 
 @media (max-width: 768px) {

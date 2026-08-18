@@ -2,19 +2,22 @@ import React from 'react';
 import { Navbar } from './Navbar';
 import { HeroSection } from './HeroSection';
 import { StorySection } from './StorySection';
+import { AboutSection } from './AboutSection';
 import { ProjectsSection } from './ProjectsSection';
+import { ContactSection } from './ContactSection';
 import './PortfolioLayout.css';
 
-export const PortfolioLayout: React.FC = () => {
+export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | 'about') => void }> = ({ onNavigate }) => {
   return (
     <div className="portfolio-layout">
-      <Navbar />
+      <Navbar onNavigate={onNavigate} />
       <main>
         <HeroSection />
         <StorySection />
+        <AboutSection />
         <ProjectsSection />
+        <ContactSection />
       </main>
-      {/* Additional sections (Work, Contact) can be added here in the future */}
     </div>
   );
 };

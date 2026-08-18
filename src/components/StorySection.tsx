@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './StorySection.css';
 
-const AnimatedLine = ({ text, baseDelay }: { text: string, baseDelay: number }) => {
+export const AnimatedLine = ({ text, baseDelay }: { text: string, baseDelay: number }) => {
   let globalCharIndex = 0;
   
   // Split by < and > to isolate highlighted text
@@ -86,7 +86,7 @@ export const StorySection: React.FC = () => {
   }, []);
 
   return (
-    <section className="story-container" id="about">
+    <section className="story-container">
       <div className="story-content">
         <div 
           ref={textRef} 

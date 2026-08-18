@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Space+Grotesk:wght@400;600;700&display=swap');
+
+.about-container {
+  width: 100vw;
+  min-height: 100vh; /* Covers the full screen height */
+  margin-left: calc(-50vw + 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the content block */
+  padding: 8rem 4vw; /* added right padding to move card left */
+  background: #000000;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  box-sizing: border-box;
+}
+
+.about-container.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-content {
+  max-width: 1400px; /* Use a max-width for better centering on large screens */
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  gap: 8vw; /* larger gap between text and card */
+  align-items: center;
+  justify-content: center;
+}
+
+/* RIGHT COLUMN: Text content */
+.about-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* LEFT COLUMN: Polaroid setup (now visually on right) */
+.about-left {
+  flex: 0 0 500px;
+  position: relative;
+  display: flex;
+  justify-content: center; /* Center the card in its column */
+}
+
+.yellow-folder {
+  position: absolute;
+  top: -20px;
+  left: -40px; /* moved to left side of the card */
+  width: 100%;
+  height: 105%;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  transform: rotate(-6deg); /* flipped rotation */
+  z-index: 1;
+  box-shadow: -2px 4px 15px rgba(0,0,0,0.5); /* adjusted shadow */
+}
+
+.play-text {
+  position: absolute;
+  left: 15px; /* moved text to left */
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg); /* rotated opposite way */
+  transform-origin: center left;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.polaroid-card {
+  position: relative;
+  z-index: 2;
+  background-color: #222222;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  border: 1px solid #333333;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.binder-clip {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.polaroid-image-wrapper {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background-color: #111111;
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.polaroid-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.polaroid-text h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px; /* increased spacing */
+  transform: scaleX(1.1); /* horizontally stretches letters */
+  transform-origin: left;
+}
+
+.highlight-text {
+  color: #a0a0a0;
+}
+
+.info-section {
+  margin-top: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #aaaaaa;
+}
+
+.value.handwriting {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: #a0a0a0;
+  font-weight: 600;
+  transform: translateY(-2px);
+}
+
+.dashed-line {
+  border: none;
+  border-top: 1px dashed #444444;
+  margin: 6px 0;
+}
+
+.subtitle.handwriting {
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #a0a0a0;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.main-title {
+  font-family: var(--font-family);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: #ffffff; /* Slightly brighter to distinguish title */
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.description p {
+  font-family: var(--font-family);
+  font-size: 2.8rem;
+  line-height: 1.2;
+  color: #a0a0a0;
+  font-weight: 500;
+  text-align: left;
+}
+
+/* Story Animation applied to About text */
+.about-story-text {
+  font-family: var(--font-family);
+  font-size: 2.8rem;
+  line-height: 1.2;
+  color: #a0a0a0;
+  font-weight: 500;
+  text-align: left;
+}
+
+.about-story-text.is-visible .fade-char {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .about-content {
+    flex-direction: column;
+    gap: 6rem;
+  }
+  
+  .about-left {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .about-right {
+    text-align: center;
+  }
+
+  .main-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-container {
+    padding: 6rem 1.5rem;
+  }
+
+  .main-title {
+    font-size: 2.5rem;
+  }
+}

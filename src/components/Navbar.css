@@ -98,28 +98,45 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  transform: translateY(30px);
-  transition: transform 0.4s ease;
-}
-
-.control-center-overlay.open .control-center-nav {
-  transform: translateY(0);
 }
 
 .control-center-nav a {
+  font-family: 'Times New Roman', Times, serif;
   font-size: 4rem;
   font-weight: 800;
   color: #a0a0a0;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 2px;
-  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.control-center-nav a:hover {
+.control-center-overlay.open .control-center-nav a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger opening transitions */
+.control-center-overlay.open .control-center-nav a:nth-child(1) {
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s, color 0.3s ease, text-shadow 0.3s ease;
+}
+.control-center-overlay.open .control-center-nav a:nth-child(2) {
+  transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s, color 0.3s ease, text-shadow 0.3s ease;
+}
+.control-center-overlay.open .control-center-nav a:nth-child(3) {
+  transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s, color 0.3s ease, text-shadow 0.3s ease;
+}
+.control-center-overlay.open .control-center-nav a:nth-child(4) {
+  transition: opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.control-center-overlay.open .control-center-nav a:hover {
   color: #ffffff;
   transform: scale(1.1);
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {

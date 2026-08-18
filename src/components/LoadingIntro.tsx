@@ -38,7 +38,7 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
       setPhase('ribbons');
     }, 1500);
 
-    // Phase 4: Slide up exit animation
+    // Phase 4: Zoom out exit animation
     const exitTimer = setTimeout(() => {
       setPhase('exit');
     }, 3200);
@@ -46,7 +46,7 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
     // Complete the intro
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 3800);
+    }, 5200);
 
     return () => {
       clearInterval(interval);
