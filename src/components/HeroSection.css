@@ -181,9 +181,10 @@
     font-size: 16vw; /* Reduced from 20vw */
   }
   .hero-subtitle {
-    font-size: 1.1rem; /* Slightly smaller for mobile */
+    font-size: 1rem;
     padding: 0 1rem;
     text-align: center;
+    white-space: normal;
   }
   .hero-actions {
     flex-direction: column;
@@ -198,13 +199,14 @@
 
 @media (max-width: 480px) {
   .hero-name {
-    font-size: 14vw;
+    font-size: 13vw;
   }
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    white-space: normal;
   }
   .hero-bg-monogram {
-    font-size: 35vh;
+    font-size: 30vh;
   }
 }
 

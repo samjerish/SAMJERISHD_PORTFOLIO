@@ -1,7 +1,7 @@
 .contact-page-wrapper {
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   background-color: #0d0d0d;
   color: #fff;
   font-family: 'Space Grotesk', sans-serif;
@@ -339,7 +339,8 @@
     height: auto;
   }
   .contact-image-section {
-    height: 40vh;
+    height: 300px;
+    flex: none;
   }
   .contact-form-section {
     padding: 3rem 2rem;
