@@ -61,13 +61,11 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
   const marqueeText = "SAM JERISH D. ".repeat(15);
 
   return (
-    <div className={`intro-container phase-${phase}`}>
+    <div className={`intro-container phase-${phase} is-initial-load`}>
       {/* Loading Percentage */}
-      {phase === 'loading' && (
-        <div className="percentage-text">
-          {percentage}%
-        </div>
-      )}
+      <div className={`percentage-text ${phase !== 'loading' ? 'hidden' : ''}`}>
+        {percentage}%
+      </div>
 
       {/* Marquee Ribbons */}
       <div className="ribbons-container">

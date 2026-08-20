@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './StorySection.css';
+import photoSrc from '../assets/1st_photo.png';
 
 export const AnimatedLine = ({ text, baseDelay }: { text: string, baseDelay: number }) => {
   let globalCharIndex = 0;
@@ -22,17 +23,8 @@ export const AnimatedLine = ({ text, baseDelay }: { text: string, baseDelay: num
               const isSpace = /^\s+$/.test(token);
               
               if (isSpace) {
-                const delay = baseDelay + (globalCharIndex * 0.02);
                 globalCharIndex += token.length;
-                return (
-                  <span 
-                    key={tokenIndex} 
-                    className="fade-char" 
-                    style={{ transitionDelay: `${delay}s`, whiteSpace: 'pre' }}
-                  >
-                    {token}
-                  </span>
-                );
+                return token;
               }
 
               return (
@@ -87,22 +79,22 @@ export const StorySection: React.FC = () => {
 
   return (
     <section className="story-container">
+      <div className="story-image-overlay">
+        <img src={photoSrc} alt="Story Background" className="story-photo" />
+      </div>
       <div className="story-content">
         <div 
           ref={textRef} 
           className={`story-text ${isVisible ? 'is-visible' : ''}`}
         >
           <AnimatedLine 
-            text="It started with a curiosity about how <computers work>." 
+            text="It started with a curiosity about how <computers work>. That curiosity grew into a passion for <coding, problem-solving, and building>." 
             baseDelay={0.2} 
           />
-          <AnimatedLine 
-            text="That curiosity grew into a passion for <coding, problem-solving, and building>." 
-            baseDelay={1.2} 
-          />
+          <br /><br />
           <AnimatedLine 
             text="From exploring technology to developing <intelligent solutions>, my journey is about turning <curiosity into code> and <ideas into reality>." 
-            baseDelay={2.2} 
+            baseDelay={3.0} 
           />
         </div>
       </div>

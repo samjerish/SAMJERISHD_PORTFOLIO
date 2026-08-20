@@ -182,5 +182,46 @@
   }
   .modern-about-container {
     padding: 0 1.5rem;
+    gap: 2rem;
+  }
+  .modern-about-image-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .modern-about-title {
+    font-size: 3rem; /* Fixed smaller size for mobile */
+  }
+  .modern-about-name {
+    font-size: 2rem;
+  }
+  .modern-about-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .modern-about-socials {
+    gap: 1.5rem;
+    justify-content: center; /* Center socials on mobile */
+    margin-top: 2rem;
+  }
+  .modern-about-left {
+    text-align: center; /* Center text on mobile */
+    justify-content: flex-start;
+  }
+  .modern-about-title {
+    transform-origin: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-about-title {
+    font-size: 2.2rem;
+    white-space: normal; /* Allow wrap on very small screens to prevent breaking */
+    word-break: break-word;
+  }
+  .modern-about-name {
+    font-size: 1.6rem;
+  }
+  .modern-about-text {
+    font-size: 1rem;
   }
 }

@@ -1,54 +1,106 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ContactSection.css';
-import { ArrowUpRight } from 'lucide-react';
+import { FiLinkedin, FiInstagram, FiGithub, FiMail } from 'react-icons/fi';
 
-const GithubIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"></path></svg>
-);
+export const ContactSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-const LinkedinIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (sectionRef.current) observer.unobserve(sectionRef.current);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15,
+      }
+    );
 
-const InstagramIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-);
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
 
-export const ContactSection: React.FC = () => {
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const timeString = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
   return (
-    <section className="contact-container" id="contact">
-      <div className="contact-content">
-        <h2 className="contact-title">LET'S WORK TOGETHER</h2>
-        <p className="contact-subtitle">
-          I'm available for full-time roles, freelance projects, and exciting collaborations in software development and media production.
-        </p>
+    <section ref={sectionRef} className={`dark-contact-section ${isVisible ? 'is-visible' : ''}`}>
+      <div className="dark-contact-content">
         
-        <div className="contact-buttons">
-          <a href="mailto:samjerishd@gmail.com" className="btn-primary">
-            Get in touch
+        {/* Logo Container */}
+        <div className="stylized-logo-wrapper">
+          <div className="logo-script-text">the</div>
+          <div className="logo-main-text">Sam Jerish <span className="logo-slash">/</span> D</div>
+          
+          {/* Decorative lines */}
+          <div className="logo-line-horizontal"></div>
+          <div className="logo-line-diagonal"></div>
+        </div>
+
+        {/* Social Icons */}
+        <div className="dark-social-icons">
+          <a href="https://www.linkedin.com/in/samjerishd" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="social-linkedin">
+            <FiLinkedin size={32} strokeWidth={1.5} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-            Connect on LinkedIn <ArrowUpRight size={18} />
+          <a href="https://github.com/samjerish" target="_blank" rel="noreferrer" aria-label="GitHub" className="social-github">
+            <FiGithub size={32} strokeWidth={1.5} />
+          </a>
+          <a href="https://www.instagram.com/samjerishd" target="_blank" rel="noreferrer" aria-label="Instagram" className="social-instagram">
+            <FiInstagram size={32} strokeWidth={1.5} />
+          </a>
+          <a href="mailto:samjerishd@gmail.com" aria-label="Email" className="social-mail">
+            <FiMail size={32} strokeWidth={1.5} />
+          </a>
+        </div>
+
+        {/* Headings */}
+        <h2 className="dark-contact-heading">
+          From concept to<br/>creation, let's make<br/>it happen
+        </h2>
+
+        <p className="dark-contact-subheading">
+          Curious to know more about my work and process?<br/>
+          Let's connect and talk about what really matters.
+        </p>
+
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button className="contact-btn-primary" onClick={() => onNavigate && onNavigate('contact')}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Get in Touch
+            </span>
+          </button>
+          
+          <a href="/Resume.pdf" target="_blank" rel="noreferrer" className="contact-btn-primary" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              View Resume
+            </span>
           </a>
         </div>
       </div>
-      
-      <footer className="footer-bar">
+
+      {/* Footer bar */}
+      <div className="contact-footer-bar">
         <div className="footer-left">
-          © 2026 Sam Jerish D. Built with ❤️
+          © 2026 SAM JERISH D . BUILT WITH ❤️
         </div>
         <div className="footer-right">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <GithubIcon />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <LinkedinIcon />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <InstagramIcon />
-          </a>
+          <span className="status-dot-green"></span> Available <span className="time-display">{timeString}</span>
         </div>
-      </footer>
+      </div>
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ProjectsSection.css';
 
 type Project = {
@@ -69,13 +69,36 @@ const RIGHT_TECH_STACK = [
 
 export const ProjectsSection: React.FC = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (sectionRef.current) observer.unobserve(sectionRef.current);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15,
+      }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
 
   // We repeat the smaller arrays multiple times to ensure the content is tall enough for a seamless loop
   const leftItems = [...LEFT_TECH_STACK, ...LEFT_TECH_STACK, ...LEFT_TECH_STACK, ...LEFT_TECH_STACK];
   const rightItems = [...RIGHT_TECH_STACK, ...RIGHT_TECH_STACK, ...RIGHT_TECH_STACK, ...RIGHT_TECH_STACK];
 
   return (
-    <section className="projects-container" id="projects">
+    <section ref={sectionRef} className={`projects-container ${isVisible ? 'is-visible' : ''}`} id="projects">
       {/* Left Marquee (Scrolls Up) */}
       <div className="vertical-marquee left-marquee">
         <div className="vertical-marquee-content scroll-up">

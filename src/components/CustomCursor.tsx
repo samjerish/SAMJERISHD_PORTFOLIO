@@ -5,10 +5,9 @@ export const CustomCursor: React.FC = () => {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const [isOnCanvas, setIsOnCanvas] = useState(false);
 
   useEffect(() => {
-    let requestRef: number | undefined;
-    
     // We update position directly for performance, but track hover/click in state
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -16,6 +15,8 @@ export const CustomCursor: React.FC = () => {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+      
+      // Check for hoverable items
       if (
         target.tagName.toLowerCase() === 'a' ||
         target.tagName.toLowerCase() === 'button' ||
@@ -26,6 +27,13 @@ export const CustomCursor: React.FC = () => {
         setIsHovering(true);
       } else {
         setIsHovering(false);
+      }
+
+      // Check if cursor is over the whiteboard canvas
+      if (target.closest('.drawing-canvas') || target.classList.contains('drawing-canvas')) {
+        setIsOnCanvas(true);
+      } else {
+        setIsOnCanvas(false);
       }
     };
 
@@ -42,13 +50,12 @@ export const CustomCursor: React.FC = () => {
       window.removeEventListener('mouseover', handleMouseOver);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
-      if (requestRef !== undefined) cancelAnimationFrame(requestRef);
     };
   }, []);
 
   return (
     <div
-      className={`custom-cursor ${isHovering || isClicking ? 'hover' : ''}`}
+      className={`custom-cursor ${isHovering || isClicking ? 'hover' : ''} ${isOnCanvas ? 'on-canvas' : ''}`}
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,

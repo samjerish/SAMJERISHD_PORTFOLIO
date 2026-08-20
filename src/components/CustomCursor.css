@@ -20,6 +20,11 @@
   border: 2px solid #ffffff;
 }
 
+.custom-cursor.on-canvas {
+  background-color: var(--cursor-canvas-color, #000000);
+  border-color: var(--cursor-canvas-color, #000000);
+}
+
 /* Hide default cursor globally */
 * {
   cursor: none !important;

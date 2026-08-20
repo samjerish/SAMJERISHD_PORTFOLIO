@@ -56,7 +56,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
               <PinterestIcon />
             </a>
-            <a href="https://linkedin.com/in/samjerishd" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/samjerishd" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <LinkedinIcon />
             </a>
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">

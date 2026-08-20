@@ -124,12 +124,8 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
             className={`story-text ${isStoryVisible ? 'is-visible' : ''}`}
           >
             <AnimatedLine 
-              text="What began as a hobby slowly became a passion for <photography and video editing>." 
+              text="What began as a hobby slowly became a passion for <photography and video editing>. With every photo I captured and every video I edited, I discovered a new way to express <creativity>." 
               baseDelay={0.2} 
-            />
-            <AnimatedLine 
-              text="With every photo I captured and every video I edited, I discovered a new way to express <creativity>." 
-              baseDelay={2.2} 
             />
           </div>
         </div>

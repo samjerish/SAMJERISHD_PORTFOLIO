@@ -1,15 +1,49 @@
 .projects-container {
+  position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  height: 100vh; /* Fixed height so vertical marquees can scroll cleanly */
-  background-color: #080808;
+  height: 100vh;
+  background-color: transparent;
   display: flex;
   flex-direction: row;
-  align-items: stretch; /* Stretch to fill vertical space */
+  align-items: stretch;
   justify-content: space-between;
-  padding: 4rem 4vw; /* Increased horizontal padding for a little gap */
+  padding: 4rem 4vw;
   box-sizing: border-box;
-  overflow: hidden; /* Hide the scrolling elements that leave the container */
+  overflow: hidden;
+  
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, transparent, #000000);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.projects-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, #000000);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.projects-container.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* --- VERTICAL MARQUEES --- */
@@ -111,6 +145,10 @@
   cursor: pointer;
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -118,11 +156,11 @@
 
 /* Alternating colors: grey and black mixed one by one */
 .accordion-strip:nth-child(odd) {
-  background-color: #222222; /* Grey */
+  background-color: rgba(255, 255, 255, 0.05); /* Grey glass */
 }
 
 .accordion-strip:nth-child(even) {
-  background-color: #050505; /* Black */
+  background-color: rgba(255, 255, 255, 0.02); /* Black glass */
 }
 
 /* Expanded state on hover */
@@ -252,12 +290,29 @@
 }
 
 @media (max-width: 768px) {
+  .projects-container {
+    padding: 2rem 1rem;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .vertical-marquee {
+    display: none; /* Hide side marquees on mobile to save space */
+  }
+  
+  .accordion-container {
+    margin: 0;
+    max-width: 100%;
+  }
+
   .accordion-strip {
     height: 70px;
   }
   
   .accordion-strip.expanded {
-    height: 450px;
+    height: auto;
+    min-height: 350px;
+    padding-bottom: 2rem;
   }
   
   .strip-full-desc {
@@ -266,5 +321,21 @@
   
   .strip-header h3 {
     font-size: 1.2rem;
+  }
+
+  .strip-header span {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .accordion-strip {
+    padding: 1.5rem;
+  }
+  .strip-header h3 {
+    font-size: 1rem;
+  }
+  .strip-header span {
+    font-size: 1rem;
   }
 }

@@ -12,16 +12,18 @@
   transition: background-color 0.3s ease;
 }
 
-.intro-container.phase-loading {
-  background-color: #111111;
-}
-
-.intro-container.phase-blackout {
-  background-color: #111111;
-}
-
+/* Default is transparent for transitions */
+.intro-container.phase-loading,
+.intro-container.phase-blackout,
 .intro-container.phase-ribbons {
-  background-color: #ffffff;
+  background-color: transparent;
+}
+
+/* Match site background for the initial load */
+.intro-container.is-initial-load.phase-loading,
+.intro-container.is-initial-load.phase-blackout,
+.intro-container.is-initial-load.phase-ribbons {
+  background-color: #080808;
 }
 
 /* Percentage Text */
@@ -31,7 +33,7 @@
   font-weight: 700;
   color: #ffffff;
   opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.5s ease;
 }
 
 .percentage-text.hidden {
@@ -55,6 +57,7 @@
   pointer-events: none;
 }
 
+.intro-container.phase-enter .ribbons-container,
 .intro-container.phase-ribbons .ribbons-container,
 .intro-container.phase-exit .ribbons-container {
   opacity: 1;
@@ -68,15 +71,23 @@
   white-space: nowrap;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 1.8s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .ribbon-top {
-  transform: rotate(4deg);
+  transform: rotate(4deg) translateX(-150vw);
 }
 
 .ribbon-bottom {
-  transform: rotate(-4deg);
+  transform: rotate(-4deg) translateX(150vw);
+}
+
+.intro-container.phase-ribbons .ribbon-top {
+  transform: rotate(4deg) translateX(0);
+}
+
+.intro-container.phase-ribbons .ribbon-bottom {
+  transform: rotate(-4deg) translateX(0);
 }
 
 .marquee-content {
@@ -114,7 +125,7 @@
 .intro-container.phase-exit {
   background-color: transparent;
   pointer-events: none;
-  transition: background-color 0.8s ease;
+  transition: background-color 0.4s ease; /* Faster fade to reduce greyish mix */
 }
 
 .intro-container.phase-exit .ribbon-top {
