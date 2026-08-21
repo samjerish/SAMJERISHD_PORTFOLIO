@@ -54,7 +54,7 @@
 
 .hero-name {
   font-family: 'Anton', sans-serif;
-  font-size: 16.5vw; /* Extremely wide, almost full screen width */
+  font-size: clamp(3rem, 15vw, 9rem); /* Capped at 9rem to prevent massive zoom on desktop */
   margin: 0;
   margin-bottom: 2rem; 
   line-height: 1;
@@ -85,7 +85,7 @@
 
 .hero-subtitle {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 2.5vw;
+  font-size: clamp(0.9rem, 2vw, 1.25rem); /* Capped to look elegant, not huge */
   font-weight: 500;
   color: #b0b0b0; /* Techy grey */
   margin-top: 0.5rem;
@@ -183,7 +183,7 @@
     font-size: 40vh; /* Reduced from 50vh so it doesn't push edges */
   }
   .hero-name {
-    font-size: 16vw; /* Reduced from 20vw */
+    font-size: clamp(3rem, 16vw, 6rem); 
   }
   .hero-subtitle {
     font-size: 1rem;
@@ -204,7 +204,7 @@
 
 @media (max-width: 480px) {
   .hero-name {
-    font-size: 13vw;
+    font-size: 14vw;
   }
   .hero-subtitle {
     font-size: 0.9rem;
