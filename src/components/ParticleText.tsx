@@ -12,7 +12,7 @@ interface Particle {
 }
 
 interface ParticleTextProps {
-  lines: string[];
+  lines?: string[];
   fontSizeDivider?: number;
   fontSizeMax?: number;
   gap?: number;

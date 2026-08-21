@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './ContactPage.css';
-import mailboxImg from '../assets/mailbox.jpg';
 import { MailboxGraphic } from './MailboxGraphic';
 import { ArrowUpRight, PenTool, Eraser, Trash2, Type, FileText } from 'lucide-react';
 import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi';
