@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ContactSection.css';
 import { FiLinkedin, FiInstagram, FiGithub, FiMail } from 'react-icons/fi';
+import { ParticleText } from './ParticleText';
 
 export const ContactSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -66,9 +67,16 @@ export const ContactSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | '
         </div>
 
         {/* Headings */}
-        <h2 className="dark-contact-heading">
-          From concept to<br/>creation, let's make<br/>it happen
-        </h2>
+        <div style={{ width: '100%', maxWidth: '900px', margin: '0 auto', marginBottom: '1rem' }}>
+          <ParticleText 
+            lines={["From concept to", "creation, let's make", "it happen"]}
+            fontSizeDivider={16}
+            fontSizeMax={60}
+            gap={4}
+            letterSpacing="2px"
+            lineSpacingRatio={0.95}
+          />
+        </div>
 
         <p className="dark-contact-subheading">
           Curious to know more about my work and process?<br/>

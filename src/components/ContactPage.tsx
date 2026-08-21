@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './ContactPage.css';
 import mailboxImg from '../assets/mailbox.jpg';
+import { MailboxGraphic } from './MailboxGraphic';
 import { ArrowUpRight, PenTool, Eraser, Trash2, Type, FileText } from 'lucide-react';
 import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi';
 
@@ -115,7 +116,7 @@ export const ContactPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abou
     <div className="contact-page-wrapper">
       {/* LEFT SIDE - IMAGE */}
       <div className="contact-image-section">
-        <img src={mailboxImg} alt="3D Mailbox" className="mailbox-img" />
+        <MailboxGraphic />
       </div>
 
       {/* RIGHT SIDE - FORM */}

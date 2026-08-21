@@ -50,3 +50,23 @@
 .scroll-progress-container:hover .scroll-progress-bar {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
 }
+
+/* Curved Scroll Effect Classes */
+.curved-main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  /* Add perspective for a better 3D-like scaling effect */
+  perspective: 1200px;
+}
+
+.curved-section {
+  width: 100%;
+  /* We use transform-origin right so they pivot like a wheel or arc */
+  transform-origin: center right;
+  /* Initial values, will be overridden by JS */
+  transform: translateX(0px) rotateZ(0deg) scale(1);
+  will-change: transform;
+}
