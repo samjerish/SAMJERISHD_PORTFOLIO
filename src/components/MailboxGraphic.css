@@ -61,21 +61,22 @@
   transform-style: preserve-3d;
 }
 
-/* Nameplate */
+/* Nameplate inside door */
 .mailbox-nameplate {
   position: absolute;
-  top: 50%;
-  right: -5px;
-  transform: translateY(-50%) rotateY(90deg) translateZ(105px);
-  background: linear-gradient(to right, #d4d4d8, #a1a1aa);
-  padding: 4px 12px;
-  border-radius: 3px;
-  font-family: 'Anton', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  color: #111;
-  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.4);
-  /* Text on the side of the mailbox */
+  top: 15px; /* On the top right of the door */
+  right: 15px;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: #000000;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.6), inset 0 0 2px rgba(255,255,255,0.8);
+  border: 1px solid #e5e7eb;
+  z-index: 10;
 }
 
 /* Inside of the mailbox (dark void + letter) */
@@ -136,6 +137,7 @@
   background-color: #111;
   border-radius: 6px;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.4);
+  margin-top: 30px;
 }
 
 .mailbox-handle {
@@ -143,7 +145,7 @@
   height: 8px;
   background-color: #d4d4d8;
   border-radius: 4px;
-  margin-top: 40px;
+  margin-top: 15px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.5), inset 0 2px 2px rgba(255,255,255,0.6);
 }
 
@@ -224,7 +226,7 @@
 
 .mailbox-hint {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   font-family: 'Space Grotesk', sans-serif;
   color: #a0a0a0;
   font-size: 0.9rem;
@@ -243,4 +245,118 @@
 @keyframes pulse {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+}
+
+/* -------------------------------------
+   DELIVERY ANIMATION (POSTMAN)
+   ------------------------------------- */
+
+.postman-character {
+  position: absolute;
+  right: -100px;
+  bottom: 30%;
+  z-index: 4;
+  opacity: 0;
+}
+
+.postman-body {
+  position: relative;
+  width: 40px;
+  height: 70px;
+  background: #2563eb;
+  border-radius: 20px 20px 8px 8px;
+}
+
+.postman-head {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background: #fed7aa;
+  border-radius: 50%;
+}
+
+.postman-head::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 30px;
+  height: 15px;
+  background: #1e3a8a;
+  border-radius: 15px 15px 0 0;
+}
+
+.postman-arm {
+  position: absolute;
+  top: 15px;
+  left: -15px;
+  width: 15px;
+  height: 40px;
+  background: #1d4ed8;
+  border-radius: 10px;
+  transform-origin: top center;
+}
+
+.delivery-letter {
+  position: absolute;
+  bottom: -20px;
+  left: -5px;
+  width: 25px;
+  height: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  opacity: 1;
+}
+
+/* Delivery Trigger Sequence */
+.mailbox-graphic-container.is-delivering .postman-character {
+  animation: postman-sequence 6s linear forwards;
+}
+
+.mailbox-graphic-container.is-delivering .postman-arm {
+  animation: postman-arm-sequence 6s linear forwards;
+}
+
+.mailbox-graphic-container.is-delivering .delivery-letter {
+  animation: letter-disappear 6s linear forwards;
+}
+
+.mailbox-graphic-container.is-delivering .mailbox-door {
+  animation: door-delivery-sequence 6s linear forwards;
+}
+
+@keyframes door-delivery-sequence {
+  0%, 30% { transform: rotateX(0deg); }
+  40%, 55% { transform: rotateX(-100deg); }
+  65%, 100% { transform: rotateX(0deg); }
+}
+
+@keyframes postman-sequence {
+  0% { right: -100px; opacity: 1; transform: translateY(0); }
+  10% { transform: translateY(-10px); }
+  20% { transform: translateY(0); }
+  25% { right: calc(50% - 160px); opacity: 1; transform: translateY(0); } /* Reached mailbox */
+  70% { right: calc(50% - 160px); opacity: 1; transform: scaleX(1); }
+  72% { right: calc(50% - 160px); opacity: 1; transform: scaleX(-1); } /* Turn around */
+  80% { transform: scaleX(-1) translateY(-10px); }
+  90% { right: -100px; opacity: 1; transform: scaleX(-1) translateY(0); }
+  100% { right: -150px; opacity: 0; transform: scaleX(-1) translateY(0); } /* Walked off */
+}
+
+@keyframes postman-arm-sequence {
+  0%, 25% { transform: rotate(0deg) translateX(0); }
+  30% { transform: rotate(45deg) translateX(-15px); } /* Reach for handle */
+  40% { transform: rotate(15deg) translateX(-5px); } /* Pull door down */
+  45% { transform: rotate(70deg) translateX(-25px); } /* Push letter deep inside */
+  55% { transform: rotate(15deg) translateX(-5px); } /* Arm back at handle */
+  65% { transform: rotate(45deg) translateX(-15px); } /* Push door back up */
+  70%, 100% { transform: rotate(0deg) translateX(0); } /* Drop arm */
+}
+
+@keyframes letter-disappear {
+  0%, 48% { opacity: 1; }
+  50%, 100% { opacity: 0; } /* Letter drops inside */
 }

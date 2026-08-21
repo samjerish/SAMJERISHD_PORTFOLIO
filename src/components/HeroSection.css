@@ -49,6 +49,7 @@
   width: 100%;
   max-width: 100%;
   padding: 0 1rem;
+  margin-top: -10vh; /* Shifts the name and button up slightly above center */
 }
 
 .hero-name {
@@ -113,7 +114,10 @@
   gap: 1.5rem;
   align-items: center;
   justify-content: center;
-  margin-top: 3rem; /* Clean space between text and button */
+  margin-top: -2.5rem; /* Pull button up closer to the text */
+  width: 100%;
+  position: relative;
+  z-index: 20; /* Ensure clear visibility */
 }
 
 /* Status Button */
@@ -143,23 +147,23 @@
 }
 
 .status-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background-color: #4ade80; /* bright green */
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.8), 0 0 20px rgba(74, 222, 128, 0.4); /* Strong permanent glow */
   animation: pulse-dot 2s infinite ease-in-out;
 }
 
 @keyframes pulse-dot {
   0% {
-    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.8), 0 0 0 0 rgba(74, 222, 128, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.8), 0 0 0 10px rgba(74, 222, 128, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.8), 0 0 0 0 rgba(74, 222, 128, 0);
   }
 }
 

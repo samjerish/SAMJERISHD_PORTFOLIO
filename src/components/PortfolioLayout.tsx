@@ -11,18 +11,90 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    let animationFrameId: number;
+
+    const mainContent = document.querySelector('main') as HTMLElement;
+    if (mainContent) {
+      // Ensure no leftover global transforms
+      mainContent.style.transform = 'none';
+      mainContent.style.filter = 'none';
+    }
+
+    const renderLoop = () => {
+      const sections = document.querySelectorAll('main > section') as NodeListOf<HTMLElement>;
+      const windowHeight = window.innerHeight;
+      const centerY = windowHeight / 2;
+
+      sections.forEach((section, index) => {
+        // Natural stacking: later sections (higher index) overlap earlier ones
+        section.style.position = 'relative';
+        section.style.zIndex = index.toString();
+        
+        // Reset old scale/opacity transforms
+        section.style.transform = 'none';
+        section.style.opacity = '1';
+        section.style.filter = 'none';
+
+        if (index === 0) {
+          // First section (Hero) is always fully visible
+          section.style.clipPath = 'none';
+          return;
+        }
+
+        const rect = section.getBoundingClientRect();
+        
+        // Distance from bottom of screen to top of section
+        const distFromBottom = windowHeight - rect.top;
+        const normalized = distFromBottom / windowHeight;
+
+        // Keep the mask visually locked to the exact center of the screen
+        const maskCenterY = centerY - rect.top;
+
+        let radius = 0;
+        
+        if (normalized > 0 && normalized <= 1.5) {
+          // Cubic easing for a slow start then burst open
+          radius = Math.pow(normalized, 3) * 150; 
+        } else if (normalized > 1.5) {
+          radius = 150;
+        }
+
+        // Apply clip path
+        if (radius >= 150) {
+          section.style.clipPath = 'none';
+        } else if (radius <= 0) {
+          section.style.clipPath = `circle(0% at 50% ${maskCenterY}px)`;
+        } else {
+          section.style.clipPath = `circle(${radius}% at 50% ${maskCenterY}px)`;
+        }
+        
+        section.style.willChange = 'clip-path';
+      });
+      
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+
+    // Start continuous physics loop
+    renderLoop();
+
     const handleScroll = () => {
       const totalScroll = window.scrollY;
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scroll = (totalScroll / windowHeight) * 100;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = (totalScroll / docHeight) * 100;
       setScrollProgress(scroll);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial call to set correctly if page is loaded already scrolled
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(animationFrameId);
+      if (mainContent) {
+        mainContent.style.transform = 'none';
+        mainContent.style.filter = 'none';
+      }
+    };
   }, []);
 
   const handleTimelineAction = (e: React.MouseEvent<HTMLDivElement>, isDragging: boolean) => {
@@ -58,8 +130,8 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
       <main>
         <HeroSection />
         <StorySection />
-        <AboutSection />
         <ProjectsSection />
+        <AboutSection />
         <ContactSection onNavigate={onNavigate} />
       </main>
     </div>

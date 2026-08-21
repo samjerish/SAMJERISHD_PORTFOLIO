@@ -50,16 +50,18 @@
   width: 100%;
   margin: 0 auto;
   display: flex;
-  gap: 8vw; /* larger gap between text and card */
+  gap: 4vw;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-/* RIGHT COLUMN: Text content */
+/* LEFT COLUMN: Text content (named about-right for historical reasons) */
 .about-right {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 /* LEFT COLUMN: Polaroid setup (now visually on right) */
@@ -284,6 +286,7 @@
   color: #ffffff; /* Slightly brighter to distinguish title */
   line-height: 1.2;
   margin-bottom: 2rem;
+  text-align: left;
 }
 
 .description {

@@ -37,7 +37,10 @@
 .story-content {
   max-width: 1400px;
   width: 100%;
-  text-align: center;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
   position: relative;
   z-index: 1;
 }

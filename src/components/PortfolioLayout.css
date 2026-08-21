@@ -7,6 +7,12 @@
   overflow-x: hidden;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 8vh; /* Adds clean spacing between each section */
+}
+
 /* Scroll Progress Bar */
 .scroll-progress-container {
   position: fixed;
@@ -64,9 +70,7 @@
 
 .curved-section {
   width: 100%;
-  /* We use transform-origin right so they pivot like a wheel or arc */
   transform-origin: center right;
-  /* Initial values, will be overridden by JS */
   transform: translateX(0px) rotateZ(0deg) scale(1);
   will-change: transform;
 }

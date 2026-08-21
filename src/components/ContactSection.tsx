@@ -67,11 +67,11 @@ export const ContactSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | '
         </div>
 
         {/* Headings */}
-        <div style={{ width: '100%', maxWidth: '900px', margin: '0 auto', marginBottom: '1rem' }}>
+        <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', marginBottom: '1rem' }}>
           <ParticleText 
             lines={["From concept to", "creation, let's make", "it happen"]}
-            fontSizeDivider={16}
-            fontSizeMax={60}
+            fontSizeDivider={14}
+            fontSizeMax={75}
             gap={4}
             letterSpacing="2px"
             lineSpacingRatio={0.95}
