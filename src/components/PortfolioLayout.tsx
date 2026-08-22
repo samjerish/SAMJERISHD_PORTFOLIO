@@ -8,14 +8,16 @@ import { ContactSection } from './ContactSection';
 import './PortfolioLayout.css';
 
 export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressBarRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const totalScroll = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scroll = (totalScroll / docHeight) * 100;
-      setScrollProgress(scroll);
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${scroll}%`;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -49,8 +51,9 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
         onMouseMove={(e) => handleTimelineAction(e, true)}
       >
         <div 
+          ref={progressBarRef}
           className="scroll-progress-bar" 
-          style={{ width: `${scrollProgress}%` }}
+          style={{ width: '0%' }}
         >
           <div className="timeline-dot" />
         </div>

@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import Lenis from 'lenis';
 import { LoadingIntro } from './components/LoadingIntro';
 import { RibbonTransition } from './components/RibbonTransition';
 import { PortfolioLayout } from './components/PortfolioLayout';
@@ -24,6 +25,29 @@ function App() {
       setCurrentPage(page);
     }
   };
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   const handleReveal = useCallback(() => {
     setCurrentPage(targetPage);
