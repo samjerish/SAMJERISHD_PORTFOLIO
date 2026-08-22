@@ -3,7 +3,7 @@ import { LoadingIntro } from './components/LoadingIntro';
 import { RibbonTransition } from './components/RibbonTransition';
 import { PortfolioLayout } from './components/PortfolioLayout';
 
-
+import { CustomCursor } from './components/CustomCursor';
 import { MyMediaPage } from './components/MyMediaPage';
 import { AboutPage } from './components/AboutPage';
 import { ProjectsPage } from './components/ProjectsPage';
@@ -35,6 +35,7 @@ function App() {
 
   return (
     <>
+      <CustomCursor />
 
       {!isLoaded && <LoadingIntro onComplete={() => setIsLoaded(true)} />}
       
