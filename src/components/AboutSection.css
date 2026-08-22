@@ -46,9 +46,9 @@
 }
 
 .about-content {
-  max-width: 1400px; /* Use a max-width for better centering on large screens */
   width: 100%;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   display: flex;
   gap: 4vw;
   align-items: center;

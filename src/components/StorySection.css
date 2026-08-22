@@ -35,9 +35,9 @@
 }
 
 .story-content {
-  max-width: 1400px;
   width: 100%;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   text-align: left;
   display: flex;
   justify-content: flex-start;
