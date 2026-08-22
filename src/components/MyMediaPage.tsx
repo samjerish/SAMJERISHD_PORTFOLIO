@@ -100,9 +100,10 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
       }
     );
 
-    if (storyRef.current) observer.observe(storyRef.current);
+    const node = storyRef.current;
+    if (node) observer.observe(node);
     return () => {
-      if (storyRef.current) observer.unobserve(storyRef.current);
+      if (node) observer.unobserve(node);
     };
   }, []);
 

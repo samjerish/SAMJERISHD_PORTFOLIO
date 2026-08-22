@@ -24,7 +24,7 @@
 
 .contact-form-section {
   flex: 1;
-  padding: 4rem 6rem;
+  padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -33,7 +33,7 @@
 .form-header {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .return-btn {
@@ -63,7 +63,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-title {
@@ -183,7 +183,7 @@
   display: flex;
   gap: 4rem;
   margin-top: auto;
-  padding-top: 4rem;
+  padding-top: 2rem;
 }
 
 .info-column h4 {

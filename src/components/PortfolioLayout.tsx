@@ -23,7 +23,6 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
     const renderLoop = () => {
       const sections = document.querySelectorAll('main > section') as NodeListOf<HTMLElement>;
       const windowHeight = window.innerHeight;
-      const centerY = windowHeight / 2;
 
       sections.forEach((section, index) => {
         // Natural stacking: later sections (higher index) overlap earlier ones
@@ -38,6 +37,8 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
         if (index === 0) {
           // First section (Hero) is always fully visible
           section.style.clipPath = 'none';
+          section.style.borderRadius = '0';
+          section.style.transform = 'none';
           return;
         }
 
@@ -45,30 +46,32 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
         
         // Distance from bottom of screen to top of section
         const distFromBottom = windowHeight - rect.top;
-        const normalized = distFromBottom / windowHeight;
+        const normalized = Math.max(0, Math.min(1, distFromBottom / windowHeight));
 
-        // Keep the mask visually locked to the exact center of the screen
-        const maskCenterY = centerY - rect.top;
-
-        let radius = 0;
-        
-        if (normalized > 0 && normalized <= 1.5) {
-          // Cubic easing for a slow start then burst open
-          radius = Math.pow(normalized, 3) * 150; 
-        } else if (normalized > 1.5) {
-          radius = 150;
+        // Cylinder effect: calculate the vertical radius for the top border
+        // It starts highly curved (e.g., 200px) when entering from the bottom
+        // and flattens out (0px) as it reaches the top (normalized = 1)
+        let vRadius = 0;
+        if (normalized < 1) {
+          // Easing function for smoother flattening
+          const easeOut = 1 - Math.pow(1 - normalized, 3);
+          vRadius = (1 - easeOut) * 200; // max curve is 200px
         }
 
-        // Apply clip path
-        if (radius >= 150) {
-          section.style.clipPath = 'none';
-        } else if (radius <= 0) {
-          section.style.clipPath = `circle(0% at 50% ${maskCenterY}px)`;
+        // Apply curved top line using border-radius
+        section.style.borderRadius = `50% 50% 0 0 / ${vRadius}px ${vRadius}px 0 0`;
+        section.style.clipPath = 'none'; // Remove the old circle clip-path
+        
+        // Add a slight 3D rotation effect as it scrolls in for the cylinder feel
+        if (normalized < 1) {
+           const rotateX = (1 - normalized) * 15; // Rotates back slightly when lower
+           const translateY = (1 - normalized) * 50; // Pushes it down slightly
+           section.style.transform = `perspective(1000px) rotateX(${rotateX}deg) translateY(${translateY}px)`;
         } else {
-          section.style.clipPath = `circle(${radius}% at 50% ${maskCenterY}px)`;
+           section.style.transform = 'none';
         }
         
-        section.style.willChange = 'clip-path';
+        section.style.willChange = 'border-radius, transform';
       });
       
       animationFrameId = requestAnimationFrame(renderLoop);

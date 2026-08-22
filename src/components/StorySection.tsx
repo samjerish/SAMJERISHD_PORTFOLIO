@@ -71,9 +71,10 @@ export const StorySection: React.FC = () => {
       }
     );
 
-    if (textRef.current) observer.observe(textRef.current);
+    const node = textRef.current;
+    if (node) observer.observe(node);
     return () => {
-      if (textRef.current) observer.unobserve(textRef.current);
+      if (node) observer.unobserve(node);
     };
   }, []);
 

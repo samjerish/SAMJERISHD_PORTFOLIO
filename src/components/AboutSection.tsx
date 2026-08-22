@@ -22,9 +22,10 @@ export const AboutSection: React.FC = () => {
       }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    const node = sectionRef.current;
+    if (node) observer.observe(node);
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
+      if (node) observer.unobserve(node);
     };
   }, []);
 

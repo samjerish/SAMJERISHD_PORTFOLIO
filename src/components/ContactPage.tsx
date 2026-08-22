@@ -239,18 +239,18 @@ export const ContactPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abou
           </div>
         )}
 
-        <div className="contact-footer-info" style={{ gap: '2rem', flexWrap: 'wrap', marginTop: '3rem' }}>
+        <div className="contact-footer-info" style={{ gap: '2rem', flexWrap: 'wrap', marginTop: '1rem' }}>
           <div className="info-column">
             <h4>Socials</h4>
             <div style={{ display: 'flex', gap: '1rem' }}>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{ color: '#aaa', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = '#aaa'}>
-                <FiInstagram size={20} />
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{ color: '#E1306C', transition: 'transform 0.2s' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>
+                <FiInstagram size={24} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{ color: '#aaa', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = '#aaa'}>
-                <FiLinkedin size={20} />
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{ color: '#0077b5', transition: 'transform 0.2s' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>
+                <FiLinkedin size={24} />
               </a>
-              <a href="https://github.com" target="_blank" rel="noreferrer" style={{ color: '#aaa', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = '#aaa'}>
-                <FiGithub size={20} />
+              <a href="https://github.com" target="_blank" rel="noreferrer" style={{ color: '#ffffff', transition: 'transform 0.2s' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>
+                <FiGithub size={24} />
               </a>
             </div>
           </div>
@@ -258,11 +258,11 @@ export const ContactPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abou
             <h4>Resume</h4>
             <button 
               onClick={() => onNavigate('media')}
-              style={{ background: 'transparent', border: 'none', color: '#aaa', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0, fontSize: '0.9rem', fontFamily: 'monospace', transition: 'color 0.2s' }}
-              onMouseOver={e => e.currentTarget.style.color = '#fff'} 
-              onMouseOut={e => e.currentTarget.style.color = '#aaa'}
+              style={{ background: 'transparent', border: 'none', color: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0, fontSize: '0.9rem', fontFamily: 'monospace', transition: 'color 0.2s', fontWeight: 'bold' }}
+              onMouseOver={e => e.currentTarget.style.color = '#ccc'} 
+              onMouseOut={e => e.currentTarget.style.color = '#ffffff'}
             >
-              <FileText size={16} /> View CV
+              <FileText size={16} /> VIEW RESUME
             </button>
           </div>
         </div>

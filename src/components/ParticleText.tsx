@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 
 interface Particle {
   x: number;
@@ -11,7 +11,7 @@ interface Particle {
   size: number;
 }
 
-interface ParticleTextProps {
+export interface ParticleTextProps {
   lines?: string[];
   fontSizeDivider?: number;
   fontSizeMax?: number;
@@ -21,7 +21,11 @@ interface ParticleTextProps {
   lineSpacingRatio?: number;
 }
 
-export const ParticleText: React.FC<ParticleTextProps> = ({
+export interface ParticleTextRef {
+  scatter: () => void;
+}
+
+export const ParticleText = forwardRef<ParticleTextRef, ParticleTextProps>(({
   lines = ["SAM", "JERISH D"],
   fontSizeDivider = 4,
   fontSizeMax = 300,
@@ -29,9 +33,16 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
   colors = ['#ffffff', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b'],
   letterSpacing = '15px',
   lineSpacingRatio = 0.9
-}) => {
+}, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // We store the scatter function in a ref so we can call the latest version from useImperativeHandle
+  const scatterRef = useRef<() => void>(() => {});
+
+  useImperativeHandle(ref, () => ({
+    scatter: () => scatterRef.current()
+  }));
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -43,6 +54,11 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
 
     let particles: Particle[] = [];
     let animationFrameId: number;
+    
+    let springForceMultiplier = 1;
+    let targetSpringForceMultiplier = 1;
+    let currentFriction = 0.85;
+    let targetFriction = 0.85;
     
     let mouse = {
       x: -1000,
@@ -59,6 +75,27 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
     const handleMouseLeave = () => {
       mouse.x = -1000;
       mouse.y = -1000;
+    };
+
+    scatterRef.current = () => {
+      // Disable spring force to let them fly freely
+      springForceMultiplier = 0;
+      targetSpringForceMultiplier = 0;
+      // Reduce friction to let them glide far
+      currentFriction = 0.99;
+      targetFriction = 0.99;
+
+      particles.forEach(p => {
+        // Explode outward with high random velocity
+        p.vx = (Math.random() - 0.5) * 80;
+        p.vy = (Math.random() - 0.5) * 80;
+      });
+
+      // After a delay, slowly pull them back
+      setTimeout(() => {
+        targetSpringForceMultiplier = 1;
+        targetFriction = 0.85;
+      }, 2500);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -130,6 +167,10 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Interpolate physics constants for smooth transitions
+      springForceMultiplier += (targetSpringForceMultiplier - springForceMultiplier) * 0.02;
+      currentFriction += (targetFriction - currentFriction) * 0.02;
+
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
 
@@ -151,16 +192,22 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
           p.vy -= forceDirectionY * force * 5;
         }
 
-        // Spring force returning to origin
-        p.vx += (p.originX - p.x) * 0.1;
-        p.vy += (p.originY - p.y) * 0.1;
+        // Spring force returning to origin (scales with multiplier)
+        p.vx += (p.originX - p.x) * 0.1 * springForceMultiplier;
+        p.vy += (p.originY - p.y) * 0.1 * springForceMultiplier;
 
         // Friction
-        p.vx *= 0.85;
-        p.vy *= 0.85;
+        p.vx *= currentFriction;
+        p.vy *= currentFriction;
 
         p.x += p.vx;
         p.y += p.vy;
+
+        // Screen boundary collisions so they bounce around when scattered
+        if (p.x < 0) { p.x = 0; p.vx *= -1; }
+        if (p.x > canvas.width) { p.x = canvas.width; p.vx *= -1; }
+        if (p.y < 0) { p.y = 0; p.vy *= -1; }
+        if (p.y > canvas.height) { p.y = canvas.height; p.vy *= -1; }
 
         // Draw particle
         ctx.fillStyle = p.color;
@@ -191,6 +238,7 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -206,4 +254,4 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
       />
     </div>
   );
-};
+});
