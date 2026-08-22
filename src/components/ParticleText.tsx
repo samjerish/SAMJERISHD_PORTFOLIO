@@ -1,4 +1,4 @@
-import { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import { useEffect, useRef, useImperativeHandle, forwardRef, useState } from 'react';
 
 interface Particle {
   x: number;
@@ -240,6 +240,36 @@ export const ParticleText = forwardRef<ParticleTextRef, ParticleTextProps>(({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div style={{ width: '100%', minHeight: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        {lines.map((line, index) => (
+          <h1 key={index} style={{ 
+            fontFamily: "'Arial Black', 'Impact', sans-serif",
+            fontWeight: 900,
+            fontSize: '12vw',
+            color: '#ffffff',
+            margin: 0,
+            lineHeight: 1.1,
+            letterSpacing: '2px',
+            textAlign: 'center'
+          }}>
+            {line}
+          </h1>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} style={{ width: '100%', height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

@@ -110,5 +110,17 @@
 @media (max-width: 768px) {
   .story-text {
     font-size: 7vw;
+    max-width: 100%;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .story-content {
+    justify-content: center;
+  }
+  .story-image-overlay {
+    width: 100%;
+    opacity: 0.2;
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 }
