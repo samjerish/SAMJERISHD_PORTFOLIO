@@ -163,6 +163,24 @@ body.light-mode .canvas-placeholder {
   color: #777777 !important;
 }
 
+/* Scroll Timeline Specifics */
+body.light-mode .scroll-progress-container {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .scroll-progress-bar {
+  background: linear-gradient(90deg, #888888, #111111) !important;
+}
+
+body.light-mode .timeline-dot {
+  background-color: #111111 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.light-mode .scroll-progress-container:hover .scroll-progress-bar {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6) !important;
+}
+
 /* Contact Section Specifics */
 body.light-mode .logo-line-horizontal,
 body.light-mode .logo-line-diagonal {
