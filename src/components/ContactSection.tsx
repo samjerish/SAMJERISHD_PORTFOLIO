@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ContactSection.css';
 import { FiLinkedin, FiInstagram, FiGithub, FiMail } from 'react-icons/fi';
-import { ParticleText } from './ParticleText';
+
 
 export const ContactSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
   const [currentTime, setCurrentTime] = useState(new Date());

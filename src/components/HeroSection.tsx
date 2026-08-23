@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './HeroSection.css';
 import './AboutSection.css';
 import animatedProfile from '../assets/animated_profile.png';
-import firstPhoto from '../assets/1st_photo.png';
+// import firstPhoto from '../assets/1st_photo.png';
 
 export const HeroSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
   const heroRef = useRef<HTMLElement>(null);
@@ -13,8 +13,7 @@ export const HeroSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
   const [isPlayOpen, setIsPlayOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   
-  const toggleTheme = (e: React.MouseEvent) => {
-    const isLight = isDarkMode; // if it was dark, it becomes light
+  const toggleTheme = () => {
 
     if (!(document as any).startViewTransition) {
       document.body.classList.add('theme-transitioning');

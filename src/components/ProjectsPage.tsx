@@ -107,7 +107,7 @@ export const ProjectsPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abo
         </div>
         
         <div className="projects-grid">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div 
               key={project.id} 
               className="project-card" 
