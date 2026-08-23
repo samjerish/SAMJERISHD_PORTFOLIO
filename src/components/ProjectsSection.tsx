@@ -11,7 +11,7 @@ type Project = {
   image: string;
 };
 
-export const projects: Project[] = [
+const projects: Project[] = [
   {
     id: 1,
     name: 'PHYSITRACK GROUP IR',
