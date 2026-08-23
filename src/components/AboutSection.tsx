@@ -56,13 +56,13 @@ export const AboutSection: React.FC = () => {
           </div>
           
           <div style={{ marginTop: '3rem' }} className={`about-resume-wrapper ${isVisible ? 'is-visible' : ''}`}>
-            <a href="/Resume.pdf" target="_blank" rel="noreferrer" className="resume-btn">
+            <button onClick={() => window.location.href = '#resume'} className="resume-btn" style={{ cursor: 'pointer' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 View Resume
               </span>
               <span className="arrow">↗</span>
-            </a>
+            </button>
           </div>
         </div>
 

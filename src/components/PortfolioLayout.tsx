@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Navbar } from './Navbar';
 import { HeroSection } from './HeroSection';
 import { StorySection } from './StorySection';
-import { AboutSection } from './AboutSection';
 import { ProjectsSection } from './ProjectsSection';
 import { ContactSection } from './ContactSection';
 import './PortfolioLayout.css';
@@ -11,6 +10,11 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
   const progressBarRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+
     const handleScroll = () => {
       const totalScroll = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -25,6 +29,7 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -60,10 +65,9 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
       </div>
       <Navbar onNavigate={onNavigate} />
       <main>
-        <HeroSection />
+        <HeroSection onNavigate={onNavigate} />
+        <ProjectsSection onNavigate={onNavigate} />
         <StorySection />
-        <ProjectsSection />
-        <AboutSection />
         <ContactSection onNavigate={onNavigate} />
       </main>
     </div>

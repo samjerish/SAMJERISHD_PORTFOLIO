@@ -25,7 +25,7 @@
 }
 
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
 }
 
@@ -45,22 +45,14 @@ a, button, [role="button"], input, select, textarea {
   /* cursor styles removed in favor of CustomCursor component */
 }
 
-/* Scrollbar Styling */
+/* Hide Scrollbar Globally */
 ::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Base button styles */
@@ -68,4 +60,146 @@ button {
   border: none;
   background: none;
   font-family: var(--font-family);
+}
+
+/* =========================================
+   GLOBAL LIGHT MODE OVERRIDES
+   ========================================= */
+/* View Transitions API configuration for theme toggling */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Fallback for browsers that don't support View Transitions */
+.theme-transitioning, .theme-transitioning * {
+  transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, filter 0.6s ease !important;
+}
+
+body.light-mode {
+  background-color: #f5f5f7; /* Off-white, soft on the eyes */
+  color: #1d1d1f;
+}
+
+/* Force all major page wrappers to be soft white in light mode */
+body.light-mode .projects-page-wrapper,
+body.light-mode .my-media-page,
+body.light-mode .pro-resume-container,
+body.light-mode .contact-page-wrapper,
+body.light-mode .about-page-wrapper,
+body.light-mode .portfolio-container,
+body.light-mode .story-container,
+body.light-mode .portfolio-layout,
+body.light-mode .hero-container,
+body.light-mode .contact-section {
+  background-color: #f5f5f7 !important;
+  color: #1d1d1f !important;
+}
+
+/* Soften the text for light mode to avoid harsh contrast */
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode .story-line,
+body.light-mode .media-title,
+body.light-mode .resume-doc-name,
+body.light-mode .section-heading,
+body.light-mode .item-title,
+body.light-mode .tech-stack-heading,
+body.light-mode .logo-script-text,
+body.light-mode .logo-main-text,
+body.light-mode .dark-contact-heading,
+body.light-mode .modern-about-name,
+body.light-mode .modern-about-socials a,
+body.light-mode .form-title,
+body.light-mode .form-group input,
+body.light-mode .form-group textarea,
+body.light-mode .info-column h4,
+body.light-mode .resume-doc-contact a,
+body.light-mode .resume-skill-name,
+body.light-mode .back-btn {
+  color: #111111 !important;
+}
+
+body.light-mode p,
+body.light-mode .resume-doc-text,
+body.light-mode .resume-doc-list,
+body.light-mode .story-line.line-1,
+body.light-mode .media-subtitle,
+body.light-mode .dark-contact-subheading,
+body.light-mode .modern-about-text,
+body.light-mode .form-group label,
+body.light-mode .info-column p,
+body.light-mode .return-btn,
+body.light-mode .book-slot-btn,
+body.light-mode .tool-btn {
+  color: #444444 !important;
+}
+
+body.light-mode .form-group input,
+body.light-mode .form-group textarea,
+body.light-mode .whiteboard-toolbar,
+body.light-mode .drawing-canvas,
+body.light-mode .back-btn {
+  border-color: #cccccc !important;
+}
+
+body.light-mode .submit-btn,
+body.light-mode .arrow-box,
+body.light-mode .arrow-box-small {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
+
+body.light-mode .canvas-placeholder {
+  color: #777777 !important;
+}
+
+/* Contact Section Specifics */
+body.light-mode .logo-line-horizontal,
+body.light-mode .logo-line-diagonal {
+  background-color: #111111 !important;
+}
+
+body.light-mode .dark-social-icons a.social-github {
+  color: #111111 !important;
+}
+
+body.light-mode .contact-footer-bar {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #555555 !important;
+  border-top-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .time-display {
+  color: #111111 !important;
+}
+
+/* Ensure no rogue black backgrounds in light mode (e.g. cards) */
+body.light-mode .project-card,
+body.light-mode .resume-skill-logo-item,
+body.light-mode .tech-grid-item,
+body.light-mode .stack-gallery-item {
+  background-color: #ffffff !important;
+  border-color: #e5e5e5 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .resume-divider,
+body.light-mode .hero-divider,
+body.light-mode .tech-stack-section {
+  border-color: #dddddd !important;
+}
+
+/* Make ALL photos colorful in light mode */
+body.light-mode img {
+  filter: grayscale(0%) !important;
 }

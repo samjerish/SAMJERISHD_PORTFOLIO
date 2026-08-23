@@ -9,11 +9,24 @@ interface ResumePageProps {
 export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+    return () => clearTimeout(timer);
   }, []);
 
   const techSkills = [
-    "Python", "Java", "TypeScript", "HTML", "CSS", "React", 
-    "SQL", "Firebase", "Adobe Premiere Pro", "After Effects", "Blender"
+    { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+    { name: "Java", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+    { name: "TypeScript", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+    { name: "HTML", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+    { name: "CSS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+    { name: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+    { name: "SQL", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
+    { name: "Firebase", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" },
+    { name: "Premiere Pro", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" },
+    { name: "After Effects", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" },
+    { name: "Blender", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg" }
   ];
 
   return (
@@ -43,8 +56,6 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
           <h1 className="resume-doc-name">SAM JERISH D</h1>
           <h2 className="resume-doc-title">ASPIRING FULL-STACK DEVELOPER</h2>
           <div className="resume-doc-contact">
-            <span>+91 93453 13744</span>
-            <span className="dot-divider">•</span>
             <a href="mailto:samjerishd@gmail.com">samjerishd@gmail.com</a>
             <span className="dot-divider">•</span>
             <a href="https://www.linkedin.com/in/samjerishd/" target="_blank" rel="noreferrer">linkedin.com/in/samjerishd/</a>
@@ -94,32 +105,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
           </div>
         </section>
 
-        {/* PROJECTS */}
-        <section className="resume-doc-section">
-          <h3 className="section-heading">PROJECTS</h3>
-          
-          <div className="resume-doc-item">
-            <div className="item-header">
-              <h4 className="item-title">DATABASE MANAGEMENT WEBSITE</h4>
-            </div>
-            <span className="tech-stack-text mb-2">HTML, CSS, JS, FIREBASE</span>
-            <ul className="resume-doc-list">
-              <li>Developed a web-based Database Management System with an intuitive interface for efficiently creating, managing, updating, and retrieving structured data.</li>
-              <li>Integrated Firebase for real-time database management, secure data storage, and seamless synchronization between the application and backend.</li>
-            </ul>
-          </div>
 
-          <div className="resume-doc-item mt-4">
-            <div className="item-header">
-              <h4 className="item-title">AUTONOMOUS MOBILE ROBOT</h4>
-            </div>
-            <span className="tech-stack-text mb-2">REACT, TYPESCRIPT, BLENDER</span>
-            <ul className="resume-doc-list">
-              <li>Developed an autonomous mobile robot for university by integrating Intelligent Robotics and Computer Vision for real-time environment perception and autonomous navigation.</li>
-              <li>Implemented computer vision-based object detection and obstacle avoidance, enabling the robot to analyze its surroundings and make autonomous movement decisions.</li>
-            </ul>
-          </div>
-        </section>
 
         {/* EDUCATION */}
         <section className="resume-doc-section">
@@ -136,9 +122,12 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
         {/* SKILLS */}
         <section className="resume-doc-section">
           <h3 className="section-heading">TECHNICAL SKILLS</h3>
-          <div className="tech-pill-container-static">
+          <div className="resume-skills-logo-grid">
             {techSkills.map((skill, index) => (
-              <span key={index} className="skill-pill-static">{skill}</span>
+              <div key={index} className="resume-skill-logo-item">
+                <img src={skill.url} alt={skill.name} title={skill.name} className="resume-skill-logo" />
+                <span className="resume-skill-name">{skill.name}</span>
+              </div>
             ))}
           </div>
         </section>

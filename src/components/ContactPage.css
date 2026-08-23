@@ -67,12 +67,14 @@
 }
 
 .form-title {
-  font-family: 'Anton', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 300;
+  font-family: 'Oswald', 'Anton', Impact, 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 0.9;
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: -2px;
+  font-stretch: ultra-condensed;
 }
 
 .book-slot-btn {

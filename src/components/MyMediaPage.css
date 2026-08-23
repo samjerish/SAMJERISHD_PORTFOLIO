@@ -37,29 +37,49 @@
 .media-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem 1rem 2rem;
+  padding: 0 2rem 2rem 2rem;
   position: relative;
   z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .media-title {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
-  font-weight: 800;
+  font-family: 'Oswald', 'Anton', Impact, sans-serif;
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .media-subtitle {
-  font-size: 1.2rem;
-  color: #a0a0a0;
-  margin-bottom: 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: #ff6b00;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .media-story-section {
   margin-bottom: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .media-story-section .story-text {
-  max-width: 1050px;
+  max-width: 900px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  line-height: 1.6;
+  color: #cccccc;
 }
 
 /* Hover Stack Gallery Styles */

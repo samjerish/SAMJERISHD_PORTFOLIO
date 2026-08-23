@@ -55,6 +55,7 @@ export const Navbar: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' |
         <div className="sticky-menu-content" ref={containerRef} onMouseLeave={handleMouseLeave}>
           <div className="nav-sliding-underline" style={{ left: `${hoverStyle.left}px`, width: `${hoverStyle.width}px`, opacity: hoverStyle.opacity }} />
           <a href="#home" onClick={(e) => handleNavigate('home', e)} onMouseEnter={handleMouseEnter}>Home</a>
+          <a href="#" onClick={(e) => handleNavigate('projects', e)} onMouseEnter={handleMouseEnter}>Projects</a>
           <a href="#" onClick={(e) => handleNavigate('media', e)} onMouseEnter={handleMouseEnter}>Beyond the Frame</a>
           <a href="#" onClick={(e) => handleNavigate('resume', e)} onMouseEnter={handleMouseEnter}>Resume</a>
         </div>

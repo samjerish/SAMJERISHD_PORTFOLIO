@@ -15,6 +15,10 @@ export const ContactPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abou
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+    return () => clearTimeout(timer);
   }, []);
 
   // Sync cursor color to CSS variable for CustomCursor

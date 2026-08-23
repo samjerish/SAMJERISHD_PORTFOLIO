@@ -24,6 +24,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   useEffect(() => {
     // simple fade in
     setIsVisible(true);
+    window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

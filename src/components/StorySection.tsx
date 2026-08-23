@@ -1,56 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './StorySection.css';
-import photoSrc from '../assets/1st_photo.png';
-
-export const AnimatedLine = ({ text, baseDelay }: { text: string, baseDelay: number }) => {
-  let globalCharIndex = 0;
-  
-  // Split by < and > to isolate highlighted text
-  const parts = text.split(/(<[^>]+>)/g);
-  
-  return (
-    <span className="fade-line-container">
-      {parts.map((part, partIndex) => {
-        const isHighlight = part.startsWith('<') && part.endsWith('>');
-        const actualText = isHighlight ? part.slice(1, -1) : part;
-        
-        // Match chunks of non-whitespace or whitespace
-        const tokens = actualText.match(/(\S+|\s+)/g) || [];
-
-        return (
-          <span key={partIndex} className={isHighlight ? 'highlight' : ''}>
-            {tokens.map((token, tokenIndex) => {
-              const isSpace = /^\s+$/.test(token);
-              
-              if (isSpace) {
-                globalCharIndex += token.length;
-                return token;
-              }
-
-              return (
-                <span key={tokenIndex} className="word-wrapper" style={{ display: 'inline-block' }}>
-                  {token.split('').map((char, charIndex) => {
-                    const delay = baseDelay + (globalCharIndex * 0.02);
-                    globalCharIndex++;
-                    return (
-                      <span 
-                        key={charIndex} 
-                        className="fade-char" 
-                        style={{ transitionDelay: `${delay}s` }}
-                      >
-                        {char}
-                      </span>
-                    );
-                  })}
-                </span>
-              );
-            })}
-          </span>
-        );
-      })}
-    </span>
-  );
-};
 
 export const StorySection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -80,27 +29,63 @@ export const StorySection: React.FC = () => {
 
   return (
     <section className="story-container">
-      <div className="story-image-overlay">
-        <img src={photoSrc} alt="Story Background" className="story-photo" />
-      </div>
-      <div className="story-content">
+      <div className="story-content-wrapper">
         <div 
           ref={textRef} 
-          className={`story-text ${isVisible ? 'is-visible' : ''}`}
+          className={`story-content-block ${isVisible ? 'is-visible' : ''}`}
         >
-          <AnimatedLine 
-            text="It started with a curiosity about how <computers work>. That curiosity grew into a passion for <coding, problem-solving, and building>." 
-            baseDelay={0.2} 
-          />
-          <br /><br />
-          <AnimatedLine 
-            text="From exploring technology to developing <intelligent solutions>, my journey is about turning <curiosity into code> and <ideas into reality>." 
-            baseDelay={3.0} 
-          />
+          <div className="story-section-part">
+            <h1 className="story-headline">A LITTLE ABOUT ME</h1>
+            <p className="story-description">
+              It started with a curiosity about how computers work. That curiosity grew into a passion for coding, problem-solving, and building.<br/><br/>
+              From exploring technology to developing intelligent solutions, my journey is about turning curiosity into code and ideas into reality.
+            </p>
+          </div>
+
+          <div className="story-section-part">
+            <h2 className="story-subheadline">WHAT I DO</h2>
+            <p className="story-description">
+              I’m someone who loves to learn, create, and experiment.<br/>
+              I enjoy exploring different ways to turn an idea into something real. I’m still figuring things out, still learning, and still creating. And honestly, that’s the part of the journey I enjoy the most.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
+export const AnimatedLine = ({ text, baseDelay = 0 }: { text: string; baseDelay?: number }) => {
+  const parts = text.split(/(<[^>]+>)/g);
+  let charIndex = 0;
 
+  const renderWords = (content: string, isHighlight: boolean) => {
+    const tokens = content.split(/( )/g);
+    return tokens.map((token, index) => {
+      if (token === ' ') {
+        charIndex++;
+        return <span key={index}> </span>;
+      }
+      return (
+        <span key={index} style={{ whiteSpace: 'nowrap' }} className={isHighlight ? 'story-highlight' : ''}>
+          {token.split('').map((char, j) => {
+            const delay = baseDelay + (charIndex++) * 0.015;
+            return <span key={j} className="fade-char" style={{ transitionDelay: `${delay}s` }}>{char}</span>;
+          })}
+        </span>
+      );
+    });
+  };
+
+  return (
+    <span className="fade-line-container">
+      {parts.map((part, i) => {
+        if (part.startsWith('<') && part.endsWith('>')) {
+          const content = part.slice(1, -1);
+          return <React.Fragment key={i}>{renderWords(content, true)}</React.Fragment>;
+        }
+        return <React.Fragment key={i}>{renderWords(part, false)}</React.Fragment>;
+      })}
+    </span>
+  );
+};

@@ -5,7 +5,7 @@
   width: 100%;
   background-color: transparent;
   color: #ffffff;
-  padding: 10vh 5vw 100px 5vw; /* Added bottom padding to clear the footer bar */
+  padding: 15vh 5vw 120px 5vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,32 +24,7 @@
   transform: translateY(0);
 }
 
-.dark-contact-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(to top, transparent, #000000);
-  pointer-events: none;
-  z-index: 10;
-}
 
-/* Clean circular grey bottom glow */
-.dark-contact-section::after {
-  content: '';
-  position: absolute;
-  bottom: -450px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 900px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(160, 160, 160, 0.25) 0%, rgba(0, 0, 0, 0) 65%);
-  pointer-events: none;
-  z-index: 1;
-}
 
 .dark-contact-content {
   display: flex;
@@ -72,17 +47,17 @@
 
 .logo-script-text {
   font-family: 'Great Vibes', cursive;
-  font-size: 3rem;
+  font-size: 6rem;
   line-height: 1;
   color: #fff;
   z-index: 2;
-  margin-bottom: -1rem;
+  margin-bottom: -2rem;
 }
 
 .logo-main-text {
-  font-size: 2.5rem;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
+  font-size: 5rem;
+  font-weight: 500;
+  letter-spacing: 0.2rem;
   color: #fff;
   z-index: 1;
   position: relative;
@@ -149,17 +124,24 @@
 }
 
 .dark-contact-subheading {
-  font-size: 1rem;
-  color: #888;
-  line-height: 1.5;
-  max-width: 400px;
+  font-size: 1.5rem;
+  color: #cccccc;
+  line-height: 1.6;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .logo-script-text {
+    font-size: 4rem;
+    margin-bottom: -1.5rem;
+  }
   .logo-main-text {
-    font-size: 1.8rem;
+    font-size: 3rem;
+  }
+  .dark-contact-subheading {
+    font-size: 1.2rem;
   }
   .dark-contact-heading {
     font-size: 2.2rem;
