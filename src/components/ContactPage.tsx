@@ -125,7 +125,7 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
       {/* RIGHT SIDE - FORM */}
       <div className="contact-form-section">
         <div className="form-header">
-          <button className="return-btn" onClick={() => onNavigate('home')}>
+          <button className="return-btn" onClick={() => onNavigate && onNavigate('home')}>
             Return to home <span className="arrow-box"><ArrowUpRight size={14} /></span>
           </button>
         </div>
@@ -261,7 +261,7 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
           <div className="info-column">
             <h4>Resume</h4>
             <button 
-              onClick={() => onNavigate('resume')}
+              onClick={() => onNavigate && onNavigate('resume')}
               style={{ background: 'transparent', border: 'none', color: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0, fontSize: '0.9rem', fontFamily: 'monospace', transition: 'color 0.2s', fontWeight: 'bold' }}
               onMouseOver={e => e.currentTarget.style.color = '#ccc'} 
               onMouseOut={e => e.currentTarget.style.color = '#ffffff'}

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import './HeroSection.css';
 import animatedProfile from '../assets/animated_profile.png';
 
-export const HeroSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
-  const [isScrolling, setIsScrolling] = useState(false);
+export const HeroSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate: _onNavigate }) => {
+  const [_isScrolling, setIsScrolling] = useState(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
