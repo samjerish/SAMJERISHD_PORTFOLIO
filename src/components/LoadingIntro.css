@@ -28,7 +28,7 @@
 
 /* Percentage Text */
 .percentage-text {
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
   font-size: 8rem;
   font-weight: 700;
   color: #ffffff;

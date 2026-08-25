@@ -134,7 +134,7 @@
 .play-text {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: 1px;
@@ -222,7 +222,7 @@
 }
 
 .polaroid-text h3 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.2;
@@ -250,14 +250,14 @@
 }
 
 .label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.9rem;
   color: #aaaaaa;
 }
 
 .value.handwriting {
-  font-family: 'Caveat', cursive;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   color: #a0a0a0;
   font-weight: 600;
@@ -271,7 +271,7 @@
 }
 
 .subtitle.handwriting {
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
   font-size: 1.5rem;
   font-weight: 500;
   color: #a0a0a0;
@@ -280,7 +280,7 @@
 }
 
 .main-title {
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
   font-size: 2.8rem;
   font-weight: 500;
   color: #ffffff; /* Slightly brighter to distinguish title */
@@ -296,7 +296,7 @@
 }
 
 .description p {
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
   font-size: 2.8rem;
   line-height: 1.2;
   color: #a0a0a0;
@@ -306,7 +306,7 @@
 
 /* Story Animation applied to About text */
 .about-story-text {
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
   font-size: 2.8rem;
   line-height: 1.2;
   color: #a0a0a0;
@@ -377,7 +377,7 @@
   border-radius: 50px;
   color: #000000;
   text-decoration: none;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;

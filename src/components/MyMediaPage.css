@@ -47,7 +47,7 @@
 }
 
 .media-title {
-  font-family: 'Oswald', 'Anton', Impact, sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(4rem, 12vw, 9rem);
   font-weight: 900;
   text-transform: uppercase;
@@ -58,7 +58,7 @@
 }
 
 .media-subtitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   color: #ff6b00;
   font-weight: 700;
@@ -76,7 +76,7 @@
 
 .media-story-section .story-text {
   max-width: 900px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   line-height: 1.6;
   color: #cccccc;

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;500;600;700&display=swap');
 
 :root {
   /* Colors */
@@ -10,7 +10,10 @@
   --accent-color: #ffffff;
   
   /* Typography */
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-handwriting: 'Caveat', cursive;
 
   /* Sizing & Borders */
   --border-radius-pill: 50px;
@@ -33,7 +36,7 @@ html {
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -59,7 +62,7 @@ body {
 button {
   border: none;
   background: none;
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
 }
 
 /* =========================================

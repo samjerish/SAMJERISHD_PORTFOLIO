@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Navbar } from './Navbar';
 import { HeroSection } from './HeroSection';
 import { StorySection } from './StorySection';
 import { ProjectsSection } from './ProjectsSection';
@@ -21,6 +20,10 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
       const scroll = (totalScroll / docHeight) * 100;
       if (progressBarRef.current) {
         progressBarRef.current.style.width = `${scroll}%`;
+        const container = progressBarRef.current.parentElement;
+        if (container) {
+          container.style.opacity = totalScroll > 10 ? '1' : '0';
+        }
       }
     };
 
@@ -63,12 +66,11 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
           <div className="timeline-dot" />
         </div>
       </div>
-      <Navbar onNavigate={onNavigate} />
       <main>
         <HeroSection onNavigate={onNavigate} />
         <ProjectsSection onNavigate={onNavigate} />
         <StorySection />
-        <ContactSection onNavigate={onNavigate} />
+        <ContactSection />
       </main>
     </div>
   );

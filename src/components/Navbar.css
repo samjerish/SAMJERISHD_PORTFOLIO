@@ -19,7 +19,7 @@
 }
 
 .nav-toggle:hover {
-  background-color: #ffffff;
+  background-color: var(--accent-color);
 }
 
 .nav-toggle:hover .hamburger,
@@ -33,7 +33,7 @@
   position: relative;
   width: 20px;
   height: 2px;
-  background-color: #ffffff;
+  background-color: var(--accent-color);
   transition: all 0.3s ease;
 }
 
@@ -44,7 +44,7 @@
   left: 0;
   width: 20px;
   height: 2px;
-  background-color: #ffffff;
+  background-color: var(--accent-color);
   transition: all 0.3s ease;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .control-center-nav a {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font-heading);
   font-size: 4rem;
   font-weight: 800;
   color: #a0a0a0;
@@ -134,7 +134,7 @@
 }
 
 .control-center-overlay.open .control-center-nav a:hover {
-  color: #ffffff;
+  color: var(--accent-color);
   transform: scale(1.1);
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
@@ -187,7 +187,7 @@
   display: inline-block;
   color: #a0a0a0;
   text-decoration: none;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 500;
   text-transform: uppercase;

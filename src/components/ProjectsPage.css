@@ -48,7 +48,7 @@
 }
 
 .story-line {
-  font-family: 'Oswald', 'Anton', Impact, sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 900;
   line-height: 1.1;
@@ -64,7 +64,7 @@
 
 .story-line.line-what-if {
   color: #ff4444; /* Bright Red */
-  font-family: 'Oswald', 'Anton', Impact, sans-serif;
+  font-family: var(--font-heading);
   font-weight: 900;
   font-size: clamp(3rem, 6vw, 4.5rem);
 }
@@ -80,7 +80,7 @@
   background-color: #ffffff;
   color: #000000;
   text-decoration: none;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   border-radius: 50px;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -106,7 +106,7 @@
 }
 
 .tech-stack-heading {
-  font-family: 'Oswald', 'Anton', Impact, 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 900;
   color: #ffffff;
@@ -152,7 +152,7 @@
 }
 
 .tech-grid-name {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1rem;
   color: #666666;
   font-weight: 600;
@@ -185,7 +185,7 @@
 }
 
 .github-cta-section p {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   color: #a0a0a0;
   max-width: 600px;
@@ -198,7 +198,7 @@
   background-color: #ffffff;
   color: #000000;
   text-decoration: none;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.1rem;
   border-radius: 50px;
@@ -214,7 +214,7 @@
 
 /* Watermark Footer */
 .projects-watermark {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.8rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.4);

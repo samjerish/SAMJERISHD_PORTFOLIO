@@ -23,7 +23,8 @@ main {
   background-color: rgba(255, 255, 255, 0.05);
   z-index: 9999; /* Top notch */
   cursor: pointer;
-  transition: height 0.3s ease;
+  opacity: 0; /* Hidden by default at top */
+  transition: height 0.3s ease, opacity 0.3s ease;
 }
 
 .scroll-progress-container:hover {

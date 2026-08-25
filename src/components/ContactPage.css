@@ -4,7 +4,7 @@
   min-height: 100vh;
   background-color: #0d0d0d;
   color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
 }
 
 .contact-image-section {
@@ -40,7 +40,7 @@
   background: transparent;
   border: none;
   color: #a0a0a0;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1rem;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@
 }
 
 .form-title {
-  font-family: 'Oswald', 'Anton', Impact, 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 900;
   font-size: clamp(4rem, 10vw, 7rem);
   line-height: 0.9;
@@ -85,7 +85,7 @@
   align-items: center;
   gap: 1rem;
   cursor: pointer;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
 }
 
 .arrow-box-small {
@@ -127,7 +127,7 @@
   border: 1px solid #333;
   color: #fff;
   padding: 1rem;
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
   border-radius: 2px;
 }
@@ -169,7 +169,7 @@
   color: #fff;
   border: none;
   padding: 1.2rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   cursor: pointer;
   align-self: flex-start;
@@ -197,7 +197,7 @@
 .info-column p {
   color: #aaa;
   margin: 0.3rem 0;
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: 0.9rem;
 }
 
@@ -214,7 +214,7 @@
   color: #a0a0a0;
   padding: 0.8rem 1.5rem;
   border-radius: 2rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -329,7 +329,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: #a0a0a0;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   pointer-events: none;
   user-select: none;

@@ -226,7 +226,7 @@ export const ContactPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abou
               <canvas
                 ref={canvasRef}
                 className="drawing-canvas"
-                style={{ cursor: 'none' }}
+                style={{ cursor: 'crosshair' }}
                 onMouseDown={startDrawing}
                 onMouseMove={draw}
                 onMouseUp={stopDrawing}

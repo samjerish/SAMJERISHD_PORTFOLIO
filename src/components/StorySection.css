@@ -44,7 +44,7 @@
 }
 
 .story-headline {
-  font-family: 'Oswald', 'Anton', Impact, 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 900;
   font-size: clamp(4rem, 10vw, 9rem);
   line-height: 0.9;
@@ -56,7 +56,7 @@
 }
 
 .story-subheadline {
-  font-family: 'Oswald', 'Anton', Impact, 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: clamp(1.5rem, 3.5vw, 3.2rem);
   line-height: 0.9;
@@ -68,7 +68,7 @@
 }
 
 .story-description {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.35rem;
   line-height: 1.6;
   color: #a0a0a0;
