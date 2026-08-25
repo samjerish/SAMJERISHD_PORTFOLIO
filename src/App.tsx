@@ -3,6 +3,8 @@ import Lenis from 'lenis';
 import { LoadingIntro } from './components/LoadingIntro';
 import { RibbonTransition } from './components/RibbonTransition';
 import { PortfolioLayout } from './components/PortfolioLayout';
+import { SpaceBackground } from './components/SpaceBackground';
+import { ThemeSwitcher } from './components/ThemeSwitcher';
 
 
 import { MyMediaPage } from './components/MyMediaPage';
@@ -16,6 +18,9 @@ function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume'>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [targetPage, setTargetPage] = useState<'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume'>('home');
+  
+  const [isSpaceMode, setIsSpaceMode] = useState(true);
+  const [spaceColor, setSpaceColor] = useState<'black' | 'purple' | 'blue'>('black');
 
   const handleNavigate = (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => {
     if (page !== currentPage) {
@@ -57,7 +62,14 @@ function App() {
 
   return (
     <>
-
+      {isSpaceMode && <SpaceBackground colorTheme={spaceColor} />}
+      
+      <ThemeSwitcher 
+        isSpaceMode={isSpaceMode}
+        setIsSpaceMode={setIsSpaceMode}
+        spaceColor={spaceColor}
+        setSpaceColor={setSpaceColor}
+      />
 
       {!isLoaded && <LoadingIntro onComplete={() => setIsLoaded(true)} />}
       

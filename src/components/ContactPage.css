@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-  background-color: #0d0d0d;
+  background-color: transparent; /* Allow space theme */
   color: #fff;
   font-family: var(--font-heading);
 }

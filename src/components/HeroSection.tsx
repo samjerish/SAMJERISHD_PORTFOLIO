@@ -28,31 +28,14 @@ export const HeroSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
       }
     };
   }, []);
+
   return (
     <section className="hero-container new-hero" id="home">
       
-      {/* TOP BAR */}
-      <div className="hero-top-bar">
-        
-        {/* Floating Glassmorphism Navbar */}
-        <nav className={`hero-floating-nav ${isScrolling ? 'collapsed' : ''}`}>
-          <div className="nav-profile">
-            <div className="nav-avatar-bg">
-              <img src={animatedProfile} alt="Sam Jerish" className="nav-avatar" />
-            </div>
-            <span className="nav-name">samjerish</span>
-          </div>
-          <div className="nav-links">
-            <button onClick={() => onNavigate && onNavigate('about')}>About</button>
-            <button onClick={() => onNavigate && onNavigate('projects')}>Projects</button>
-            <button onClick={() => onNavigate && onNavigate('media')}>Beyond the frame</button>
-            <button onClick={() => onNavigate && onNavigate('contact')}>Contact</button>
-          </div>
-        </nav>
-      </div>
+      {/* Top Bar removed and moved to PortfolioLayout.tsx */}
 
       <div className="hero-content-wrapper center-layout">
-        
+
         {/* Giant Background Text */}
         <div className="hero-background-text-new">
           <span className="text-line-1">SAM</span>
@@ -68,21 +51,22 @@ export const HeroSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
           />
         </div>
 
-        {/* Bottom Elements */}
-        <div className="hero-bottom-elements">
-          <div className="hero-intro-text">
-            <p>I'm a practicing Full Stack Developer who loves to learn, create, and experiment.<br/>I enjoy exploring different ways to turn an idea into something real.</p>
-          </div>
-          
-          <div className="hero-cta-group">
-            <a href="mailto:samjerishd@gmail.com" className="book-call-btn">
-              EMAIL ME :)
-            </a>
-            <div className="cta-dot"></div>
-          </div>
+      </div>
+
+      {/* Bottom Elements moved outside of center-layout so they are not masked by the fade out effect */}
+      <div className="hero-bottom-elements">
+        <div className="hero-intro-text">
+          <p><span className="waving-hand">👋</span> I'm a practicing Full Stack Developer who loves to learn, create, and experiment.<br/>I enjoy exploring different ways to turn an idea into something real.</p>
         </div>
         
+        <div className="hero-cta-group">
+          <a href="mailto:samjerishd@gmail.com" className="book-call-btn">
+            EMAIL ME :)
+          </a>
+          <div className="cta-dot"></div>
+        </div>
       </div>
+
     </section>
   );
 };

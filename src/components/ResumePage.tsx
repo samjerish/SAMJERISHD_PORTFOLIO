@@ -42,7 +42,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
           <span>BACK TO HOME</span>
         </button>
 
-        <a href="/Resume.pdf" target="_blank" rel="noreferrer" className="action-btn download-btn">
+        <a href="https://drive.google.com/file/d/1UDob2GDrfJLw3JD4dG5BLQTJCX5e28uz/view?usp=share_link" target="_blank" rel="noreferrer" className="action-btn download-btn">
           <span>DOWNLOAD CV</span>
           <FiDownload size={20} />
         </a>
@@ -54,7 +54,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
         {/* HEADER */}
         <header className="resume-doc-header">
           <h1 className="resume-doc-name">SAM JERISH D</h1>
-          <h2 className="resume-doc-title">ASPIRING FULL-STACK DEVELOPER</h2>
+          <h2 className="resume-doc-title">FULL-STACK DEVELOPER</h2>
           <div className="resume-doc-contact">
             <a href="mailto:samjerishd@gmail.com">samjerishd@gmail.com</a>
             <span className="dot-divider">•</span>

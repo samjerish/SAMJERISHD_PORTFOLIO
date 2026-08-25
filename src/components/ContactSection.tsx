@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ContactSection.css';
 import { FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
+import { FileText } from 'lucide-react';
+import thumpsupImage from '../assets/thumpsup.png';
 
-export const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void;
+}
+
+export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -48,8 +54,22 @@ export const ContactSection: React.FC = () => {
         <div className="contact-info-grid">
           <div className="info-block">
             <span className="info-label">Email</span>
-            <a href="mailto:samjerishd@gmail.com" className="info-value">samjerishd@gmail.com</a>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <a href="mailto:samjerishd@gmail.com" className="info-value">samjerishd@gmail.com</a>
+              {onNavigate && (
+                <button 
+                  onClick={() => onNavigate('resume')}
+                  style={{ background: 'transparent', border: 'none', color: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0, fontSize: '0.9rem', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', transition: 'color 0.2s' }}
+                  onMouseOver={e => e.currentTarget.style.color = '#ccc'}
+                  onMouseOut={e => e.currentTarget.style.color = '#ffffff'}
+                >
+                  <FileText size={16} /> VIEW RESUME
+                </button>
+              )}
+            </div>
           </div>
+          
+          <div className="contact-splitter-vertical"></div>
           
           <div className="info-block">
             <span className="info-label">Social</span>
@@ -66,13 +86,21 @@ export const ContactSection: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <div className="contact-splitter-horizontal"></div>
       </div>
 
       {/* Massive Text (Outside content wrapper to stretch fully) */}
-      <div className="contact-massive-text">
-        <span style={{ color: '#ffffff' }}>SAM</span> <span style={{ color: '#888888' }}>JERISH D</span>
+      <div className="contact-massive-text-container">
+        <div className="contact-credit-text">
+          DESIGNED & DEVELOPED WITH ❤️ BY
+        </div>
+        <div className="contact-massive-text">
+          <span style={{ color: '#ffffff' }}>SAM</span> <span style={{ color: '#888888' }}>JERISH D</span>
+        </div>
       </div>
       
+      <img src={thumpsupImage} alt="Thumbs Up" className="contact-thumpsup-image" />
     </section>
   );
 };

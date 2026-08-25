@@ -4,7 +4,7 @@ import mailboxImg from '../assets/mailbox.jpg';
 import { ArrowUpRight, PenTool, Eraser, Trash2, Type, FileText } from 'lucide-react';
 import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi';
 
-export const ContactPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'about' | 'projects' | 'contact') => void }> = ({ onNavigate }) => {
+export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [inputMode, setInputMode] = useState<'draw' | 'type'>('draw');
   const [isDrawing, setIsDrawing] = useState(false);
@@ -261,7 +261,7 @@ export const ContactPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abou
           <div className="info-column">
             <h4>Resume</h4>
             <button 
-              onClick={() => onNavigate('media')}
+              onClick={() => onNavigate('resume')}
               style={{ background: 'transparent', border: 'none', color: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0, fontSize: '0.9rem', fontFamily: 'monospace', transition: 'color 0.2s', fontWeight: 'bold' }}
               onMouseOver={e => e.currentTarget.style.color = '#ccc'} 
               onMouseOut={e => e.currentTarget.style.color = '#ffffff'}

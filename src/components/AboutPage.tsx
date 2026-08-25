@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AboutPage.css';
-import profileImg from '../assets/animated_profile.png';
+import profileImg from '../assets/photo.jpg';
 import { FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 interface AboutPageProps {

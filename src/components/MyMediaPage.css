@@ -1,6 +1,6 @@
 .my-media-page {
   min-height: 100vh;
-  background-color: #111111;
+  background-color: transparent;
   color: #ffffff;
   animation: fadeInPage 0.5s ease forwards;
   overflow-x: hidden;
@@ -48,13 +48,14 @@
 
 .media-title {
   font-family: var(--font-heading);
-  font-size: clamp(4rem, 12vw, 9rem);
+  font-size: clamp(2rem, 7vw, 6rem); /* Reduced to fit on one line */
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -2px;
   line-height: 1;
   margin-bottom: 1rem;
   color: #ffffff;
+  white-space: nowrap; /* Force one line */
 }
 
 .media-subtitle {

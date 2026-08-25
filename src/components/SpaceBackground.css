@@ -1,0 +1,97 @@
+.global-space-theme {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -999; /* Stay behind everything */
+  pointer-events: none;
+  background: radial-gradient(ellipse at bottom, var(--space-bg-center, #151515) 0%, var(--space-bg-edge, #000000) 100%);
+  transition: background 0.8s ease;
+}
+
+/* Color Themes */
+.theme-black {
+  --space-bg-center: #151515;
+  --space-bg-edge: #000000;
+}
+
+.theme-purple {
+  --space-bg-center: #2e1065; /* Deep cosmic purple */
+  --space-bg-edge: #09090b;
+}
+
+.theme-blue {
+  --space-bg-center: #1e3a8a; /* Deep galaxy blue */
+  --space-bg-edge: #020617;
+}
+
+.stars-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  animation: animStar linear infinite;
+}
+
+.stars-small {
+  width: 1px;
+  height: 1px;
+  animation-duration: 100s;
+}
+
+.stars-small::after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+.stars-medium {
+  width: 2px;
+  height: 2px;
+  animation-duration: 150s;
+}
+
+.stars-medium::after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+.stars-large {
+  width: 3px;
+  height: 3px;
+  animation-duration: 200s;
+}
+
+.stars-large::after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+@keyframes animStar {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-2000px); }
+}
+
+body.light-mode .global-space-theme {
+  background: radial-gradient(ellipse at bottom, #e0e5ec 0%, #f4f7f6 100%);
+}
+
+body.light-mode .stars-layer {
+  opacity: 0; /* Hide white stars in light mode */
+}

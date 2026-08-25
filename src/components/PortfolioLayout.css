@@ -1,9 +1,10 @@
 .portfolio-layout {
-  width: 100%;
+  position: relative;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #000000;
+  background-color: transparent; /* Allow space theme */
   overflow-x: hidden;
 }
 
@@ -11,6 +12,10 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8vh; /* Adds clean spacing between each section */
+}
+
+.scroll-fade-wrapper {
+  will-change: opacity;
 }
 
 /* Scroll Progress Bar */
@@ -74,4 +79,119 @@ main {
   transform-origin: center right;
   transform: translateX(0px) rotateZ(0deg) scale(1);
   will-change: transform;
+}
+
+/* Floating Social Popup */
+.social-popup-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem; /* Moved to left to avoid overlapping with Theme Switcher */
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(10, 10, 10, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  padding: 10px 24px;
+  border-radius: 50px;
+  opacity: 0;
+  transform: translateX(-120%); /* Start off-screen to the left */
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+  pointer-events: none; /* Ignore clicks when hidden */
+}
+
+.social-popup-container.visible {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.social-popup-text {
+  font-family: var(--font-primary, sans-serif);
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.social-popup-links {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.social-popup-links a {
+  color: #ffffff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+}
+
+.social-popup-links a:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+.social-popup-links a.social-instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  color: #ffffff;
+}
+
+.social-popup-links a.social-linkedin:hover {
+  background-color: #0077b5;
+  color: #ffffff;
+}
+
+.social-popup-links a.social-github:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.light-mode .social-popup-container {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .social-popup-text {
+  color: #666666;
+}
+
+body.light-mode .social-popup-links a {
+  color: #333333;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .social-popup-links a:hover {
+  /* Override general light mode hover, keep brand colors */
+}
+
+body.light-mode .social-popup-links a.social-github:hover {
+  background-color: #24292e; /* Darker github logo in light mode */
+}
+
+@media (max-width: 640px) {
+  .social-popup-container {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(150%); /* Start below screen and centered */
+    bottom: 1.5rem;
+    padding: 10px 20px;
+    gap: 1rem;
+    width: 90%;
+    max-width: 350px;
+    justify-content: space-between;
+  }
+  .social-popup-container.visible {
+    transform: translateX(-50%) translateY(0);
+  }
 }

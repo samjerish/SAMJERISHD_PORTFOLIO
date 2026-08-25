@@ -1,6 +1,6 @@
 .pro-resume-container {
   min-height: 100vh;
-  background-color: #080808;
+  background-color: transparent; /* Allow space theme */
   color: #e0e0e0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   display: flex;
@@ -51,6 +51,18 @@
   border-color: #ffffff;
 }
 
+.download-btn {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.download-btn:hover {
+  background: #e6e6e6;
+  border-color: #e6e6e6;
+  color: #000000;
+}
+
 /* DOCUMENT WRAPPER */
 .resume-document {
   width: 100%;
@@ -79,7 +91,7 @@
   font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 600;
-  color: #ff6b00; /* Add an accent color */
+  color: #888888; /* Changed to grey */
   margin: 0 0 1.2rem 0;
   letter-spacing: 0.15em;
   text-transform: uppercase;

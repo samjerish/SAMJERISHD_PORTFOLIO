@@ -1,0 +1,198 @@
+.theme-switcher-container {
+  position: fixed;
+  bottom: 4rem; /* Moved up as requested */
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.theme-switcher-toggle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-switcher-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.spin-icon {
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.theme-switcher-menu {
+  width: 250px;
+  background-color: rgba(17, 17, 17, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  
+  /* Initial hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transform-origin: bottom right;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-switcher-container.open .theme-switcher-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.theme-switcher-title {
+  font-family: var(--font-heading, sans-serif);
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.setting-section {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.setting-section:last-child {
+  margin-bottom: 0;
+}
+
+.setting-label {
+  font-family: var(--font-primary, sans-serif);
+  color: #888888;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.mood-toggle-group {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.mood-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #888888;
+  font-size: 0.85rem;
+  font-family: var(--font-primary, sans-serif);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mood-btn:hover {
+  color: #ffffff;
+}
+
+.mood-btn.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.color-picker-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.color-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.color-btn:hover {
+  transform: scale(1.15);
+}
+
+.color-btn.active {
+  border-color: #ffffff;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.black-preset { background: linear-gradient(135deg, #222222, #000000); }
+.purple-preset { background: linear-gradient(135deg, #4c1d95, #1e1b4b); }
+.blue-preset { background: linear-gradient(135deg, #1d4ed8, #0f172a); }
+
+.fade-in {
+  animation: simpleFadeIn 0.3s ease forwards;
+}
+
+@keyframes simpleFadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Light mode overrides for the switcher itself */
+body.light-mode .theme-switcher-toggle {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-color: rgba(0, 0, 0, 0.9);
+}
+
+body.light-mode .theme-switcher-menu {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .theme-switcher-title {
+  color: #111111;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .mood-toggle-group {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .mood-btn {
+  color: #666666;
+}
+
+body.light-mode .mood-btn:hover {
+  color: #111111;
+}
+
+body.light-mode .mood-btn.active {
+  background-color: #ffffff;
+  color: #111111;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
