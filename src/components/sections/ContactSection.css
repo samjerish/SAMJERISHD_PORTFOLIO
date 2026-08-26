@@ -170,8 +170,7 @@
   font-size: clamp(4rem, 12.5vw, 15rem);
   font-weight: 900;
   line-height: 0.8;
-  margin: 0;
-  padding-bottom: 3rem; /* Added gap below text */
+  margin: 0 0 -0.4em 0; /* Pull bottom up by half the text height to remove the invisible gap */
   letter-spacing: -2px;
   width: 100%;
   text-align: center;
