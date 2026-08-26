@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './ProjectModal.css';
-import type { Project } from '../data/projects';
+import type { Project } from '../../data/projects';
 import { FiX } from 'react-icons/fi';
 
 interface ProjectModalProps {

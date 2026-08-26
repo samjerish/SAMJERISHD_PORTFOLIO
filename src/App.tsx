@@ -1,18 +1,18 @@
 import { useState, useCallback, useEffect } from 'react';
 import Lenis from 'lenis';
-import { LoadingIntro } from './components/LoadingIntro';
-import { RibbonTransition } from './components/RibbonTransition';
-import { PortfolioLayout } from './components/PortfolioLayout';
-import { SpaceBackground } from './components/SpaceBackground';
-import { ThemeSwitcher } from './components/ThemeSwitcher';
+import { LoadingIntro } from './components/ui/LoadingIntro';
+import { RibbonTransition } from './components/ui/RibbonTransition';
+import { PortfolioLayout } from './components/layout/PortfolioLayout';
+import { SpaceBackground } from './components/ui/SpaceBackground';
+import { ThemeSwitcher } from './components/layout/ThemeSwitcher';
 // @ts-ignore
-import SplashCursor from './components/SplashCursor';
+import SplashCursor from './components/ui/SplashCursor';
 
-import { MyMediaPage } from './components/MyMediaPage';
-import { AboutPage } from './components/AboutPage';
-import { ProjectsPage } from './components/ProjectsPage';
-import { ContactPage } from './components/ContactPage';
-import { ResumePage } from './components/ResumePage';
+import { MyMediaPage } from './components/pages/MyMediaPage';
+import { AboutPage } from './components/pages/AboutPage';
+import { ProjectsPage } from './components/pages/ProjectsPage';
+import { ContactPage } from './components/pages/ContactPage';
+import { ResumePage } from './components/pages/ResumePage';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);

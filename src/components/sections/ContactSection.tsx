@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './ContactSection.css';
 import { FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
 import { FileText } from 'lucide-react';
-import thumpsupImage from '../assets/thumpsup.png';
+import thumpsupImage from '../../assets/thumpsup.png';
 
 interface ContactSectionProps {
   onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void;

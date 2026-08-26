@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './HeroSection.css';
-import animatedProfile from '../assets/animated_profile.png';
+import animatedProfile from '../../assets/animated_profile.png';
 
 export const HeroSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate: _onNavigate }) => {
   const [_isScrolling, setIsScrolling] = useState(false);

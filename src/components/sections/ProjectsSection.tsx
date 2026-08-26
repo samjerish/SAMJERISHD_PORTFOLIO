@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import './ProjectsSection.css';
-import clickHereGraphic from '../assets/click_here.png';
+import clickHereGraphic from '../../assets/click_here.png';
 
-import { projects } from '../data/projects';
-import type { Project } from '../data/projects';
-import { ProjectModal } from './ProjectModal';
+import { projects } from '../../data/projects';
+import type { Project } from '../../data/projects';
+import { ProjectModal } from '../ui/ProjectModal';
 
 export const ProjectsSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);

@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import './MyMediaPage.css';
-import { AnimatedLine } from './StorySection';
+import { AnimatedLine } from '../sections/StorySection';
 
 interface MyMediaPageProps {
   onNavigate: (page: 'home' | 'media') => void;
 }
 
 // @ts-ignore
-import Masonry from './Masonry';
+import Masonry from '../ui/Masonry';
 
 export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
   const items = [

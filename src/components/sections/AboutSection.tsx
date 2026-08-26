@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './AboutSection.css';
-import profileImg from '../assets/animated_profile.png';
+import profileImg from '../../assets/animated_profile.png';
 import { AnimatedLine } from './StorySection';
 
 export const AboutSection: React.FC = () => {

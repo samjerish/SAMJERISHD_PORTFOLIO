@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { HeroSection } from './HeroSection';
-import { StorySection } from './StorySection';
-import { ProjectsSection } from './ProjectsSection';
-import { ContactSection } from './ContactSection';
+import { HeroSection } from '../sections/HeroSection';
+import { StorySection } from '../sections/StorySection';
+import { ProjectsSection } from '../sections/ProjectsSection';
+import { ContactSection } from '../sections/ContactSection';
 import './PortfolioLayout.css';
-import animatedProfile from '../assets/animated_profile.png';
+import animatedProfile from '../../assets/animated_profile.png';
 import { FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {

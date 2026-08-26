@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './ProjectsPage.css';
-import './ProjectsSection.css';
-import { projects } from '../data/projects';
-import type { Project } from '../data/projects';
-import { ProjectModal } from './ProjectModal';
+import '../sections/ProjectsSection.css';
+import { projects } from '../../data/projects';
+import type { Project } from '../../data/projects';
+import { ProjectModal } from '../ui/ProjectModal';
 
 const TECH_STACK = [
   { name: 'Python', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg' },

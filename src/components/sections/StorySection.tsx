@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './StorySection.css';
-import profileImg from '../assets/photo.jpg';
+import profileImg from '../../assets/photo.jpg';
 
 export const StorySection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
