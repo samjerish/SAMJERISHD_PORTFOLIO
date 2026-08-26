@@ -12,6 +12,46 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
   const [lineWidth, setLineWidth] = useState(3);
   const [hasDrawn, setHasDrawn] = useState(false);
   const [activeTool, setActiveTool] = useState<'pen' | 'eraser'>('pen');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submitDrawing = async () => {
+    const canvas = canvasRef.current;
+    if (!canvas || !hasDrawn) {
+      alert('Please draw a message before sending!');
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      // Use JPEG with 0.5 quality to keep the base64 string very small
+      // Formspree free tier ignores file blobs, so we send it as a text field.
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
+      
+      const formData = new FormData();
+      formData.append('message_type', 'User Drawing');
+      formData.append('drawing_image_base64', dataUrl);
+      
+      const response = await fetch('https://formspree.io/f/xljerddq', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        alert('Message sent successfully!');
+        clearCanvas();
+      } else {
+        alert('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -151,27 +191,27 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
         </div>
 
         {inputMode === 'type' ? (
-          <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="contact-form" action="https://formspree.io/f/xljerddq" method="POST">
             <div className="form-row">
               <div className="form-group" style={{ width: '100%' }}>
                 <label>Full name</label>
-                <input type="text" placeholder="John Doe" />
+                <input type="text" name="name" placeholder="John Doe" required />
               </div>
             </div>
             
             <div className="form-row">
               <div className="form-group" style={{ width: '100%' }}>
                 <label>Email Address</label>
-                <input type="email" placeholder="john@example.com" />
+                <input type="email" name="email" placeholder="john@example.com" required />
               </div>
             </div>
 
             <div className="form-group">
               <label>Message</label>
-              <textarea placeholder="Dear Sam," rows={6}></textarea>
+              <textarea name="message" placeholder="Dear Sam," rows={6} required></textarea>
             </div>
 
-            <button type="submit" className="submit-btn" onClick={() => alert('Message sent!')}>
+            <button type="submit" className="submit-btn">
               Send to Sam
             </button>
           </form>
@@ -237,8 +277,8 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
               />
             </div>
 
-            <button className="submit-btn" onClick={() => alert('Message sent!')} style={{ marginTop: '1rem' }}>
-              Send to Sam
+            <button className="submit-btn" onClick={submitDrawing} disabled={isSubmitting} style={{ marginTop: '1rem', opacity: isSubmitting ? 0.7 : 1 }}>
+              {isSubmitting ? 'Sending...' : 'Send to Sam'}
             </button>
           </div>
         )}

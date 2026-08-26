@@ -4,7 +4,6 @@ import { StorySection } from '../sections/StorySection';
 import { ProjectsSection } from '../sections/ProjectsSection';
 import { ContactSection } from '../sections/ContactSection';
 import './PortfolioLayout.css';
-import animatedProfile from '../../assets/animated_profile.png';
 import { FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
@@ -117,8 +116,8 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
       <div className="hero-top-bar" style={{ position: 'fixed', zIndex: 100 }}>
         <nav className={`hero-floating-nav ${isScrolling ? 'collapsed' : ''}`}>
           <div className="nav-profile">
-            <div className="nav-avatar-bg">
-              <img src={animatedProfile} alt="Sam Jerish" className="nav-avatar" />
+            <div className="nav-avatar-bg" style={{ background: 'transparent' }}>
+              <img src={`${import.meta.env.BASE_URL}LOGO.png`} alt="Logo" className="nav-avatar" style={{ objectFit: 'contain', width: '100%', height: '100%' }} />
             </div>
             <span className="nav-name">samjerish</span>
           </div>

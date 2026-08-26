@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './ProjectModal.css';
 import type { Project } from '../../data/projects';
 import { FiX } from 'react-icons/fi';
@@ -24,7 +25,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
 
   if (!isOpen || !project) return null;
 
-  return (
+  return createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-btn" onClick={onClose}>
@@ -40,7 +41,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
         <div className="modal-content">
           <div className="modal-section">
             <h3>Overview</h3>
-            <p>{project.details || project.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: project.details || project.description }}></p>
           </div>
           
           <div className="modal-split">
@@ -55,13 +56,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
             </div>
           </div>
           
-          <div className="modal-footer">
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="modal-view-btn">
-              VIEW PROJECT ↗
-            </a>
-          </div>
+          {project.link && (
+            <div className="modal-footer">
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="modal-view-btn">
+                VIEW PROJECT ↗
+              </a>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

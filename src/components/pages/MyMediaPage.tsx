@@ -11,12 +11,13 @@ interface MyMediaPageProps {
 import Masonry from '../ui/Masonry';
 
 export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
+  const basePath = import.meta.env.BASE_URL;
   const items = [
-    { id: "1", img: "/1.png", url: "/1.png", height: 600 },
-    { id: "2", img: "/4.JPG", url: "/4.JPG", height: 800 },
-    { id: "3", img: "/5.png", url: "/5.png", height: 500 },
-    { id: "4", img: "/BQPV5141.JPG", url: "/BQPV5141.JPG", height: 700 },
-    { id: "5", img: "/channel art.png", url: "/channel art.png", height: 400 },
+    { id: "1", img: `${basePath}media/media-1.jpg`, url: `${basePath}media/media-1.jpg`, height: 800 },
+    { id: "2", img: `${basePath}media/media-2.jpg`, url: `${basePath}media/media-2.jpg`, height: 600 },
+    { id: "3", img: `${basePath}media/media-3.jpg`, url: `${basePath}media/media-3.jpg`, height: 800 },
+    { id: "4", img: `${basePath}media/media-4.png`, url: `${basePath}media/media-4.png`, height: 500 },
+    { id: "5", img: `${basePath}media/media-5.jpg`, url: `${basePath}media/media-5.jpg`, height: 700 },
   ];
 
   const [isStoryVisible, setIsStoryVisible] = useState(false);
@@ -78,7 +79,7 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
       </div>
       
       {/* Interactive Masonry Gallery */}
-      <div style={{ height: '800px', width: '100%', position: 'relative', marginTop: '2rem' }}>
+      <div style={{ height: '800px', width: '100%', position: 'relative', marginTop: '0rem' }}>
         <Masonry
           items={items}
           ease="power3.out"

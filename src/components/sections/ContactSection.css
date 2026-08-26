@@ -132,19 +132,7 @@
 }
 
 
-/* --- COPYRIGHT --- */
-.contact-copyright-top-right {
-  position: absolute;
-  top: 2rem;
-  right: 5vw;
-  font-family: var(--font-primary, sans-serif);
-  font-size: 0.9rem;
-  color: #777777;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-/* --- MASSIVE TEXT --- */
+/* --- MASSIVE TEXT & FOOTER --- */
 .contact-massive-text-container {
   position: relative;
   width: 100%;
@@ -155,24 +143,14 @@
   align-items: center;
 }
 
-.contact-credit-text {
-  font-family: var(--font-primary, sans-serif);
-  font-size: 0.9rem;
-  color: #888888;
-  letter-spacing: 0.3rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem; /* Increased spacing */
-  text-transform: uppercase;
-}
-
 .contact-massive-text {
   font-family: var(--font-heading, sans-serif);
-  font-size: clamp(4rem, 12.5vw, 15rem);
-  font-weight: 900;
+  font-size: clamp(3rem, 14vw, 18rem);
+  font-weight: 800;
   line-height: 0.8;
   margin: 0;
-  padding-bottom: 3rem; /* Restored gap since text is fully shown */
-  letter-spacing: -2px;
+  padding-bottom: 1.5rem;
+  letter-spacing: 2px;
   width: 100%;
   text-align: center;
   position: relative;
@@ -182,10 +160,51 @@
   
   /* Outline fading effect */
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, rgba(0, 0, 0, 0.1) 100%);
-  mask-image: linear-gradient(to bottom, black 80%, rgba(0, 0, 0, 0.1) 100%);
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
   user-select: none;
+}
+
+.contact-footer-line {
+  width: 100%;
+  max-width: 1400px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 0 auto 1.5rem auto;
+}
+
+.contact-footer-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem 1rem;
+  font-family: var(--font-primary, sans-serif);
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  position: relative;
+  z-index: 15;
+}
+
+.contact-footer-left {
+  font-weight: 500;
+}
+
+.contact-footer-right {
+  display: flex;
+  gap: 2rem;
+}
+
+.contact-footer-right span {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.contact-footer-right span:hover {
+  color: #ffffff;
 }
 
 .word-animate {
@@ -240,6 +259,12 @@
     max-width: 55vw;
     right: 5vw;
     bottom: 0;
+  }
+  
+  .contact-footer-links {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
   }
 }
 

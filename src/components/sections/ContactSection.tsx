@@ -40,15 +40,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) =>
       if (node) observer.unobserve(node);
       clearInterval(wordInterval);
     };
-  }, []);
+  }, [words.length]);
 
   return (
     <section ref={sectionRef} className={`dark-contact-section ${isVisible ? 'is-visible' : ''}`}>
       <div className="dark-contact-content">
         
-        <div className="contact-copyright-top-right">
-          <span>© 2026 Sam Jerish D</span>
-        </div>
+
 
         {/* Header Section */}
         <div className="contact-hero-header">
@@ -98,13 +96,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) =>
         <div className="contact-splitter-horizontal"></div>
       </div>
 
-      {/* Massive Text (Outside content wrapper to stretch fully) */}
+      {/* Massive Text and Footer */}
       <div className="contact-massive-text-container">
-        <div className="contact-credit-text">
-          DESIGNED & DEVELOPED WITH ❤️ BY
-        </div>
         <div className="contact-massive-text">
           SAM JERISH D
+        </div>
+        
+        <div className="contact-footer-line"></div>
+        
+        <div className="contact-footer-links">
+          <div className="contact-footer-left">
+            © 2026 Sam Jerish D / Reject all substitutes
+          </div>
+          <div className="contact-footer-right">
+            <span>Security</span>
+            <span>Terms of service</span>
+            <span>Privacy policy</span>
+          </div>
         </div>
       </div>
       
