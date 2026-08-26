@@ -183,8 +183,8 @@
   /* Outline fading effect */
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 50%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 50%);
   user-select: none;
 }
 
