@@ -290,4 +290,23 @@ body.light-mode .story-highlight {
   .story-content-block {
     gap: 4rem;
   }
+  
+  .id-card-stack {
+    max-width: 300px;
+  }
+  
+  .id-card-connect-text {
+    left: -40px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .id-card-stack {
+    max-width: 250px;
+  }
+  
+  .id-card-connect-text {
+    display: none; /* Hide sideways text on extra small screens to prevent clipping */
+  }
 }
