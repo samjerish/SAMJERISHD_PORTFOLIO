@@ -1,6 +1,7 @@
 .theme-switcher-container {
   position: fixed;
-  bottom: 4rem; /* Moved up as requested */
+  top: 50%;
+  transform: translateY(-50%);
   right: 2rem;
   z-index: 9999;
   display: flex;

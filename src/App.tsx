@@ -5,7 +5,8 @@ import { RibbonTransition } from './components/RibbonTransition';
 import { PortfolioLayout } from './components/PortfolioLayout';
 import { SpaceBackground } from './components/SpaceBackground';
 import { ThemeSwitcher } from './components/ThemeSwitcher';
-
+// @ts-ignore
+import SplashCursor from './components/SplashCursor';
 
 import { MyMediaPage } from './components/MyMediaPage';
 import { AboutPage } from './components/AboutPage';
@@ -62,6 +63,18 @@ function App() {
 
   return (
     <>
+      <SplashCursor
+        DENSITY_DISSIPATION={3.5}
+        VELOCITY_DISSIPATION={2}
+        PRESSURE={0.1}
+        CURL={3}
+        SPLAT_RADIUS={0.2}
+        SPLAT_FORCE={6000}
+        COLOR_UPDATE_SPEED={10}
+        SHADING
+        RAINBOW_MODE={false}
+        COLOR="#ffffff"
+      />
       {isSpaceMode && <SpaceBackground colorTheme={spaceColor} />}
       
       <ThemeSwitcher 

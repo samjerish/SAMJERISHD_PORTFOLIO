@@ -58,28 +58,31 @@ export const ProjectsPage: React.FC<{ onNavigate: (page: 'home' | 'media' | 'abo
           </div>
         </div>
         
-        <div className="dedicated-projects-grid">
+        <div className="projects-grid" style={{ marginBottom: '6rem' }}>
           {projects.map((project) => (
             <div 
               key={project.id} 
-              className="dedicated-project-card" 
+              className="project-card" 
               onClick={() => handleProjectClick(project)}
             >
-              <img src={project.image} alt={project.name} className="project-image" />
-              
-              <div className="project-info-overlay">
-                <div className="project-info-header">
-                  <h3 className="project-title">{project.name}</h3>
-                  <span className="project-date">{project.date}</span>
+              <div className="project-card-header">
+                <div className="project-card-logo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 22 22 22"></polygon></svg>
                 </div>
-                <p className="project-desc">{project.description}</p>
+                <span className="project-card-name">{project.name}</span>
               </div>
-
-              {project.tag && (
-                <div className="project-tag">
-                  <span className="tag-dot"></span> {project.tag}
+              
+              <div className="project-image-wrapper">
+                <img src={project.image} alt={project.name} className="project-image" />
+              </div>
+              
+              <div className="project-info">
+                <h3 className="project-card-title">{project.description}</h3>
+                <p className="project-card-desc">{project.details}</p>
+                <div className="project-card-footer">
+                  {project.tag && project.date ? `${project.tag}, ${project.date}` : project.date || project.tag}
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
