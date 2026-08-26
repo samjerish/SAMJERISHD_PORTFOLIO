@@ -314,3 +314,9 @@ body.light-mode .view-all-text-wrapper p {
     font-size: 2rem;
   }
 }
+
+@media (max-width: 480px) {
+  .portfolio-container {
+    padding: 4rem 1.5rem;
+  }
+}

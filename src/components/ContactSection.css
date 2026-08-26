@@ -2,7 +2,7 @@
 
 .dark-contact-section {
   position: relative;
-  width: 100vw;
+  width: 100%;
   background-color: transparent; /* Allow space theme */
   color: #ffffff;
   padding: 10vh 5vw 0 5vw;
@@ -147,7 +147,7 @@
 /* --- MASSIVE TEXT --- */
 .contact-massive-text-container {
   position: relative;
-  width: 100vw;
+  width: 100%;
   margin-top: auto;
   z-index: 10; /* Keep text above the image */
   display: flex;
@@ -173,7 +173,7 @@
   margin: 0;
   padding-bottom: 3rem; /* Added gap below text */
   letter-spacing: -2px;
-  width: 100vw;
+  width: 100%;
   text-align: center;
   position: relative;
   left: 50%;
@@ -218,15 +218,27 @@
 
 
   .contact-massive-text {
-    font-size: 11.5vw;
+    font-size: clamp(3rem, 12vw, 8rem);
     line-height: 0.8;
   }
 
   .contact-thumpsup-image {
-    height: 40vh;
-    max-width: 50vw;
+    height: 35vh;
+    max-width: 55vw;
     right: 5vw;
     bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .dark-contact-section {
+    padding: 6vh 1.5rem 0 1.5rem;
+  }
+  .contact-hero-header h1 {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+  .contact-massive-text {
+    font-size: clamp(2.5rem, 14vw, 5rem);
   }
 }
 

@@ -362,3 +362,12 @@
   }
 }
 
+@media (max-width: 480px) {
+  .contact-form-section {
+    padding: 2rem 1.5rem;
+  }
+  .form-title {
+    font-size: clamp(3rem, 12vw, 4rem);
+  }
+}
+

@@ -346,6 +346,19 @@
     padding: 6rem 1.5rem;
   }
 
+  .about-story-text, .description p {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .yellow-folder.open {
+    transform: translateX(-15px) translateY(-20px) rotate(-5deg);
+  }
+
+  .social-links-drawer {
+    left: 20px;
+  }
+
   .play-text {
     font-size: 0.6rem;
   }

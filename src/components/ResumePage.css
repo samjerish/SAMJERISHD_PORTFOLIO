@@ -297,4 +297,13 @@
   .resume-skills-logo-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .resume-doc-name {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+  .section-heading {
+    font-size: 1.4rem;
+  }
+  .item-title {
+    font-size: 1.1rem;
+  }
 }

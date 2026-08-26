@@ -172,8 +172,21 @@
   }
   .new-about-layout {
     padding: 0 1.5rem;
+    gap: 2.5rem;
   }
   .about-title-block h2 {
     font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .about-right-col p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .about-title-block p {
+    font-size: 1.1rem;
+  }
+  .about-signature span {
+    font-size: 4rem;
   }
 }

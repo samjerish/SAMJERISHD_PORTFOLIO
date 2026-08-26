@@ -1,6 +1,6 @@
 .hero-container.new-hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-color: transparent; /* Allow global space theme */
   overflow: hidden;
@@ -145,7 +145,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
-  width: 100vw;
+  width: 100%;
   pointer-events: none;
 }
 
@@ -158,14 +158,14 @@
 
 .text-line-1 {
   color: #ffffff;
-  font-size: 36.5vw;
+  font-size: clamp(3rem, 18vw, 36.5vw);
   line-height: 0.75;
   letter-spacing: -0.2vw;
 }
 
 .text-line-2 {
   color: #888888;
-  font-size: 14.5vw;
+  font-size: clamp(1.5rem, 7vw, 14.5vw);
   line-height: 0.85;
   letter-spacing: 0vw;
 }
@@ -336,3 +336,22 @@ body.light-mode .hero-floating-nav button:hover {
   }
 }
 
+@media (max-width: 480px) {
+  .hero-floating-nav {
+    gap: 0.8rem;
+    padding: 6px 12px;
+  }
+  
+  .nav-name {
+    display: none;
+  }
+  
+  .nav-links {
+    gap: 0.5rem;
+  }
+  
+  .nav-links button {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+}
