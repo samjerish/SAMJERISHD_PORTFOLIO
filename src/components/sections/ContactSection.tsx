@@ -53,7 +53,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) =>
         {/* Header Section */}
         <div className="contact-hero-header">
           <h1>
-            Lets <span className="handwriting-pink" style={{ display: 'inline-block', minWidth: '100px', transition: 'opacity 0.3s' }}>{words[wordIndex]}</span><br />
+            Lets <span key={wordIndex} className="handwriting-pink word-animate">{words[wordIndex]}</span><br />
             incredible work together.
           </h1>
         </div>

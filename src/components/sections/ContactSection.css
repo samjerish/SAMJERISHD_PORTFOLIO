@@ -183,9 +183,22 @@
   /* Outline fading effect */
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0.1) 100%);
-  mask-image: linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0.1) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 75%, rgba(0, 0, 0, 0.1) 100%);
+  mask-image: linear-gradient(to bottom, black 75%, rgba(0, 0, 0, 0.1) 100%);
   user-select: none;
+}
+
+.word-animate {
+  display: inline-block;
+  min-width: 80px;
+  animation: wordSwap 2s forwards;
+}
+
+@keyframes wordSwap {
+  0% { opacity: 0; transform: translateY(10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
 }
 
 .contact-thumpsup-image {
