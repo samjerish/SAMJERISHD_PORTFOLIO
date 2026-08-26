@@ -116,8 +116,7 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
   const colors = ['#000000', '#ef4444', '#3b82f6', '#22c55e', '#eab308'];
 
   return (
-    <div className="contact-page-container">
-      <div className="contact-page-wrapper">
+    <div className="contact-page-wrapper">
       {/* LEFT SIDE - IMAGE */}
       <div className="contact-image-section">
         <img src={mailboxImg} alt="Contact Mailbox" className="contact-image" />
@@ -272,23 +271,6 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
           </div>
         </div>
       </div>
-      </div>
-      
-      {/* GIANT FOOTER */}
-      <footer className="giant-footer">
-        <div className="giant-footer-text">
-          SAM JERISH D
-        </div>
-        <div className="giant-footer-divider"></div>
-        <div className="giant-footer-bottom">
-          <span className="footer-copyright">© 2026 Sam Jerish / Reject all substitutes</span>
-          <div className="footer-links">
-            <a href="#">Security</a>
-            <a href="#">Terms of service</a>
-            <a href="#">Privacy policy</a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
