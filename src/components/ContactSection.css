@@ -167,18 +167,25 @@
 
 .contact-massive-text {
   font-family: var(--font-heading, sans-serif);
-  font-size: 12.5vw;
+  font-size: clamp(4rem, 12.5vw, 15rem);
   font-weight: 900;
-  line-height: 0.75;
+  line-height: 0.8;
   margin: 0;
   padding-bottom: 3rem; /* Added gap below text */
-  letter-spacing: -0.3vw;
+  letter-spacing: -2px;
   width: 100vw;
   text-align: center;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
+  
+  /* Outline fading effect */
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  user-select: none;
 }
 
 .contact-thumpsup-image {
@@ -244,4 +251,8 @@ body.light-mode .menu-links a {
 
 body.light-mode .contact-divider {
   background-color: #dddddd;
+}
+
+body.light-mode .contact-massive-text {
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
 }

@@ -96,7 +96,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) =>
           DESIGNED & DEVELOPED WITH ❤️ BY
         </div>
         <div className="contact-massive-text">
-          <span style={{ color: '#ffffff' }}>SAM</span> <span style={{ color: '#888888' }}>JERISH D</span>
+          SAM JERISH D
         </div>
       </div>
       
