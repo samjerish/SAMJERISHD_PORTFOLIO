@@ -158,16 +158,16 @@
 
 .text-line-1 {
   color: #ffffff;
-  font-size: clamp(3rem, 18vw, 36.5vw);
-  line-height: 0.75;
-  letter-spacing: -0.2vw;
+  font-size: clamp(4rem, 22vw, 40vw);
+  line-height: 0.8;
+  letter-spacing: 1vw;
 }
 
 .text-line-2 {
   color: #888888;
-  font-size: clamp(1.5rem, 7vw, 14.5vw);
-  line-height: 0.85;
-  letter-spacing: 0vw;
+  font-size: clamp(3rem, 15vw, 28vw);
+  line-height: 0.8;
+  letter-spacing: 1vw;
 }
 
 .floating-avatar-new {
