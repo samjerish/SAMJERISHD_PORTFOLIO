@@ -10,6 +10,8 @@ interface ContactSectionProps {
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
+  const words = ['build', 'create', 'innovate'];
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -29,8 +31,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) =>
 
     const node = sectionRef.current;
     if (node) observer.observe(node);
+    
+    const wordInterval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length);
+    }, 2000);
+    
     return () => {
       if (node) observer.unobserve(node);
+      clearInterval(wordInterval);
     };
   }, []);
 
@@ -45,7 +53,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) =>
         {/* Header Section */}
         <div className="contact-hero-header">
           <h1>
-            Lets <span className="handwriting-pink">build</span><br />
+            Lets <span className="handwriting-pink" style={{ display: 'inline-block', minWidth: '100px', transition: 'opacity 0.3s' }}>{words[wordIndex]}</span><br />
             incredible work together.
           </h1>
         </div>
