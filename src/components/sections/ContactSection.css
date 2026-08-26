@@ -170,7 +170,8 @@
   font-size: clamp(4rem, 12.5vw, 15rem);
   font-weight: 900;
   line-height: 0.8;
-  margin: 0 0 -0.4em 0; /* Pull bottom up by half the text height to remove the invisible gap */
+  margin: 0;
+  padding-bottom: 3rem; /* Restored gap since text is fully shown */
   letter-spacing: -2px;
   width: 100%;
   text-align: center;
@@ -182,8 +183,8 @@
   /* Outline fading effect */
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
-  mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0.1) 100%);
+  mask-image: linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0.1) 100%);
   user-select: none;
 }
 
