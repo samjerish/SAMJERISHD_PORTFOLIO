@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { HeroSection } from '../sections/HeroSection';
 import { StorySection } from '../sections/StorySection';
 import { ProjectsSection } from '../sections/ProjectsSection';
@@ -12,7 +12,6 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
   const mainRef = React.useRef<HTMLElement>(null);
   const socialPopupRef = React.useRef<HTMLDivElement>(null);
   
-  const [isScrolling, setIsScrolling] = useState(false);
   const scrollTimeout = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -22,12 +21,10 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
     }, 50);
 
     const handleScroll = () => {
-      setIsScrolling(true);
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
       scrollTimeout.current = setTimeout(() => {
-        setIsScrolling(false);
       }, 150);
 
       const totalScroll = window.scrollY;
