@@ -70,12 +70,13 @@
 .form-title {
   font-family: var(--font-heading);
   font-weight: 900;
-  font-size: clamp(4rem, 10vw, 7rem);
+  font-size: clamp(2rem, 6vw, 5rem);
   line-height: 0.9;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: -2px;
   font-stretch: ultra-condensed;
+  white-space: nowrap;
 }
 
 .book-slot-btn {
@@ -367,7 +368,7 @@
     padding: 2rem 1.5rem;
   }
   .form-title {
-    font-size: clamp(3rem, 12vw, 4rem);
+    font-size: clamp(1.5rem, 8vw, 3rem);
   }
 }
 
