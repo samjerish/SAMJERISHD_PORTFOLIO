@@ -46,7 +46,7 @@ export const ContactPage: React.FC<{ onNavigate?: (page: 'home' | 'media' | 'abo
       } else {
         alert('Failed to send message. Please try again.');
       }
-    } catch (error) {
+    } catch {
       alert('An error occurred. Please try again later.');
     } finally {
       setIsSubmitting(false);

@@ -5,6 +5,7 @@ import { ProjectsSection } from '../sections/ProjectsSection';
 import { ContactSection } from '../sections/ContactSection';
 import './PortfolioLayout.css';
 import { FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
+import { Navbar } from './Navbar';
 
 export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => void }> = ({ onNavigate }) => {
   const progressBarRef = React.useRef<HTMLDivElement>(null);
@@ -113,22 +114,7 @@ export const PortfolioLayout: React.FC<{ onNavigate: (page: 'home' | 'media' | '
   return (
     <div className="portfolio-layout">
       {/* Global Navigation Bar */}
-      <div className="hero-top-bar" style={{ position: 'fixed', zIndex: 100 }}>
-        <nav className={`hero-floating-nav ${isScrolling ? 'collapsed' : ''}`}>
-          <div className="nav-profile">
-            <div className="nav-avatar-bg" style={{ background: 'transparent' }}>
-              <img src={`${import.meta.env.BASE_URL}LOGO.png`} alt="Logo" className="nav-avatar" style={{ objectFit: 'contain', width: '100%', height: '100%' }} />
-            </div>
-            <span className="nav-name">samjerish</span>
-          </div>
-          <div className="nav-links">
-            <button onClick={() => onNavigate && onNavigate('about')}>About</button>
-            <button onClick={() => onNavigate && onNavigate('projects')}>Projects</button>
-            <button onClick={() => onNavigate && onNavigate('media')}>Beyond the frame</button>
-            <button onClick={() => onNavigate && onNavigate('contact')}>Contact</button>
-          </div>
-        </nav>
-      </div>
+      <Navbar onNavigate={onNavigate} />
 
       {/* Floating Social Popup */}
       <div ref={socialPopupRef} className="social-popup-container">

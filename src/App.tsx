@@ -3,10 +3,8 @@ import Lenis from 'lenis';
 import { LoadingIntro } from './components/ui/LoadingIntro';
 import { RibbonTransition } from './components/ui/RibbonTransition';
 import { PortfolioLayout } from './components/layout/PortfolioLayout';
-import { SpaceBackground } from './components/ui/SpaceBackground';
-import { ThemeSwitcher } from './components/layout/ThemeSwitcher';
-// @ts-ignore
-import SplashCursor from './components/ui/SplashCursor';
+
+
 
 import { MyMediaPage } from './components/pages/MyMediaPage';
 import { AboutPage } from './components/pages/AboutPage';
@@ -20,8 +18,7 @@ function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [targetPage, setTargetPage] = useState<'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume'>('home');
   
-  const [isSpaceMode, setIsSpaceMode] = useState(true);
-  const [spaceColor, setSpaceColor] = useState<'black' | 'purple' | 'blue'>('black');
+
 
   const handleNavigate = (page: 'home' | 'media' | 'about' | 'projects' | 'contact' | 'resume') => {
     if (page !== currentPage) {
@@ -63,26 +60,8 @@ function App() {
 
   return (
     <>
-      <SplashCursor
-        DENSITY_DISSIPATION={3.5}
-        VELOCITY_DISSIPATION={2}
-        PRESSURE={0.1}
-        CURL={3}
-        SPLAT_RADIUS={0.2}
-        SPLAT_FORCE={6000}
-        COLOR_UPDATE_SPEED={10}
-        SHADING
-        RAINBOW_MODE={false}
-        COLOR="#ffffff"
-      />
-      {isSpaceMode && <SpaceBackground colorTheme={spaceColor} />}
-      
-      <ThemeSwitcher 
-        isSpaceMode={isSpaceMode}
-        setIsSpaceMode={setIsSpaceMode}
-        spaceColor={spaceColor}
-        setSpaceColor={setSpaceColor}
-      />
+
+
 
       {!isLoaded && <LoadingIntro onComplete={() => setIsLoaded(true)} />}
       

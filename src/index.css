@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;500;600;700&display=swap');
 
 :root {
   /* Colors */
@@ -10,8 +10,8 @@
   --accent-color: #ffffff;
   
   /* Typography */
-  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-primary: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --font-handwriting: 'Caveat', cursive;
 
@@ -41,6 +41,9 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 /* Custom interactive cursor for links/buttons */

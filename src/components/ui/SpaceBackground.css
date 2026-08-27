@@ -1,14 +1,16 @@
 .global-space-theme {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
-  z-index: -999; /* Stay behind everything */
+  z-index: 0; /* Changed from -999 to sit right behind content but inside the container */
   pointer-events: none;
   background: radial-gradient(ellipse at bottom, var(--space-bg-center, #151515) 0%, var(--space-bg-edge, #000000) 100%);
   transition: background 0.8s ease;
+  -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
 }
 
 /* Color Themes */
