@@ -69,7 +69,7 @@ const Masonry = ({
   );
 
   const [containerRef, { width }] = useMeasure();
-  const [imagesReady, setImagesReady] = useState(false);
+  const [imagesReady, setImagesReady] = useState(true);
 
   const getInitialPosition = item => {
     const containerRect = containerRef.current?.getBoundingClientRect();
@@ -100,10 +100,6 @@ const Masonry = ({
         return { x: item.x, y: item.y + 100 };
     }
   };
-
-  useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
-  }, [items]);
 
   const { grid, maxHeight } = useMemo(() => {
     if (!width) return { grid: [], maxHeight: 0 };
@@ -230,7 +226,7 @@ const Masonry = ({
             onMouseEnter={e => handleMouseEnter(e, item)}
             onMouseLeave={e => handleMouseLeave(e, item)}
           >
-            <div className="item-img" style={{ backgroundImage: `url("${item.img}")` }}>
+            <div className="item-img" style={{ backgroundImage: `url("${encodeURI(item.img)}")` }}>
               {colorShiftOnHover && (
                 <div
                   className="color-overlay"

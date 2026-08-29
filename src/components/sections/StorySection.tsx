@@ -2,13 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import "./StorySection.css";
 import profileImg1 from "../../assets/me.jpg";
 import profileImg2 from "../../assets/me2.jpg";
-import profileImg3 from "../../assets/me3.jpg";
 
 export const StorySection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
-  const photos = [profileImg1, profileImg2, profileImg3];
+  const photos = [profileImg1, profileImg2];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -100,20 +99,14 @@ export const StorySection: React.FC = () => {
                 {/* Photo */}
                 <div className="id-card-photo-wrapper">
                   {photos.map((photo, index) => {
-                    let positionClass = "next";
-                    if (index === photoIndex) positionClass = "active";
-                    else if (
-                      index ===
-                      (photoIndex - 1 + photos.length) % photos.length
-                    )
-                      positionClass = "prev";
+                    const positionClass = index === photoIndex ? "active" : "hidden";
 
                     return (
                       <img
                         key={index}
                         src={photo}
                         alt={`Sam Jerish ${index + 1}`}
-                        className={`id-card-photo ${positionClass} ${index === 2 ? "photo-contain" : ""}`}
+                        className={`id-card-photo ${positionClass}`}
                       />
                     );
                   })}
