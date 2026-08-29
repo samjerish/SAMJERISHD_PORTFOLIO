@@ -36,14 +36,18 @@ body.menu-open .scroll-progress-container {
 
 .hamburger-btn .menu-icon-hamburger {
   position: absolute;
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: rotate(0deg) scale(1);
   opacity: 1;
 }
 
 .hamburger-btn .menu-icon-close {
   position: absolute;
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: rotate(-90deg) scale(0.5);
   opacity: 0;
 }
@@ -71,11 +75,13 @@ body.menu-open .scroll-progress-container {
   z-index: 2000;
   display: flex;
   flex-direction: column;
-  
+
   /* Transition state */
   visibility: hidden;
   clip-path: circle(0% at calc(100% - 3.5rem) 3.5rem);
-  transition: visibility 1.2s, clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition:
+    visibility 1.2s,
+    clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .menu-overlay.open {
@@ -89,7 +95,11 @@ body.menu-open .scroll-progress-container {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(30, 30, 30, 0.4) 0%, rgba(5, 5, 5, 1) 70%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(30, 30, 30, 0.4) 0%,
+    rgba(5, 5, 5, 1) 70%
+  );
   pointer-events: none;
   z-index: -1;
 }
@@ -123,20 +133,30 @@ body.menu-open .scroll-progress-container {
   text-align: left;
   cursor: pointer;
   color: #ffffff;
-  transition: all 0.2s ease, opacity 0.6s ease, transform 0.6s ease;
-  
+  transition:
+    all 0.2s ease,
+    opacity 0.6s ease,
+    transform 0.6s ease;
+
   /* Staggered Entrance */
   opacity: 0;
   transform: translateY(30px);
 }
 
-.menu-item:first-child { border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.menu-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
 
 .menu-overlay.open .menu-item {
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.2s ease, opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0s, calc(0.3s + (var(--animation-order) * 0.15s)), calc(0.3s + (var(--animation-order) * 0.15s));
+  transition:
+    all 0.2s ease,
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay:
+    0s, calc(0.3s + (var(--animation-order) * 0.15s)),
+    calc(0.3s + (var(--animation-order) * 0.15s));
 }
 
 .menu-item-number {
@@ -145,7 +165,9 @@ body.menu-open .scroll-progress-container {
   font-weight: 300;
   color: #555;
   margin-right: 3rem;
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .menu-item-text {
@@ -202,16 +224,20 @@ body.menu-open .scroll-progress-container {
   font-family: var(--font-secondary, monospace);
   font-size: 0.9rem;
   color: #888;
-  
+
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .menu-overlay.open .menu-footer {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: 1s;
 }
 
@@ -246,7 +272,11 @@ body.light-mode .menu-overlay {
 }
 
 body.light-mode .menu-background-gradient {
-  background: radial-gradient(circle at 50% 50%, rgba(220, 220, 220, 0.4) 0%, rgba(250, 250, 250, 1) 70%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(220, 220, 220, 0.4) 0%,
+    rgba(250, 250, 250, 1) 70%
+  );
 }
 
 body.light-mode .close-menu-btn {
@@ -291,36 +321,36 @@ body.light-mode .menu-socials a:hover {
     top: 1.5rem;
     right: 1.5rem;
   }
-  
+
   .hamburger-btn {
     width: 45px;
     height: 45px;
   }
-  
+
   .menu-links-advanced {
     padding: 0 5vw;
   }
-  
+
   .menu-item-number {
     font-size: 0.8rem;
     margin-right: 1.5rem;
   }
-  
+
   .menu-item-text {
     font-size: clamp(2rem, 9vw, 3rem);
   }
-  
+
   .menu-item-icon {
     display: none; /* Hide icon on mobile to save space */
   }
-  
+
   .menu-footer {
     flex-direction: column;
     gap: 1rem;
     padding: 1.5rem 5vw;
     text-align: center;
   }
-  
+
   .menu-socials {
     gap: 1.5rem;
   }

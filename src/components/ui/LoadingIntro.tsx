@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import './LoadingIntro.css';
+import React, { useEffect, useState } from "react";
+import "./LoadingIntro.css";
 
 interface LoadingIntroProps {
   onComplete: () => void;
 }
 
-type Phase = 'loading' | 'blackout' | 'ribbons' | 'exit';
+type Phase = "loading" | "blackout" | "ribbons" | "exit";
 
 export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
   const [percentage, setPercentage] = useState(0);
-  const [phase, setPhase] = useState<Phase>('loading');
+  const [phase, setPhase] = useState<Phase>("loading");
 
   useEffect(() => {
     // Phase 1: Percentage counting up to 100%
@@ -20,7 +20,10 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
 
     const interval = setInterval(() => {
       currentStep++;
-      const nextPercentage = Math.min(Math.floor((currentStep / steps) * 100), 100);
+      const nextPercentage = Math.min(
+        Math.floor((currentStep / steps) * 100),
+        100,
+      );
       setPercentage(nextPercentage);
 
       if (currentStep >= steps) {
@@ -30,17 +33,17 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
 
     // Phase 2: Blackout
     const blackoutTimer = setTimeout(() => {
-      setPhase('blackout');
+      setPhase("blackout");
     }, 1300);
 
     // Phase 3: Ribbons appear and marquee
     const ribbonsTimer = setTimeout(() => {
-      setPhase('ribbons');
+      setPhase("ribbons");
     }, 1500);
 
     // Phase 4: Zoom out exit animation
     const exitTimer = setTimeout(() => {
-      setPhase('exit');
+      setPhase("exit");
     }, 3200);
 
     // Complete the intro
@@ -63,7 +66,7 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
   return (
     <div className={`intro-container phase-${phase} is-initial-load`}>
       {/* Loading Percentage */}
-      <div className={`percentage-text ${phase !== 'loading' ? 'hidden' : ''}`}>
+      <div className={`percentage-text ${phase !== "loading" ? "hidden" : ""}`}>
         {percentage}%
       </div>
 

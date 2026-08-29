@@ -37,7 +37,9 @@
 }
 
 @keyframes spin {
-  100% { transform: rotate(360deg); }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .theme-switcher-menu {
@@ -48,7 +50,7 @@
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-  
+
   /* Initial hidden state */
   opacity: 0;
   visibility: hidden;
@@ -123,7 +125,7 @@
 .mood-btn.active {
   background-color: rgba(255, 255, 255, 0.15);
   color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .color-picker-group {
@@ -150,17 +152,29 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.black-preset { background: linear-gradient(135deg, #222222, #000000); }
-.purple-preset { background: linear-gradient(135deg, #4c1d95, #1e1b4b); }
-.blue-preset { background: linear-gradient(135deg, #1d4ed8, #0f172a); }
+.black-preset {
+  background: linear-gradient(135deg, #222222, #000000);
+}
+.purple-preset {
+  background: linear-gradient(135deg, #4c1d95, #1e1b4b);
+}
+.blue-preset {
+  background: linear-gradient(135deg, #1d4ed8, #0f172a);
+}
 
 .fade-in {
   animation: simpleFadeIn 0.3s ease forwards;
 }
 
 @keyframes simpleFadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Light mode overrides for the switcher itself */
@@ -195,5 +209,5 @@ body.light-mode .mood-btn:hover {
 body.light-mode .mood-btn.active {
   background-color: #ffffff;
   color: #111111;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }

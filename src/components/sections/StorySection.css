@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap");
 
 .story-container {
   width: 100%;
@@ -10,8 +10,6 @@
   padding: 2rem 4vw 8rem 4vw;
   position: relative;
 }
-
-
 
 .story-content-wrapper {
   max-width: 1400px;
@@ -31,7 +29,9 @@
   align-items: center;
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .story-text-column {
@@ -60,7 +60,11 @@
 .story-headline {
   font-family: var(--font-heading);
   font-weight: 900;
-  font-size: clamp(2.5rem, 6vw, 6rem); /* Reduced to fit in the new column layout */
+  font-size: clamp(
+    2.5rem,
+    6vw,
+    6rem
+  ); /* Reduced to fit in the new column layout */
   line-height: 0.9;
   color: #ffffff;
   margin: 0 0 1.5rem 0;
@@ -124,16 +128,16 @@ body.light-mode .story-container::after {
   border: 1px solid #333333;
   transform: rotate(-3deg);
   z-index: 1;
-  box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
+  box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .id-card-connect-text {
   position: absolute;
-  left: -80px; 
+  left: -80px;
   top: 50%;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: center;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: #555555;
   font-size: 0.95rem;
   font-weight: 700;
@@ -149,7 +153,7 @@ body.light-mode .story-container::after {
   border: 1px solid #333333;
   padding: 28px;
   z-index: 2;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -180,7 +184,7 @@ body.light-mode .story-container::after {
   position: absolute;
   top: 0;
   left: 0;
-  box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .id-card-photo.next {
@@ -213,7 +217,7 @@ body.light-mode .story-container::after {
 }
 
 .id-card-headline {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 1.6rem;
   font-weight: 800;
   line-height: 1.25;
@@ -240,24 +244,25 @@ body.light-mode .story-container::after {
 }
 
 .id-card-label {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   color: #888888;
 }
 
 .id-card-value.handwriting {
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   font-size: 2.1rem;
   color: #cccccc;
   line-height: 1;
   transform: rotate(-2deg);
 }
 
-body.light-mode .id-card-bg, body.light-mode .id-card-fg {
+body.light-mode .id-card-bg,
+body.light-mode .id-card-fg {
   background-color: #ffffff;
-  border-color: rgba(0,0,0,0.1);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
 body.light-mode .id-card-headline {
@@ -269,7 +274,7 @@ body.light-mode .id-card-value.handwriting {
 }
 
 body.light-mode .id-card-info-row {
-  border-bottom-color: rgba(0,0,0,0.1);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 
 /* AnimatedLine legacy support for other sections */
@@ -281,7 +286,9 @@ body.light-mode .id-card-info-row {
   display: inline-block;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.4s cubic-bezier(0.2, 0, 0.2, 1), transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+  transition:
+    opacity 0.4s cubic-bezier(0.2, 0, 0.2, 1),
+    transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
   white-space: pre-wrap;
 }
 
@@ -318,12 +325,12 @@ body.light-mode .story-highlight {
   .story-content-block {
     gap: 4rem;
   }
-  
+
   .id-card-stack {
     max-width: 100%;
     width: 300px;
   }
-  
+
   .id-card-connect-text {
     left: -40px;
     font-size: 0.8rem;
@@ -339,7 +346,7 @@ body.light-mode .story-highlight {
     max-width: 100%;
     width: 250px;
   }
-  
+
   .id-card-connect-text {
     display: none; /* Hide sideways text on extra small screens to prevent clipping */
   }
@@ -352,7 +359,8 @@ body.light-mode .story-highlight {
     font-size: clamp(1.2rem, 6vw, 1.8rem);
   }
 
-  .story-description, .about-story-text {
+  .story-description,
+  .about-story-text {
     font-size: 1.1rem;
   }
 }

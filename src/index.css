@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;500;600;700&display=swap");
 
 :root {
   /* Colors */
@@ -8,12 +8,12 @@
   --text-primary: #ffffff;
   --text-secondary: #a0a0a0;
   --accent-color: #ffffff;
-  
+
   /* Typography */
-  --font-primary: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-handwriting: 'Caveat', cursive;
+  --font-primary: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-handwriting: "Caveat", cursive;
 
   /* Sizing & Borders */
   --border-radius-pill: 50px;
@@ -34,7 +34,8 @@ img {
   height: auto;
 }
 
-html, body {
+html,
+body {
   overflow-x: clip;
   max-width: 100vw;
 }
@@ -54,7 +55,12 @@ body {
 }
 
 /* Custom interactive cursor for links/buttons */
-a, button, [role="button"], input, select, textarea {
+a,
+button,
+[role="button"],
+input,
+select,
+textarea {
   /* cursor styles removed in favor of CustomCursor component */
 }
 
@@ -64,8 +70,8 @@ a, button, [role="button"], input, select, textarea {
 }
 
 body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* Base button styles */
@@ -92,8 +98,13 @@ button {
 }
 
 /* Fallback for browsers that don't support View Transitions */
-.theme-transitioning, .theme-transitioning * {
-  transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, filter 0.6s ease !important;
+.theme-transitioning,
+.theme-transitioning * {
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease,
+    border-color 0.6s ease,
+    filter 0.6s ease !important;
 }
 
 body.light-mode {

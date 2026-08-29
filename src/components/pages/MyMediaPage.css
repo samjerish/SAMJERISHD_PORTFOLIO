@@ -7,8 +7,12 @@
 }
 
 @keyframes fadeInPage {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .media-nav {
@@ -24,7 +28,9 @@
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
   font-family: inherit;
   display: inline-block;
 }
@@ -110,8 +116,15 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
-  50% { opacity: 0.8; transform: translateX(-50%) translateY(-5px); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(-5px);
+  }
 }
 
 .stack-gallery-center {
@@ -130,7 +143,7 @@
   height: 100%;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   background-color: #222;
   will-change: transform;
 }

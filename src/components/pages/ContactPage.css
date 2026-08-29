@@ -1,4 +1,3 @@
-
 .contact-page-wrapper {
   display: flex;
   width: 100%;
@@ -263,7 +262,9 @@
   border-radius: 50%;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
 }
 
 .color-btn:hover {
@@ -371,4 +372,3 @@
     font-size: clamp(1.5rem, 8vw, 3rem);
   }
 }
-

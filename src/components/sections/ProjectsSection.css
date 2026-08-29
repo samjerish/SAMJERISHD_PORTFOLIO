@@ -23,7 +23,9 @@
   margin-bottom: 4rem;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
   z-index: 10;
   position: relative;
 }
@@ -81,7 +83,10 @@
   flex-direction: column;
   gap: 1.5rem;
   cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -253,18 +258,21 @@
   padding: 2.5rem 4rem;
   cursor: pointer;
   gap: 3rem;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition:
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 0.3s,
+    box-shadow 0.3s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: visible; /* so avatar can pop out */
   max-width: 800px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .view-all-banner:hover {
   transform: translateY(-10px) scale(1.02);
   background-color: #222222;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .view-all-graphic-wrapper {
@@ -280,7 +288,7 @@
   position: absolute;
   bottom: -15px;
   width: 300px; /* Extremely big so it pops out massively */
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4));
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-origin: bottom center;
 }
@@ -343,7 +351,7 @@ body.light-mode .view-all-text-wrapper p {
   .projects-grid {
     gap: 1.5rem;
   }
-  
+
   .project-card:last-child:nth-child(odd) {
     width: calc(50% - 0.75rem);
   }
@@ -353,7 +361,7 @@ body.light-mode .view-all-text-wrapper p {
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .project-card:last-child:nth-child(odd) {
     grid-column: auto;
     width: 100%;
@@ -364,7 +372,7 @@ body.light-mode .view-all-text-wrapper p {
   .portfolio-headline {
     font-size: clamp(2.5rem, 10vw, 3.5rem);
   }
-  
+
   .view-all-banner {
     flex-direction: column;
     text-align: center;
@@ -375,17 +383,17 @@ body.light-mode .view-all-text-wrapper p {
     max-width: 100%;
     box-sizing: border-box;
   }
-  
+
   .view-all-text-wrapper h2 {
     font-size: 1.8rem;
   }
-  
+
   .view-all-graphic-wrapper {
     width: 100%;
     max-width: 150px;
     height: 120px;
   }
-  
+
   .view-all-avatar {
     width: 250px;
   }
@@ -395,15 +403,15 @@ body.light-mode .view-all-text-wrapper p {
   .portfolio-container {
     padding: 3rem 1rem;
   }
-  
+
   .portfolio-headline {
     font-size: clamp(2rem, 10vw, 2.5rem);
   }
-  
+
   .view-all-avatar {
     width: 200px;
   }
-  
+
   .view-all-banner {
     padding: 1.5rem 1rem;
   }

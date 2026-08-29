@@ -29,7 +29,9 @@ main {
   z-index: 9999; /* Top notch */
   cursor: pointer;
   opacity: 0; /* Hidden by default at top */
-  transition: height 0.3s ease, opacity 0.3s ease;
+  transition:
+    height 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .scroll-progress-container:hover {
@@ -99,7 +101,9 @@ main {
   border-radius: 50px;
   opacity: 0;
   transform: translateX(-120%); /* Start off-screen to the left */
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+  transition:
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.5s ease;
   pointer-events: none; /* Ignore clicks when hidden */
 }
 
@@ -134,7 +138,9 @@ main {
   height: 36px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.08);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 0.3s ease;
 }
 
 .social-popup-links a:hover {
@@ -142,7 +148,14 @@ main {
 }
 
 .social-popup-links a.social-instagram:hover {
-  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
   color: #ffffff;
 }
 

@@ -81,12 +81,14 @@
   position: absolute;
   bottom: 1.5rem;
   left: 2.5rem;
+  right: 1.5rem; /* Ensure long text wraps within the box */
   font-family: var(--font-heading, sans-serif);
   font-size: 2.5rem;
   font-weight: 800;
   color: #ffffff;
   margin: 0;
   letter-spacing: -0.5px;
+  line-height: 1.1; /* Keep multi-line titles compact */
 }
 
 .modal-content {
@@ -165,16 +167,20 @@
 }
 
 @keyframes modalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modalSlideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(30px) scale(0.95);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
@@ -184,21 +190,27 @@
   .modal-overlay {
     padding: 1rem;
   }
-  
+
   .modal-header-image {
     height: 200px;
   }
-  
+
   .modal-title {
-    font-size: 2rem;
+    font-size: clamp(
+      1.2rem,
+      5vw,
+      1.8rem
+    ); /* Fluid sizing prevents long titles from clipping */
     left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1rem;
   }
-  
+
   .modal-content {
     padding: 1.5rem;
     gap: 2rem;
   }
-  
+
   .modal-split {
     grid-template-columns: 1fr;
     gap: 1.5rem;

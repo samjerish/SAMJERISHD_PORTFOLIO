@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import './ProjectModal.css';
-import type { Project } from '../../data/projects';
-import { FiX } from 'react-icons/fi';
+import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
+import "./ProjectModal.css";
+import type { Project } from "../../data/projects";
+import { FiX } from "react-icons/fi";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -10,16 +10,20 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
+export const ProjectModal: React.FC<ProjectModalProps> = ({
+  project,
+  isOpen,
+  onClose,
+}) => {
   // Prevent scrolling on the body when modal is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [isOpen]);
 
@@ -31,7 +35,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
         <button className="modal-close-btn" onClick={onClose}>
           <FiX />
         </button>
-        
+
         <div className="modal-header-image">
           <img src={project.image} alt={project.name} />
           <div className="modal-header-gradient"></div>
@@ -41,24 +45,33 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
         <div className="modal-content">
           <div className="modal-section">
             <h3>Overview</h3>
-            <p dangerouslySetInnerHTML={{ __html: project.details || project.description }}></p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: project.details || project.description,
+              }}
+            ></p>
           </div>
-          
+
           <div className="modal-split">
             <div className="modal-section problem">
               <h3>The Problem</h3>
               <p>{project.problemStatement}</p>
             </div>
-            
+
             <div className="modal-section solution">
               <h3>The Solution</h3>
               <p>{project.solution}</p>
             </div>
           </div>
-          
+
           {project.link && (
             <div className="modal-footer">
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="modal-view-btn">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="modal-view-btn"
+              >
                 VIEW PROJECT ↗
               </a>
             </div>
@@ -66,6 +79,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };

@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import './LoadingIntro.css';
+import React, { useEffect, useState } from "react";
+import "./LoadingIntro.css";
 
 interface RibbonTransitionProps {
   onReveal: () => void;
   onComplete: () => void;
 }
 
-export const RibbonTransition: React.FC<RibbonTransitionProps> = ({ onReveal, onComplete }) => {
-  const [phase, setPhase] = useState<'enter' | 'ribbons' | 'exit'>('enter');
+export const RibbonTransition: React.FC<RibbonTransitionProps> = ({
+  onReveal,
+  onComplete,
+}) => {
+  const [phase, setPhase] = useState<"enter" | "ribbons" | "exit">("enter");
 
   useEffect(() => {
     const enterTimer = setTimeout(() => {
-      setPhase('ribbons');
+      setPhase("ribbons");
     }, 50);
 
     const exitTimer = setTimeout(() => {
       onReveal();
-      setPhase('exit');
+      setPhase("exit");
     }, 1400);
 
     const completeTimer = setTimeout(() => {

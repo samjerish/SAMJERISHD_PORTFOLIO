@@ -25,23 +25,32 @@
   align-items: center;
 }
 
-
-
 .hero-floating-nav {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
-  background: rgba(10, 10, 10, 0.65); /* Dark tinted glass for universal legibility */
+  background: rgba(
+    10,
+    10,
+    10,
+    0.65
+  ); /* Dark tinted glass for universal legibility */
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
   padding: 8px 12px 8px 10px;
   border-radius: 50px;
   width: auto;
   max-width: 900px;
-  transition: max-width 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), gap 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.5s ease;
+  transition:
+    max-width 0.9s cubic-bezier(0.34, 1.56, 0.64, 1),
+    padding 0.9s cubic-bezier(0.34, 1.56, 0.64, 1),
+    gap 0.9s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.5s ease;
   overflow: hidden;
 }
 
@@ -86,7 +95,10 @@
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  transition: opacity 0.5s ease, transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), max-width 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition:
+    opacity 0.5s ease,
+    transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1),
+    max-width 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-origin: right center;
   opacity: 1;
   max-width: 800px;
@@ -107,7 +119,9 @@
   font-size: 1.05rem;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.3s, background-color 0.3s;
+  transition:
+    color 0.3s,
+    background-color 0.3s;
   padding: 6px 14px;
   border-radius: 20px;
   white-space: nowrap;
@@ -180,12 +194,17 @@
 .hero-avatar-img-new {
   width: clamp(350px, 55vw, 800px);
   object-fit: contain;
-  filter: drop-shadow(0 30px 40px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-30px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
 }
 
 .hero-bottom-elements {
@@ -230,7 +249,9 @@
   border: none;
   text-decoration: none;
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .book-call-btn:hover {
@@ -248,9 +269,18 @@
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* --- LIGHT MODE OVERRIDES --- */
@@ -291,14 +321,30 @@ body.light-mode .hero-floating-nav button:hover {
 
 /* --- WAVING HAND ANIMATION --- */
 @keyframes wave-animation {
-  0% { transform: rotate(0.0deg) }
-  10% { transform: rotate(14.0deg) }
-  20% { transform: rotate(-8.0deg) }
-  30% { transform: rotate(14.0deg) }
-  40% { transform: rotate(-4.0deg) }
-  50% { transform: rotate(10.0deg) }
-  60% { transform: rotate(0.0deg) }
-  100% { transform: rotate(0.0deg) }
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .waving-hand {
@@ -309,8 +355,6 @@ body.light-mode .hero-floating-nav button:hover {
   display: inline-block;
   margin-right: 8px;
 }
-
-
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
@@ -336,7 +380,7 @@ body.light-mode .hero-floating-nav button:hover {
     padding-bottom: 2rem;
     margin-top: 1.5rem; /* Fixed gap instead of auto pushing to bottom */
   }
-  
+
   .hero-intro-text {
     max-width: 100%;
   }
@@ -364,24 +408,34 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .hero-background-text-new {
-    top: 42%; /* Push text up slightly to balance with tall bottom elements */
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     opacity: 0.9;
   }
 
   .text-line-1 {
-    font-size: clamp(4rem, 18vw, 24vw);
-    letter-spacing: 0.5vw;
+    font-size: clamp(2.5rem, 22vw, 26vw);
+    line-height: 1;
+    letter-spacing: 0;
   }
-  
+
   .text-line-2 {
-    font-size: clamp(2.5rem, 11.5vw, 14vw); /* Maximize size without overflowing */
-    letter-spacing: 0.5vw;
+    font-size: clamp(
+      1.5rem,
+      11.5vw,
+      12vw
+    ); /* Mathematically maximized for 8 characters */
+    line-height: 1;
+    margin-top: -1rem;
+    letter-spacing: 0;
   }
 
   .floating-avatar-new {
     display: none; /* Remove photo in mobile view */
   }
-  
+
   .center-layout {
     flex-direction: column;
     justify-content: center;
@@ -398,40 +452,41 @@ body.light-mode .hero-floating-nav button:hover {
     max-width: 100%;
     margin: 0 auto;
   }
-  
+
   .nav-name {
     display: none;
   }
-  
+
   .nav-links {
     gap: 0.2rem;
     justify-content: space-around;
     width: 100%;
   }
-  
+
   .nav-links button {
     font-size: 0.7rem;
     padding: 4px 6px;
     white-space: normal; /* allow wrapping for beyond the frame */
     line-height: 1.1;
   }
-  
+
   .hero-avatar-img-new {
     display: none;
   }
-  
+
   .text-line-1 {
-    font-size: clamp(3.5rem, 20vw, 25vw);
-    line-height: 0.9;
-    letter-spacing: 0.5vw;
+    font-size: clamp(2.2rem, 25vw, 28vw);
+    line-height: 1;
+    letter-spacing: 0;
   }
-  
+
   .text-line-2 {
-    font-size: clamp(2.5rem, 12.5vw, 15vw); /* Maximum safe width for 8 characters */
-    line-height: 0.9;
-    letter-spacing: 0.5vw;
+    font-size: clamp(1.2rem, 11.5vw, 12.2vw); /* Max width without overflow */
+    line-height: 1;
+    margin-top: -1rem;
+    letter-spacing: 0;
   }
-  
+
   .hero-bottom-elements {
     padding: 1rem 1.5rem 2rem 1.5rem;
   }
