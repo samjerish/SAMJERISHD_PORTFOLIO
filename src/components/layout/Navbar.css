@@ -36,14 +36,14 @@ body.menu-open .scroll-progress-container {
 
 .hamburger-btn .menu-icon-hamburger {
   position: absolute;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: rotate(0deg) scale(1);
   opacity: 1;
 }
 
 .hamburger-btn .menu-icon-close {
   position: absolute;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: rotate(-90deg) scale(0.5);
   opacity: 0;
 }
@@ -73,16 +73,14 @@ body.menu-open .scroll-progress-container {
   flex-direction: column;
   
   /* Transition state */
-  opacity: 0;
   visibility: hidden;
-  clip-path: circle(0% at top right);
-  transition: opacity 1s ease, visibility 1s, clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  clip-path: circle(0% at calc(100% - 3.5rem) 3.5rem);
+  transition: visibility 1.2s, clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .menu-overlay.open {
-  opacity: 1;
   visibility: visible;
-  clip-path: circle(150% at top right);
+  clip-path: circle(150% at calc(100% - 3.5rem) 3.5rem);
 }
 
 .menu-background-gradient {
@@ -125,7 +123,7 @@ body.menu-open .scroll-progress-container {
   text-align: left;
   cursor: pointer;
   color: #ffffff;
-  transition: all 0.4s ease;
+  transition: all 0.2s ease, opacity 0.6s ease, transform 0.6s ease;
   
   /* Staggered Entrance */
   opacity: 0;
@@ -135,15 +133,10 @@ body.menu-open .scroll-progress-container {
 .menu-item:first-child { border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
 .menu-overlay.open .menu-item {
-  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(0.2s + (var(--animation-order) * 0.1s));
-}
-
-@keyframes slideUpFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.2s ease, opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0s, calc(0.3s + (var(--animation-order) * 0.15s)), calc(0.3s + (var(--animation-order) * 0.15s));
 }
 
 .menu-item-number {
@@ -152,7 +145,7 @@ body.menu-open .scroll-progress-container {
   font-weight: 300;
   color: #555;
   margin-right: 3rem;
-  transition: color 0.3s;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .menu-item-text {
@@ -162,7 +155,7 @@ body.menu-open .scroll-progress-container {
   text-transform: uppercase;
   letter-spacing: -1px;
   line-height: 1;
-  transition: all 0.4s ease;
+  transition: all 0.2s ease;
 }
 
 .menu-item-icon {
@@ -170,7 +163,7 @@ body.menu-open .scroll-progress-container {
   opacity: 0;
   transform: translateX(-20px);
   color: #fff;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* The "Mindblowing" Hover Effect */
@@ -212,11 +205,14 @@ body.menu-open .scroll-progress-container {
   
   opacity: 0;
   transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .menu-overlay.open .menu-footer {
-  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.7s;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 1s;
 }
 
 .menu-socials {

@@ -18,6 +18,32 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
     { id: "3", img: `${basePath}media/media-3.jpg`, url: `${basePath}media/media-3.jpg`, height: 800 },
     { id: "4", img: `${basePath}media/media-4.png`, url: `${basePath}media/media-4.png`, height: 500 },
     { id: "5", img: `${basePath}media/media-5.jpg`, url: `${basePath}media/media-5.jpg`, height: 700 },
+    { id: "6", img: `${basePath}6.JPG`, url: `${basePath}6.JPG`, height: 600 },
+    { id: "7", img: `${basePath}7.JPG`, url: `${basePath}7.JPG`, height: 700 },
+    { id: "8", img: `${basePath}8.JPG`, url: `${basePath}8.JPG`, height: 500 },
+    { id: "9", img: `${basePath}9.JPG`, url: `${basePath}9.JPG`, height: 800 },
+    { id: "10", img: `${basePath}10.jpg`, url: `${basePath}10.jpg`, height: 650 },
+    { id: "11", img: `${basePath}11.JPG`, url: `${basePath}11.JPG`, height: 550 },
+    { id: "12", img: `${basePath}12.JPG`, url: `${basePath}12.JPG`, height: 750 },
+    { id: "13", img: `${basePath}Screenshot 2026-08-29 at 19.58.05.png`, url: `${basePath}Screenshot 2026-08-29 at 19.58.05.png`, height: 600 },
+    { id: "14", img: `${basePath}Screenshot 2026-08-29 at 19.58.18.png`, url: `${basePath}Screenshot 2026-08-29 at 19.58.18.png`, height: 800 },
+    { id: "15", img: `${basePath}Screenshot 2026-08-29 at 19.58.25.png`, url: `${basePath}Screenshot 2026-08-29 at 19.58.25.png`, height: 500 },
+    { id: "16", img: `${basePath}Screenshot 2026-08-29 at 19.58.30.png`, url: `${basePath}Screenshot 2026-08-29 at 19.58.30.png`, height: 700 },
+    { id: "17", img: `${basePath}Screenshot 2026-08-29 at 19.58.42.png`, url: `${basePath}Screenshot 2026-08-29 at 19.58.42.png`, height: 650 },
+    { id: "18", img: `${basePath}Screenshot 2026-08-29 at 19.58.51.png`, url: `${basePath}Screenshot 2026-08-29 at 19.58.51.png`, height: 750 },
+    { id: "19", img: `${basePath}Screenshot 2026-08-29 at 19.58.56.png`, url: `${basePath}Screenshot 2026-08-29 at 19.58.56.png`, height: 550 },
+    { id: "20", img: `${basePath}Screenshot 2026-08-29 at 19.59.03.png`, url: `${basePath}Screenshot 2026-08-29 at 19.59.03.png`, height: 800 },
+    { id: "21", img: `${basePath}Screenshot 2026-08-29 at 19.59.12.png`, url: `${basePath}Screenshot 2026-08-29 at 19.59.12.png`, height: 600 },
+    { id: "22", img: `${basePath}Screenshot 2026-08-29 at 19.59.20.png`, url: `${basePath}Screenshot 2026-08-29 at 19.59.20.png`, height: 700 },
+    { id: "23", img: `${basePath}Screenshot 2026-08-29 at 19.59.29.png`, url: `${basePath}Screenshot 2026-08-29 at 19.59.29.png`, height: 500 },
+    { id: "24", img: `${basePath}Screenshot 2026-08-29 at 19.59.43.png`, url: `${basePath}Screenshot 2026-08-29 at 19.59.43.png`, height: 750 },
+    { id: "25", img: `${basePath}Screenshot 2026-08-29 at 19.59.49.png`, url: `${basePath}Screenshot 2026-08-29 at 19.59.49.png`, height: 650 },
+    { id: "26", img: `${basePath}Screenshot 2026-08-29 at 20.00.04.png`, url: `${basePath}Screenshot 2026-08-29 at 20.00.04.png`, height: 800 },
+    { id: "27", img: `${basePath}Screenshot 2026-08-29 at 20.00.15.png`, url: `${basePath}Screenshot 2026-08-29 at 20.00.15.png`, height: 550 },
+    { id: "28", img: `${basePath}Screenshot 2026-08-29 at 20.00.23.png`, url: `${basePath}Screenshot 2026-08-29 at 20.00.23.png`, height: 700 },
+    { id: "29", img: `${basePath}Screenshot 2026-08-29 at 20.00.40.png`, url: `${basePath}Screenshot 2026-08-29 at 20.00.40.png`, height: 600 },
+    { id: "30", img: `${basePath}Screenshot 2026-08-29 at 20.00.46.png`, url: `${basePath}Screenshot 2026-08-29 at 20.00.46.png`, height: 500 },
+    { id: "31", img: `${basePath}Screenshot 2026-08-29 at 20.00.51.png`, url: `${basePath}Screenshot 2026-08-29 at 20.00.51.png`, height: 750 },
   ];
 
   const [isStoryVisible, setIsStoryVisible] = useState(false);
@@ -79,7 +105,7 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
       </div>
       
       {/* Interactive Masonry Gallery */}
-      <div style={{ height: '800px', width: '100%', position: 'relative', marginTop: '0rem' }}>
+      <div style={{ minHeight: '100vh', width: '100%', position: 'relative', marginTop: '0rem', paddingBottom: '4rem' }}>
         <Masonry
           items={items}
           ease="power3.out"

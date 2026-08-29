@@ -323,6 +323,10 @@ body.light-mode .hero-floating-nav button:hover {
 }
 
 @media (max-width: 768px) {
+  .hero-container.new-hero {
+    justify-content: center;
+  }
+
   .hero-bottom-elements {
     position: relative; /* Remove absolute positioning */
     flex-direction: column;
@@ -330,7 +334,7 @@ body.light-mode .hero-floating-nav button:hover {
     text-align: center;
     gap: 2rem;
     padding-bottom: 2rem;
-    margin-top: auto;
+    margin-top: 1.5rem; /* Fixed gap instead of auto pushing to bottom */
   }
   
   .hero-intro-text {
@@ -338,8 +342,8 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .hero-intro-text p {
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 0.95rem; /* Smaller, cleaner text for mobile */
+    line-height: 1.5;
     color: #e0e0e0;
     font-weight: 300;
     max-width: 95%;
@@ -359,32 +363,30 @@ body.light-mode .hero-floating-nav button:hover {
     font-size: 0.9rem;
   }
 
-  .text-line-1, .text-line-2 {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
-    font-weight: 800;
-  }
-  
-  .text-line-2 {
-    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
-  }
-
   .hero-background-text-new {
-    top: 45%;
+    top: 42%; /* Push text up slightly to balance with tall bottom elements */
     opacity: 0.9;
   }
 
+  .text-line-1 {
+    font-size: clamp(4rem, 18vw, 24vw);
+    letter-spacing: 0.5vw;
+  }
+  
+  .text-line-2 {
+    font-size: clamp(2.5rem, 11.5vw, 14vw); /* Maximize size without overflowing */
+    letter-spacing: 0.5vw;
+  }
+
   .floating-avatar-new {
-    top: 0;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+    display: none; /* Remove photo in mobile view */
   }
   
   .center-layout {
     flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 6rem; /* Space for nav */
+    justify-content: center;
+    padding-top: 6rem; /* Give space for top nav */
+    flex: none; /* Don't stretch */
   }
 }
 
@@ -414,20 +416,20 @@ body.light-mode .hero-floating-nav button:hover {
     line-height: 1.1;
   }
   
+  .hero-avatar-img-new {
+    display: none;
+  }
+  
   .text-line-1 {
-    font-size: clamp(3rem, 18vw, 25vw);
+    font-size: clamp(3.5rem, 20vw, 25vw);
     line-height: 0.9;
-    letter-spacing: 1vw;
+    letter-spacing: 0.5vw;
   }
   
   .text-line-2 {
-    font-size: clamp(2rem, 15vw, 20vw);
+    font-size: clamp(2.5rem, 12.5vw, 15vw); /* Maximum safe width for 8 characters */
     line-height: 0.9;
-    letter-spacing: 0.8vw;
-  }
-  
-  .hero-avatar-img-new {
-    width: clamp(200px, 65vw, 320px);
+    letter-spacing: 0.5vw;
   }
   
   .hero-bottom-elements {

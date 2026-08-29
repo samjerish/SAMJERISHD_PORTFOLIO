@@ -99,7 +99,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) =>
       {/* Massive Text and Footer */}
       <div className="contact-massive-text-container">
         <div className="contact-massive-text">
-          SAM JERISH D
+          SAM <span className="contact-massive-text-grey">JERISH D</span>
         </div>
         
         <div className="contact-footer-line"></div>
