@@ -324,22 +324,77 @@ body.light-mode .hero-floating-nav button:hover {
 
 @media (max-width: 768px) {
   .hero-bottom-elements {
+    position: relative; /* Remove absolute positioning */
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 2rem;
-    padding-bottom: 5rem;
+    padding-bottom: 2rem;
+    margin-top: auto;
   }
   
   .hero-intro-text {
     max-width: 100%;
   }
+
+  .hero-intro-text p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+    font-weight: 300;
+    max-width: 95%;
+    margin: 0 auto;
+  }
+
+  .book-call-btn {
+    background: linear-gradient(135deg, #ffffff, #dcdcdc);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+    border: none;
+    letter-spacing: 1px;
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+
+  .text-line-1, .text-line-2 {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+    font-weight: 800;
+  }
+  
+  .text-line-2 {
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-background-text-new {
+    top: 45%;
+    opacity: 0.9;
+  }
+
+  .floating-avatar-new {
+    top: 0;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+  }
+  
+  .center-layout {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 6rem; /* Space for nav */
+  }
 }
 
 @media (max-width: 480px) {
   .hero-floating-nav {
-    gap: 0.8rem;
-    padding: 6px 12px;
+    gap: 0.2rem;
+    padding: 6px;
+    width: 95%; /* Prevent horizontal overflow */
+    max-width: 100%;
+    margin: 0 auto;
   }
   
   .nav-name {
@@ -347,15 +402,53 @@ body.light-mode .hero-floating-nav button:hover {
   }
   
   .nav-links {
-    gap: 0.5rem;
+    gap: 0.2rem;
+    justify-content: space-around;
+    width: 100%;
   }
   
   .nav-links button {
-    font-size: 0.85rem;
-    padding: 6px 10px;
+    font-size: 0.7rem;
+    padding: 4px 6px;
+    white-space: normal; /* allow wrapping for beyond the frame */
+    line-height: 1.1;
   }
   
-  .text-line-1, .text-line-2 {
-    line-height: 1.1;
+  .text-line-1 {
+    font-size: clamp(3rem, 18vw, 25vw);
+    line-height: 0.9;
+    letter-spacing: 1vw;
+  }
+  
+  .text-line-2 {
+    font-size: clamp(2rem, 15vw, 20vw);
+    line-height: 0.9;
+    letter-spacing: 0.8vw;
+  }
+  
+  .hero-avatar-img-new {
+    width: clamp(200px, 65vw, 320px);
+  }
+  
+  .hero-bottom-elements {
+    padding: 1rem 1.5rem 2rem 1.5rem;
+  }
+
+  .hero-container.new-hero {
+    min-height: 100dvh; /* use dynamic viewport height */
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-floating-nav {
+    padding: 4px;
+  }
+  .nav-links button {
+    font-size: 0.65rem;
+    padding: 4px;
+  }
+  .book-call-btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
   }
 }

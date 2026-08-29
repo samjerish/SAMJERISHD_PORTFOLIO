@@ -9,7 +9,6 @@
   justify-content: center;
   padding: 2rem 4vw 8rem 4vw;
   position: relative;
-  overflow: hidden;
 }
 
 
@@ -286,13 +285,15 @@ body.light-mode .story-highlight {
 @media (max-width: 768px) {
   .story-headline {
     font-size: clamp(3rem, 12vw, 4rem);
+    white-space: normal;
   }
   .story-content-block {
     gap: 4rem;
   }
   
   .id-card-stack {
-    max-width: 300px;
+    max-width: 100%;
+    width: 300px;
   }
   
   .id-card-connect-text {
@@ -302,11 +303,44 @@ body.light-mode .story-highlight {
 }
 
 @media (max-width: 480px) {
+  .story-container {
+    padding: 2rem 1rem 5rem 1rem;
+  }
+
   .id-card-stack {
-    max-width: 250px;
+    max-width: 100%;
+    width: 250px;
   }
   
   .id-card-connect-text {
     display: none; /* Hide sideways text on extra small screens to prevent clipping */
+  }
+
+  .story-headline {
+    font-size: clamp(2rem, 10vw, 2.5rem);
+  }
+
+  .story-subheadline {
+    font-size: clamp(1.2rem, 6vw, 1.8rem);
+  }
+
+  .story-description, .about-story-text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .id-card-stack {
+    width: 100%;
+    max-width: 240px;
+  }
+  .id-card-fg {
+    padding: 20px;
+  }
+  .id-card-headline {
+    font-size: 1.3rem;
+  }
+  .id-card-value.handwriting {
+    font-size: 1.5rem;
   }
 }

@@ -144,7 +144,7 @@
 }
 
 .contact-massive-text {
-  font-family: var(--font-heading, sans-serif);
+  font-family: var(--font-primary, sans-serif);
   font-size: clamp(3rem, 14vw, 18rem);
   font-weight: 800;
   line-height: 0.8;
@@ -160,9 +160,9 @@
   
   /* Outline fading effect */
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
-  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
   user-select: none;
 }
 
@@ -222,7 +222,7 @@
 
 .contact-thumpsup-image {
   position: absolute;
-  right: 5vw;
+  right: -5vw;
   bottom: 0; 
   height: 55vh; /* Adjust height to reach 'incredible work together.' */
   width: auto;
@@ -231,7 +231,7 @@
   object-position: bottom right;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
   transform-origin: bottom right;
-  z-index: 5; /* Stays behind text */
+  z-index: 1; /* Stays behind text */
 }
 
 /* --- RESPONSIVE --- */
@@ -255,12 +255,18 @@
   }
 
   .contact-thumpsup-image {
-    height: 35vh;
-    max-width: 55vw;
-    right: 5vw;
-    bottom: 0;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    height: auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto 0 auto;
+    opacity: 1;
+    pointer-events: auto;
+    order: 3; /* Ensure it is at the bottom if using flex */
   }
-  
+
   .contact-footer-links {
     flex-direction: column;
     gap: 1.5rem;
@@ -270,13 +276,36 @@
 
 @media (max-width: 480px) {
   .dark-contact-section {
-    padding: 6vh 1.5rem 0 1.5rem;
+    padding: 6vh 1rem 0 1rem;
   }
   .contact-hero-header h1 {
-    font-size: clamp(2.5rem, 10vw, 4rem);
+    font-size: clamp(2rem, 10vw, 3rem);
   }
   .contact-massive-text {
-    font-size: clamp(2.5rem, 14vw, 5rem);
+    font-size: clamp(1.8rem, 10vw, 3.5rem);
+  }
+  .contact-thumpsup-image {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 380px) {
+  .dark-contact-section {
+    padding: 5vh 0.5rem 0 0.5rem;
+  }
+  .contact-hero-header h1 {
+    font-size: 1.8rem;
+  }
+  .contact-massive-text {
+    font-size: 1.5rem;
+  }
+  .info-value {
+    font-size: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .contact-footer-links {
+    font-size: 0.8rem;
   }
 }
 

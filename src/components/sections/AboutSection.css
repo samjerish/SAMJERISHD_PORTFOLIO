@@ -352,11 +352,11 @@
   }
 
   .yellow-folder.open {
-    transform: translateX(-15px) translateY(-20px) rotate(-5deg);
+    transform: translateX(-10px) translateY(-15px) rotate(-3deg);
   }
 
   .social-links-drawer {
-    left: 20px;
+    left: 10px;
   }
 
   .play-text {
@@ -364,7 +364,70 @@
   }
 
   .main-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 5rem 1rem;
+  }
+
+  .about-content {
+    gap: 4rem;
+  }
+
+  .about-left {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .yellow-folder {
+    left: -10px;
+    width: 100%;
+  }
+
+  .yellow-folder.open {
+    transform: translateX(0px) translateY(-10px) rotate(-2deg);
+  }
+
+  .social-links-drawer {
+    left: 5px;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+  }
+
+  .about-story-text, .description p {
+    font-size: 1.5rem;
+  }
+
+  .polaroid-card {
+    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .polaroid-text h3 {
+    font-size: 1.2rem;
+  }
+  
+  .value.handwriting {
+    font-size: 1.2rem;
+  }
+  
+  .subtitle.handwriting {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .main-title {
+    font-size: 1.5rem;
+  }
+  .about-story-text, .description p {
+    font-size: 1.25rem;
   }
 }
 

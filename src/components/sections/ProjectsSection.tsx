@@ -75,6 +75,15 @@ export const ProjectsSection: React.FC<{ onNavigate?: (page: 'home' | 'media' | 
               
               <div className="project-image-wrapper">
                 <img src={project.image} alt={project.name} className="project-image" />
+                <div className="project-hover-overlay">
+                  <span className="hover-hint-text">Click to view more</span>
+                  {project.problemStatement && (
+                    <div className="hover-problem-text">
+                      <span className="problem-label">Problem solved:</span>
+                      <p>{project.problemStatement}</p>
+                    </div>
+                  )}
+                </div>
               </div>
               
               <div className="project-info">
