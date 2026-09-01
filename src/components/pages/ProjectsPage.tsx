@@ -41,7 +41,9 @@ const TECH_STACK = [
 ];
 
 export const ProjectsPage: React.FC<{
-  onNavigate: (page: "home" | "media" | "about" | "projects") => void;
+  onNavigate: (
+    page: "home" | "media" | "about" | "projects" | "contact" | "resume",
+  ) => void;
 }> = ({ onNavigate }) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

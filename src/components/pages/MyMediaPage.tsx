@@ -4,7 +4,9 @@ import "./MyMediaPage.css";
 import { AnimatedLine } from "../sections/StorySection";
 
 interface MyMediaPageProps {
-  onNavigate: (page: "home" | "media") => void;
+  onNavigate: (
+    page: "home" | "media" | "about" | "projects" | "contact" | "resume",
+  ) => void;
 }
 
 // @ts-ignore

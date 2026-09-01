@@ -349,7 +349,7 @@ export const ContactPage: React.FC<{
             <h4>Socials</h4>
             <div style={{ display: "flex", gap: "1rem" }}>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/samjerishd"
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: "#E1306C", transition: "transform 0.2s" }}
@@ -363,7 +363,7 @@ export const ContactPage: React.FC<{
                 <FiInstagram size={24} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/samjerishd"
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: "#0077b5", transition: "transform 0.2s" }}
@@ -377,7 +377,7 @@ export const ContactPage: React.FC<{
                 <FiLinkedin size={24} />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/samjerish"
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: "#ffffff", transition: "transform 0.2s" }}
