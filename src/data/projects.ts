@@ -24,7 +24,7 @@ export const projects: Project[] = [
     solution:
       "FOCUSFLOW is a productivity system that helps users organize tasks, manage their time, and maintain focused work sessions.",
     link: "https://samjerish.github.io/FOCUSFLOW",
-    image: `${import.meta.env.BASE_URL}PROJECTS ASSESTS/focusflow.png`,
+    image: `${import.meta.env.BASE_URL}PROJECTS ASSESTS/focsuflow.png`,
     tag: "Productivity • Task Management",
     date: "2026",
   },

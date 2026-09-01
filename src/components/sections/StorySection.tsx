@@ -3,11 +3,12 @@ import "./StorySection.css";
 import profileImg1 from "../../assets/me.jpg";
 import profileImg2 from "../../assets/me2.jpg";
 
+const STORY_PHOTOS = [profileImg1, profileImg2];
+
 export const StorySection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
-  const photos = [profileImg1, profileImg2];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,7 +29,7 @@ export const StorySection: React.FC = () => {
     if (node) observer.observe(node);
 
     const photoInterval = setInterval(() => {
-      setPhotoIndex((prev) => (prev + 1) % photos.length);
+      setPhotoIndex((prev) => (prev + 1) % STORY_PHOTOS.length);
     }, 3500);
 
     return () => {
@@ -98,7 +99,7 @@ export const StorySection: React.FC = () => {
 
                 {/* Photo */}
                 <div className="id-card-photo-wrapper">
-                  {photos.map((photo, index) => {
+                  {STORY_PHOTOS.map((photo, index) => {
                     const positionClass = index === photoIndex ? "active" : "hidden";
 
                     return (

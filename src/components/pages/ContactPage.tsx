@@ -112,6 +112,8 @@ export const ContactPage: React.FC<{
     if (!ctx) return;
 
     const rect = canvas.getBoundingClientRect();
+    const scaleX = rect.width ? canvas.width / rect.width : 1;
+    const scaleY = rect.height ? canvas.height / rect.height : 1;
     let clientX, clientY;
 
     if ("touches" in e) {
@@ -122,8 +124,8 @@ export const ContactPage: React.FC<{
       clientY = e.clientY;
     }
 
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+    const x = (clientX - rect.left) * scaleX;
+    const y = (clientY - rect.top) * scaleY;
 
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -143,6 +145,8 @@ export const ContactPage: React.FC<{
     if (!ctx) return;
 
     const rect = canvas.getBoundingClientRect();
+    const scaleX = rect.width ? canvas.width / rect.width : 1;
+    const scaleY = rect.height ? canvas.height / rect.height : 1;
     let clientX, clientY;
 
     if ("touches" in e) {
@@ -155,7 +159,7 @@ export const ContactPage: React.FC<{
 
     ctx.strokeStyle = activeTool === "eraser" ? "#ffffff" : currentColor;
     ctx.lineWidth = activeTool === "eraser" ? 20 : lineWidth;
-    ctx.lineTo(clientX - rect.left, clientY - rect.top);
+    ctx.lineTo((clientX - rect.left) * scaleX, (clientY - rect.top) * scaleY);
     ctx.stroke();
   };
 

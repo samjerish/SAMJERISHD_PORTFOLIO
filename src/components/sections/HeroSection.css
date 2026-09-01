@@ -212,7 +212,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 4rem 5vw;
+  padding: 3rem 3.5rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -220,7 +220,8 @@
 }
 
 .hero-intro-text {
-  max-width: 400px;
+  max-width: 450px;
+  text-align: left;
 }
 
 .hero-intro-text p {

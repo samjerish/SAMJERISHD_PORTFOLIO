@@ -59,7 +59,7 @@ export const ProjectsSection: React.FC<{
     >
       <div className="portfolio-content-wrapper">
         <div className="portfolio-header-static">
-          <h1 className="portfolio-headline">RECENT PROJECTS</h1>
+          <h1 className="portfolio-headline">FEATURED PROJECTS</h1>
           <p className="portfolio-subtext">
             This is a curated selection of projects I want to share. If anything
             catches your eye or sparks an idea, don't hesitate to drop me a

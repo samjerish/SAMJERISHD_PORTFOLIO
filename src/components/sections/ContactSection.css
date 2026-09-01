@@ -33,6 +33,8 @@
 .dark-contact-content {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
   position: relative;
   width: 100%;
   max-width: 1400px;
@@ -44,6 +46,10 @@
   margin-bottom: 5rem;
   position: relative;
   z-index: 10;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .contact-hero-header h1 {
@@ -54,6 +60,7 @@
   margin: 0;
   color: #ffffff;
   letter-spacing: -1px;
+  text-align: left;
 }
 
 .handwriting-pink {
@@ -73,6 +80,8 @@
   gap: 4rem;
   margin-bottom: 2rem;
   width: 100%;
+  max-width: 1000px;
+  align-items: flex-start;
 }
 
 .contact-splitter-vertical {
@@ -156,14 +165,12 @@
   font-size: clamp(3rem, 10vw, 13rem);
   font-weight: 900;
   line-height: 0.9;
-  margin: 0;
+  margin: 0 auto;
   padding-bottom: 1.5rem;
   letter-spacing: 6px;
   width: 100%;
   text-align: center;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   white-space: nowrap;
   z-index: 10;
 

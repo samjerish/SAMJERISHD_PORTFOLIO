@@ -34,11 +34,26 @@ export const Navbar: React.FC<{
   };
 
   const navItems = [
-    { id: "home", label: "HOME", number: "01" },
-    { id: "projects", label: "PROJECTS", number: "02" },
-    { id: "media", label: "BEYOND THE FRAME", number: "03" },
-    { id: "resume", label: "RESUME", number: "04" },
-    { id: "contact", label: "CONTACT", number: "05" },
+    { id: "home", label: "HOME", number: "01", tag: "Main Space" },
+    { id: "projects", label: "PROJECTS", number: "02", tag: "Selected Works" },
+    {
+      id: "media",
+      label: "BEYOND THE FRAME",
+      number: "03",
+      tag: "Gallery & Moments",
+    },
+    {
+      id: "resume",
+      label: "RESUME",
+      number: "04",
+      tag: "Skills & Experience",
+    },
+    {
+      id: "contact",
+      label: "CONNECT WITH ME",
+      number: "05",
+      tag: "Let's Talk",
+    },
   ];
 
   return (
@@ -64,9 +79,16 @@ export const Navbar: React.FC<{
                 style={{ "--animation-order": index } as React.CSSProperties}
                 onClick={(e) => handleNavigate(item.id as any, e)}
               >
-                <span className="menu-item-number">{item.number}</span>
-                <span className="menu-item-text">{item.label}</span>
-                <ArrowRight className="menu-item-icon" size={32} />
+                <div className="menu-item-left">
+                  <span className="menu-item-number">{item.number}</span>
+                  <div className="menu-text-group">
+                    <span className="menu-item-text">{item.label}</span>
+                    <span className="menu-item-tag">{item.tag}</span>
+                  </div>
+                </div>
+                <div className="menu-item-icon-wrapper">
+                  <ArrowRight className="menu-item-icon" size={24} />
+                </div>
               </button>
             ))}
           </nav>

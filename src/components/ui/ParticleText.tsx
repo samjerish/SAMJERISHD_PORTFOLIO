@@ -78,8 +78,10 @@ export const ParticleText = forwardRef<ParticleTextRef, ParticleTextProps>(
 
       const handleMouseMove = (e: MouseEvent) => {
         const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
+        const scaleX = rect.width ? canvas.width / rect.width : 1;
+        const scaleY = rect.height ? canvas.height / rect.height : 1;
+        mouse.x = (e.clientX - rect.left) * scaleX;
+        mouse.y = (e.clientY - rect.top) * scaleY;
       };
 
       const handleMouseLeave = () => {
