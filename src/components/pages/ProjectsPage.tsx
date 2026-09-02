@@ -5,7 +5,7 @@ import { projects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { ProjectModal } from "../ui/ProjectModal";
 import { CenterFlow } from "../ui/CenterFlow";
-import { ProjectParallaxList } from "../ui/ProjectParallaxList";
+import { ProjectSwipeDownList } from "../ui/ProjectSwipeDownList";
 
 export const ProjectsPage: React.FC<{
   onNavigate: (
@@ -52,8 +52,8 @@ export const ProjectsPage: React.FC<{
           </div>
         </div>
 
-        {/* Alternating Parallax Project Showcase with 3D Tilt */}
-        <ProjectParallaxList
+        {/* Minimalist Title List with Swipe-Down on Hover */}
+        <ProjectSwipeDownList
           projects={projects}
           onProjectClick={handleProjectClick}
         />
