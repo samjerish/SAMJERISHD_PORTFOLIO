@@ -1,54 +1,58 @@
-/* SCROLL STACK COMPONENT */
+/* SCROLL STACK COMPONENT (Cards Deck Effect) */
 .scroll-stack-container {
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  padding-bottom: 8rem;
+  padding-bottom: 14rem;
 }
 
 /* Card Outer Wrapper - Sticky Pinned */
 .scroll-stack-card-wrapper {
   position: sticky;
   width: 100%;
-  margin-bottom: 6rem;
+  margin-bottom: 24vh;
   perspective: 1200px;
   will-change: transform;
+}
+
+.scroll-stack-card-wrapper:last-child {
+  margin-bottom: 4rem;
 }
 
 /* Inner Stack Card Body */
 .scroll-stack-card {
   position: relative;
   width: 100%;
-  background: radial-gradient(circle at 30% 0%, #1c1c1c 0%, #0d0d0d 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: radial-gradient(circle at 35% 0%, #1c1c1c 0%, #0d0d0d 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
   border-radius: 28px;
-  padding: 2.5rem;
+  padding: 2.5rem 2.8rem;
   box-shadow:
-    0 30px 70px rgba(0, 0, 0, 0.8),
-    0 10px 25px rgba(0, 0, 0, 0.5),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    0 35px 80px rgba(0, 0, 0, 0.85),
+    0 12px 30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.15s ease-out,
-              filter 0.2s ease-out,
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.15s ease-out,
               border-color 0.3s ease,
               box-shadow 0.3s ease;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .scroll-stack-card:hover {
   border-color: rgba(255, 255, 255, 0.35);
   box-shadow:
-    0 40px 90px rgba(0, 0, 0, 0.9),
-    0 0 35px rgba(74, 222, 128, 0.12),
-    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+    0 45px 95px rgba(0, 0, 0, 0.95),
+    0 0 40px rgba(74, 222, 128, 0.16),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
 /* Header Top Strip */
@@ -263,7 +267,7 @@
 
 /* Light Mode Overrides */
 body.light-mode .scroll-stack-card {
-  background: radial-gradient(circle at 30% 0%, #ffffff 0%, #f6f6f6 100%);
+  background: radial-gradient(circle at 35% 0%, #ffffff 0%, #f4f4f4 100%);
   border-color: rgba(0, 0, 0, 0.1);
   box-shadow:
     0 25px 50px rgba(0, 0, 0, 0.08),
@@ -309,6 +313,10 @@ body.light-mode .media-frame {
    =================================================== */
 
 @media (max-width: 960px) {
+  .scroll-stack-card-wrapper {
+    margin-bottom: 18vh;
+  }
+
   .scroll-stack-card {
     padding: 2rem 1.8rem;
   }
@@ -328,8 +336,12 @@ body.light-mode .media-frame {
 }
 
 @media (max-width: 640px) {
+  .scroll-stack-container {
+    padding-bottom: 8rem;
+  }
+
   .scroll-stack-card-wrapper {
-    margin-bottom: 4rem;
+    margin-bottom: 14vh;
   }
 
   .scroll-stack-card {
