@@ -6,7 +6,6 @@ import {
   FiGitBranch,
   FiFolder,
   FiExternalLink,
-  FiRefreshCw,
   FiZap,
   FiTrendingUp,
   FiAward
@@ -35,7 +34,6 @@ export const GitHubContributions: React.FC = () => {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [refreshKey, setRefreshKey] = useState(0);
 
   const fetchGitHubData = async () => {
     setLoading(true);
@@ -64,7 +62,7 @@ export const GitHubContributions: React.FC = () => {
 
   useEffect(() => {
     fetchGitHubData();
-  }, [refreshKey]);
+  }, []);
 
   const totalStars = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
   const totalForks = repos.reduce((acc, r) => acc + (r.forks_count || 0), 0);
@@ -80,7 +78,7 @@ export const GitHubContributions: React.FC = () => {
           <div>
             <div className="github-live-badge-row">
               <span className="live-radar-dot"></span>
-              <span className="live-radar-text">LIVE GITHUB SYNC</span>
+              <span className="live-radar-text">LIVE GITHUB TELEMETRY</span>
             </div>
             <h2 className="github-sync-title">CODE ACTIVITY & CONTRIBUTIONS</h2>
             <p className="github-sync-subtitle">
@@ -98,14 +96,6 @@ export const GitHubContributions: React.FC = () => {
         </div>
 
         <div className="github-header-actions">
-          <button
-            className="github-refresh-btn"
-            onClick={() => setRefreshKey((k) => k + 1)}
-            title="Sync Latest GitHub Data"
-          >
-            <FiRefreshCw className={loading ? "is-spinning" : ""} />
-            <span>Sync Live</span>
-          </button>
           <a
             href="https://github.com/samjerish"
             target="_blank"
