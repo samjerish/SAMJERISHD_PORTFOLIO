@@ -53,7 +53,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="about-hero-info">
-            <span className="about-hero-kicker">ABOUT ME</span>
             <h1 className="about-hero-name">SAM JERISH D</h1>
             <h2 className="about-hero-tagline">
               AIML Student • Full Stack Developer • Creative Problem Solver
