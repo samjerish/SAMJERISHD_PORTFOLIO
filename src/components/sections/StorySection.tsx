@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./StorySection.css";
 import profileImg1 from "../../assets/me.jpg";
 import profileImg2 from "../../assets/me2.jpg";
+import clickHereGraphic from "../../assets/click_here.png";
 
 const STORY_PHOTOS = [profileImg1, profileImg2];
 
@@ -9,7 +10,7 @@ export const StorySection: React.FC<{
   onNavigate?: (
     page: "home" | "media" | "about" | "projects" | "contact" | "resume",
   ) => void;
-}> = () => {
+}> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
@@ -161,6 +162,29 @@ export const StorySection: React.FC<{
                 and still creating. And honestly, that’s the part of the journey
                 I enjoy the most.
               </p>
+            </div>
+
+            {/* Small View More Option with Click Here Graphic */}
+            <div
+              className="story-view-more-card"
+              onClick={() => onNavigate && onNavigate("about")}
+              role="button"
+              tabIndex={0}
+            >
+              <div className="story-view-more-avatar-wrap">
+                <img
+                  src={clickHereGraphic}
+                  alt="Click to View More"
+                  className="story-view-more-avatar"
+                  draggable={false}
+                />
+              </div>
+              <div className="story-view-more-info">
+                <span className="story-view-more-title">VIEW MORE</span>
+                <span className="story-view-more-sub">
+                  Learn more about my story, journey & GitHub activity →
+                </span>
+              </div>
             </div>
           </div>
 
