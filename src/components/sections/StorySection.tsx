@@ -9,12 +9,15 @@ export const StorySection: React.FC<{
   onNavigate?: (
     page: "home" | "media" | "about" | "projects" | "contact" | "resume",
   ) => void;
-}> = ({ onNavigate }) => {
+}> = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [tilt, setTilt] = useState({ x: 0, y: 0, glareX: 50, glareY: 50 });
-  const [isHovered, setIsHovered] = useState(false);
+  const [angle, setAngle] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [glare, setGlare] = useState({ x: 50, y: 50 });
   const textRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const animRef = useRef<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,28 +44,69 @@ export const StorySection: React.FC<{
     return () => {
       if (node) observer.unobserve(node);
       clearInterval(photoInterval);
+      if (animRef.current) cancelAnimationFrame(animRef.current);
     };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+  const handlePointerDown = (clientX: number, clientY: number) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    setIsDragging(true);
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const anchorX = rect.left + rect.width / 2;
+    const anchorY = rect.top;
 
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
-    const glareX = (x / rect.width) * 100;
-    const glareY = (y / rect.height) * 100;
-
-    setTilt({ x: rotateX, y: rotateY, glareX, glareY });
-    setIsHovered(true);
+    const dx = clientX - anchorX;
+    const dy = Math.max(15, clientY - anchorY);
+    const rad = Math.atan2(dx, dy);
+    let deg = (rad * 180) / Math.PI;
+    deg = Math.max(-45, Math.min(45, deg));
+    setAngle(deg);
   };
 
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0, glareX: 50, glareY: 50 });
-    setIsHovered(false);
+  const handlePointerMove = (clientX: number, clientY: number) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const anchorX = rect.left + rect.width / 2;
+    const anchorY = rect.top;
+
+    if (isDragging) {
+      const dx = clientX - anchorX;
+      const dy = Math.max(15, clientY - anchorY);
+      const rad = Math.atan2(dx, dy);
+      let deg = (rad * 180) / Math.PI;
+      deg = Math.max(-50, Math.min(50, deg));
+      setAngle(deg);
+    }
+
+    const glareX = ((clientX - rect.left) / rect.width) * 100;
+    const glareY = ((clientY - rect.top) / rect.height) * 100;
+    setGlare({ x: glareX, y: glareY });
+  };
+
+  const handlePointerUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+
+    // Realistic dampened pendulum swing back to center
+    const startDeg = angle;
+    let time = 0;
+
+    const animateSwing = () => {
+      time += 0.035;
+      const decay = Math.exp(-time * 2.2);
+      const nextAngle = startDeg * decay * Math.cos(time * 9.5);
+      setAngle(nextAngle);
+
+      if (Math.abs(nextAngle) > 0.1 && decay > 0.008) {
+        animRef.current = requestAnimationFrame(animateSwing);
+      } else {
+        setAngle(0);
+      }
+    };
+
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    animRef.current = requestAnimationFrame(animateSwing);
   };
 
   return (
@@ -100,69 +144,91 @@ export const StorySection: React.FC<{
           </div>
 
           <div className="story-graphic-column">
+            {/* Hanging Status Tag */}
+            <div className="hanging-tag-wrapper">
+              <span className="hanging-tag">
+                <span className="hanging-tag-pulse"></span>
+                HOLD & DRAG TO SWING ✦
+              </span>
+            </div>
+
+            {/* Hanging Wall Rig */}
             <div
-              className="id-card-stack"
-              onClick={() => onNavigate && onNavigate("contact")}
-              style={{
-                cursor: onNavigate ? "pointer" : "default",
-                transform: isHovered
-                  ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.025, 1.025, 1.025)`
-                  : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
-                transition: isHovered
-                  ? "transform 0.1s ease-out"
-                  : "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              role={onNavigate ? "button" : undefined}
-              tabIndex={onNavigate ? 0 : undefined}
-              onKeyDown={(e) => {
-                if (onNavigate && (e.key === "Enter" || e.key === " ")) {
-                  e.preventDefault();
-                  onNavigate("contact");
-                }
-              }}
+              className="hanging-rig"
+              onMouseUp={handlePointerUp}
+              onMouseLeave={handlePointerUp}
+              onTouchEnd={handlePointerUp}
+              onTouchCancel={handlePointerUp}
             >
-              {/* Background Card */}
-              <div className="id-card-bg">
-                <div className="id-card-connect-text">CLICK TO CONNECT ↗</div>
+              {/* Wall Pin / Metallic Nail */}
+              <div className="wall-anchor-pin">
+                <div className="pin-head"></div>
+                <div className="pin-screw"></div>
               </div>
 
-              {/* Foreground Card */}
-              <div className="id-card-fg">
-                {/* Dynamic light glare on hover */}
+              {/* Lanyard Strap hanging from pin */}
+              <div
+                className="hanging-lanyard"
+                style={{
+                  transform: `rotate(${angle * 0.4}deg)`,
+                  transformOrigin: "top center",
+                }}
+              >
+                <div className="lanyard-ribbon"></div>
+                <div className="lanyard-clasp">
+                  <div className="clasp-swivel"></div>
+                  <div className="clasp-hook"></div>
+                </div>
+              </div>
+
+              {/* ID Card with Hanging Pendulum Physics */}
+              <div
+                ref={cardRef}
+                className={`hanging-id-card ${isDragging ? "is-dragging" : ""}`}
+                style={{
+                  transform: `rotate(${angle}deg)`,
+                  transformOrigin: "top center",
+                }}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handlePointerDown(e.clientX, e.clientY);
+                }}
+                onMouseMove={(e) => {
+                  handlePointerMove(e.clientX, e.clientY);
+                }}
+                onTouchStart={(e) => {
+                  const touch = e.touches[0];
+                  if (touch) handlePointerDown(touch.clientX, touch.clientY);
+                }}
+                onTouchMove={(e) => {
+                  const touch = e.touches[0];
+                  if (touch) handlePointerMove(touch.clientX, touch.clientY);
+                }}
+              >
+                {/* Dynamic light reflection glare */}
                 <div
-                  className="id-card-glare"
+                  className="card-glare-layer"
                   style={{
-                    opacity: isHovered ? 0.3 : 0,
-                    background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 65%)`,
+                    opacity: isDragging ? 0.35 : 0.15,
+                    background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 65%)`,
                   }}
                 />
 
-                {/* ID Card Punch Hole & Metallic Badge Clip */}
-                <div className="id-card-punch-slot"></div>
-                <div className="id-card-clip">
-                  <svg
-                    width="40"
-                    height="70"
-                    viewBox="0 0 24 42"
-                    fill="none"
-                    stroke="#888888"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M9 26 V 10 A 3 3 0 0 1 15 10 V 30 A 6 6 0 0 1 3 30 V 6 A 9 9 0 0 1 21 6 V 24" />
-                  </svg>
+                {/* Card Punch Slot & Metal Eyelet */}
+                <div className="card-top-slot">
+                  <div className="slot-eyelet"></div>
                 </div>
 
-                {/* ID Header Badge */}
-                <div className="id-card-header-bar">
-                  <span className="id-card-header-badge">DEV IDENTIFICATION</span>
-                  <span className="id-card-header-id">#007</span>
+                {/* Card Header */}
+                <div className="id-card-top-banner">
+                  <div className="id-badge-status">
+                    <span className="badge-live-dot"></span>
+                    <span className="badge-title">DEV ACCESS PASS</span>
+                  </div>
+                  <div className="id-badge-serial">2026 // PRO</div>
                 </div>
 
-                {/* Photo */}
+                {/* Photo with Frame */}
                 <div className="id-card-photo-wrapper">
                   {STORY_PHOTOS.map((photo, index) => {
                     const positionClass = index === photoIndex ? "active" : "hidden";
@@ -204,31 +270,17 @@ export const StorySection: React.FC<{
                     </span>
                   </div>
 
-                  {/* Security Barcode Footer */}
-                  <div className="id-card-barcode-container">
-                    <div className="id-card-barcode-lines">
-                      <span className="b-w1"></span>
-                      <span className="b-w2"></span>
-                      <span className="b-w1"></span>
-                      <span className="b-w3"></span>
-                      <span className="b-w1"></span>
-                      <span className="b-w2"></span>
-                      <span className="b-w3"></span>
-                      <span className="b-w1"></span>
-                      <span className="b-w2"></span>
-                      <span className="b-w1"></span>
-                      <span className="b-w3"></span>
-                      <span className="b-w2"></span>
-                      <span className="b-w1"></span>
-                      <span className="b-w3"></span>
-                      <span className="b-w2"></span>
-                      <span className="b-w1"></span>
-                      <span className="b-w2"></span>
-                      <span className="b-w1"></span>
-                      <span className="b-w3"></span>
-                      <span className="b-w1"></span>
+                  {/* Unique Security Holographic Seal */}
+                  <div className="id-card-hologram-seal">
+                    <div className="hologram-emblem">
+                      <div className="hologram-ring"></div>
+                      <span className="hologram-text">VERIFIED IDENTITY</span>
                     </div>
-                    <div className="id-card-barcode-code">SJD // 2026 // PASS</div>
+                    <div className="hologram-chip">
+                      <div className="chip-line c1"></div>
+                      <div className="chip-line c2"></div>
+                      <div className="chip-line c3"></div>
+                    </div>
                   </div>
                 </div>
               </div>
