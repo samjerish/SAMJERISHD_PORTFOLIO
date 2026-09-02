@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProjectSwipeDownList.css";
 import type { Project } from "../../data/projects";
-import { FiArrowUpRight, FiChevronDown, FiExternalLink } from "react-icons/fi";
+import { FiChevronDown, FiExternalLink } from "react-icons/fi";
 
 interface ProjectSwipeDownListProps {
   projects: Project[];
@@ -10,35 +10,35 @@ interface ProjectSwipeDownListProps {
 export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
   projects,
 }) => {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const [activeMobileId, setActiveMobileId] = useState<number | null>(null);
+  const [openId, setOpenId] = useState<number | null>(null);
 
-  const handleRowClick = (project: Project, e: React.MouseEvent) => {
-    // If on mobile/touch, toggle the swipe-down drawer
-    if (window.innerWidth <= 860) {
-      e.preventDefault();
-      setActiveMobileId((prev) => (prev === project.id ? null : project.id));
-    }
+  const handleToggle = (projectId: number) => {
+    setOpenId((prev) => (prev === projectId ? null : projectId));
   };
 
   return (
     <div className="project-swipe-list">
       {projects.map((project, index) => {
-        const isHovered = hoveredId === project.id;
-        const isActive = activeMobileId === project.id;
-        const isOpen = isHovered || isActive;
+        const isOpen = openId === project.id;
 
         return (
           <div
             key={project.id}
             className={`project-swipe-item ${isOpen ? "is-open" : ""}`}
-            onMouseEnter={() => setHoveredId(project.id)}
-            onMouseLeave={() => setHoveredId(null)}
           >
             {/* Minimalist Title Row */}
             <div
               className="project-title-row"
-              onClick={(e) => handleRowClick(project, e)}
+              onClick={() => handleToggle(project.id)}
+              role="button"
+              tabIndex={0}
+              aria-expanded={isOpen}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleToggle(project.id);
+                }
+              }}
             >
               <div className="project-title-left">
                 <span className="project-number">0{index + 1}</span>
@@ -49,10 +49,17 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                 {project.tag && (
                   <span className="project-tag-pill">{project.tag}</span>
                 )}
-                <div className="project-arrow-badge">
+                <button
+                  type="button"
+                  className={`project-arrow-badge ${isOpen ? "is-open" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleToggle(project.id);
+                  }}
+                  aria-label={isOpen ? "Collapse project details" : "Expand project details"}
+                >
                   <FiChevronDown className={`chevron-icon ${isOpen ? "is-rotated" : ""}`} />
-                  <FiArrowUpRight className="arrow-hover-icon" />
-                </div>
+                </button>
               </div>
             </div>
 

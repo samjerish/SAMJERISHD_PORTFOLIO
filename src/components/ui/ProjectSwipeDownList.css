@@ -113,20 +113,18 @@
   align-items: center;
   justify-content: center;
   color: #888888;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-}
-
-.arrow-hover-icon {
-  position: absolute;
-  opacity: 0;
-  transform: scale(0.6) rotate(-45deg);
-  transition: all 0.35s ease;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
 }
 
 .chevron-icon {
-  transition: transform 0.35s ease;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
 }
 
 .chevron-icon.is-rotated {
