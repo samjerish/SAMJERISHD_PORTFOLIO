@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AboutPage.css";
 import profileImg from "../../assets/photo.jpg";
-import { FiInstagram, FiLinkedin, FiGithub, FiMail, FiBriefcase, FiBookOpen, FiCode } from "react-icons/fi";
+import { FiInstagram, FiLinkedin, FiGithub, FiMail, FiCode, FiTerminal, FiVideo } from "react-icons/fi";
 import { GitHubContributions } from "../ui/GitHubContributions";
 
 interface AboutPageProps {
@@ -140,36 +140,36 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Card 2 */}
+            {/* Card 2: Python Development Intern @Swiftant */}
             <div className="timeline-card">
-              <div className="timeline-icon-box edu-box">
-                <FiBookOpen />
+              <div className="timeline-icon-box py-box">
+                <FiTerminal />
               </div>
               <div className="timeline-content">
-                <span className="timeline-period">2023 — 2027</span>
-                <h3 className="timeline-role">B.Tech in Computer Science (AIML)</h3>
-                <h4 className="timeline-org">Undergraduate Degree</h4>
+                <span className="timeline-period">JUNE 2026</span>
+                <h3 className="timeline-role">Python Development Intern</h3>
+                <h4 className="timeline-org">@Swiftant</h4>
                 <p className="timeline-desc">
-                  Specializing in Artificial Intelligence and Machine Learning.
-                  Deep coursework in Data Structures, Algorithms, Machine Learning
-                  Pipelines, Deep Learning, and Autonomous Robotics Systems.
+                  Worked on Python-based application development, applying Object-Oriented
+                  Programming (OOP) principles to build structured and maintainable solutions.
+                  Strengthened debugging, problem-solving, and software development skills through hands-on projects.
                 </p>
               </div>
             </div>
 
-            {/* Card 3 */}
+            {/* Card 3: Media Coordinator @Matrix Karunya */}
             <div className="timeline-card">
-              <div className="timeline-icon-box bot-box">
-                <FiBriefcase />
+              <div className="timeline-icon-box media-box">
+                <FiVideo />
               </div>
               <div className="timeline-content">
-                <span className="timeline-period">2024 — 2025</span>
-                <h3 className="timeline-role">Autonomous Robotics & Computer Vision</h3>
-                <h4 className="timeline-org">University Research & Development</h4>
+                <span className="timeline-period">APR 2024 — PRESENT</span>
+                <h3 className="timeline-role">Media Coordinator</h3>
+                <h4 className="timeline-org">Matrix Karunya</h4>
                 <p className="timeline-desc">
-                  Engineered autonomous obstacle navigation robots utilizing
-                  sensor arrays, embedded microcontrollers, and Computer Vision
-                  algorithms for environmental perception and navigation.
+                  Delivered multimedia coverage for 50+ events, producing 35K+ visual
+                  assets and 25+ videos while managing the department’s official social
+                  media platforms to enhance public engagement.
                 </p>
               </div>
             </div>
