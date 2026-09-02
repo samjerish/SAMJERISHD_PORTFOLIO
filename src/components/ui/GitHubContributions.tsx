@@ -42,7 +42,6 @@ export const GitHubContributions: React.FC = () => {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [contributions, setContributions] = useState<ContributionDay[]>([]);
-  const [totalYearContributions, setTotalYearContributions] = useState<number | null>(null);
   const [hoveredDay, setHoveredDay] = useState<{ date: string; count: number } | null>(null);
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -74,9 +73,6 @@ export const GitHubContributions: React.FC = () => {
         const data = await contribRes.json();
         if (data && data.contributions) {
           setContributions(data.contributions);
-          if (data.total && data.total.lastYear !== undefined) {
-            setTotalYearContributions(data.total.lastYear);
-          }
         }
       }
     } catch (err) {
@@ -233,12 +229,6 @@ export const GitHubContributions: React.FC = () => {
         <div className="timeline-header-row">
           <div className="timeline-title-wrap">
             <h3 className="timeline-title">CONTRIBUTION ACTIVITY</h3>
-            <span className="timeline-badge">
-              <span className="badge-pulse-dot"></span>
-              {totalYearContributions !== null
-                ? `${totalYearContributions} contributions in the last year`
-                : "Real-time Sync"}
-            </span>
           </div>
           <span className="timeline-caption-year">Last 12 Months</span>
         </div>
