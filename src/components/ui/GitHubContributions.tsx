@@ -6,9 +6,6 @@ import {
   FiGitBranch,
   FiFolder,
   FiExternalLink,
-  FiZap,
-  FiTrendingUp,
-  FiAward
 } from "react-icons/fi";
 
 interface GitHubUser {
@@ -78,11 +75,11 @@ export const GitHubContributions: React.FC = () => {
           <div>
             <div className="github-live-badge-row">
               <span className="live-radar-dot"></span>
-              <span className="live-radar-text">LIVE GITHUB TELEMETRY</span>
+              <span className="live-radar-text">LIVE TELEMETRY</span>
             </div>
-            <h2 className="github-sync-title">CODE ACTIVITY & CONTRIBUTIONS</h2>
+            <h2 className="github-sync-title">GITHUB CONTRIBUTIONS</h2>
             <p className="github-sync-subtitle">
-              Real-time telemetry synced with{" "}
+              Real-time activity synced with{" "}
               <a
                 href="https://github.com/samjerish"
                 target="_blank"
@@ -155,88 +152,46 @@ export const GitHubContributions: React.FC = () => {
         </div>
       </div>
 
-      {/* Dark Mode Activity & Peak Commits Visualizer */}
-      <div className="github-chart-container dark-chart-mode">
-        {/* Top Control Bar */}
-        <div className="chart-header-row">
-          <div className="chart-title-group">
-            <span className="chart-badge">CONTRIBUTIONS HEATMAP</span>
-            <h3 className="chart-title">ANNUAL COMMIT VELOCITY</h3>
+      {/* Clean Dark Mode GitHub Contribution Timeline */}
+      <div className="github-timeline-container">
+        <div className="timeline-header-row">
+          <div className="timeline-title-wrap">
+            <h3 className="timeline-title">CONTRIBUTION ACTIVITY</h3>
+            <span className="timeline-badge">
+              <span className="badge-pulse-dot"></span>
+              Real-time Sync
+            </span>
           </div>
-
-          <div className="chart-intensity-legend">
-            <span className="legend-label">Less</span>
-            <div className="legend-cells">
-              <span className="legend-cell lvl-0"></span>
-              <span className="legend-cell lvl-1"></span>
-              <span className="legend-cell lvl-2"></span>
-              <span className="legend-cell lvl-3"></span>
-              <span className="legend-cell lvl-4 peak-glow"></span>
-            </div>
-            <span className="legend-label">More (Peak)</span>
-          </div>
+          <span className="timeline-caption-year">Last 12 Months</span>
         </div>
 
-        {/* Highlight Banner: Peak Activity & Most Committed Day */}
-        <div className="peak-committed-highlights">
-          <div className="highlight-pill peak-day">
-            <div className="highlight-icon-wrap zap-icon">
-              <FiZap />
-            </div>
-            <div className="highlight-text-group">
-              <span className="highlight-small-title">PEAK COMMIT VELOCITY</span>
-              <span className="highlight-main-val">High-Frequency Sprint Days</span>
-            </div>
-          </div>
-
-          <div className="highlight-pill streak-day">
-            <div className="highlight-icon-wrap trend-icon">
-              <FiTrendingUp />
-            </div>
-            <div className="highlight-text-group">
-              <span className="highlight-small-title">COMMIT FREQUENCY</span>
-              <span className="highlight-main-val">Active Development Cycle</span>
-            </div>
-          </div>
-
-          <div className="highlight-pill best-day">
-            <div className="highlight-icon-wrap award-icon">
-              <FiAward />
-            </div>
-            <div className="highlight-text-group">
-              <span className="highlight-small-title">PRIMARY FOCUS</span>
-              <span className="highlight-main-val">Full Stack & AI Architectures</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Dark Mode Glowing Heatmap Frame */}
-        <div className="chart-viewport-wrapper">
-          <div className="chart-glow-underlay"></div>
-          <div className="chart-image-wrap">
+        {/* Heatmap Graph Window */}
+        <div className="timeline-graph-window">
+          <div className="timeline-graph-scroll">
             <img
-              src={`https://ghchart.rshah.org/4ade80/samjerish?timestamp=${Date.now()}`}
+              src={`https://ghchart.rshah.org/39d353/samjerish?timestamp=${Date.now()}`}
               alt="Sam Jerish's GitHub Dark Heatmap Chart"
-              className="github-chart-img dark-themed-graph"
+              className="github-timeline-img"
               loading="lazy"
             />
           </div>
         </div>
 
-        {/* Footer Meta */}
-        <div className="chart-footer-caption">
-          <div className="chart-meta-left">
-            <span className="meta-dot"></span>
-            <span>Live commits recorded from GitHub public events and repositories</span>
+        {/* Timeline Footer */}
+        <div className="timeline-footer-row">
+          <div className="footer-legend-hint">
+            <span>Points in </span>
+            <span className="green-accent-text">green</span>
+            <span> indicate active commit days</span>
           </div>
 
           <a
             href="https://github.com/samjerish"
             target="_blank"
             rel="noreferrer"
-            className="chart-inspect-link"
+            className="timeline-inspect-btn"
           >
-            <span>Explore on GitHub</span>
+            <span>View GitHub Profile</span>
             <FiExternalLink />
           </a>
         </div>
