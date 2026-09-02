@@ -232,69 +232,30 @@ export const StorySection: React.FC<{
                     {/* Diagonal Geometric Stripes Background Overlay */}
                     <div className="card-diagonal-stripes"></div>
 
-                    {/* Top Branding & Logo */}
-                    <div className="id-card-top-branding">
-                      <div className="id-brand-icon">
-                        <div className="brand-square sq-1"></div>
-                        <div className="brand-square sq-2"></div>
-                      </div>
-                      <div className="id-brand-text">
-                        <span className="id-brand-name">SAM JERISH D</span>
-                        <span className="id-brand-sub">PORTFOLIO ID PASS</span>
-                      </div>
+                    {/* Full Photo Frame */}
+                    <div className="id-full-photo-frame">
+                      {STORY_PHOTOS.map((photo, index) => {
+                        const positionClass =
+                          index === photoIndex ? "active" : "hidden";
+
+                        return (
+                          <img
+                            key={index}
+                            src={photo}
+                            alt="Sam Jerish"
+                            className={`id-card-full-img ${positionClass}`}
+                            draggable={false}
+                            onContextMenu={(e) => e.preventDefault()}
+                          />
+                        );
+                      })}
+                      <div className="id-photo-specular-glare"></div>
                     </div>
 
-                    {/* Center Diamond Avatar Frame */}
-                    <div className="id-diamond-container">
-                      <div className="id-diamond-outer-rim">
-                        <div className="id-diamond-photo-mask">
-                          {STORY_PHOTOS.map((photo, index) => {
-                            const positionClass =
-                              index === photoIndex ? "active" : "hidden";
-
-                            return (
-                              <img
-                                key={index}
-                                src={photo}
-                                alt="Sam Jerish"
-                                className={`id-diamond-photo ${positionClass}`}
-                                draggable={false}
-                                onContextMenu={(e) => e.preventDefault()}
-                              />
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Name & Title */}
-                    <div className="id-identity-info">
+                    {/* Below Photo: Name and Small Full Stack Developer Text */}
+                    <div className="id-identity-bottom">
                       <h3 className="id-person-name">SAM JERISH D</h3>
-                      <p className="id-person-title">FULL STACK DEVELOPER</p>
-                    </div>
-
-                    {/* Clean Key-Value Specifications */}
-                    <div className="id-specs-table">
-                      <div className="id-spec-row">
-                        <span className="spec-key">ID No</span>
-                        <span className="spec-colon">:</span>
-                        <span className="spec-val">SJD-2026-DEV</span>
-                      </div>
-                      <div className="id-spec-row">
-                        <span className="spec-key">Role</span>
-                        <span className="spec-colon">:</span>
-                        <span className="spec-val">Full Stack Engineer</span>
-                      </div>
-                      <div className="id-spec-row">
-                        <span className="spec-key">Email</span>
-                        <span className="spec-colon">:</span>
-                        <span className="spec-val">samjerishd@gmail.com</span>
-                      </div>
-                      <div className="id-spec-row">
-                        <span className="spec-key">Location</span>
-                        <span className="spec-colon">:</span>
-                        <span className="spec-val">Tamil Nadu, India</span>
-                      </div>
+                      <p className="id-person-subtitle">FULL STACK DEVELOPER</p>
                     </div>
                   </div>
                 </div>
