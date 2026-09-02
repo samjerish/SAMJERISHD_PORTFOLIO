@@ -271,26 +271,26 @@
 @media (max-width: 900px) {
   .contact-info-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    text-align: center;
-    align-items: center;
-    justify-items: center;
+    gap: 2.2rem;
+    text-align: left;
+    align-items: flex-start;
+    justify-items: flex-start;
   }
 
   .info-block {
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     width: 100%;
   }
 
   .info-block > div {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .social-circles {
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .contact-splitter-vertical {

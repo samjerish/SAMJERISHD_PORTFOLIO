@@ -383,11 +383,11 @@ body.light-mode .hero-floating-nav button:hover {
     flex: 1;
     position: relative;
     width: 100%;
-    min-height: 52vh;
+    min-height: 48vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 4.2rem;
+    padding-top: 3.5rem;
     padding-bottom: 0;
     -webkit-mask-image: none !important;
     mask-image: none !important;
@@ -395,7 +395,7 @@ body.light-mode .hero-floating-nav button:hover {
 
   .hero-background-text-new {
     position: absolute;
-    top: 45%;
+    top: 34%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -410,7 +410,7 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(3.8rem, 23vw, 6.2rem);
+    font-size: clamp(3.6rem, 22vw, 5.8rem);
     line-height: 0.85;
     letter-spacing: 2px;
     text-align: center;
@@ -420,7 +420,7 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-2 {
-    font-size: clamp(2.2rem, 13vw, 3.8rem);
+    font-size: clamp(2.1rem, 12.5vw, 3.6rem);
     line-height: 0.85;
     letter-spacing: 1px;
     margin-top: 0.2rem;
@@ -436,7 +436,7 @@ body.light-mode .hero-floating-nav button:hover {
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 4vh;
+    top: 8vh;
     z-index: 10;
     animation: float 6s ease-in-out infinite;
     pointer-events: none;
@@ -444,13 +444,13 @@ body.light-mode .hero-floating-nav button:hover {
 
   .hero-avatar-img-new {
     display: block !important;
-    width: clamp(270px, 72vw, 390px);
-    max-height: 48vh;
+    width: clamp(260px, 70vw, 370px);
+    max-height: 42vh;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.65));
-    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 98%);
-    mask-image: linear-gradient(to bottom, black 65%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 95%);
   }
 
   .hero-bottom-elements {
@@ -461,9 +461,9 @@ body.light-mode .hero-floating-nav button:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 1.25rem;
-    padding: 0.5rem 1rem 2.2rem 1rem;
-    margin-top: auto;
+    gap: 1rem;
+    padding: 0 1rem 2rem 1rem;
+    margin-top: -0.5rem;
     z-index: 30;
   }
 

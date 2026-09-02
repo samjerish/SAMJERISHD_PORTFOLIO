@@ -233,7 +233,6 @@ export const ContactPage: React.FC<{
                   type="text"
                   id="contact-name"
                   name="name"
-                  placeholder="John Doe"
                   required
                 />
               </div>
@@ -246,7 +245,6 @@ export const ContactPage: React.FC<{
                   type="email"
                   id="contact-email"
                   name="email"
-                  placeholder="john@example.com"
                   required
                 />
               </div>
@@ -257,7 +255,6 @@ export const ContactPage: React.FC<{
               <textarea
                 id="contact-message"
                 name="message"
-                placeholder="Dear Sam,"
                 rows={6}
                 required
               ></textarea>

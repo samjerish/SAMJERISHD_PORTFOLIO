@@ -12,6 +12,8 @@ export const StorySection: React.FC<{
 }> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0, glareX: 50, glareY: 50 });
+  const [isHovered, setIsHovered] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,6 +43,27 @@ export const StorySection: React.FC<{
       clearInterval(photoInterval);
     };
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+    const glareX = (x / rect.width) * 100;
+    const glareY = (y / rect.height) * 100;
+
+    setTilt({ x: rotateX, y: rotateY, glareX, glareY });
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0, glareX: 50, glareY: 50 });
+    setIsHovered(false);
+  };
 
   return (
     <section className="story-container">
@@ -80,7 +103,17 @@ export const StorySection: React.FC<{
             <div
               className="id-card-stack"
               onClick={() => onNavigate && onNavigate("contact")}
-              style={{ cursor: onNavigate ? "pointer" : "default" }}
+              style={{
+                cursor: onNavigate ? "pointer" : "default",
+                transform: isHovered
+                  ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.025, 1.025, 1.025)`
+                  : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
+                transition: isHovered
+                  ? "transform 0.1s ease-out"
+                  : "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
               role={onNavigate ? "button" : undefined}
               tabIndex={onNavigate ? 0 : undefined}
               onKeyDown={(e) => {
@@ -90,27 +123,43 @@ export const StorySection: React.FC<{
                 }
               }}
             >
-              {/* Background Card - No green dot as requested */}
+              {/* Background Card */}
               <div className="id-card-bg">
                 <div className="id-card-connect-text">CLICK TO CONNECT ↗</div>
               </div>
 
               {/* Foreground Card */}
               <div className="id-card-fg">
-                {/* Paperclip */}
+                {/* Dynamic light glare on hover */}
+                <div
+                  className="id-card-glare"
+                  style={{
+                    opacity: isHovered ? 0.3 : 0,
+                    background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 65%)`,
+                  }}
+                />
+
+                {/* ID Card Punch Hole & Metallic Badge Clip */}
+                <div className="id-card-punch-slot"></div>
                 <div className="id-card-clip">
                   <svg
                     width="40"
                     height="70"
                     viewBox="0 0 24 42"
                     fill="none"
-                    stroke="#666666"
+                    stroke="#888888"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
                     <path d="M9 26 V 10 A 3 3 0 0 1 15 10 V 30 A 6 6 0 0 1 3 30 V 6 A 9 9 0 0 1 21 6 V 24" />
                   </svg>
+                </div>
+
+                {/* ID Header Badge */}
+                <div className="id-card-header-bar">
+                  <span className="id-card-header-badge">DEV IDENTIFICATION</span>
+                  <span className="id-card-header-id">#007</span>
                 </div>
 
                 {/* Photo */}
@@ -153,6 +202,33 @@ export const StorySection: React.FC<{
                     <span className="id-card-value handwriting">
                       Full Stack Developer
                     </span>
+                  </div>
+
+                  {/* Security Barcode Footer */}
+                  <div className="id-card-barcode-container">
+                    <div className="id-card-barcode-lines">
+                      <span className="b-w1"></span>
+                      <span className="b-w2"></span>
+                      <span className="b-w1"></span>
+                      <span className="b-w3"></span>
+                      <span className="b-w1"></span>
+                      <span className="b-w2"></span>
+                      <span className="b-w3"></span>
+                      <span className="b-w1"></span>
+                      <span className="b-w2"></span>
+                      <span className="b-w1"></span>
+                      <span className="b-w3"></span>
+                      <span className="b-w2"></span>
+                      <span className="b-w1"></span>
+                      <span className="b-w3"></span>
+                      <span className="b-w2"></span>
+                      <span className="b-w1"></span>
+                      <span className="b-w2"></span>
+                      <span className="b-w1"></span>
+                      <span className="b-w3"></span>
+                      <span className="b-w1"></span>
+                    </div>
+                    <div className="id-card-barcode-code">SJD // 2026 // PASS</div>
                   </div>
                 </div>
               </div>
