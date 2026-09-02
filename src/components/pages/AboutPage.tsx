@@ -204,7 +204,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <em>"Solving Real world problems through creativity and technology."</em> I love taking ideas from scratch and turning them into practical, clean, and responsive digital products that people can actually use.
               </p>
               <p>
-                When I’m not coding or debugging, you’ll usually find me behind a camera capturing campus events or editing video content for <strong>@MatrixKarunya</strong>.
+                When I’m not coding or debugging, you’ll usually find me behind a camera capturing photos and editing videos.
               </p>
             </div>
           </div>
