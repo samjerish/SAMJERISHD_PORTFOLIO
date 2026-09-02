@@ -35,23 +35,24 @@ export const Navbar: React.FC<{
 
   const navItems = [
     { id: "home", label: "HOME", number: "01", tag: "Main Space" },
-    { id: "projects", label: "PROJECTS", number: "02", tag: "Selected Works" },
+    { id: "about", label: "ABOUT ME", number: "02", tag: "Story & Journey" },
+    { id: "projects", label: "PROJECTS", number: "03", tag: "Selected Works" },
     {
       id: "media",
       label: "BEYOND THE FRAME",
-      number: "03",
+      number: "04",
       tag: "Gallery & Moments",
     },
     {
       id: "resume",
       label: "RESUME",
-      number: "04",
+      number: "05",
       tag: "Skills & Experience",
     },
     {
       id: "contact",
       label: "CONNECT WITH ME",
-      number: "05",
+      number: "06",
       tag: "Let's Talk",
     },
   ];
