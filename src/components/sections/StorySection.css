@@ -1,54 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap");
-
 .story-container {
+  min-height: 100vh;
   width: 100%;
-  min-height: auto;
-  background-color: transparent;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 2rem 4vw 8rem 4vw;
+  align-items: center;
+  padding: 6rem 2rem;
   position: relative;
+  background-color: transparent;
+  z-index: 10;
 }
 
 .story-content-wrapper {
-  max-width: 1400px;
+  max-width: 1300px;
   width: 100%;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  position: relative;
 }
 
 .story-content-block {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: 4rem;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(30px);
   transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-}
-
-.story-text-column {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem; /* Space between the two text parts */
-}
-
-.story-graphic-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
 }
 
 .story-content-block.is-visible {
@@ -56,47 +33,41 @@
   transform: translateY(0);
 }
 
+.story-text-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
 .story-section-part {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 1.25rem;
 }
 
 .story-headline {
   font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: clamp(
-    2.5rem,
-    6vw,
-    6rem
-  ); /* Reduced to fit in the new column layout */
-  line-height: 0.9;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
   color: #ffffff;
-  margin: 0 0 1.5rem 0;
-  text-transform: uppercase;
-  letter-spacing: -2px;
-  font-stretch: ultra-condensed;
-  white-space: nowrap; /* Ensure it stays on one line */
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .story-subheadline {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(1.5rem, 3.5vw, 3.2rem);
-  line-height: 0.9;
-  color: #d0d0d0;
-  margin: 0 0 1.5rem 0;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  font-stretch: ultra-condensed;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: #e0e0e0;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .story-description {
-  font-family: var(--font-heading);
-  font-size: 1.35rem;
-  line-height: 1.6;
+  font-family: "Inter", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: #a0a0a0;
-  max-width: 800px;
   margin: 0;
 }
 
@@ -109,297 +80,409 @@ body.light-mode .story-subheadline {
   color: #555555;
 }
 
-body.light-mode .story-container::after {
-  background: linear-gradient(to bottom, transparent, #f8f8f8);
-}
+/* ===================================================
+   ID CARD ASSEMBLY (MOCKUP EXACT REPLICA)
+   =================================================== */
 
-/* ELASTIC DRAGGABLE ID CARD */
-.elastic-card-container {
-  position: relative;
-  width: 100%;
-  max-width: 380px;
-  margin: 0 auto;
+.story-graphic-column {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  padding-top: 2rem;
+}
+
+.id-card-assembly {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  height: 580px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
-  padding: 10px 0;
 }
 
-.elastic-id-card {
-  position: relative;
-  width: 100%;
-  background-color: #111111;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 24px 22px 26px 22px;
-  z-index: 15;
-  box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.65),
-    0 10px 20px rgba(0, 0, 0, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+/* Top Fixed Lanyard Mounting Anchor */
+.lanyard-fixed-anchor {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 14px;
+  background: linear-gradient(180deg, #333333 0%, #111111 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anchor-metal-pin {
+  width: 20px;
+  height: 4px;
+  background: #666666;
+  border-radius: 2px;
+}
+
+/* Dynamic SVG Lanyard Ribbon */
+.id-lanyard-svg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 600px;
+  pointer-events: none;
+  z-index: 10;
+  overflow: visible;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+}
+
+/* Draggable ID Badge Unit */
+.id-badge-unit {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  margin-left: -140px; /* half of 280px width */
+  width: 280px;
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
-  overflow: hidden;
+  align-items: center;
+  z-index: 20;
   cursor: grab;
-  transform-origin: center center;
-  will-change: transform, box-shadow;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transform-origin: 50% 0%;
+  will-change: transform;
 }
 
-.elastic-id-card.is-dragging {
+.id-badge-unit.is-dragging {
   cursor: grabbing;
 }
 
-.card-glare-layer {
+/* Silver Metal Clasp */
+.badge-metal-clasp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -1px;
+  z-index: 25;
+}
+
+.clasp-metal-ring {
+  width: 26px;
+  height: 20px;
+  border: 3.5px solid #d4d4d4;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.clasp-spring-buckle {
+  width: 18px;
+  height: 14px;
+  background: linear-gradient(180deg, #e8e8e8 0%, #999999 100%);
+  border-radius: 3px;
+  border: 1px solid #777777;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: -3px;
+}
+
+/* White Molded Plastic Outer Badge Frame */
+.badge-outer-frame {
+  position: relative;
+  width: 100%;
+  background: #f2f3f5;
+  border-radius: 24px;
+  padding: 8px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.75),
+    0 10px 25px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Top Tab Punch Hole Slot */
+.badge-slot-punch {
+  width: 52px;
+  height: 14px;
+  background: #f2f3f5;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2px;
+  margin-bottom: 6px;
+}
+
+.slot-inner-hole {
+  width: 32px;
+  height: 6px;
+  background: #111111;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Inner ID Card Surface */
+.badge-inner-card {
+  position: relative;
+  width: 100%;
+  background-color: #121214;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 24px 18px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+/* Diagonal Geometric Stripes Background */
+.card-diagonal-stripes {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 18px,
+    rgba(255, 255, 255, 0.025) 18px,
+    rgba(255, 255, 255, 0.025) 36px,
+    transparent 36px,
+    transparent 54px,
+    rgba(255, 255, 255, 0.04) 54px,
+    rgba(255, 255, 255, 0.04) 76px
+  );
   pointer-events: none;
-  z-index: 25;
-  mix-blend-mode: overlay;
-  transition: opacity 0.2s ease;
+  z-index: 1;
 }
 
-/* Punch Slot & Metallic Eyelet */
-.card-top-slot {
+/* Top Branding */
+.id-card-top-branding {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+  margin-bottom: 1.5rem;
+}
+
+.id-brand-icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+}
+
+.brand-square {
   position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 44px;
-  height: 9px;
-  background-color: #060606;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #ffffff;
+  border-radius: 2px;
+}
+
+.brand-square.sq-1 {
+  top: 0;
+  left: 0;
+}
+
+.brand-square.sq-2 {
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.id-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.id-brand-name {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+}
+
+.id-brand-sub {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.55rem;
+  color: #777777;
+  letter-spacing: 1px;
+}
+
+/* Diamond Avatar Frame */
+.id-diamond-container {
+  position: relative;
+  width: 105px;
+  height: 105px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 20;
+  margin-bottom: 1.4rem;
+  z-index: 5;
 }
 
-.slot-eyelet {
-  width: 32px;
-  height: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-}
-
-/* Photo */
-.id-card-photo-wrapper {
-  width: 100%;
-  aspect-ratio: 3.5 / 4;
-  border-radius: 12px;
+.id-diamond-outer-rim {
+  width: 82px;
+  height: 82px;
+  transform: rotate(45deg);
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  border-radius: 10px;
   overflow: hidden;
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.7),
+    0 0 15px rgba(255, 255, 255, 0.15);
+  background-color: #1e1e22;
   position: relative;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
-  margin-top: 10px;
 }
 
-.id-card-photo {
+.id-diamond-photo-mask {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.id-diamond-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-              filter 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.id-card-photo.hidden {
+.id-diamond-photo.hidden {
   opacity: 0;
-  filter: blur(10px) brightness(1.2);
-  transform: scale(1.1);
+  filter: blur(8px) brightness(1.2);
   z-index: 1;
 }
 
-.id-card-photo.active {
+.id-diamond-photo.active {
   opacity: 1;
   filter: blur(0) brightness(1);
-  transform: scale(1);
   z-index: 2;
 }
 
-/* Card Content & Text */
-.id-card-content {
+/* Identity Name & Title */
+.id-identity-info {
+  text-align: center;
+  z-index: 5;
+  margin-bottom: 1.25rem;
+}
+
+.id-person-name {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+}
+
+.id-person-title {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #888888;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Key-Value Specifications Table */
+.id-specs-table {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 7px;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 5;
 }
 
-.id-card-headline {
+.id-spec-row {
+  display: grid;
+  grid-template-columns: 55px 10px 1fr;
+  align-items: center;
   font-family: "Inter", sans-serif;
-  font-size: clamp(1.2rem, 4.2vw, 1.6rem);
-  font-weight: 800;
-  line-height: 1.25;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: 1px;
+  font-size: 0.72rem;
+  line-height: 1.3;
 }
 
-.figureoutable-word {
-  white-space: nowrap;
-  display: inline-block;
+.spec-key {
+  color: #ffffff;
+  font-weight: 700;
   letter-spacing: 0.5px;
 }
 
-.id-card-subheadline {
+.spec-colon {
   color: #777777;
+  text-align: center;
 }
 
-.id-card-info-row {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  border-bottom: 1px dashed #333333;
-  padding-bottom: 0.8rem;
+.spec-val {
+  color: #999999;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.id-card-info-row:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.id-card-label {
-  font-family: "Inter", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #888888;
-}
-
-.id-card-value.handwriting {
-  font-family: "Caveat", cursive;
-  font-size: 2.1rem;
-  color: #cccccc;
-  line-height: 1;
-  transform: rotate(-2deg);
-}
-
-body.light-mode .elastic-id-card {
-  background-color: #ffffff;
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.1),
-    0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-body.light-mode .id-card-headline {
-  color: #111111;
-}
-
-body.light-mode .id-card-value.handwriting {
-  color: #222222;
-}
-
-body.light-mode .id-card-info-row {
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-}
-
-/* AnimatedLine legacy support for other sections */
-.fade-line-container {
-  display: inline;
-}
-
-.fade-char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.4s cubic-bezier(0.2, 0, 0.2, 1),
-    transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
-  white-space: pre-wrap;
-}
-
-.is-visible .fade-char {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-body.light-mode .story-description {
-  color: #666666;
-}
-
-.story-highlight {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-body.light-mode .story-highlight {
-  color: #111111;
-}
-
-@media (max-width: 1024px) {
+/* Responsive adjustments */
+@media (max-width: 900px) {
   .story-content-block {
     grid-template-columns: 1fr;
-    gap: 6rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .story-headline {
-    font-size: clamp(3rem, 12vw, 4rem);
-    white-space: normal;
-  }
-  .story-content-block {
-    gap: 4rem;
+    gap: 3rem;
   }
 
-  .elastic-card-container {
-    max-width: 320px;
+  .story-graphic-column {
+    padding-top: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .story-container {
-    padding: 2rem 1rem 5rem 1rem;
+  .id-card-assembly {
+    max-width: 300px;
+    height: 540px;
   }
 
-  .elastic-card-container {
-    max-width: 290px;
+  .id-badge-unit {
+    width: 260px;
+    margin-left: -130px;
   }
 
-  .elastic-id-card {
-    padding: 20px 18px 22px 18px;
-    border-radius: 16px;
-    gap: 1.2rem;
+  .badge-inner-card {
+    padding: 20px 15px 18px 15px;
   }
 
-  .story-headline {
-    font-size: clamp(2rem, 10vw, 2.5rem);
-  }
-
-  .story-subheadline {
-    font-size: clamp(1.2rem, 6vw, 1.8rem);
-  }
-
-  .story-description,
-  .about-story-text {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .elastic-card-container {
-    max-width: 260px;
-  }
-  .elastic-id-card {
-    padding: 16px 14px 18px 14px;
-  }
-  .id-card-headline {
-    font-size: 1.05rem;
-    letter-spacing: 0.5px;
-  }
-  .id-card-value.handwriting {
-    font-size: 1.35rem;
+  .id-person-name {
+    font-size: 1.15rem;
   }
 }

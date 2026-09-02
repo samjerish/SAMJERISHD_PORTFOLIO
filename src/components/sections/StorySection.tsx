@@ -14,9 +14,9 @@ export const StorySection: React.FC<{
   const [photoIndex, setPhotoIndex] = useState(0);
   const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [glare, setGlare] = useState({ x: 50, y: 50 });
   const textRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef<{ startX: number; startY: number }>({ startX: 0, startY: 0 });
   const animFrameRef = useRef<number | null>(null);
 
@@ -50,8 +50,10 @@ export const StorySection: React.FC<{
   }, []);
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Prevent default context menus and image drag behaviors
+    e.preventDefault();
     if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     setIsDragging(true);
     dragStartRef.current = {
       startX: e.clientX - pos.x,
@@ -60,38 +62,35 @@ export const StorySection: React.FC<{
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
-    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
-    setGlare({ x: glareX, y: glareY });
+    if (!isDragging) return;
+    e.preventDefault();
 
-    if (isDragging) {
-      const newX = e.clientX - dragStartRef.current.startX;
-      const newY = e.clientY - dragStartRef.current.startY;
-      const rotate = Math.max(-25, Math.min(25, newX * 0.07));
-      setPos({ x: newX, y: newY, rotate });
-    }
+    const newX = e.clientX - dragStartRef.current.startX;
+    const newY = e.clientY - dragStartRef.current.startY;
+    // Rotation tilt based on horizontal drag distance
+    const rotate = Math.max(-20, Math.min(20, newX * 0.08));
+    setPos({ x: newX, y: newY, rotate });
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging) return;
     try {
-      (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
     } catch {
       // ignore
     }
     setIsDragging(false);
 
-    // Elastic spring physics simulation with bounce-back to home (0,0)
+    // Smooth, slow elastic spring bounce-back simulation to home (0, 0)
     let currentX = pos.x;
     let currentY = pos.y;
     let currentRotate = pos.rotate;
     let vx = 0;
     let vy = 0;
     let vRotate = 0;
-    const stiffness = 0.16;
-    const damping = 0.78;
+    // Gentle stiffness and smooth damping for slow, graceful return
+    const stiffness = 0.065;
+    const damping = 0.87;
 
     const springStep = () => {
       const ax = -stiffness * currentX;
@@ -109,10 +108,10 @@ export const StorySection: React.FC<{
       setPos({ x: currentX, y: currentY, rotate: currentRotate });
 
       if (
-        Math.abs(currentX) > 0.25 ||
-        Math.abs(currentY) > 0.25 ||
-        Math.abs(vx) > 0.08 ||
-        Math.abs(vy) > 0.08
+        Math.abs(currentX) > 0.15 ||
+        Math.abs(currentY) > 0.15 ||
+        Math.abs(vx) > 0.04 ||
+        Math.abs(vy) > 0.04
       ) {
         animFrameRef.current = requestAnimationFrame(springStep);
       } else {
@@ -123,6 +122,13 @@ export const StorySection: React.FC<{
     if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     animFrameRef.current = requestAnimationFrame(springStep);
   };
+
+  // Calculate dynamic SVG lanyard path from fixed top origin to moving badge clip
+  const anchorX = 160;
+  const anchorY = 0;
+  const clipX = 160 + pos.x;
+  const clipY = 80 + pos.y;
+  const controlY = anchorY + (clipY - anchorY) * 0.5;
 
   return (
     <section className="story-container">
@@ -159,73 +165,137 @@ export const StorySection: React.FC<{
           </div>
 
           <div className="story-graphic-column">
-            <div className="elastic-card-container">
-              {/* Elastic Draggable ID Card */}
+            <div
+              ref={containerRef}
+              className="id-card-assembly"
+              onContextMenu={(e) => e.preventDefault()}
+            >
+              {/* Dynamic SVG Elastic Lanyard Strap */}
+              <svg className="id-lanyard-svg" viewBox="0 0 320 600">
+                {/* Left Strap Band */}
+                <path
+                  d={`M ${anchorX - 18} ${anchorY} Q ${anchorX - 10 + pos.x * 0.3} ${controlY} ${clipX - 12} ${clipY}`}
+                  fill="none"
+                  stroke="#1c1c1c"
+                  strokeWidth="22"
+                  strokeLinecap="round"
+                />
+                {/* Right Strap Band (Two-tone Accent) */}
+                <path
+                  d={`M ${anchorX + 18} ${anchorY} Q ${anchorX + 10 + pos.x * 0.3} ${controlY} ${clipX + 12} ${clipY}`}
+                  fill="none"
+                  stroke="#3a3a3a"
+                  strokeWidth="22"
+                  strokeLinecap="round"
+                />
+                {/* Center Seam Stripe */}
+                <path
+                  d={`M ${anchorX} ${anchorY} Q ${anchorX + pos.x * 0.3} ${controlY} ${clipX} ${clipY}`}
+                  fill="none"
+                  stroke="#111111"
+                  strokeWidth="3"
+                />
+              </svg>
+
+              {/* Fixed Wall/Ceiling Mounting Anchor */}
+              <div className="lanyard-fixed-anchor">
+                <div className="anchor-metal-pin"></div>
+              </div>
+
+              {/* Draggable Hanging ID Card Unit */}
               <div
                 ref={cardRef}
-                className={`elastic-id-card ${isDragging ? "is-dragging" : ""}`}
+                className={`id-badge-unit ${isDragging ? "is-dragging" : ""}`}
                 style={{
-                  transform: `translate3d(${pos.x}px, ${pos.y}px, 0) rotate(${pos.rotate}deg) scale(${isDragging ? 1.04 : 1})`,
+                  transform: `translate3d(${pos.x}px, ${pos.y}px, 0) rotate(${pos.rotate}deg)`,
                 }}
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
               >
-                {/* Dynamic light reflection glare */}
-                <div
-                  className="card-glare-layer"
-                  style={{
-                    opacity: isDragging ? 0.35 : 0.15,
-                    background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 65%)`,
-                  }}
-                />
-
-                {/* Card Punch Slot & Metal Eyelet */}
-                <div className="card-top-slot">
-                  <div className="slot-eyelet"></div>
+                {/* Silver Metal Clip Clasp */}
+                <div className="badge-metal-clasp">
+                  <div className="clasp-metal-ring"></div>
+                  <div className="clasp-spring-buckle"></div>
                 </div>
 
-                {/* Photo with Frame */}
-                <div className="id-card-photo-wrapper">
-                  {STORY_PHOTOS.map((photo, index) => {
-                    const positionClass = index === photoIndex ? "active" : "hidden";
-
-                    return (
-                      <img
-                        key={index}
-                        src={photo}
-                        alt={`Sam Jerish ${index + 1}`}
-                        className={`id-card-photo ${positionClass}`}
-                      />
-                    );
-                  })}
-                </div>
-
-                {/* Text Content */}
-                <div className="id-card-content">
-                  <h3 className="id-card-headline">
-                    THIS IS WHO SAYS
-                    <br />
-                    EVERYTHING IS
-                    <br />
-                    <span className="figureoutable-word">FIGUREOUTABLE</span>
-                    <br />
-                    <span className="id-card-subheadline">AND FIGURES OUT</span>
-                  </h3>
-
-                  <div className="id-card-info-row">
-                    <span className="id-card-label">Name:</span>
-                    <span className="id-card-value handwriting">
-                      Sam Jerish
-                    </span>
+                {/* White Molded Outer Badge Casing */}
+                <div className="badge-outer-frame">
+                  {/* Top Casing Hole Slot */}
+                  <div className="badge-slot-punch">
+                    <div className="slot-inner-hole"></div>
                   </div>
 
-                  <div className="id-card-info-row">
-                    <span className="id-card-label">Role:</span>
-                    <span className="id-card-value handwriting">
-                      Full Stack Developer
-                    </span>
+                  {/* Inner Dark ID Card Surface */}
+                  <div className="badge-inner-card">
+                    {/* Diagonal Geometric Stripes Background Overlay */}
+                    <div className="card-diagonal-stripes"></div>
+
+                    {/* Top Branding & Logo */}
+                    <div className="id-card-top-branding">
+                      <div className="id-brand-icon">
+                        <div className="brand-square sq-1"></div>
+                        <div className="brand-square sq-2"></div>
+                      </div>
+                      <div className="id-brand-text">
+                        <span className="id-brand-name">SAM JERISH D</span>
+                        <span className="id-brand-sub">PORTFOLIO ID PASS</span>
+                      </div>
+                    </div>
+
+                    {/* Center Diamond Avatar Frame */}
+                    <div className="id-diamond-container">
+                      <div className="id-diamond-outer-rim">
+                        <div className="id-diamond-photo-mask">
+                          {STORY_PHOTOS.map((photo, index) => {
+                            const positionClass =
+                              index === photoIndex ? "active" : "hidden";
+
+                            return (
+                              <img
+                                key={index}
+                                src={photo}
+                                alt="Sam Jerish"
+                                className={`id-diamond-photo ${positionClass}`}
+                                draggable={false}
+                                onContextMenu={(e) => e.preventDefault()}
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Name & Title */}
+                    <div className="id-identity-info">
+                      <h3 className="id-person-name">SAM JERISH D</h3>
+                      <p className="id-person-title">FULL STACK DEVELOPER</p>
+                    </div>
+
+                    {/* Clean Key-Value Specifications */}
+                    <div className="id-specs-table">
+                      <div className="id-spec-row">
+                        <span className="spec-key">ID No</span>
+                        <span className="spec-colon">:</span>
+                        <span className="spec-val">SJD-2026-DEV</span>
+                      </div>
+                      <div className="id-spec-row">
+                        <span className="spec-key">Role</span>
+                        <span className="spec-colon">:</span>
+                        <span className="spec-val">Full Stack Engineer</span>
+                      </div>
+                      <div className="id-spec-row">
+                        <span className="spec-key">Email</span>
+                        <span className="spec-colon">:</span>
+                        <span className="spec-val">samjerishd@gmail.com</span>
+                      </div>
+                      <div className="id-spec-row">
+                        <span className="spec-key">Location</span>
+                        <span className="spec-colon">:</span>
+                        <span className="spec-val">Tamil Nadu, India</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -295,3 +365,4 @@ export const AnimatedLine = ({
     </span>
   );
 };
+
