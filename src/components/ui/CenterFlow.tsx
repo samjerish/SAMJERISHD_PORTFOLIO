@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./CenterFlow.css";
+import thumpsupImage from "../../assets/thumpsup.png";
 
 export interface TechItem {
   id: string;
@@ -286,26 +287,17 @@ export const CenterFlow: React.FC<{
           <div className="hub-orbit-dashed"></div>
 
           {/* Central Core Card */}
-          <div className="hub-core-card">
-            <div className="hub-icon-container">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="hub-icon"
-              >
-                <polyline points="16 18 22 12 16 6" />
-                <polyline points="8 6 2 12 8 18" />
-                <line x1="14" y1="4" x2="10" y2="20" />
-              </svg>
+          <div className="hub-core-card photo-hub">
+            <div className="hub-photo-container">
+              <img
+                src={thumpsupImage}
+                alt="Sam Jerish D"
+                className="hub-avatar-photo"
+                draggable={false}
+              />
             </div>
             <div className="hub-text-content">
-              <span className="hub-label">CORE SYSTEM</span>
+              <span className="hub-label">SAM JERISH D</span>
               <span className="hub-tag">FULL STACK</span>
             </div>
             <div className="hub-live-badge">
