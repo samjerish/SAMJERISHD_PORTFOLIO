@@ -37,8 +37,8 @@ body.menu-open .scroll-progress-container {
 .hamburger-btn .menu-icon-hamburger {
   position: absolute;
   transition:
-    opacity 1.1s ease,
-    transform 1.1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: rotate(0deg) scale(1);
   opacity: 1;
 }
@@ -46,8 +46,8 @@ body.menu-open .scroll-progress-container {
 .hamburger-btn .menu-icon-close {
   position: absolute;
   transition:
-    opacity 1.1s ease,
-    transform 1.1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: rotate(-90deg) scale(0.5);
   opacity: 0;
 }
@@ -87,8 +87,8 @@ body.menu-open .scroll-progress-container {
   visibility: hidden;
   clip-path: circle(0% at calc(100% - 3.5rem) 3.5rem);
   transition:
-    visibility 1.45s,
-    clip-path 1.45s cubic-bezier(0.77, 0, 0.175, 1);
+    visibility 1s,
+    clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .menu-overlay.open {
@@ -148,11 +148,11 @@ body.menu-open .scroll-progress-container {
   color: #ffffff;
   position: relative;
   transition:
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.4s ease,
     border-color 0.4s ease,
     box-shadow 0.4s ease,
-    opacity 0.65s ease;
+    opacity 0.4s ease;
 
   /* Staggered Entrance */
   opacity: 0;
@@ -163,13 +163,13 @@ body.menu-open .scroll-progress-container {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.4s ease,
     border-color 0.4s ease,
     box-shadow 0.4s ease;
   transition-delay:
-    0s, calc(0.3s + (var(--animation-order) * 0.1s)),
+    0s, calc(0.2s + (var(--animation-order) * 0.08s)),
     0s, 0s, 0s;
 }
 
