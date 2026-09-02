@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import "./GitHubContributions.css";
 import {
   FiGithub,
@@ -45,6 +45,7 @@ export const GitHubContributions: React.FC = () => {
   const [totalYearContributions, setTotalYearContributions] = useState<number | null>(null);
   const [hoveredDay, setHoveredDay] = useState<{ date: string; count: number } | null>(null);
   const [loading, setLoading] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const fetchGitHubData = async () => {
     setLoading(true);
@@ -132,6 +133,24 @@ export const GitHubContributions: React.FC = () => {
 
     return { weeks: resultWeeks, monthHeaders: headers };
   }, [contributions]);
+
+  useEffect(() => {
+    // In mobile view / on load, position scroll to the live (latest) month at starting
+    const scrollToLiveMonth = () => {
+      if (scrollContainerRef.current) {
+        const el = scrollContainerRef.current;
+        el.scrollLeft = el.scrollWidth - el.clientWidth;
+      }
+    };
+
+    const timer = setTimeout(scrollToLiveMonth, 80);
+    window.addEventListener("resize", scrollToLiveMonth);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", scrollToLiveMonth);
+    };
+  }, [weeks, loading]);
 
   return (
     <section className="github-sync-section">
@@ -226,7 +245,7 @@ export const GitHubContributions: React.FC = () => {
 
         {/* Full-Cover Native SVG Contribution Matrix */}
         <div className="timeline-graph-window">
-          <div className="timeline-native-scroll">
+          <div ref={scrollContainerRef} className="timeline-native-scroll">
             <svg
               className="native-contrib-svg"
               viewBox={`0 0 ${weeks.length * 15 + 40} 135`}

@@ -289,10 +289,10 @@
 .timeline-native-scroll {
   width: 100%;
   overflow-x: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  padding: 6px 0;
 }
 
 .native-contrib-svg {
@@ -301,6 +301,7 @@
   min-width: 720px;
   height: auto;
   display: block;
+  margin: 0 auto;
 }
 
 /* Month and Day SVG Text Labels */
