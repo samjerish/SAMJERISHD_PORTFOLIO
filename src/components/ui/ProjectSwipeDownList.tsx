@@ -81,29 +81,53 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                     </div>
                   </div>
 
-                  {/* Right: Project Highlights & Actions */}
+                  {/* Right: Project Highlights, Problem & Solution */}
                   <div className="drawer-info-col">
                     <div className="drawer-meta-tags">
-                      <span className="drawer-highlight-badge">PROJECT OVERVIEW</span>
+                      <span className="drawer-highlight-badge">CASE STUDY</span>
+                      {project.tag && (
+                        <span className="drawer-category-tag">{project.tag}</span>
+                      )}
                       {project.date && (
                         <span className="drawer-year-tag">{project.date}</span>
                       )}
                     </div>
 
-                    {project.problemStatement && (
-                      <div className="drawer-problem-box">
-                        <span className="problem-pill">PROBLEM SOLVED</span>
-                        <p>{project.problemStatement}</p>
+                    {/* Overview / Details */}
+                    {project.details && (
+                      <div className="drawer-overview-block">
+                        <span className="drawer-section-label">OVERVIEW</span>
+                        <p
+                          className="drawer-desc-text"
+                          dangerouslySetInnerHTML={{ __html: project.details }}
+                        ></p>
                       </div>
                     )}
 
-                    {project.details && (
-                      <p
-                        className="drawer-desc-text"
-                        dangerouslySetInnerHTML={{ __html: project.details }}
-                      ></p>
-                    )}
+                    {/* Problem & Solution Showcase Cards */}
+                    <div className="drawer-case-study-grid">
+                      {project.problemStatement && (
+                        <div className="drawer-callout-card problem-card">
+                          <div className="callout-header">
+                            <span className="callout-indicator problem-dot"></span>
+                            <span className="callout-title">PROBLEM STATEMENT</span>
+                          </div>
+                          <p className="callout-text">{project.problemStatement}</p>
+                        </div>
+                      )}
 
+                      {project.solution && (
+                        <div className="drawer-callout-card solution-card">
+                          <div className="callout-header">
+                            <span className="callout-indicator solution-dot"></span>
+                            <span className="callout-title">THE SOLUTION</span>
+                          </div>
+                          <p className="callout-text">{project.solution}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Live Project Action */}
                     {project.link && (
                       <div className="drawer-actions">
                         <a
