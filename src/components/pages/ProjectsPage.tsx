@@ -5,6 +5,7 @@ import { projects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { ProjectModal } from "../ui/ProjectModal";
 import { CenterFlow } from "../ui/CenterFlow";
+import { ScrollStack } from "../ui/ScrollStack";
 
 export const ProjectsPage: React.FC<{
   onNavigate: (
@@ -51,64 +52,11 @@ export const ProjectsPage: React.FC<{
           </div>
         </div>
 
-        <div className="projects-grid" style={{ marginBottom: "6rem" }}>
-          {[...projects.slice(3), ...projects.slice(0, 3)].map((project) => (
-            <div
-              key={project.id}
-              className="project-card"
-              onClick={() => handleProjectClick(project)}
-            >
-              <div className="project-card-header">
-                <div className="project-card-logo">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
-                  </svg>
-                </div>
-                <span className="project-card-name">{project.name}</span>
-              </div>
-
-              <div className="project-image-wrapper">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="project-image"
-                />
-                <div className="project-hover-overlay">
-                  <span className="hover-hint-text">Click to view more</span>
-                  {project.problemStatement && (
-                    <div className="hover-problem-text">
-                      <span className="problem-label">Problem solved:</span>
-                      <p>{project.problemStatement}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="project-info">
-                {project.description && (
-                  <h3
-                    className="project-card-title"
-                    dangerouslySetInnerHTML={{ __html: project.description }}
-                  ></h3>
-                )}
-                <div className="project-card-footer">
-                  {project.tag && project.date
-                    ? `${project.tag}, ${project.date}`
-                    : project.date || project.tag}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Scroll Stack Pinned Cards Deck */}
+        <ScrollStack
+          projects={projects}
+          onProjectClick={handleProjectClick}
+        />
 
         {/* Center Flow Radial Tech Stack */}
         <CenterFlow

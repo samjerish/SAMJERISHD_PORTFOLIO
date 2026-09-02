@@ -1,0 +1,382 @@
+/* SCROLL STACK COMPONENT */
+.scroll-stack-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 8rem;
+}
+
+/* Card Outer Wrapper - Sticky Pinned */
+.scroll-stack-card-wrapper {
+  position: sticky;
+  width: 100%;
+  margin-bottom: 6rem;
+  perspective: 1200px;
+  will-change: transform;
+}
+
+/* Inner Stack Card Body */
+.scroll-stack-card {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(circle at 30% 0%, #1c1c1c 0%, #0d0d0d 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: 2.5rem;
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.8),
+    0 10px 25px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.15s ease-out,
+              filter 0.2s ease-out,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.scroll-stack-card:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(74, 222, 128, 0.12),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+/* Header Top Strip */
+.stack-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.stack-card-index {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-mono, monospace);
+}
+
+.index-number {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.index-total {
+  font-size: 0.85rem;
+  color: #666666;
+  font-weight: 600;
+}
+
+.stack-card-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cccccc;
+  letter-spacing: 0.5px;
+}
+
+.tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.stack-card-year {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #777777;
+}
+
+/* Main Body Grid */
+.stack-card-body {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Left Side: Information Column */
+.stack-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stack-card-title {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.stack-card-problem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid #4ade80;
+  border-radius: 0 10px 10px 0;
+}
+
+.problem-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #4ade80;
+  text-transform: uppercase;
+}
+
+.stack-card-problem p {
+  font-size: 0.92rem;
+  color: #a0a0a0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.stack-card-desc {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: #b0b0b0;
+  margin: 0;
+}
+
+/* Action Buttons */
+.stack-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.stack-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 30px;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stack-card-btn:hover {
+  background: #e0e0e0;
+  transform: scale(1.04);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+}
+
+.stack-card-link-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 11px 20px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.stack-card-link-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Right Side: Media Showcase */
+.stack-card-media {
+  position: relative;
+  width: 100%;
+}
+
+.media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  background-color: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.stack-project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-stack-card:hover .stack-project-img {
+  transform: scale(1.05);
+}
+
+.media-glare-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Light Mode Overrides */
+body.light-mode .scroll-stack-card {
+  background: radial-gradient(circle at 30% 0%, #ffffff 0%, #f6f6f6 100%);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.08),
+    0 5px 15px rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode .index-number,
+body.light-mode .stack-card-title {
+  color: #111111;
+}
+
+body.light-mode .stack-card-tag-pill {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #555555;
+}
+
+body.light-mode .stack-card-problem {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode .stack-card-problem p,
+body.light-mode .stack-card-desc {
+  color: #555555;
+}
+
+body.light-mode .stack-card-btn {
+  background: #000000;
+  color: #ffffff;
+}
+
+body.light-mode .stack-card-link-btn {
+  color: #111111;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .media-frame {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ===================================================
+   RESPONSIVE LAYOUT (Mobile & Tablet)
+   =================================================== */
+
+@media (max-width: 960px) {
+  .scroll-stack-card {
+    padding: 2rem 1.8rem;
+  }
+
+  .stack-card-body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .stack-card-media {
+    order: -1;
+  }
+
+  .media-frame {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 640px) {
+  .scroll-stack-card-wrapper {
+    margin-bottom: 4rem;
+  }
+
+  .scroll-stack-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 20px;
+    gap: 1.4rem;
+  }
+
+  .stack-card-header {
+    padding-bottom: 0.9rem;
+  }
+
+  .index-number {
+    font-size: 1.1rem;
+  }
+
+  .stack-card-tag-pill {
+    padding: 4px 10px;
+    font-size: 0.68rem;
+  }
+
+  .stack-card-title {
+    font-size: 1.5rem;
+  }
+
+  .stack-card-problem {
+    padding: 10px 12px;
+  }
+
+  .stack-card-problem p {
+    font-size: 0.85rem;
+  }
+
+  .stack-card-desc {
+    font-size: 0.88rem;
+  }
+
+  .stack-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .stack-card-btn,
+  .stack-card-link-btn {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+}
