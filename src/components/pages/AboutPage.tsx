@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./AboutPage.css";
+import firstPhoto from "../../assets/first_photo.png";
 import profileImg from "../../assets/photo.jpg";
+import me2Img from "../../assets/me2.jpg";
 import {
   FiCode,
   FiTerminal,
@@ -18,13 +20,55 @@ interface AboutPageProps {
   ) => void;
 }
 
+const ABOUT_PHOTOS = [
+  { src: firstPhoto, alt: "Sam Jerish D" },
+  { src: profileImg, alt: "Sam Jerish D - Portrait" },
+  { src: me2Img, alt: "Sam Jerish D - Creative" },
+];
+
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [isHolding, setIsHolding] = useState(false);
+  const dragStartRef = useRef<number>(0);
+  const isDraggingRef = useRef<boolean>(false);
 
   useEffect(() => {
     setIsVisible(true);
     window.scrollTo(0, 0);
   }, []);
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    dragStartRef.current = e.clientX;
+    isDraggingRef.current = true;
+    setIsHolding(true);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const diff = e.clientX - dragStartRef.current;
+    setDragX(diff);
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {
+      // ignore
+    }
+    isDraggingRef.current = false;
+    setIsHolding(false);
+
+    if (dragX < -65) {
+      setPhotoIndex((prev) => (prev + 1) % ABOUT_PHOTOS.length);
+    } else if (dragX > 65) {
+      setPhotoIndex((prev) => (prev - 1 + ABOUT_PHOTOS.length) % ABOUT_PHOTOS.length);
+    }
+    setDragX(0);
+  };
 
   return (
     <div className={`about-page-wrapper ${isVisible ? "is-visible" : ""}`}>
@@ -39,15 +83,50 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         {/* Profile Hero Header */}
         <div className="about-profile-hero">
           <div className="about-hero-image-wrapper">
-            <div className="about-avatar-frame">
+            <div
+              className={`about-avatar-frame swipe-interactive ${isHolding ? "is-holding" : ""}`}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
+              style={{
+                transform: `translateX(${dragX}px) rotate(${dragX * 0.05}deg) ${isHolding ? "scale(0.98)" : "scale(1)"}`,
+                transition: isHolding ? "none" : "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+            >
               <img
-                src={profileImg}
-                alt="Sam Jerish D"
+                src={ABOUT_PHOTOS[photoIndex].src}
+                alt={ABOUT_PHOTOS[photoIndex].alt}
                 className="about-avatar-img"
+                draggable={false}
               />
+
+              {/* Hold & Swipe Gesture Pill */}
+              <div className="avatar-swipe-hint-pill">
+                <span>Hold & swipe</span>
+                <span className="swipe-arrows">⇄</span>
+              </div>
+
+              {/* Status Indicator */}
               <div className="avatar-status-pill">
                 <span className="status-live-dot"></span>
                 <span>Active & Building</span>
+              </div>
+
+              {/* Photo Indicator Dots */}
+              <div className="avatar-dots-indicator">
+                {ABOUT_PHOTOS.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className={`avatar-dot ${i === photoIndex ? "active" : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPhotoIndex(i);
+                    }}
+                    aria-label={`Photo ${i + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
