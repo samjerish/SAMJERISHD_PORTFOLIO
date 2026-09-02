@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AboutPage.css";
 import profileImg from "../../assets/photo.jpg";
-import { FiInstagram, FiLinkedin, FiGithub, FiMail, FiCode, FiTerminal, FiVideo } from "react-icons/fi";
+import { FiCode, FiTerminal, FiVideo } from "react-icons/fi";
 import { GitHubContributions } from "../ui/GitHubContributions";
 
 interface AboutPageProps {
@@ -41,47 +41,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <span className="status-live-dot"></span>
                 <span>Active & Building</span>
               </div>
-            </div>
-
-            <div className="about-hero-socials">
-              <a
-                href="https://github.com/samjerish"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-pill"
-                title="GitHub"
-              >
-                <FiGithub />
-                <span>GitHub</span>
-              </a>
-              <a
-                href="https://linkedin.com/in/samjerishd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-pill"
-                title="LinkedIn"
-              >
-                <FiLinkedin />
-                <span>LinkedIn</span>
-              </a>
-              <a
-                href="https://instagram.com/samjerishd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-pill"
-                title="Instagram"
-              >
-                <FiInstagram />
-                <span>Instagram</span>
-              </a>
-              <a
-                href="mailto:samjerishd@gmail.com"
-                className="social-pill"
-                title="Email"
-              >
-                <FiMail />
-                <span>Email</span>
-              </a>
             </div>
           </div>
 
