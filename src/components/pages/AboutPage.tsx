@@ -101,7 +101,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </p>
               <p>
                 My philosophy is simple:{" "}
-                <em>"Everything is figureoutable."</em> I love exploring the
+                <em>"Solving Real world problems through creativity and technology."</em> I love exploring the
                 intersection of technology and creativity—turning curious ideas
                 into real, useful, and responsive digital products.
               </p>
