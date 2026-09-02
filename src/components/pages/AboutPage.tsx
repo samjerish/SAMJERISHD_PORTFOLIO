@@ -157,7 +157,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Card 3: Media Coordinator @Matrix Karunya */}
+            {/* Card 3: Media Coordinator @MatrixKarunya */}
             <div className="timeline-card">
               <div className="timeline-icon-box media-box">
                 <FiVideo />
@@ -165,7 +165,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <div className="timeline-content">
                 <span className="timeline-period">APR 2024 — PRESENT</span>
                 <h3 className="timeline-role">Media Coordinator</h3>
-                <h4 className="timeline-org">Matrix Karunya</h4>
+                <h4 className="timeline-org">@MatrixKarunya</h4>
                 <p className="timeline-desc">
                   Delivered multimedia coverage for 50+ events, producing 35K+ visual
                   assets and 25+ videos while managing the department’s official social
