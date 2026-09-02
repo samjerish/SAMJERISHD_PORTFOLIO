@@ -198,7 +198,7 @@ body.light-mode .story-view-more-avatar-wrap {
   align-items: flex-start;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 /* Top Fixed Lanyard Mounting Anchor */
