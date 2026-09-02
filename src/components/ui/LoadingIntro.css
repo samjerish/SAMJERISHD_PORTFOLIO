@@ -152,12 +152,12 @@
 
   .ribbons-container {
     width: 220vw;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .ribbon {
-    padding: 0.65rem 0;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    padding: 1.1rem 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   }
 
   .ribbon-top {
@@ -185,25 +185,25 @@
   }
 
   .marquee-content {
-    font-size: clamp(1.8rem, 6vw, 2.3rem);
+    font-size: clamp(2.4rem, 7.5vw, 3.4rem);
   }
 
   .marquee-content span {
-    padding-right: 1.25rem;
+    padding-right: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .ribbons-container {
     width: 240vw;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .ribbon {
-    padding: 0.55rem 0;
+    padding: 0.9rem 0;
   }
 
   .marquee-content {
-    font-size: clamp(1.5rem, 5.5vw, 1.95rem);
+    font-size: clamp(2rem, 6.8vw, 2.7rem);
   }
 }

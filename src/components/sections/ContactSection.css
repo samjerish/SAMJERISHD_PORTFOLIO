@@ -271,7 +271,26 @@
 @media (max-width: 900px) {
   .contact-info-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .info-block {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .info-block > div {
+    justify-content: center;
+  }
+
+  .social-circles {
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .contact-splitter-vertical {

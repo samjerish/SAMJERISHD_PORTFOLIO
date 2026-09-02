@@ -383,11 +383,11 @@ body.light-mode .hero-floating-nav button:hover {
     flex: 1;
     position: relative;
     width: 100%;
-    min-height: 48vh;
+    min-height: 52vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 4rem;
+    padding-top: 4.2rem;
     padding-bottom: 0;
     -webkit-mask-image: none !important;
     mask-image: none !important;
@@ -395,7 +395,7 @@ body.light-mode .hero-floating-nav button:hover {
 
   .hero-background-text-new {
     position: absolute;
-    top: 48%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -410,8 +410,8 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(3.2rem, 20vw, 5.5rem);
-    line-height: 0.9;
+    font-size: clamp(3.8rem, 23vw, 6.2rem);
+    line-height: 0.85;
     letter-spacing: 2px;
     text-align: center;
     color: #ffffff;
@@ -420,10 +420,10 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-2 {
-    font-size: clamp(1.8rem, 11vw, 3.2rem);
-    line-height: 0.9;
+    font-size: clamp(2.2rem, 13vw, 3.8rem);
+    line-height: 0.85;
     letter-spacing: 1px;
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
     text-align: center;
     color: #888888;
     display: block;
@@ -436,7 +436,7 @@ body.light-mode .hero-floating-nav button:hover {
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 5vh;
+    top: 4vh;
     z-index: 10;
     animation: float 6s ease-in-out infinite;
     pointer-events: none;
@@ -444,10 +444,13 @@ body.light-mode .hero-floating-nav button:hover {
 
   .hero-avatar-img-new {
     display: block !important;
-    width: clamp(230px, 60vw, 340px);
+    width: clamp(270px, 72vw, 390px);
+    max-height: 48vh;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.65));
+    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 98%);
+    mask-image: linear-gradient(to bottom, black 65%, transparent 98%);
   }
 
   .hero-bottom-elements {
@@ -459,7 +462,7 @@ body.light-mode .hero-floating-nav button:hover {
     justify-content: center;
     text-align: center;
     gap: 1.25rem;
-    padding: 0.5rem 1rem 2.5rem 1rem;
+    padding: 0.5rem 1rem 2.2rem 1rem;
     margin-top: auto;
     z-index: 30;
   }
@@ -486,7 +489,7 @@ body.light-mode .hero-floating-nav button:hover {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    margin-top: 0.2rem;
+    margin-top: 0.25rem;
   }
 
   .book-call-btn {
@@ -515,33 +518,34 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .center-layout {
-    min-height: 44vh;
-    padding-top: 3.5rem;
+    min-height: 48vh;
+    padding-top: 3.8rem;
   }
 
   .text-line-1 {
-    font-size: clamp(2.8rem, 18vw, 4.2rem);
-    line-height: 0.9;
+    font-size: clamp(3.2rem, 21vw, 4.8rem);
+    line-height: 0.85;
     letter-spacing: 1px;
   }
 
   .text-line-2 {
-    font-size: clamp(1.45rem, 9.6vw, 2.4rem);
-    line-height: 0.9;
+    font-size: clamp(1.8rem, 11.8vw, 2.8rem);
+    line-height: 0.85;
     letter-spacing: 0.5px;
-    margin-top: 0.25rem;
+    margin-top: 0.15rem;
   }
 
   .floating-avatar-new {
-    top: 4vh;
+    top: 3vh;
   }
 
   .hero-avatar-img-new {
-    width: clamp(210px, 58vw, 280px);
+    width: clamp(250px, 68vw, 340px);
+    max-height: 44vh;
   }
 
   .hero-bottom-elements {
-    padding: 0.5rem 0.5rem 2rem 0.5rem;
+    padding: 0.4rem 0.5rem 1.8rem 0.5rem;
     gap: 1rem;
   }
 
@@ -558,19 +562,19 @@ body.light-mode .hero-floating-nav button:hover {
 
 @media (max-width: 360px) {
   .center-layout {
-    min-height: 40vh;
+    min-height: 44vh;
   }
 
   .text-line-1 {
-    font-size: clamp(2.4rem, 16vw, 3.2rem);
+    font-size: clamp(2.8rem, 19vw, 3.8rem);
   }
 
   .text-line-2 {
-    font-size: clamp(1.3rem, 9vw, 1.9rem);
+    font-size: clamp(1.55rem, 10.5vw, 2.2rem);
   }
 
   .hero-avatar-img-new {
-    width: clamp(175px, 52vw, 220px);
+    width: clamp(210px, 64vw, 280px);
   }
 
   .hero-intro-text p {
