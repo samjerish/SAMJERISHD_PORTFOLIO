@@ -23,14 +23,16 @@ export const Navbar: React.FC<{
     e?: React.MouseEvent,
   ) => {
     if (e) e.preventDefault();
-    setIsOpen(false); // Close menu on navigation
+    setIsOpen(false); // Trigger smooth circular close
 
-    if (page === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    if (onNavigate) {
-      onNavigate(page);
-    }
+    setTimeout(() => {
+      if (page === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      if (onNavigate) {
+        onNavigate(page);
+      }
+    }, 450);
   };
 
   const navItems = [

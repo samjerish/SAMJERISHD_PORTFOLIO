@@ -87,13 +87,16 @@ body.menu-open .scroll-progress-container {
   visibility: hidden;
   clip-path: circle(0% at calc(100% - 3.5rem) 3.5rem);
   transition:
-    visibility 1s,
-    clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+    visibility 0.85s cubic-bezier(0.77, 0, 0.175, 1),
+    clip-path 0.85s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .menu-overlay.open {
   visibility: visible;
   clip-path: circle(220% at calc(100% - 3.5rem) 3.5rem);
+  transition:
+    visibility 0.85s cubic-bezier(0.77, 0, 0.175, 1),
+    clip-path 0.85s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .menu-background-gradient {
@@ -147,29 +150,31 @@ body.menu-open .scroll-progress-container {
   cursor: pointer;
   color: #ffffff;
   position: relative;
+  opacity: 1;
+  transform: translateY(0);
   transition:
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.4s ease,
-    border-color 0.4s ease,
-    box-shadow 0.4s ease,
-    opacity 0.4s ease;
+    opacity 0.85s cubic-bezier(0.77, 0, 0.175, 1),
+    transform 0.85s cubic-bezier(0.77, 0, 0.175, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
 
-  /* Staggered Entrance */
-  opacity: 0;
-  transform: translateY(30px);
+.menu-overlay:not(.open) .menu-item {
+  opacity: 0.9;
 }
 
 .menu-overlay.open .menu-item {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.4s ease,
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   transition-delay:
-    0s, calc(0.2s + (var(--animation-order) * 0.08s)),
+    0s, calc(0.12s + (var(--animation-order) * 0.05s)),
     0s, 0s, 0s;
 }
 
