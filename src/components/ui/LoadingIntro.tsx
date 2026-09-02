@@ -36,25 +36,25 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
       setPhase("unlocking");
     }, 1300);
 
-    // Phase 3: Lock morphs and expands into ribbons
+    // Phase 3: Lock morphs and shoots ribbons outward
     const morphTimer = setTimeout(() => {
       setPhase("morphing");
-    }, 2000);
+    }, 2100);
 
-    // Phase 4: Ribbons appear and marquee across screen
+    // Phase 4: Ribbons marquee across screen
     const ribbonsTimer = setTimeout(() => {
       setPhase("ribbons");
-    }, 2400);
+    }, 2600);
 
     // Phase 5: Zoom out exit animation revealing website
     const exitTimer = setTimeout(() => {
       setPhase("exit");
-    }, 3900);
+    }, 4100);
 
     // Complete the intro
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 5200);
+    }, 5400);
 
     return () => {
       clearInterval(interval);
@@ -87,17 +87,22 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
       >
         <div className={`lock-card-wrapper ${isUnlocked ? "is-unlocked" : ""}`}>
           <div className="lock-pulse-ring"></div>
+          
+          {/* Morph Energy Beams shooting out to ribbons */}
+          <div className="lock-morph-beam beam-top-left"></div>
+          <div className="lock-morph-beam beam-bottom-right"></div>
+
           <div className="lock-icon-assembly">
             <svg
               className={`lock-svg ${isUnlocked ? "unlocked" : ""}`}
-              viewBox="0 0 24 24"
+              viewBox="0 -10 24 34"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              {/* Shackle: lifts and rotates open when unlocked */}
+              {/* Shackle: lifts and rotates open when unlocked with ample headroom */}
               <path className="lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4" />
               {/* Padlock Body */}
               <rect
@@ -125,7 +130,7 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
               className={`lock-status-dot ${isUnlocked ? "active-green" : ""}`}
             ></span>
             <span className="lock-status-label">
-              {isUnlocked ? "UNLOCKED" : "SECURE SYSTEM"}
+              {isUnlocked ? "SYSTEM UNLOCKED" : "SECURE SYSTEM"}
             </span>
           </div>
         </div>
