@@ -1,0 +1,518 @@
+/* CENTER FLOW (Radial Flow Component) */
+.center-flow-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  margin: 6rem auto 4rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.center-flow-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  z-index: 5;
+}
+
+.center-flow-title {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #ffffff 30%, #888888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.center-flow-subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: 1.05rem;
+  color: #888888;
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Canvas Area */
+.center-flow-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* SVG Overlay for Connections */
+.center-flow-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+.center-flow-base-track {
+  fill: none;
+  transition: opacity 0.4s ease, stroke 0.4s ease, stroke-width 0.4s ease;
+}
+
+.center-flow-beam {
+  fill: none;
+  stroke-dasharray: 20 160;
+  animation: flowBeam 3s linear infinite;
+  transition: stroke-width 0.3s ease;
+  opacity: 0.85;
+}
+
+.center-flow-beam.is-highlighted {
+  opacity: 1;
+  stroke-dasharray: 40 120;
+  animation: flowBeam 1.6s linear infinite;
+}
+
+@keyframes flowBeam {
+  0% {
+    stroke-dashoffset: 180;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.center-flow-particle {
+  transition: r 0.3s ease;
+}
+
+/* Columns for Outer Tech Nodes */
+.center-flow-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  z-index: 10;
+  width: 220px;
+}
+
+.flow-left {
+  align-items: flex-start;
+}
+
+.flow-right {
+  align-items: flex-end;
+}
+
+/* Tech Node Cards */
+.center-flow-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 10px 16px;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.center-flow-node:hover,
+.center-flow-node.is-active {
+  transform: translateY(-3px) scale(1.04);
+  background: rgba(28, 28, 28, 0.95);
+}
+
+.node-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.node-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+.node-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.node-name {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.node-category {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  color: #777777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.node-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* Central Hub */
+.center-flow-hub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  margin: 0 2rem;
+}
+
+.hub-core-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding: 24px 28px;
+  background: radial-gradient(circle at 50% 0%, #222222 0%, #111111 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(74, 222, 128, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+  min-width: 170px;
+}
+
+.center-flow-hub:hover .hub-core-card,
+.center-flow-hub.is-active .hub-core-card {
+  transform: scale(1.06);
+  border-color: #4ade80;
+  box-shadow:
+    0 30px 75px rgba(0, 0, 0, 0.9),
+    0 0 50px rgba(74, 222, 128, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.hub-icon-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.2) 0%, rgba(96, 165, 250, 0.1) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4ade80;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.25);
+}
+
+.hub-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hub-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #888888;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hub-tag {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.hub-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 20px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #4ade80;
+  letter-spacing: 1px;
+}
+
+.hub-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: hub-pulse 2s infinite ease-in-out;
+}
+
+@keyframes hub-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.4);
+  }
+}
+
+/* Ambient Pulse Rings */
+.hub-ripple-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  pointer-events: none;
+  animation: rippleExpand 4s infinite linear;
+}
+
+.hub-ripple-ring.ring-1 {
+  width: 220px;
+  height: 220px;
+  animation-delay: 0s;
+}
+
+.hub-ripple-ring.ring-2 {
+  width: 280px;
+  height: 280px;
+  animation-delay: 2s;
+}
+
+@keyframes rippleExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0;
+  }
+}
+
+.hub-orbit-dashed {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  animation: orbitSpin 30s linear infinite;
+}
+
+@keyframes orbitSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Light Mode Overrides */
+body.light-mode .center-flow-title {
+  background: linear-gradient(135deg, #111111 30%, #555555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.light-mode .center-flow-subtitle {
+  color: #666666;
+}
+
+body.light-mode .center-flow-node {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .center-flow-node:hover,
+body.light-mode .center-flow-node.is-active {
+  background: #ffffff;
+}
+
+body.light-mode .node-name {
+  color: #111111;
+}
+
+body.light-mode .hub-core-card {
+  background: radial-gradient(circle at 50% 0%, #ffffff 0%, #f4f4f4 100%);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.08),
+    0 0 30px rgba(74, 222, 128, 0.12);
+}
+
+body.light-mode .hub-tag {
+  color: #111111;
+}
+
+body.light-mode .center-flow-base-track {
+  stroke: rgba(0, 0, 0, 0.08);
+}
+
+/* ===================================================
+   RESPONSIVE ADAPTATIONS (Mobile & Tablet)
+   =================================================== */
+
+@media (max-width: 900px) {
+  .center-flow-canvas {
+    min-height: 540px;
+  }
+
+  .center-flow-column {
+    width: 175px;
+    gap: 1rem;
+  }
+
+  .center-flow-node {
+    padding: 8px 12px;
+    gap: 0.6rem;
+  }
+
+  .node-icon-wrapper {
+    width: 32px;
+    height: 32px;
+  }
+
+  .node-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .node-name {
+    font-size: 0.82rem;
+  }
+
+  .hub-core-card {
+    padding: 18px 20px;
+    min-width: 140px;
+  }
+
+  .hub-icon-container {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hub-tag {
+    font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .center-flow-wrapper {
+    margin: 4rem auto 2rem auto;
+    padding: 0 0.8rem;
+  }
+
+  .center-flow-header {
+    margin-bottom: 2rem;
+  }
+
+  .center-flow-canvas {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    min-height: auto;
+    padding: 1rem 0;
+  }
+
+  .center-flow-column {
+    width: 100%;
+    max-width: 340px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .flow-left,
+  .flow-right {
+    align-items: center;
+  }
+
+  .center-flow-hub {
+    margin: 0.5rem 0;
+    order: 0;
+  }
+
+  .flow-left {
+    order: -1;
+  }
+
+  .flow-right {
+    order: 1;
+  }
+
+  .center-flow-svg {
+    opacity: 0.6;
+  }
+
+  .hub-ripple-ring.ring-1 {
+    width: 170px;
+    height: 170px;
+  }
+
+  .hub-ripple-ring.ring-2 {
+    width: 210px;
+    height: 210px;
+  }
+
+  .hub-orbit-dashed {
+    width: 190px;
+    height: 190px;
+  }
+
+  .center-flow-node {
+    padding: 8px 10px;
+  }
+}

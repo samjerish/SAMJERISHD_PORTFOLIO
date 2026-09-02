@@ -6,6 +6,7 @@ import clickHereGraphic from "../../assets/click_here.png";
 import { projects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { ProjectModal } from "../ui/ProjectModal";
+import { CenterFlow } from "../ui/CenterFlow";
 
 export const ProjectsSection: React.FC<{
   onNavigate?: (
@@ -125,6 +126,9 @@ export const ProjectsSection: React.FC<{
             </div>
           ))}
         </div>
+
+        {/* Center Flow Radial Tech Stack */}
+        <CenterFlow />
 
         <div
           className="view-all-banner"

@@ -4,41 +4,7 @@ import "../sections/ProjectsSection.css";
 import { projects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { ProjectModal } from "../ui/ProjectModal";
-
-const TECH_STACK = [
-  {
-    name: "Python",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  },
-  {
-    name: "HTML5",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
-  },
-  {
-    name: "JavaScript",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-  },
-  {
-    name: "Java",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
-  },
-  {
-    name: "CSS3",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-  },
-  {
-    name: "TypeScript",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "React",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-  },
-  {
-    name: "Node.js",
-    url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-  },
-];
+import { CenterFlow } from "../ui/CenterFlow";
 
 export const ProjectsPage: React.FC<{
   onNavigate: (
@@ -144,21 +110,11 @@ export const ProjectsPage: React.FC<{
           ))}
         </div>
 
-        <div className="tech-stack-section">
-          <h2 className="tech-stack-heading">TECH STACK</h2>
-          <div className="tech-stack-grid">
-            {TECH_STACK.map((tech, index) => (
-              <div key={index} className="tech-grid-item">
-                <img
-                  src={tech.url}
-                  alt={tech.name}
-                  className="tech-grid-icon"
-                />
-                <span className="tech-grid-name">{tech.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Center Flow Radial Tech Stack */}
+        <CenterFlow
+          title="TECH STACK"
+          subtitle="Core technologies and frameworks powering my applications and experiments"
+        />
 
         <div className="github-cta-section">
           <h2>More on GitHub</h2>
