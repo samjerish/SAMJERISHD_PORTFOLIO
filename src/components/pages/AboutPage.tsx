@@ -37,15 +37,32 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isHolding, setIsHolding] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const [exitDir, setExitDir] = useState<number>(0);
   const dragStartRef = useRef<number>(0);
   const isDraggingRef = useRef<boolean>(false);
+
+  const nextIndex = (photoIndex + 1) % ABOUT_PHOTOS.length;
 
   useEffect(() => {
     setIsVisible(true);
     window.scrollTo(0, 0);
   }, []);
 
+  const triggerSwitch = (direction: number = 1) => {
+    if (isExiting) return;
+    setExitDir(direction);
+    setIsExiting(true);
+    setTimeout(() => {
+      setPhotoIndex((prev) => (prev + 1) % ABOUT_PHOTOS.length);
+      setIsExiting(false);
+      setDragX(0);
+      setExitDir(0);
+    }, 320);
+  };
+
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (isExiting) return;
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     dragStartRef.current = e.clientX;
     isDraggingRef.current = true;
@@ -53,13 +70,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDraggingRef.current) return;
+    if (!isDraggingRef.current || isExiting) return;
     const diff = e.clientX - dragStartRef.current;
     setDragX(diff);
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDraggingRef.current) return;
+    if (!isDraggingRef.current || isExiting) return;
     try {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
     } catch {
@@ -68,12 +85,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     isDraggingRef.current = false;
     setIsHolding(false);
 
-    if (dragX < -65) {
-      setPhotoIndex((prev) => (prev + 1) % ABOUT_PHOTOS.length);
-    } else if (dragX > 65) {
-      setPhotoIndex((prev) => (prev - 1 + ABOUT_PHOTOS.length) % ABOUT_PHOTOS.length);
+    if (dragX < -45) {
+      triggerSwitch(1);
+    } else if (dragX > 45) {
+      triggerSwitch(-1);
+    } else {
+      if (Math.abs(dragX) < 6) {
+        triggerSwitch(1);
+      } else {
+        setDragX(0);
+      }
     }
-    setDragX(0);
   };
 
   return (
@@ -89,37 +111,64 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         {/* Profile Hero Header */}
         <div className="about-profile-hero">
           <div className="about-hero-image-wrapper">
-            <div
-              className={`about-avatar-frame swipe-interactive ${isHolding ? "is-holding" : ""}`}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={handlePointerUp}
-              style={{
-                transform: `translateX(${dragX}px) rotate(${dragX * 0.05}deg) ${isHolding ? "scale(0.98)" : "scale(1)"}`,
-                transition: isHolding ? "none" : "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-            >
-              <img
-                src={ABOUT_PHOTOS[photoIndex].src}
-                alt={ABOUT_PHOTOS[photoIndex].alt}
-                className="about-avatar-img"
-                style={{
-                  objectPosition: ABOUT_PHOTOS[photoIndex].objectPosition || "center center",
-                }}
-                draggable={false}
-              />
-
-              {/* Hold & Swipe Gesture Pill */}
-              <div className="avatar-swipe-hint-pill">
-                <span>Hold & swipe</span>
-                <span className="swipe-arrows">⇄</span>
+            <div className="photo-stack-deck">
+              {/* Background Stack Card (Preview of next photo) */}
+              <div
+                className={`about-avatar-frame back-stack-card ${isHolding || isExiting ? "peeking" : ""}`}
+              >
+                <img
+                  src={ABOUT_PHOTOS[nextIndex].src}
+                  alt={ABOUT_PHOTOS[nextIndex].alt}
+                  className="about-avatar-img"
+                  style={{
+                    objectPosition:
+                      ABOUT_PHOTOS[nextIndex].objectPosition || "center center",
+                  }}
+                  draggable={false}
+                />
               </div>
 
-              {/* Status Indicator */}
-              <div className="avatar-status-pill">
-                <span className="status-live-dot"></span>
-                <span>Active & Building</span>
+              {/* Foreground Active Card */}
+              <div
+                className={`about-avatar-frame top-active-card ${isHolding ? "is-holding" : ""} ${isExiting ? "is-exiting" : ""}`}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
+                style={{
+                  transform: isExiting
+                    ? `translate3d(${exitDir * 130}%, 0, 0) rotate(${exitDir * 20}deg) scale(0.9)`
+                    : isHolding
+                    ? `translate3d(${dragX}px, 0, 0) rotate(${dragX * 0.08}deg) scale(0.98)`
+                    : "translate3d(0, 0, 0) rotate(0deg) scale(1)",
+                  opacity: isExiting ? 0 : 1,
+                  transition: isHolding
+                    ? "none"
+                    : "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease",
+                }}
+              >
+                <img
+                  src={ABOUT_PHOTOS[photoIndex].src}
+                  alt={ABOUT_PHOTOS[photoIndex].alt}
+                  className="about-avatar-img"
+                  style={{
+                    objectPosition:
+                      ABOUT_PHOTOS[photoIndex].objectPosition || "center center",
+                  }}
+                  draggable={false}
+                />
+
+                {/* Gesture Hint Pill */}
+                <div className="avatar-swipe-hint-pill">
+                  <span>Tap or swipe</span>
+                  <span className="swipe-arrows">⇄</span>
+                </div>
+
+                {/* Status Indicator */}
+                <div className="avatar-status-pill">
+                  <span className="status-live-dot"></span>
+                  <span>Active & Building</span>
+                </div>
               </div>
 
               {/* Photo Indicator Dots */}
@@ -131,7 +180,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                     className={`avatar-dot ${i === photoIndex ? "active" : ""}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      setPhotoIndex(i);
+                      if (i !== photoIndex) triggerSwitch(1);
                     }}
                     aria-label={`Photo ${i + 1}`}
                   />
