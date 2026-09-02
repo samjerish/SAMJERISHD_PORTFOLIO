@@ -97,10 +97,9 @@
 }
 
 .story-view-more-card:hover {
-  transform: translateY(-3px) scale(1.02);
-  border-color: rgba(74, 222, 128, 0.45);
-  background: radial-gradient(circle at 20% 0%, rgba(40, 40, 46, 0.95) 0%, rgba(18, 18, 22, 0.98) 100%);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(74, 222, 128, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
 .story-view-more-avatar-wrap {
@@ -125,7 +124,7 @@
 }
 
 .story-view-more-card:hover .story-view-more-avatar {
-  transform: scale(1.2) rotate(4deg);
+  transform: scale(1.15);
 }
 
 .story-view-more-info {
@@ -147,11 +146,6 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.75rem;
   color: #888888;
-  transition: color 0.2s ease;
-}
-
-.story-view-more-card:hover .story-view-more-sub {
-  color: #4ade80;
 }
 
 /* Light Mode Overrides for Story Section */
