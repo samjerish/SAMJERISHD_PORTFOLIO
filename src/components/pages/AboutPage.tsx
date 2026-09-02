@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import "./AboutPage.css";
 import firstPhoto from "../../assets/first_photo.png";
 import profileImg from "../../assets/photo.jpg";
-import me2Img from "../../assets/me2.jpg";
 import {
   FiCode,
   FiTerminal,
@@ -21,9 +20,16 @@ interface AboutPageProps {
 }
 
 const ABOUT_PHOTOS = [
-  { src: firstPhoto, alt: "Sam Jerish D" },
-  { src: profileImg, alt: "Sam Jerish D - Portrait" },
-  { src: me2Img, alt: "Sam Jerish D - Creative" },
+  {
+    src: firstPhoto,
+    alt: "Sam Jerish D - Building since early days",
+    objectPosition: "18% center",
+  },
+  {
+    src: profileImg,
+    alt: "Sam Jerish D - Portrait",
+    objectPosition: "center 15%",
+  },
 ];
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
@@ -98,6 +104,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 src={ABOUT_PHOTOS[photoIndex].src}
                 alt={ABOUT_PHOTOS[photoIndex].alt}
                 className="about-avatar-img"
+                style={{
+                  objectPosition: ABOUT_PHOTOS[photoIndex].objectPosition || "center center",
+                }}
                 draggable={false}
               />
 
