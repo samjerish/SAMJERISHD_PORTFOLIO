@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./AboutPage.css";
 import profileImg from "../../assets/photo.jpg";
-import { FiCode, FiTerminal, FiVideo } from "react-icons/fi";
+import {
+  FiCode,
+  FiTerminal,
+  FiVideo,
+  FiGithub,
+  FiLinkedin,
+  FiInstagram,
+  FiMail,
+} from "react-icons/fi";
 import { GitHubContributions } from "../ui/GitHubContributions";
 
 interface AboutPageProps {
@@ -53,10 +61,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
             <div className="about-bio-paragraphs">
               <p>
-                I’m a Computer Science and Engineering student specializing in{" "}
-                <strong>Artificial Intelligence & Machine Learning</strong>, with
-                a profound passion for building intelligent, user-centric full stack
-                web applications and software solutions.
+                I’m an AI & Machine Learning student and Full Stack Developer
+                who thrives on building high-performance web experiences,
+                intelligent systems, and creative digital media.
               </p>
               <p>
                 My philosophy is simple:{" "}
@@ -65,9 +72,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 into real, useful, and responsive digital products.
               </p>
               <p>
-                Beyond code, I also engage in photography, video editing, and
-                creative media, bringing an aesthetic eye and attention to detail to
-                every application I design.
+                Whether it's architecting reactive frontend interfaces,
+                engineering automation pipelines, or capturing stories through
+                visual media, I bring relentless curiosity and meticulous
+                craftsmanship to everything I build.
               </p>
             </div>
           </div>
@@ -81,7 +89,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="experience-timeline-grid">
-            {/* Card 1 */}
+            {/* Card 1: Freelance & Independent Projects */}
             <div className="timeline-card">
               <div className="timeline-icon-box">
                 <FiCode />
@@ -91,17 +99,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <h3 className="timeline-role">Full Stack & AI Developer</h3>
                 <h4 className="timeline-org">Freelance & Independent Projects</h4>
                 <p className="timeline-desc">
-                  Architected and deployed full stack web applications including
-                  FocusFlow, EcoTracker, Community Maintenance Management System,
-                  and Firebase Database Management Systems. Focused on responsive
-                  design, cloud databases, and clean user experience.
+                  Designing and deploying end-to-end full stack web platforms,
+                  integrating responsive user interfaces with reactive backend
+                  APIs and cloud-native hosting architectures.
                 </p>
               </div>
             </div>
 
             {/* Card 2: Python Development Intern @Swiftant */}
             <div className="timeline-card">
-              <div className="timeline-icon-box py-box">
+              <div className="timeline-icon-box intern-box">
                 <FiTerminal />
               </div>
               <div className="timeline-content">
@@ -137,6 +144,48 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
         {/* Live GitHub Contributions & Real-Time Stats */}
         <GitHubContributions />
+
+        {/* Bottom Four Social Media Icons */}
+        <div className="about-bottom-socials">
+          <a
+            href="https://github.com/samjerish"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="about-social-icon-btn"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <FiGithub />
+          </a>
+          <a
+            href="https://linkedin.com/in/samjerishd"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="about-social-icon-btn"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <FiLinkedin />
+          </a>
+          <a
+            href="https://instagram.com/samjerishd"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="about-social-icon-btn"
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            <FiInstagram />
+          </a>
+          <a
+            href="mailto:samjerishd@gmail.com"
+            className="about-social-icon-btn"
+            aria-label="Email"
+            title="Email"
+          >
+            <FiMail />
+          </a>
+        </div>
       </div>
     </div>
   );
