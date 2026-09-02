@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./ProjectsPage.css";
 import "../sections/ProjectsSection.css";
 import { projects } from "../../data/projects";
-import type { Project } from "../../data/projects";
-import { ProjectModal } from "../ui/ProjectModal";
 import { CenterFlow } from "../ui/CenterFlow";
 import { ProjectSwipeDownList } from "../ui/ProjectSwipeDownList";
 
@@ -12,19 +10,6 @@ export const ProjectsPage: React.FC<{
     page: "home" | "media" | "about" | "projects" | "contact" | "resume",
   ) => void;
 }> = ({ onNavigate }) => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleProjectClick = (project: Project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedProject(null), 300);
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
     const timer = setTimeout(() => {
@@ -53,10 +38,7 @@ export const ProjectsPage: React.FC<{
         </div>
 
         {/* Minimalist Title List with Swipe-Down on Hover */}
-        <ProjectSwipeDownList
-          projects={projects}
-          onProjectClick={handleProjectClick}
-        />
+        <ProjectSwipeDownList projects={projects} />
 
         {/* Center Flow Radial Tech Stack */}
         <CenterFlow
@@ -84,13 +66,6 @@ export const ProjectsPage: React.FC<{
           CREATIVITY AND TECHNOLOGY TO SOLVE REAL WORLD PROBLEMS
         </div>
       </div>
-
-      {/* Render Project Modal */}
-      <ProjectModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      />
     </div>
   );
 };

@@ -5,12 +5,10 @@ import { FiArrowUpRight, FiChevronDown, FiExternalLink } from "react-icons/fi";
 
 interface ProjectSwipeDownListProps {
   projects: Project[];
-  onProjectClick: (project: Project) => void;
 }
 
 export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
   projects,
-  onProjectClick,
 }) => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [activeMobileId, setActiveMobileId] = useState<number | null>(null);
@@ -20,8 +18,6 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
     if (window.innerWidth <= 860) {
       e.preventDefault();
       setActiveMobileId((prev) => (prev === project.id ? null : project.id));
-    } else {
-      onProjectClick(project);
     }
   };
 
@@ -66,13 +62,7 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                 <div className="drawer-grid">
                   {/* Left: Fitted Project Image Showcase */}
                   <div className="drawer-media-col">
-                    <div
-                      className="drawer-image-frame"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onProjectClick(project);
-                      }}
-                    >
+                    <div className="drawer-image-frame">
                       <img
                         src={project.image}
                         alt={project.name}
@@ -81,9 +71,6 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                         draggable={false}
                         onContextMenu={(e) => e.preventDefault()}
                       />
-                      <div className="drawer-img-overlay">
-                        <span>Click to Open Full Details</span>
-                      </div>
                     </div>
                   </div>
 
@@ -110,19 +97,8 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                       ></p>
                     )}
 
-                    <div className="drawer-actions">
-                      <button
-                        className="drawer-modal-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onProjectClick(project);
-                        }}
-                      >
-                        <span>View Project Modal</span>
-                        <FiArrowUpRight />
-                      </button>
-
-                      {project.link && (
+                    {project.link && (
+                      <div className="drawer-actions">
                         <a
                           href={project.link}
                           target="_blank"
@@ -130,11 +106,11 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                           className="drawer-live-btn"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <span>Live Demo</span>
+                          <span>Live Project Demo</span>
                           <FiExternalLink />
                         </a>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
