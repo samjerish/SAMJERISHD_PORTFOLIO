@@ -77,7 +77,7 @@ export const GitHubContributions: React.FC = () => {
               <span className="live-radar-dot"></span>
               <span className="live-radar-text">LIVE TELEMETRY</span>
             </div>
-            <h2 className="github-sync-title">GITHUB CONTRIBUTIONS</h2>
+            <h2 className="github-sync-title">CODING ACTIVITY & CONTRIBUTIONS</h2>
             <p className="github-sync-subtitle">
               Real-time activity synced with{" "}
               <a
