@@ -295,14 +295,7 @@ export const GitHubContributions: React.FC = () => {
                 <strong>{hoveredDay.count}</strong> contributions on{" "}
                 <strong>{hoveredDay.date}</strong>
               </span>
-            ) : (
-              <>
-                <span>Boxes in </span>
-                <span className="black-accent-text">dark black</span>
-                <span>, active commits in </span>
-                <span className="green-accent-text">vibrant green</span>
-              </>
-            )}
+            ) : null}
           </div>
 
           <a
