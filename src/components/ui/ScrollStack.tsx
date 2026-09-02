@@ -13,89 +13,89 @@ export interface ScrollStackProps {
 export const ScrollStack: React.FC<ScrollStackProps> = ({
   projects,
   onProjectClick,
-  stackOffset = 32,
-  scaleStep = 0.045,
-  rotationStep = 1.6,
+  stackOffset = 26,
+  scaleStep = 0.04,
+  rotationStep = 1.4,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // State to track scroll transforms for each card
+  // Track dynamic transforms for each card as subsequent cards slide on top
   const [cardTransforms, setCardTransforms] = useState<
-    { scale: number; rotation: number; brightness: number; blur: number; translateY: number }[]
+    { scale: number; rotation: number; brightness: number; blur: number }[]
   >(() =>
     projects.map(() => ({
       scale: 1,
       rotation: 0,
       brightness: 1,
       blur: 0,
-      translateY: 0,
     }))
   );
 
-  const updateTransforms = useCallback(() => {
+  const calculateStackTransforms = useCallback(() => {
     if (!containerRef.current) return;
+
+    const isMobile = window.innerWidth <= 768;
+    const currentStackOffset = isMobile ? 18 : stackOffset;
 
     const newTransforms = projects.map((_, index) => {
       const cardEl = cardRefs.current[index];
       if (!cardEl) {
-        return { scale: 1, rotation: 0, brightness: 1, blur: 0, translateY: 0 };
+        return { scale: 1, rotation: 0, brightness: 1, blur: 0 };
       }
 
-      // Check how many subsequent cards have scrolled past their sticky point
-      let overlapCount = 0;
+      // Count how many subsequent cards have landed on top of this card
+      let cardsOnTop = 0;
       for (let j = index + 1; j < projects.length; j++) {
         const nextCard = cardRefs.current[j];
         if (nextCard) {
           const nextRect = nextCard.getBoundingClientRect();
-          const targetStickyTop = 90 + j * stackOffset;
+          const targetStickyTop = (isMobile ? 70 : 85) + j * currentStackOffset;
 
-          // If next card has reached or passed its sticky top
-          if (nextRect.top <= targetStickyTop + 20) {
-            const distancePast = (targetStickyTop + 20) - nextRect.top;
-            const progress = Math.min(1, Math.max(0, distancePast / 150));
-            overlapCount += progress;
+          // When the next card reaches its sticky position, it is on top of this card
+          if (nextRect.top <= targetStickyTop + 30) {
+            const overlapProgress = Math.min(
+              1,
+              Math.max(0, (targetStickyTop + 30 - nextRect.top) / 100)
+            );
+            cardsOnTop += overlapProgress;
           }
         }
       }
 
-      const totalRemaining = projects.length - 1 - index;
-      const effectiveOverlap = Math.min(totalRemaining, overlapCount);
+      // Calculate smooth stacking scaling, tilt, and brightness
+      const scale = Math.max(0.78, 1 - cardsOnTop * scaleStep);
+      const rotDirection = index % 2 === 0 ? -1 : 1;
+      const rotation = cardsOnTop * rotationStep * rotDirection;
+      const brightness = Math.max(0.5, 1 - cardsOnTop * 0.12);
+      const blur = cardsOnTop * 0.8;
 
-      // Transforms
-      const scale = Math.max(0.82, 1 - effectiveOverlap * scaleStep);
-      const rotDir = index % 2 === 0 ? -1 : 1;
-      const rotation = effectiveOverlap * rotationStep * rotDir;
-      const brightness = Math.max(0.55, 1 - effectiveOverlap * 0.14);
-      const blur = effectiveOverlap * 1.2;
-      const translateY = -effectiveOverlap * 6;
-
-      return { scale, rotation, brightness, blur, translateY };
+      return { scale, rotation, brightness, blur };
     });
 
     setCardTransforms(newTransforms);
-  }, [projects, scaleStep, rotationStep, stackOffset]);
+  }, [projects, stackOffset, scaleStep, rotationStep]);
 
   useEffect(() => {
-    let animFrameId: number;
+    let animId: number;
 
-    const onScroll = () => {
-      cancelAnimationFrame(animFrameId);
-      animFrameId = requestAnimationFrame(updateTransforms);
+    const handleScroll = () => {
+      cancelAnimationFrame(animId);
+      animId = requestAnimationFrame(calculateStackTransforms);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
 
-    // Initial calculation
-    updateTransforms();
+    // Initial run
+    calculateStackTransforms();
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      cancelAnimationFrame(animFrameId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      cancelAnimationFrame(animId);
     };
-  }, [updateTransforms]);
+  }, [calculateStackTransforms]);
 
   return (
     <div ref={containerRef} className="scroll-stack-container">
@@ -105,10 +105,7 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
           rotation: 0,
           brightness: 1,
           blur: 0,
-          translateY: 0,
         };
-
-        const stickyTop = `calc(90px + ${index * stackOffset}px)`;
 
         return (
           <div
@@ -118,16 +115,17 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
             }}
             className="scroll-stack-card-wrapper"
             style={{
-              top: stickyTop,
+              // CSS custom property for sticky top position
+              top: `calc(85px + ${index * stackOffset}px)`,
               zIndex: index + 10,
             }}
           >
             <div
               className="scroll-stack-card"
               style={{
-                transform: `translate3d(0, ${transformState.translateY}px, 0) scale(${transformState.scale}) rotate(${transformState.rotation}deg)`,
+                transform: `scale(${transformState.scale}) rotate(${transformState.rotation}deg)`,
                 filter: `brightness(${transformState.brightness}) blur(${transformState.blur}px)`,
-                transformOrigin: "center 15%",
+                transformOrigin: "center 10%",
               }}
               onClick={() => onProjectClick && onProjectClick(project)}
             >
