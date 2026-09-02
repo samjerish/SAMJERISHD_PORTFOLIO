@@ -205,7 +205,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <FiVideo />
               </div>
               <div className="timeline-content">
-                <span className="timeline-period">APR 2024 — PRESENT</span>
                 <h3 className="timeline-role">Media Coordinator</h3>
                 <h4 className="timeline-org">@MatrixKarunya</h4>
                 <p className="timeline-desc">
