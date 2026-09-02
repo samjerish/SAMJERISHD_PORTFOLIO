@@ -24,7 +24,7 @@ export const projects: Project[] = [
     solution:
       "FOCUSFLOW is a productivity system that helps users organize tasks, manage their time, and maintain focused work sessions.",
     link: "https://samjerish.github.io/FOCUSFLOW",
-    image: `${import.meta.env.BASE_URL}PROJECTS ASSESTS/focsuflow.png`,
+    image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/focsuflow.png`,
     tag: "Productivity • Task Management",
     date: "2026",
   },
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     solution:
       "A centralized platform where residents can report maintenance issues and administrators can assign, track, and manage them until resolution.",
     link: "",
-    image: `${import.meta.env.BASE_URL}PROJECTS ASSESTS/community_maintance.png`,
+    image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/community_maintance.png`,
     tag: "Community Management • Database",
     date: "2025",
   },
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     solution:
       "A cloud-based database management system using Firebase for data storage, authentication, and real-time database operations.",
     link: "",
-    image: `${import.meta.env.BASE_URL}PROJECTS ASSESTS/DATABASE_MANGANMENT.png`,
+    image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/DATABASE_MANGANMENT.png`,
     tag: "Firebase • Cloud Database",
     date: "2025",
   },
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     solution:
       "An autonomous university robot capable of navigating campus environments and performing predefined tasks using sensors and intelligent decision-making.",
     link: "",
-    image: `${import.meta.env.BASE_URL}PROJECTS ASSESTS/ir project.png`,
+    image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/ir%20project.png`,
     tag: "Robotics • Autonomous Navigation",
     date: "2024",
   },
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     solution:
       "ECOTRACKER helps users monitor their environmental activities and encourages more sustainable everyday habits.",
     link: "https://samjerish.github.io/ECOTRACKER",
-    image: `${import.meta.env.BASE_URL}PROJECTS ASSESTS/ecotracker.png`,
+    image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/ecotracker.png`,
     tag: "Sustainability • Data Tracking",
     date: "2026",
   },

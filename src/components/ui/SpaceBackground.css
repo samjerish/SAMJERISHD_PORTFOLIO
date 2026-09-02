@@ -39,6 +39,8 @@
   left: 0;
   background: transparent;
   animation: animStar linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .stars-small {

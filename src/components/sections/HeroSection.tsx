@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import "./HeroSection.css";
 import animatedProfile from "../../assets/animated_profile.png";
 import { SpaceBackground } from "../ui/SpaceBackground";
@@ -8,32 +8,6 @@ export const HeroSection: React.FC<{
     page: "home" | "media" | "about" | "projects" | "contact" | "resume",
   ) => void;
 }> = ({ onNavigate: _onNavigate }) => {
-  const [_isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolling(true);
-
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-
-      scrollTimeout.current = setTimeout(() => {
-        setIsScrolling(false);
-      }, 150);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-    };
-  }, []);
-
   return (
     <section className="hero-container new-hero" id="home">
       <SpaceBackground colorTheme="black" />

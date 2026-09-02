@@ -55,7 +55,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         {/* Header Section */}
         <div className="contact-hero-header">
           <h1>
-            Lets{" "}
+            Let's{" "}
             <span key={wordIndex} className="handwriting-pink word-animate">
               {words[wordIndex]}
             </span>

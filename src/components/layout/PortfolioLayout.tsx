@@ -16,9 +16,6 @@ export const PortfolioLayout: React.FC<{
   const mainRef = React.useRef<HTMLElement>(null);
   const socialPopupRef = React.useRef<HTMLDivElement>(null);
 
-  const scrollTimeout = React.useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,68 +23,68 @@ export const PortfolioLayout: React.FC<{
       window.scrollTo(0, 0);
     }, 50);
 
+    let ticking = false;
+
     const handleScroll = () => {
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-      scrollTimeout.current = setTimeout(() => {}, 150);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const totalScroll = window.scrollY;
+          const windowHeight = window.innerHeight;
+          const isMobile = window.innerWidth <= 768;
 
-      const totalScroll = window.scrollY;
+          // Social popup logic
+          if (socialPopupRef.current && mainRef.current) {
+            const sections = mainRef.current.children;
+            const contactSection = sections[sections.length - 1];
+            let isContactVisible = false;
 
-      // Social popup logic
-      if (socialPopupRef.current && mainRef.current) {
-        const sections = mainRef.current.children;
-        const contactSection = sections[sections.length - 1]; // Assuming Contact is the last section
-        let isContactVisible = false;
+            if (contactSection) {
+              const contactRect = contactSection.getBoundingClientRect();
+              if (contactRect.top < windowHeight - 100) {
+                isContactVisible = true;
+              }
+            }
 
-        if (contactSection) {
-          const contactRect = contactSection.getBoundingClientRect();
-          // Hide when Contact section enters the viewport
-          if (contactRect.top < window.innerHeight - 100) {
-            isContactVisible = true;
+            if (totalScroll > windowHeight * 0.8 && !isContactVisible) {
+              socialPopupRef.current.classList.add("visible");
+            } else {
+              socialPopupRef.current.classList.remove("visible");
+            }
           }
-        }
 
-        if (totalScroll > window.innerHeight * 0.8 && !isContactVisible) {
-          socialPopupRef.current.classList.add("visible");
-        } else {
-          socialPopupRef.current.classList.remove("visible");
-        }
-      }
-
-      const docHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scroll = (totalScroll / docHeight) * 100;
-      if (progressBarRef.current) {
-        progressBarRef.current.style.width = `${scroll}%`;
-        const container = progressBarRef.current.parentElement;
-        if (container) {
-          container.style.opacity = totalScroll > 10 ? "1" : "0";
-        }
-      }
-
-      // Professional fade-out effect for sections as they scroll up
-      if (mainRef.current) {
-        const sections = mainRef.current.children;
-        const windowHeight = window.innerHeight;
-
-        for (let i = 0; i < sections.length; i++) {
-          const section = sections[i] as HTMLElement;
-          const rect = section.getBoundingClientRect();
-
-          // Only fade out when the section is almost finished scrolling
-          // This fixes the issue with tall sections (like Projects) fading out too early
-          const fadeThreshold = Math.min(windowHeight * 0.8, rect.height);
-
-          if (rect.top < 0 && rect.bottom < fadeThreshold) {
-            // Fade out over the remaining visible height of the section
-            const fadeAmount = 1 - rect.bottom / fadeThreshold;
-            section.style.opacity = Math.max(0, 1 - fadeAmount).toString();
-          } else {
-            section.style.opacity = "1";
+          const docHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+          if (docHeight > 0 && progressBarRef.current) {
+            const scroll = (totalScroll / docHeight) * 100;
+            progressBarRef.current.style.width = `${scroll}%`;
+            const container = progressBarRef.current.parentElement;
+            if (container) {
+              container.style.opacity = totalScroll > 10 ? "1" : "0";
+            }
           }
-        }
+
+          // Smooth fade-out effect for desktop
+          if (!isMobile && mainRef.current) {
+            const sections = mainRef.current.children;
+
+            for (let i = 0; i < sections.length; i++) {
+              const section = sections[i] as HTMLElement;
+              const rect = section.getBoundingClientRect();
+              const fadeThreshold = Math.min(windowHeight * 0.8, rect.height);
+
+              if (rect.top < 0 && rect.bottom < fadeThreshold) {
+                const fadeAmount = 1 - rect.bottom / fadeThreshold;
+                section.style.opacity = Math.max(0, 1 - fadeAmount).toString();
+              } else {
+                section.style.opacity = "1";
+              }
+            }
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -177,7 +174,7 @@ export const PortfolioLayout: React.FC<{
           <ProjectsSection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
-          <StorySection />
+          <StorySection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
           <ContactSection onNavigate={onNavigate} />

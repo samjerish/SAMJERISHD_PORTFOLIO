@@ -46,7 +46,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 120vw;
+  width: 150vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -70,16 +70,17 @@
   display: flex;
   white-space: nowrap;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+  width: 100%;
 }
 
 .ribbon-top {
-  transform: rotate(4deg) translateX(-150vw);
+  transform: rotate(4deg) translateX(-180vw);
 }
 
 .ribbon-bottom {
-  transform: rotate(-4deg) translateX(150vw);
+  transform: rotate(-4deg) translateX(180vw);
 }
 
 .intro-container.phase-ribbons .ribbon-top {
@@ -133,7 +134,7 @@
 .intro-container.phase-exit {
   background-color: transparent;
   pointer-events: none;
-  transition: background-color 0.4s ease; /* Faster fade to reduce greyish mix */
+  transition: background-color 0.4s ease;
 }
 
 .intro-container.phase-exit .ribbon-top {
@@ -146,12 +147,63 @@
 
 @media (max-width: 768px) {
   .percentage-text {
-    font-size: 5rem;
+    font-size: clamp(3.5rem, 15vw, 5rem);
   }
-  .marquee-content {
-    font-size: 4rem;
+
+  .ribbons-container {
+    width: 220vw;
+    gap: 1.25rem;
   }
+
   .ribbon {
-    padding: 1rem 0;
+    padding: 0.65rem 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .ribbon-top {
+    transform: rotate(5deg) translateX(-220vw);
+  }
+
+  .ribbon-bottom {
+    transform: rotate(-5deg) translateX(220vw);
+  }
+
+  .intro-container.phase-ribbons .ribbon-top {
+    transform: rotate(5deg) translateX(0);
+  }
+
+  .intro-container.phase-ribbons .ribbon-bottom {
+    transform: rotate(-5deg) translateX(0);
+  }
+
+  .intro-container.phase-exit .ribbon-top {
+    transform: rotate(5deg) scale(5) translateY(-80vh);
+  }
+
+  .intro-container.phase-exit .ribbon-bottom {
+    transform: rotate(-5deg) scale(5) translateY(80vh);
+  }
+
+  .marquee-content {
+    font-size: clamp(1.8rem, 6vw, 2.3rem);
+  }
+
+  .marquee-content span {
+    padding-right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ribbons-container {
+    width: 240vw;
+    gap: 1rem;
+  }
+
+  .ribbon {
+    padding: 0.55rem 0;
+  }
+
+  .marquee-content {
+    font-size: clamp(1.5rem, 5.5vw, 1.95rem);
   }
 }

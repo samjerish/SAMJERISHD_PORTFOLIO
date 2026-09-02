@@ -251,15 +251,19 @@
 
 .polaroid-text h3 {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
   font-weight: 700;
   line-height: 1.2;
   color: #ffffff;
   margin-bottom: 20px;
   text-transform: uppercase;
-  letter-spacing: 2px; /* increased spacing */
-  transform: scaleX(1.1); /* horizontally stretches letters */
-  transform-origin: left;
+  letter-spacing: 1px;
+}
+
+.polaroid-text .figureoutable-word {
+  white-space: nowrap;
+  display: inline-block;
+  letter-spacing: 0.5px;
 }
 
 .highlight-text {

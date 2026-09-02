@@ -228,9 +228,10 @@ export const ContactPage: React.FC<{
           >
             <div className="form-row">
               <div className="form-group" style={{ width: "100%" }}>
-                <label>Full name</label>
+                <label htmlFor="contact-name">Full name</label>
                 <input
                   type="text"
+                  id="contact-name"
                   name="name"
                   placeholder="John Doe"
                   required
@@ -240,9 +241,10 @@ export const ContactPage: React.FC<{
 
             <div className="form-row">
               <div className="form-group" style={{ width: "100%" }}>
-                <label>Email Address</label>
+                <label htmlFor="contact-email">Email Address</label>
                 <input
                   type="email"
+                  id="contact-email"
                   name="email"
                   placeholder="john@example.com"
                   required
@@ -251,8 +253,9 @@ export const ContactPage: React.FC<{
             </div>
 
             <div className="form-group">
-              <label>Message</label>
+              <label htmlFor="contact-message">Message</label>
               <textarea
+                id="contact-message"
                 name="message"
                 placeholder="Dear Sam,"
                 rows={6}

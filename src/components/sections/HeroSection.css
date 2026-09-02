@@ -369,144 +369,216 @@ body.light-mode .hero-floating-nav button:hover {
 
 @media (max-width: 768px) {
   .hero-container.new-hero {
+    min-height: 100dvh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    overflow: hidden;
+  }
+
+  .center-layout {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    min-height: 48vh;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    padding-top: 4rem;
+    padding-bottom: 0;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  .hero-background-text-new {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .text-line-1 {
+    font-size: clamp(3.2rem, 20vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #ffffff;
+    display: block;
+    width: 100%;
+  }
+
+  .text-line-2 {
+    font-size: clamp(1.8rem, 11vw, 3.2rem);
+    line-height: 0.9;
+    letter-spacing: 1px;
+    margin-top: 0.3rem;
+    text-align: center;
+    color: #888888;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  .floating-avatar-new {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 5vh;
+    z-index: 10;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .hero-avatar-img-new {
+    display: block !important;
+    width: clamp(230px, 60vw, 340px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.65));
   }
 
   .hero-bottom-elements {
-    position: relative; /* Remove absolute positioning */
+    position: relative;
+    width: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    gap: 2rem;
-    padding-bottom: 2rem;
-    margin-top: 1.5rem; /* Fixed gap instead of auto pushing to bottom */
+    gap: 1.25rem;
+    padding: 0.5rem 1rem 2.5rem 1rem;
+    margin-top: auto;
+    z-index: 30;
   }
 
   .hero-intro-text {
-    max-width: 100%;
-  }
-
-  .hero-intro-text p {
-    font-size: 0.95rem; /* Smaller, cleaner text for mobile */
-    line-height: 1.5;
-    color: #e0e0e0;
-    font-weight: 300;
-    max-width: 95%;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
     margin: 0 auto;
   }
 
+  .hero-intro-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #b8b8b8;
+    font-weight: 400;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.2rem;
+  }
+
   .book-call-btn {
-    background: linear-gradient(135deg, #ffffff, #dcdcdc);
-    color: #000;
+    background: #ffffff;
+    color: #000000;
     font-weight: 700;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
     border: none;
     letter-spacing: 1px;
     padding: 14px 32px;
     border-radius: 30px;
     text-transform: uppercase;
     font-size: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .hero-background-text-new {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    opacity: 0.9;
-  }
-
-  .text-line-1 {
-    font-size: clamp(2.5rem, 22vw, 26vw);
-    line-height: 1;
-    letter-spacing: 0;
-  }
-
-  .text-line-2 {
-    font-size: clamp(
-      1.5rem,
-      11.5vw,
-      12vw
-    ); /* Mathematically maximized for 8 characters */
-    line-height: 1;
-    margin-top: -1rem;
-    letter-spacing: 0;
-  }
-
-  .floating-avatar-new {
-    display: none; /* Remove photo in mobile view */
-  }
-
-  .center-layout {
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 6rem; /* Give space for top nav */
-    flex: none; /* Don't stretch */
+  .book-call-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 25px rgba(255, 255, 255, 0.35);
   }
 }
 
 @media (max-width: 480px) {
-  .hero-floating-nav {
-    gap: 0.2rem;
-    padding: 6px;
-    width: 95%; /* Prevent horizontal overflow */
-    max-width: 100%;
-    margin: 0 auto;
+  .hero-container.new-hero {
+    padding: 0 0.8rem;
   }
 
-  .nav-name {
-    display: none;
-  }
-
-  .nav-links {
-    gap: 0.2rem;
-    justify-content: space-around;
-    width: 100%;
-  }
-
-  .nav-links button {
-    font-size: 0.7rem;
-    padding: 4px 6px;
-    white-space: normal; /* allow wrapping for beyond the frame */
-    line-height: 1.1;
-  }
-
-  .hero-avatar-img-new {
-    display: none;
+  .center-layout {
+    min-height: 44vh;
+    padding-top: 3.5rem;
   }
 
   .text-line-1 {
-    font-size: clamp(2.2rem, 25vw, 28vw);
-    line-height: 1;
-    letter-spacing: 0;
+    font-size: clamp(2.8rem, 18vw, 4.2rem);
+    line-height: 0.9;
+    letter-spacing: 1px;
   }
 
   .text-line-2 {
-    font-size: clamp(1.2rem, 11.5vw, 12.2vw); /* Max width without overflow */
-    line-height: 1;
-    margin-top: -1rem;
-    letter-spacing: 0;
+    font-size: clamp(1.45rem, 9.6vw, 2.4rem);
+    line-height: 0.9;
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+  }
+
+  .floating-avatar-new {
+    top: 4vh;
+  }
+
+  .hero-avatar-img-new {
+    width: clamp(210px, 58vw, 280px);
   }
 
   .hero-bottom-elements {
-    padding: 1rem 1.5rem 2rem 1.5rem;
+    padding: 0.5rem 0.5rem 2rem 0.5rem;
+    gap: 1rem;
   }
 
-  .hero-container.new-hero {
-    min-height: 100dvh; /* use dynamic viewport height */
+  .hero-intro-text p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .book-call-btn {
+    padding: 12px 28px;
+    font-size: 0.85rem;
   }
 }
 
-@media (max-width: 380px) {
-  .hero-floating-nav {
-    padding: 4px;
+@media (max-width: 360px) {
+  .center-layout {
+    min-height: 40vh;
   }
-  .nav-links button {
-    font-size: 0.65rem;
-    padding: 4px;
+
+  .text-line-1 {
+    font-size: clamp(2.4rem, 16vw, 3.2rem);
   }
+
+  .text-line-2 {
+    font-size: clamp(1.3rem, 9vw, 1.9rem);
+  }
+
+  .hero-avatar-img-new {
+    width: clamp(175px, 52vw, 220px);
+  }
+
+  .hero-intro-text p {
+    font-size: 0.82rem;
+  }
+
   .book-call-btn {
-    padding: 10px 20px;
-    font-size: 0.85rem;
+    padding: 10px 22px;
+    font-size: 0.8rem;
   }
 }

@@ -19,11 +19,14 @@ export const SpaceBackground: React.FC<SpaceBackgroundProps> = ({
     return shadows;
   };
 
-  const [stars] = useState(() => ({
-    small: generateStars(700),
-    medium: generateStars(200),
-    large: generateStars(50),
-  }));
+  const [stars] = useState(() => {
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+    return {
+      small: generateStars(isMobile ? 180 : 600),
+      medium: generateStars(isMobile ? 50 : 180),
+      large: generateStars(isMobile ? 15 : 40),
+    };
+  });
 
   return (
     <div className={`global-space-theme theme-${colorTheme}`}>

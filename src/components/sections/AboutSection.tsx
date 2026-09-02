@@ -205,7 +205,7 @@ export const AboutSection: React.FC = () => {
                 <br />
                 EVERYTHING IS
                 <br />
-                FIGUREOUTABLE
+                <span className="figureoutable-word">FIGUREOUTABLE</span>
                 <br />
                 <span className="highlight-text">AND FIGURES OUT</span>
               </h3>

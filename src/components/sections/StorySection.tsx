@@ -5,7 +5,11 @@ import profileImg2 from "../../assets/me2.jpg";
 
 const STORY_PHOTOS = [profileImg1, profileImg2];
 
-export const StorySection: React.FC = () => {
+export const StorySection: React.FC<{
+  onNavigate?: (
+    page: "home" | "media" | "about" | "projects" | "contact" | "resume",
+  ) => void;
+}> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
@@ -73,7 +77,19 @@ export const StorySection: React.FC = () => {
           </div>
 
           <div className="story-graphic-column">
-            <div className="id-card-stack">
+            <div
+              className="id-card-stack"
+              onClick={() => onNavigate && onNavigate("contact")}
+              style={{ cursor: onNavigate ? "pointer" : "default" }}
+              role={onNavigate ? "button" : undefined}
+              tabIndex={onNavigate ? 0 : undefined}
+              onKeyDown={(e) => {
+                if (onNavigate && (e.key === "Enter" || e.key === " ")) {
+                  e.preventDefault();
+                  onNavigate("contact");
+                }
+              }}
+            >
               {/* Background Card - No green dot as requested */}
               <div className="id-card-bg">
                 <div className="id-card-connect-text">CLICK TO CONNECT ↗</div>
@@ -120,7 +136,7 @@ export const StorySection: React.FC = () => {
                     <br />
                     EVERYTHING IS
                     <br />
-                    FIGUREOUTABLE
+                    <span className="figureoutable-word">FIGUREOUTABLE</span>
                     <br />
                     <span className="id-card-subheadline">AND FIGURES OUT</span>
                   </h3>
