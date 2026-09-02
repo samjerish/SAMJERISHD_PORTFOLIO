@@ -1,29 +1,29 @@
-/* STORY SECTION (ENLARGED & REFINED) */
+/* STORY SECTION (STANDARDIZED DIMENSIONS & TYPOGRAPHY) */
 .story-container {
   min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8rem 2.5rem;
+  padding: 8rem 4vw;
   position: relative;
   background-color: transparent;
   z-index: 10;
 }
 
 .story-content-wrapper {
-  max-width: 1380px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
 }
 
 .story-content-block {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 5rem;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 4.5rem;
   align-items: center;
   opacity: 0;
-  transform: translateY(35px);
+  transform: translateY(30px);
   transition:
     opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -43,33 +43,36 @@
 .story-section-part {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1.25rem;
 }
 
 .story-headline {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-  font-weight: 800;
+  font-size: clamp(3rem, 5.5vw, 4.8rem);
+  font-weight: 900;
   color: #ffffff;
-  letter-spacing: -0.5px;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
   margin: 0;
-  line-height: 1.15;
+  line-height: 1;
 }
 
 .story-subheadline {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 700;
-  color: #e0e0e0;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
   letter-spacing: -0.5px;
+  text-transform: uppercase;
   margin: 0;
+  line-height: 1.1;
 }
 
 .story-description {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-heading, "Inter", sans-serif);
   font-size: 1.15rem;
-  line-height: 1.8;
-  color: #a8a8a8;
+  line-height: 1.7;
+  color: #a0a0a0;
   margin: 0;
 }
 
@@ -79,7 +82,7 @@ body.light-mode .story-headline {
 }
 
 body.light-mode .story-subheadline {
-  color: #555555;
+  color: #222222;
 }
 
 body.light-mode .story-description {
@@ -87,7 +90,7 @@ body.light-mode .story-description {
 }
 
 /* ===================================================
-   ID CARD ASSEMBLY (FULL PHOTO + SMALL SUBTITLE)
+   ID CARD ASSEMBLY (BLACK CASING & BALANCED SIZE)
    =================================================== */
 
 .story-graphic-column {
@@ -101,8 +104,8 @@ body.light-mode .story-description {
 .id-card-assembly {
   position: relative;
   width: 100%;
-  max-width: 360px;
-  height: 600px;
+  max-width: 320px;
+  height: 540px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -117,9 +120,9 @@ body.light-mode .story-description {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 48px;
-  height: 14px;
-  background: linear-gradient(180deg, #333333 0%, #111111 100%);
+  width: 44px;
+  height: 13px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
@@ -130,9 +133,9 @@ body.light-mode .story-description {
 }
 
 .anchor-metal-pin {
-  width: 22px;
+  width: 20px;
   height: 4px;
-  background: #666666;
+  background: #555555;
   border-radius: 2px;
 }
 
@@ -143,7 +146,7 @@ body.light-mode .story-description {
   left: 50%;
   transform: translateX(-50%);
   width: 320px;
-  height: 600px;
+  height: 560px;
   pointer-events: none;
   z-index: 10;
   overflow: visible;
@@ -155,8 +158,8 @@ body.light-mode .story-description {
   position: absolute;
   top: 80px;
   left: 50%;
-  margin-left: -150px; /* half of 300px width */
-  width: 300px;
+  margin-left: -135px; /* half of 270px width */
+  width: 270px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -174,7 +177,7 @@ body.light-mode .story-description {
   cursor: grabbing;
 }
 
-/* Silver Metal Clasp */
+/* Dark Chrome Metal Clasp */
 .badge-metal-clasp {
   display: flex;
   flex-direction: column;
@@ -184,74 +187,75 @@ body.light-mode .story-description {
 }
 
 .clasp-metal-ring {
-  width: 28px;
-  height: 22px;
-  border: 3.5px solid #d4d4d4;
+  width: 26px;
+  height: 20px;
+  border: 3.5px solid #666666;
   border-radius: 6px;
   background: transparent;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .clasp-spring-buckle {
-  width: 20px;
-  height: 14px;
-  background: linear-gradient(180deg, #e8e8e8 0%, #999999 100%);
+  width: 18px;
+  height: 13px;
+  background: linear-gradient(180deg, #444444 0%, #1c1c1c 100%);
   border-radius: 3px;
-  border: 1px solid #777777;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border: 1px solid #555555;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   margin-top: -3px;
 }
 
-/* White Molded Plastic Outer Badge Frame */
+/* SLEEK BLACK MOLDED CASING (Changed from White to Black Border) */
 .badge-outer-frame {
   position: relative;
   width: 100%;
-  background: #f2f3f5;
-  border-radius: 24px;
-  padding: 8px;
+  background: #141416;
+  border-radius: 22px;
+  padding: 7px;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
   box-shadow:
-    0 25px 65px rgba(0, 0, 0, 0.8),
-    0 10px 25px rgba(0, 0, 0, 0.55),
-    inset 0 1px 2px rgba(255, 255, 255, 0.95),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.15);
+    0 25px 60px rgba(0, 0, 0, 0.85),
+    0 10px 25px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Top Tab Punch Hole Slot */
+/* Top Tab Punch Hole Slot (Dark) */
 .badge-slot-punch {
-  width: 54px;
-  height: 14px;
-  background: #f2f3f5;
+  width: 50px;
+  height: 13px;
+  background: #141416;
   border-radius: 8px 8px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: -2px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .slot-inner-hole {
-  width: 34px;
-  height: 6px;
-  background: #111111;
+  width: 30px;
+  height: 5px;
+  background: #080808;
   border-radius: 4px;
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9);
 }
 
 /* Inner ID Card Surface */
 .badge-inner-card {
   position: relative;
   width: 100%;
-  background-color: #111113;
-  border-radius: 18px;
+  background-color: #0c0c0e;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
-  padding: 14px 14px 18px 14px;
+  padding: 12px 12px 16px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9);
 }
 
 /* Diagonal Geometric Stripes Background */
@@ -264,13 +268,13 @@ body.light-mode .story-description {
   background: repeating-linear-gradient(
     -45deg,
     transparent,
-    transparent 18px,
-    rgba(255, 255, 255, 0.02) 18px,
-    rgba(255, 255, 255, 0.02) 36px,
-    transparent 36px,
-    transparent 54px,
-    rgba(255, 255, 255, 0.035) 54px,
-    rgba(255, 255, 255, 0.035) 76px
+    transparent 16px,
+    rgba(255, 255, 255, 0.02) 16px,
+    rgba(255, 255, 255, 0.02) 32px,
+    transparent 32px,
+    transparent 48px,
+    rgba(255, 255, 255, 0.035) 48px,
+    rgba(255, 255, 255, 0.035) 68px
   );
   pointer-events: none;
   z-index: 1;
@@ -280,11 +284,11 @@ body.light-mode .story-description {
 .id-full-photo-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 4.8;
-  border-radius: 14px;
+  aspect-ratio: 4 / 4.7;
+  border-radius: 12px;
   overflow: hidden;
-  background-color: #1a1a1e;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: #16161a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
     0 10px 25px rgba(0, 0, 0, 0.6),
     inset 0 0 10px rgba(0, 0, 0, 0.5);
@@ -337,14 +341,14 @@ body.light-mode .story-description {
   align-items: center;
   text-align: center;
   gap: 4px;
-  margin-top: 14px;
+  margin-top: 12px;
   z-index: 5;
   width: 100%;
 }
 
 .id-person-name {
   font-family: "Outfit", sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.18rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: 1px;
@@ -354,7 +358,7 @@ body.light-mode .story-description {
 
 .id-person-subtitle {
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: #4ade80;
   letter-spacing: 2px;
@@ -366,15 +370,18 @@ body.light-mode .story-description {
   border-radius: 20px;
 }
 
-/* Responsive adjustments */
+/* ===================================================
+   RESPONSIVE ADAPTATIONS (Mobile & Tablet)
+   =================================================== */
+
 @media (max-width: 960px) {
   .story-container {
-    padding: 6rem 1.5rem;
+    padding: 6rem 4vw;
   }
 
   .story-content-block {
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 3rem;
   }
 
   .story-graphic-column {
@@ -384,32 +391,32 @@ body.light-mode .story-description {
 
 @media (max-width: 480px) {
   .id-card-assembly {
-    max-width: 310px;
-    height: 560px;
+    max-width: 290px;
+    height: 510px;
   }
 
   .id-badge-unit {
-    width: 270px;
-    margin-left: -135px;
+    width: 250px;
+    margin-left: -125px;
   }
 
   .id-person-name {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   .id-person-subtitle {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
   }
 
   .story-headline {
-    font-size: 2.2rem;
+    font-size: clamp(2.4rem, 8vw, 3.2rem);
   }
 
   .story-subheadline {
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
   }
 
   .story-description {
-    font-size: 1.02rem;
+    font-size: 1rem;
   }
 }
