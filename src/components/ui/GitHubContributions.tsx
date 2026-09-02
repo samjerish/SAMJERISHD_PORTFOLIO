@@ -138,18 +138,6 @@ export const GitHubContributions: React.FC = () => {
             <span className="metric-lbl">Total Forks</span>
           </div>
         </div>
-
-        <div className="github-metric-card">
-          <div className="metric-icon-wrap follow-wrap">
-            <FiGithub />
-          </div>
-          <div className="metric-content">
-            <span className="metric-val">
-              {loading ? "..." : user ? user.followers : "4"}
-            </span>
-            <span className="metric-lbl">Followers</span>
-          </div>
-        </div>
       </div>
 
       {/* Clean Dark Mode GitHub Contribution Timeline */}
