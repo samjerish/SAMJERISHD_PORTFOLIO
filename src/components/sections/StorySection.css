@@ -1,4 +1,4 @@
-/* STORY SECTION (STANDARDIZED DIMENSIONS & TYPOGRAPHY) */
+/* STORY SECTION (ENLARGED TYPOGRAPHY & BIG ID CARD) */
 .story-container {
   min-height: 100vh;
   width: 100%;
@@ -19,8 +19,8 @@
 
 .story-content-block {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: 4.5rem;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 5rem;
   align-items: center;
   opacity: 0;
   transform: translateY(30px);
@@ -37,42 +37,42 @@
 .story-text-column {
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
+  gap: 4rem;
 }
 
 .story-section-part {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .story-headline {
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 5.5vw, 4.8rem);
+  font-size: clamp(3.5rem, 6.5vw, 5.5rem);
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: -1.5px;
+  letter-spacing: -2px;
   text-transform: uppercase;
   margin: 0;
-  line-height: 1;
+  line-height: 0.96;
 }
 
 .story-subheadline {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
   text-transform: uppercase;
   margin: 0;
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
 .story-description {
   font-family: var(--font-heading, "Inter", sans-serif);
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: #a0a0a0;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  line-height: 1.75;
+  color: #b8b8b8;
   margin: 0;
 }
 
@@ -90,7 +90,7 @@ body.light-mode .story-description {
 }
 
 /* ===================================================
-   ID CARD ASSEMBLY (BLACK CASING & BALANCED SIZE)
+   ENLARGED ID CARD ASSEMBLY (BIG PROPORTIONS)
    =================================================== */
 
 .story-graphic-column {
@@ -104,8 +104,8 @@ body.light-mode .story-description {
 .id-card-assembly {
   position: relative;
   width: 100%;
-  max-width: 320px;
-  height: 540px;
+  max-width: 420px;
+  height: 680px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -120,12 +120,12 @@ body.light-mode .story-description {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 44px;
-  height: 13px;
+  width: 56px;
+  height: 16px;
   background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   z-index: 30;
   display: flex;
   align-items: center;
@@ -133,9 +133,9 @@ body.light-mode .story-description {
 }
 
 .anchor-metal-pin {
-  width: 20px;
-  height: 4px;
-  background: #555555;
+  width: 26px;
+  height: 5px;
+  background: #666666;
   border-radius: 2px;
 }
 
@@ -145,21 +145,21 @@ body.light-mode .story-description {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 320px;
-  height: 560px;
+  width: 420px;
+  height: 700px;
   pointer-events: none;
   z-index: 10;
   overflow: visible;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
 }
 
-/* Draggable ID Badge Unit */
+/* Draggable ID Badge Unit (Enlarged to 360px) */
 .id-badge-unit {
   position: absolute;
-  top: 80px;
+  top: 95px;
   left: 50%;
-  margin-left: -135px; /* half of 270px width */
-  width: 270px;
+  margin-left: -180px; /* half of 360px width */
+  width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -187,36 +187,36 @@ body.light-mode .story-description {
 }
 
 .clasp-metal-ring {
-  width: 26px;
-  height: 20px;
-  border: 3.5px solid #666666;
-  border-radius: 6px;
+  width: 34px;
+  height: 24px;
+  border: 4.5px solid #666666;
+  border-radius: 8px;
   background: transparent;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 .clasp-spring-buckle {
-  width: 18px;
-  height: 13px;
+  width: 24px;
+  height: 16px;
   background: linear-gradient(180deg, #444444 0%, #1c1c1c 100%);
-  border-radius: 3px;
+  border-radius: 4px;
   border: 1px solid #555555;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  margin-top: -3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+  margin-top: -4px;
 }
 
-/* SLEEK BLACK MOLDED CASING (Changed from White to Black Border) */
+/* SLEEK BLACK MOLDED CASING */
 .badge-outer-frame {
   position: relative;
   width: 100%;
   background: #141416;
-  border-radius: 22px;
-  padding: 7px;
-  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.16);
   box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.85),
-    0 10px 25px rgba(0, 0, 0, 0.6),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    0 30px 75px rgba(0, 0, 0, 0.9),
+    0 12px 30px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -224,23 +224,23 @@ body.light-mode .story-description {
 
 /* Top Tab Punch Hole Slot (Dark) */
 .badge-slot-punch {
-  width: 50px;
-  height: 13px;
+  width: 64px;
+  height: 16px;
   background: #141416;
-  border-radius: 8px 8px 0 0;
+  border-radius: 10px 10px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -2px;
-  margin-bottom: 5px;
+  margin-top: -3px;
+  margin-bottom: 6px;
 }
 
 .slot-inner-hole {
-  width: 30px;
-  height: 5px;
+  width: 40px;
+  height: 6px;
   background: #080808;
-  border-radius: 4px;
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 /* Inner ID Card Surface */
@@ -248,14 +248,14 @@ body.light-mode .story-description {
   position: relative;
   width: 100%;
   background-color: #0c0c0e;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  padding: 12px 12px 16px 12px;
+  padding: 16px 16px 20px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.95);
 }
 
 /* Diagonal Geometric Stripes Background */
@@ -268,13 +268,13 @@ body.light-mode .story-description {
   background: repeating-linear-gradient(
     -45deg,
     transparent,
-    transparent 16px,
-    rgba(255, 255, 255, 0.02) 16px,
-    rgba(255, 255, 255, 0.02) 32px,
-    transparent 32px,
-    transparent 48px,
-    rgba(255, 255, 255, 0.035) 48px,
-    rgba(255, 255, 255, 0.035) 68px
+    transparent 18px,
+    rgba(255, 255, 255, 0.02) 18px,
+    rgba(255, 255, 255, 0.02) 36px,
+    transparent 36px,
+    transparent 54px,
+    rgba(255, 255, 255, 0.035) 54px,
+    rgba(255, 255, 255, 0.035) 76px
   );
   pointer-events: none;
   z-index: 1;
@@ -284,14 +284,14 @@ body.light-mode .story-description {
 .id-full-photo-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 4.7;
-  border-radius: 12px;
+  aspect-ratio: 4 / 4.8;
+  border-radius: 16px;
   overflow: hidden;
   background-color: #16161a;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
   box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.6),
-    inset 0 0 10px rgba(0, 0, 0, 0.5);
+    0 15px 35px rgba(0, 0, 0, 0.7),
+    inset 0 0 14px rgba(0, 0, 0, 0.6);
   z-index: 5;
 }
 
@@ -340,48 +340,48 @@ body.light-mode .story-description {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 4px;
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 16px;
   z-index: 5;
   width: 100%;
 }
 
 .id-person-name {
   font-family: "Outfit", sans-serif;
-  font-size: 1.18rem;
+  font-size: 1.45rem;
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   margin: 0;
   text-transform: uppercase;
 }
 
 .id-person-subtitle {
   font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: #4ade80;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   margin: 0;
-  padding: 3px 10px;
+  padding: 5px 14px;
   background: rgba(74, 222, 128, 0.08);
-  border: 1px solid rgba(74, 222, 128, 0.2);
-  border-radius: 20px;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 24px;
 }
 
 /* ===================================================
    RESPONSIVE ADAPTATIONS (Mobile & Tablet)
    =================================================== */
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) {
   .story-container {
     padding: 6rem 4vw;
   }
 
   .story-content-block {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 4rem;
   }
 
   .story-graphic-column {
@@ -391,32 +391,32 @@ body.light-mode .story-description {
 
 @media (max-width: 480px) {
   .id-card-assembly {
-    max-width: 290px;
-    height: 510px;
+    max-width: 320px;
+    height: 560px;
   }
 
   .id-badge-unit {
-    width: 250px;
-    margin-left: -125px;
+    width: 280px;
+    margin-left: -140px;
   }
 
   .id-person-name {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .id-person-subtitle {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
   }
 
   .story-headline {
-    font-size: clamp(2.4rem, 8vw, 3.2rem);
+    font-size: clamp(2.6rem, 8.5vw, 3.6rem);
   }
 
   .story-subheadline {
-    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    font-size: clamp(1.6rem, 5.5vw, 2.2rem);
   }
 
   .story-description {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
