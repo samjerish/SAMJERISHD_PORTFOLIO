@@ -60,21 +60,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
             <div className="about-bio-paragraphs">
               <p>
-                I’m an AI & Machine Learning student and Full Stack Developer
-                who thrives on building high-performance web experiences,
-                intelligent systems, and creative digital media.
+                Hey, I’m <strong>Sam Jerish</strong> — a Computer Science student specializing in AI & Machine Learning. I build full-stack web applications, experiment with intelligent software, and create visual media.
               </p>
               <p>
                 My philosophy is simple:{" "}
-                <em>"Solving Real world problems through creativity and technology."</em> I love exploring the
-                intersection of technology and creativity—turning curious ideas
-                into real, useful, and responsive digital products.
+                <em>"Solving Real world problems through creativity and technology."</em> I love taking ideas from scratch and turning them into practical, clean, and responsive digital products that people can actually use.
               </p>
               <p>
-                Whether it's architecting reactive frontend interfaces,
-                engineering automation pipelines, or capturing stories through
-                visual media, I bring relentless curiosity and meticulous
-                craftsmanship to everything I build.
+                When I’m not coding or debugging, you’ll usually find me behind a camera capturing campus events or editing video content for <strong>@MatrixKarunya</strong>.
               </p>
             </div>
           </div>
@@ -98,9 +91,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <h3 className="timeline-role">Full Stack & AI Developer</h3>
                 <h4 className="timeline-org">Freelance & Independent Projects</h4>
                 <p className="timeline-desc">
-                  Designing and deploying end-to-end full stack web platforms,
-                  integrating responsive user interfaces with reactive backend
-                  APIs and cloud-native hosting architectures.
+                  Building and deploying web applications, working with React, TypeScript, Python, and cloud backends. Focused on clean UI, smooth performance, and practical user experience.
                 </p>
               </div>
             </div>
