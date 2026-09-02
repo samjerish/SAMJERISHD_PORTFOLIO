@@ -274,6 +274,13 @@ export const StorySection: React.FC<{
                         );
                       })}
                       <div className="id-photo-specular-glare"></div>
+
+                      {/* Interactive Indicator Pill */}
+                      <div className="id-interactive-pill">
+                        <span className="id-interactive-dot"></span>
+                        <span>Hold & Swing</span>
+                        <span className="id-interactive-arrow">⇄</span>
+                      </div>
                     </div>
 
                     {/* Below Photo: Name and Small Full Stack Developer Text */}

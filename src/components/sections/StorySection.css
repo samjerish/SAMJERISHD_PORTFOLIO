@@ -421,6 +421,59 @@ body.light-mode .story-view-more-avatar-wrap {
   z-index: 3;
 }
 
+/* Interactive Drag & Swing Hint Pill */
+.id-interactive-pill {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  background: rgba(12, 12, 15, 0.88);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #eeeeee;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 12px rgba(74, 222, 128, 0.15);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.id-badge-unit.is-dragging .id-interactive-pill {
+  opacity: 0.2;
+}
+
+.id-interactive-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: dot-pulse 1.4s infinite ease-in-out;
+}
+
+.id-interactive-arrow {
+  color: #4ade80;
+  font-size: 0.82rem;
+  animation: nudge-swing 2s infinite ease-in-out;
+}
+
+@keyframes nudge-swing {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
 /* Identity Bottom (Name + Small Title) */
 .id-identity-bottom {
   display: flex;
