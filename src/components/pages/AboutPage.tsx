@@ -157,18 +157,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   }}
                   draggable={false}
                 />
-
-                {/* Gesture Hint Pill */}
-                <div className="avatar-swipe-hint-pill">
-                  <span>Tap or swipe</span>
-                  <span className="swipe-arrows">⇄</span>
-                </div>
-
-                {/* Status Indicator */}
-                <div className="avatar-status-pill">
-                  <span className="status-live-dot"></span>
-                  <span>Active & Building</span>
-                </div>
               </div>
 
               {/* Photo Indicator Dots */}
@@ -191,9 +179,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
           <div className="about-hero-info">
             <h1 className="about-hero-name">SAM JERISH D</h1>
-            <h2 className="about-hero-tagline">
-              AIML Student • Full Stack Developer • Creative Problem Solver
-            </h2>
 
             <div className="about-bio-paragraphs">
               <p>
