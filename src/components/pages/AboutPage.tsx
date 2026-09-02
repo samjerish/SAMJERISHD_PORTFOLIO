@@ -114,11 +114,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Work Experience & Education Milestones */}
+        {/* Work Experience Milestones */}
         <section className="about-experience-section">
           <div className="experience-header">
             <span className="exp-badge">JOURNEY & MILESTONES</span>
-            <h2 className="exp-heading">WORK EXPERIENCE & EDUCATION</h2>
+            <h2 className="exp-heading">WORK EXPERIENCE</h2>
           </div>
 
           <div className="experience-timeline-grid">
