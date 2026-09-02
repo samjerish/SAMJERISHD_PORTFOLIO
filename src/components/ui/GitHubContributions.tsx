@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./GitHubContributions.css";
 import {
   FiGithub,
@@ -27,10 +27,23 @@ interface GitHubRepo {
   updated_at: string;
 }
 
+interface ContributionDay {
+  date: string;
+  count: number;
+  level: number;
+}
+
+const MONTH_NAMES = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
 export const GitHubContributions: React.FC = () => {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
-  const [chartSvg, setChartSvg] = useState<string>("");
+  const [contributions, setContributions] = useState<ContributionDay[]>([]);
+  const [totalYearContributions, setTotalYearContributions] = useState<number | null>(null);
+  const [hoveredDay, setHoveredDay] = useState<{ date: string; count: number } | null>(null);
   const [loading, setLoading] = useState(true);
 
   const fetchGitHubData = async () => {
@@ -52,26 +65,21 @@ export const GitHubContributions: React.FC = () => {
         setRepos(reposData);
       }
 
-      // 3. Fetch real-time SVG contribution calendar and transform all white/light fills to dark
-      const chartRes = await fetch("https://ghchart.rshah.org/39d353/samjerish");
-      if (chartRes.ok) {
-        let svg = await chartRes.text();
-        // Replace all white/light-gray squares with GitHub dark theme squares (#161b22)
-        svg = svg
-          .replace(/#EEEEEE/gi, "#161b22")
-          .replace(/#ebedf0/gi, "#161b22")
-          .replace(/#ffffff/gi, "#0d1117")
-          .replace(/#767676/gi, "#8b949e");
-
-        // Make SVG fully fluid and stretch across the container
-        svg = svg.replace(
-          "<svg ",
-          '<svg width="100%" height="100%" viewBox="0 0 660 110" preserveAspectRatio="xMidYMid meet" '
-        );
-        setChartSvg(svg);
+      // 3. Fetch real-time contribution calendar (CORS-enabled API)
+      const contribRes = await fetch(
+        "https://github-contributions-api.jogruber.de/v4/samjerish?y=last"
+      );
+      if (contribRes.ok) {
+        const data = await contribRes.json();
+        if (data && data.contributions) {
+          setContributions(data.contributions);
+          if (data.total && data.total.lastYear !== undefined) {
+            setTotalYearContributions(data.total.lastYear);
+          }
+        }
       }
     } catch (err) {
-      console.error("Failed to fetch live GitHub data:", err);
+      console.error("Failed to fetch live GitHub telemetry:", err);
     } finally {
       setLoading(false);
     }
@@ -83,6 +91,47 @@ export const GitHubContributions: React.FC = () => {
 
   const totalStars = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
   const totalForks = repos.reduce((acc, r) => acc + (r.forks_count || 0), 0);
+
+  // Group contributions into 52/53 weeks of 7 days
+  const { weeks, monthHeaders } = useMemo(() => {
+    const list: ContributionDay[] =
+      contributions.length > 0
+        ? contributions
+        : Array.from({ length: 364 }, (_, i) => ({
+            date: `2025-01-${(i % 28) + 1}`,
+            count: 0,
+            level: 0,
+          }));
+
+    const resultWeeks: ContributionDay[][] = [];
+    let currentWeek: ContributionDay[] = [];
+
+    list.forEach((item, idx) => {
+      currentWeek.push(item);
+      if (currentWeek.length === 7 || idx === list.length - 1) {
+        resultWeeks.push(currentWeek);
+        currentWeek = [];
+      }
+    });
+
+    // Determine month label positions along week columns
+    const headers: { month: string; colIndex: number }[] = [];
+    let lastMonth = -1;
+
+    resultWeeks.forEach((week, colIdx) => {
+      const firstDay = week[0];
+      if (firstDay && firstDay.date) {
+        const d = new Date(firstDay.date);
+        const m = d.getMonth();
+        if (m !== lastMonth) {
+          headers.push({ month: MONTH_NAMES[m], colIndex: colIdx });
+          lastMonth = m;
+        }
+      }
+    });
+
+    return { weeks: resultWeeks, monthHeaders: headers };
+  }, [contributions]);
 
   return (
     <section className="github-sync-section">
@@ -160,44 +209,100 @@ export const GitHubContributions: React.FC = () => {
         </div>
       </div>
 
-      {/* Clean Full-Width Dark Mode GitHub Contribution Timeline */}
+      {/* Pure Dark-Themed Contribution Matrix (All Non-Commits in Dark Black) */}
       <div className="github-timeline-container">
         <div className="timeline-header-row">
           <div className="timeline-title-wrap">
             <h3 className="timeline-title">CONTRIBUTION ACTIVITY</h3>
             <span className="timeline-badge">
               <span className="badge-pulse-dot"></span>
-              Real-time Sync
+              {totalYearContributions !== null
+                ? `${totalYearContributions} contributions in the last year`
+                : "Real-time Sync"}
             </span>
           </div>
           <span className="timeline-caption-year">Last 12 Months</span>
         </div>
 
-        {/* Full-Cover Heatmap Graph Window */}
+        {/* Full-Cover Native SVG Contribution Matrix */}
         <div className="timeline-graph-window">
-          <div className="timeline-graph-scroll">
-            {chartSvg ? (
-              <div
-                className="timeline-svg-wrapper"
-                dangerouslySetInnerHTML={{ __html: chartSvg }}
-              />
-            ) : (
-              <img
-                src={`https://ghchart.rshah.org/39d353/samjerish?timestamp=${Date.now()}`}
-                alt="Sam Jerish's GitHub Dark Heatmap Chart"
-                className="github-timeline-img"
-                loading="lazy"
-              />
-            )}
+          <div className="timeline-native-scroll">
+            <svg
+              className="native-contrib-svg"
+              viewBox={`0 0 ${weeks.length * 15 + 40} 135`}
+              preserveAspectRatio="xMidYMid meet"
+            >
+              {/* Month Text Headers */}
+              {monthHeaders.map((h, i) => (
+                <text
+                  key={i}
+                  x={36 + h.colIndex * 15}
+                  y={14}
+                  className="svg-month-label"
+                >
+                  {h.month}
+                </text>
+              ))}
+
+              {/* Day Labels (Mon, Wed, Fri) */}
+              <text x={0} y={42} className="svg-day-label">
+                Mon
+              </text>
+              <text x={0} y={72} className="svg-day-label">
+                Wed
+              </text>
+              <text x={0} y={102} className="svg-day-label">
+                Fri
+              </text>
+
+              {/* Grid of Weeks & Days (Boxes in Deep Black / Neon Green) */}
+              <g transform="translate(36, 22)">
+                {weeks.map((week, colIdx) => (
+                  <g key={colIdx} transform={`translate(${colIdx * 15}, 0)`}>
+                    {week.map((day, rowIdx) => {
+                      const levelClass = `cell-lvl-${day.level || 0}`;
+                      return (
+                        <rect
+                          key={rowIdx}
+                          x={0}
+                          y={rowIdx * 15}
+                          width={11}
+                          height={11}
+                          rx={2.5}
+                          ry={2.5}
+                          className={`contrib-cell ${levelClass}`}
+                          onMouseEnter={() =>
+                            setHoveredDay({ date: day.date, count: day.count })
+                          }
+                          onMouseLeave={() => setHoveredDay(null)}
+                        >
+                          <title>{`${day.count} contributions on ${day.date}`}</title>
+                        </rect>
+                      );
+                    })}
+                  </g>
+                ))}
+              </g>
+            </svg>
           </div>
         </div>
 
-        {/* Timeline Footer */}
+        {/* Timeline Footer & Hover Tooltip */}
         <div className="timeline-footer-row">
           <div className="footer-legend-hint">
-            <span>Points in </span>
-            <span className="green-accent-text">green</span>
-            <span> indicate active commit days</span>
+            {hoveredDay ? (
+              <span className="hover-activity-badge">
+                <strong>{hoveredDay.count}</strong> contributions on{" "}
+                <strong>{hoveredDay.date}</strong>
+              </span>
+            ) : (
+              <>
+                <span>Boxes in </span>
+                <span className="black-accent-text">dark black</span>
+                <span>, active commits in </span>
+                <span className="green-accent-text">vibrant green</span>
+              </>
+            )}
           </div>
 
           <a
