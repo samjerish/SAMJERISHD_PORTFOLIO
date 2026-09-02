@@ -414,9 +414,34 @@ body.light-mode .social-pill {
 
 .about-social-icon-btn:hover {
   transform: translateY(-5px) scale(1.1);
-  border-color: #4ade80;
-  color: #4ade80;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+/* GitHub Hover */
+.about-social-icon-btn.github-btn:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 255, 255, 0.4);
+}
+
+/* LinkedIn Hover */
+.about-social-icon-btn.linkedin-btn:hover {
+  border-color: #0a66c2;
+  color: #0a66c2;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(10, 102, 194, 0.5);
+}
+
+/* Instagram Hover */
+.about-social-icon-btn.instagram-btn:hover {
+  border-color: #e1306c;
+  color: #e1306c;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(225, 48, 108, 0.55);
+}
+
+/* Email / Gmail Hover */
+.about-social-icon-btn.email-btn:hover {
+  border-color: #ea4335;
+  color: #ea4335;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 22px rgba(234, 67, 53, 0.5);
 }
 
 body.light-mode .about-bottom-socials {
@@ -430,9 +455,24 @@ body.light-mode .about-social-icon-btn {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-body.light-mode .about-social-icon-btn:hover {
-  border-color: #16a34a;
-  color: #16a34a;
+body.light-mode .about-social-icon-btn.github-btn:hover {
+  border-color: #111111;
+  color: #111111;
+}
+
+body.light-mode .about-social-icon-btn.linkedin-btn:hover {
+  border-color: #0a66c2;
+  color: #0a66c2;
+}
+
+body.light-mode .about-social-icon-btn.instagram-btn:hover {
+  border-color: #e1306c;
+  color: #e1306c;
+}
+
+body.light-mode .about-social-icon-btn.email-btn:hover {
+  border-color: #ea4335;
+  color: #ea4335;
 }
 
 /* ===================================================

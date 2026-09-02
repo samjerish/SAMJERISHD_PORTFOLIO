@@ -151,7 +151,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             href="https://github.com/samjerish"
             target="_blank"
             rel="noopener noreferrer"
-            className="about-social-icon-btn"
+            className="about-social-icon-btn github-btn"
             aria-label="GitHub"
             title="GitHub"
           >
@@ -161,7 +161,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             href="https://linkedin.com/in/samjerishd"
             target="_blank"
             rel="noopener noreferrer"
-            className="about-social-icon-btn"
+            className="about-social-icon-btn linkedin-btn"
             aria-label="LinkedIn"
             title="LinkedIn"
           >
@@ -171,7 +171,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             href="https://instagram.com/samjerishd"
             target="_blank"
             rel="noopener noreferrer"
-            className="about-social-icon-btn"
+            className="about-social-icon-btn instagram-btn"
             aria-label="Instagram"
             title="Instagram"
           >
@@ -179,7 +179,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           </a>
           <a
             href="mailto:samjerishd@gmail.com"
-            className="about-social-icon-btn"
+            className="about-social-icon-btn email-btn"
             aria-label="Email"
             title="Email"
           >
