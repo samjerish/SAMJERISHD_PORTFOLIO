@@ -286,24 +286,14 @@ export const CenterFlow: React.FC<{
           <div className="hub-ripple-ring ring-2"></div>
           <div className="hub-orbit-dashed"></div>
 
-          {/* Central Core Card */}
-          <div className="hub-core-card photo-hub">
-            <div className="hub-photo-container">
-              <img
-                src={thumpsupImage}
-                alt="Sam Jerish D"
-                className="hub-avatar-photo"
-                draggable={false}
-              />
-            </div>
-            <div className="hub-text-content">
-              <span className="hub-label">SAM JERISH D</span>
-              <span className="hub-tag">FULL STACK</span>
-            </div>
-            <div className="hub-live-badge">
-              <span className="hub-live-dot"></span>
-              <span>ACTIVE</span>
-            </div>
+          {/* Central Core Hub Photo (Clean & Borderless) */}
+          <div className="hub-core-card photo-hub-clean">
+            <img
+              src={thumpsupImage}
+              alt="Sam Jerish D"
+              className="hub-avatar-photo-clean"
+              draggable={false}
+            />
           </div>
         </div>
 

@@ -179,6 +179,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
           <div className="about-hero-info">
             <h1 className="about-hero-name">SAM JERISH D</h1>
+            <h2 className="about-hero-tagline">
+              AIML Student • Full Stack Developer • Creative Problem Solver
+            </h2>
 
             <div className="about-bio-paragraphs">
               <p>
