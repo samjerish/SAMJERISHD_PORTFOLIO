@@ -5,7 +5,7 @@ import { projects } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import { ProjectModal } from "../ui/ProjectModal";
 import { CenterFlow } from "../ui/CenterFlow";
-import { ScrollStack } from "../ui/ScrollStack";
+import { ProjectParallaxList } from "../ui/ProjectParallaxList";
 
 export const ProjectsPage: React.FC<{
   onNavigate: (
@@ -52,8 +52,8 @@ export const ProjectsPage: React.FC<{
           </div>
         </div>
 
-        {/* Scroll Stack Pinned Cards Deck */}
-        <ScrollStack
+        {/* Alternating Parallax Project Showcase with 3D Tilt */}
+        <ProjectParallaxList
           projects={projects}
           onProjectClick={handleProjectClick}
         />
