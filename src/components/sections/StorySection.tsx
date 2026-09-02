@@ -12,12 +12,13 @@ export const StorySection: React.FC<{
 }> = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [angle, setAngle] = useState(0);
+  const [pos, setPos] = useState({ x: 0, y: 0, rotate: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [glare, setGlare] = useState({ x: 50, y: 50 });
   const textRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const animRef = useRef<number | null>(null);
+  const dragStartRef = useRef<{ startX: number; startY: number }>({ startX: 0, startY: 0 });
+  const animFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,69 +45,83 @@ export const StorySection: React.FC<{
     return () => {
       if (node) observer.unobserve(node);
       clearInterval(photoInterval);
-      if (animRef.current) cancelAnimationFrame(animRef.current);
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
   }, []);
 
-  const handlePointerDown = (clientX: number, clientY: number) => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
     setIsDragging(true);
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const anchorX = rect.left + rect.width / 2;
-    const anchorY = rect.top;
-
-    const dx = clientX - anchorX;
-    const dy = Math.max(15, clientY - anchorY);
-    const rad = Math.atan2(dx, dy);
-    let deg = (rad * 180) / Math.PI;
-    deg = Math.max(-45, Math.min(45, deg));
-    setAngle(deg);
+    dragStartRef.current = {
+      startX: e.clientX - pos.x,
+      startY: e.clientY - pos.y,
+    };
   };
 
-  const handlePointerMove = (clientX: number, clientY: number) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    const anchorX = rect.left + rect.width / 2;
-    const anchorY = rect.top;
+    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
+    setGlare({ x: glareX, y: glareY });
 
     if (isDragging) {
-      const dx = clientX - anchorX;
-      const dy = Math.max(15, clientY - anchorY);
-      const rad = Math.atan2(dx, dy);
-      let deg = (rad * 180) / Math.PI;
-      deg = Math.max(-50, Math.min(50, deg));
-      setAngle(deg);
+      const newX = e.clientX - dragStartRef.current.startX;
+      const newY = e.clientY - dragStartRef.current.startY;
+      const rotate = Math.max(-25, Math.min(25, newX * 0.07));
+      setPos({ x: newX, y: newY, rotate });
     }
-
-    const glareX = ((clientX - rect.left) / rect.width) * 100;
-    const glareY = ((clientY - rect.top) / rect.height) * 100;
-    setGlare({ x: glareX, y: glareY });
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging) return;
+    try {
+      (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {
+      // ignore
+    }
     setIsDragging(false);
 
-    // Realistic dampened pendulum swing back to center
-    const startDeg = angle;
-    let time = 0;
+    // Elastic spring physics simulation with bounce-back to home (0,0)
+    let currentX = pos.x;
+    let currentY = pos.y;
+    let currentRotate = pos.rotate;
+    let vx = 0;
+    let vy = 0;
+    let vRotate = 0;
+    const stiffness = 0.16;
+    const damping = 0.78;
 
-    const animateSwing = () => {
-      time += 0.035;
-      const decay = Math.exp(-time * 2.2);
-      const nextAngle = startDeg * decay * Math.cos(time * 9.5);
-      setAngle(nextAngle);
+    const springStep = () => {
+      const ax = -stiffness * currentX;
+      const ay = -stiffness * currentY;
+      const aRotate = -stiffness * currentRotate;
 
-      if (Math.abs(nextAngle) > 0.1 && decay > 0.008) {
-        animRef.current = requestAnimationFrame(animateSwing);
+      vx = (vx + ax) * damping;
+      vy = (vy + ay) * damping;
+      vRotate = (vRotate + aRotate) * damping;
+
+      currentX += vx;
+      currentY += vy;
+      currentRotate += vRotate;
+
+      setPos({ x: currentX, y: currentY, rotate: currentRotate });
+
+      if (
+        Math.abs(currentX) > 0.25 ||
+        Math.abs(currentY) > 0.25 ||
+        Math.abs(vx) > 0.08 ||
+        Math.abs(vy) > 0.08
+      ) {
+        animFrameRef.current = requestAnimationFrame(springStep);
       } else {
-        setAngle(0);
+        setPos({ x: 0, y: 0, rotate: 0 });
       }
     };
 
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    animRef.current = requestAnimationFrame(animateSwing);
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    animFrameRef.current = requestAnimationFrame(springStep);
   };
 
   return (
@@ -144,66 +159,18 @@ export const StorySection: React.FC<{
           </div>
 
           <div className="story-graphic-column">
-            {/* Hanging Status Tag */}
-            <div className="hanging-tag-wrapper">
-              <span className="hanging-tag">
-                <span className="hanging-tag-pulse"></span>
-                HOLD & DRAG TO SWING ✦
-              </span>
-            </div>
-
-            {/* Hanging Wall Rig */}
-            <div
-              className="hanging-rig"
-              onMouseUp={handlePointerUp}
-              onMouseLeave={handlePointerUp}
-              onTouchEnd={handlePointerUp}
-              onTouchCancel={handlePointerUp}
-            >
-              {/* Wall Pin / Metallic Nail */}
-              <div className="wall-anchor-pin">
-                <div className="pin-head"></div>
-                <div className="pin-screw"></div>
-              </div>
-
-              {/* Lanyard Strap hanging from pin */}
-              <div
-                className="hanging-lanyard"
-                style={{
-                  transform: `rotate(${angle * 0.4}deg)`,
-                  transformOrigin: "top center",
-                }}
-              >
-                <div className="lanyard-ribbon"></div>
-                <div className="lanyard-clasp">
-                  <div className="clasp-swivel"></div>
-                  <div className="clasp-hook"></div>
-                </div>
-              </div>
-
-              {/* ID Card with Hanging Pendulum Physics */}
+            <div className="elastic-card-container">
+              {/* Elastic Draggable ID Card */}
               <div
                 ref={cardRef}
-                className={`hanging-id-card ${isDragging ? "is-dragging" : ""}`}
+                className={`elastic-id-card ${isDragging ? "is-dragging" : ""}`}
                 style={{
-                  transform: `rotate(${angle}deg)`,
-                  transformOrigin: "top center",
+                  transform: `translate3d(${pos.x}px, ${pos.y}px, 0) rotate(${pos.rotate}deg) scale(${isDragging ? 1.04 : 1})`,
                 }}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  handlePointerDown(e.clientX, e.clientY);
-                }}
-                onMouseMove={(e) => {
-                  handlePointerMove(e.clientX, e.clientY);
-                }}
-                onTouchStart={(e) => {
-                  const touch = e.touches[0];
-                  if (touch) handlePointerDown(touch.clientX, touch.clientY);
-                }}
-                onTouchMove={(e) => {
-                  const touch = e.touches[0];
-                  if (touch) handlePointerMove(touch.clientX, touch.clientY);
-                }}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
               >
                 {/* Dynamic light reflection glare */}
                 <div
@@ -217,15 +184,6 @@ export const StorySection: React.FC<{
                 {/* Card Punch Slot & Metal Eyelet */}
                 <div className="card-top-slot">
                   <div className="slot-eyelet"></div>
-                </div>
-
-                {/* Card Header */}
-                <div className="id-card-top-banner">
-                  <div className="id-badge-status">
-                    <span className="badge-live-dot"></span>
-                    <span className="badge-title">DEV ACCESS PASS</span>
-                  </div>
-                  <div className="id-badge-serial">2026 // PRO</div>
                 </div>
 
                 {/* Photo with Frame */}
@@ -268,19 +226,6 @@ export const StorySection: React.FC<{
                     <span className="id-card-value handwriting">
                       Full Stack Developer
                     </span>
-                  </div>
-
-                  {/* Unique Security Holographic Seal */}
-                  <div className="id-card-hologram-seal">
-                    <div className="hologram-emblem">
-                      <div className="hologram-ring"></div>
-                      <span className="hologram-text">VERIFIED IDENTITY</span>
-                    </div>
-                    <div className="hologram-chip">
-                      <div className="chip-line c1"></div>
-                      <div className="chip-line c2"></div>
-                      <div className="chip-line c3"></div>
-                    </div>
                   </div>
                 </div>
               </div>

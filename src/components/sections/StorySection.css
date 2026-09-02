@@ -113,173 +113,45 @@ body.light-mode .story-container::after {
   background: linear-gradient(to bottom, transparent, #f8f8f8);
 }
 
-/* HANGING WALL ID CARD RIG */
-.hanging-tag-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  width: 100%;
-}
-
-.hanging-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #a0a0a0;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  user-select: none;
-}
-
-.hanging-tag-pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #4ade80;
-  box-shadow: 0 0 10px #4ade80;
-  animation: tag-pulse 2s infinite ease-in-out;
-}
-
-@keyframes tag-pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 0.5;
-  }
-}
-
-.hanging-rig {
+/* ELASTIC DRAGGABLE ID CARD */
+.elastic-card-container {
   position: relative;
   width: 100%;
   max-width: 380px;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding-top: 15px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
+  padding: 10px 0;
 }
 
-/* Wall Mount Pin */
-.wall-anchor-pin {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #888888 0%, #333333 60%, #111111 100%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.6);
-  z-index: 20;
-}
-
-.pin-screw {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 2px;
-  background-color: #111111;
-  border-radius: 1px;
-}
-
-/* Lanyard Ribbon & Clasp */
-.hanging-lanyard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-  z-index: 10;
-  will-change: transform;
-}
-
-.lanyard-ribbon {
-  width: 14px;
-  height: 45px;
-  background: repeating-linear-gradient(
-    45deg,
-    #181818,
-    #181818 4px,
-    #252525 4px,
-    #252525 8px
-  );
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  border-radius: 2px;
-}
-
-.lanyard-clasp {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -2px;
-}
-
-.clasp-swivel {
-  width: 18px;
-  height: 7px;
-  background: linear-gradient(90deg, #555555, #aaaaaa, #555555);
-  border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.clasp-hook {
-  width: 10px;
-  height: 18px;
-  border: 2.5px solid #aaaaaa;
-  border-top: none;
-  border-radius: 0 0 6px 6px;
-  background: transparent;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-/* Hanging ID Card Body */
-.hanging-id-card {
+.elastic-id-card {
   position: relative;
   width: 100%;
-  margin-top: -8px;
   background-color: #111111;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 24px 22px 22px 22px;
+  padding: 24px 22px 26px 22px;
   z-index: 15;
   box-shadow:
-    0 25px 50px rgba(0, 0, 0, 0.75),
+    0 20px 45px rgba(0, 0, 0, 0.65),
     0 10px 20px rgba(0, 0, 0, 0.4),
     inset 0 1px 1px rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.4rem;
   overflow: hidden;
   cursor: grab;
-  transform-origin: top center;
-  will-change: transform;
+  transform-origin: center center;
+  will-change: transform, box-shadow;
+  touch-action: none;
 }
 
-.hanging-id-card.is-dragging {
+.elastic-id-card.is-dragging {
   cursor: grabbing;
-  box-shadow:
-    0 35px 70px rgba(0, 0, 0, 0.85),
-    0 15px 30px rgba(0, 0, 0, 0.5),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25);
 }
 
 .card-glare-layer {
@@ -297,11 +169,11 @@ body.light-mode .story-container::after {
 /* Punch Slot & Metallic Eyelet */
 .card-top-slot {
   position: absolute;
-  top: 9px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   width: 44px;
-  height: 10px;
+  height: 9px;
   background-color: #060606;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -314,51 +186,9 @@ body.light-mode .story-container::after {
 
 .slot-eyelet {
   width: 32px;
-  height: 4px;
+  height: 3px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 3px;
-}
-
-/* Header Banner */
-.id-card-top-banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: 8px;
-}
-
-.id-badge-status {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.badge-live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #4ade80;
-  box-shadow: 0 0 8px #4ade80;
-}
-
-.badge-title {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #aaaaaa;
-  text-transform: uppercase;
-}
-
-.id-badge-serial {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #777777;
-  letter-spacing: 1px;
 }
 
 /* Photo */
@@ -371,6 +201,7 @@ body.light-mode .story-container::after {
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  margin-top: 10px;
 }
 
 .id-card-photo {
@@ -439,62 +270,6 @@ body.light-mode .story-container::after {
   padding-bottom: 0;
 }
 
-/* Holographic Seal Badge */
-.id-card-hologram-seal {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 12px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(74, 222, 128, 0.08) 50%,
-    rgba(96, 165, 250, 0.08) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  margin-top: 0.25rem;
-}
-
-.hologram-emblem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.hologram-ring {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid #4ade80;
-  background: radial-gradient(circle, #60a5fa 30%, transparent 70%);
-  opacity: 0.85;
-}
-
-.hologram-text {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #888888;
-  text-transform: uppercase;
-}
-
-.hologram-chip {
-  display: flex;
-  gap: 2px;
-}
-
-.chip-line {
-  height: 12px;
-  background: linear-gradient(to bottom, #d4af37, #fef08a, #ca8a04);
-  border-radius: 1px;
-}
-
-.chip-line.c1 { width: 3px; }
-.chip-line.c2 { width: 4px; }
-.chip-line.c3 { width: 2px; }
-
 .id-card-label {
   font-family: "Inter", sans-serif;
   font-size: 0.95rem;
@@ -510,30 +285,12 @@ body.light-mode .story-container::after {
   transform: rotate(-2deg);
 }
 
-body.light-mode .hanging-id-card {
+body.light-mode .elastic-id-card {
   background-color: #ffffff;
   border-color: rgba(0, 0, 0, 0.1);
   box-shadow:
     0 20px 45px rgba(0, 0, 0, 0.1),
     0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-body.light-mode .hanging-tag {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.1);
-  color: #555555;
-}
-
-body.light-mode .id-card-top-banner {
-  border-bottom-color: rgba(0, 0, 0, 0.08);
-}
-
-body.light-mode .badge-title {
-  color: #666666;
-}
-
-body.light-mode .id-badge-serial {
-  color: #888888;
 }
 
 body.light-mode .id-card-headline {
@@ -546,16 +303,6 @@ body.light-mode .id-card-value.handwriting {
 
 body.light-mode .id-card-info-row {
   border-bottom-color: rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .id-card-hologram-seal {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.02) 0%,
-    rgba(74, 222, 128, 0.08) 50%,
-    rgba(96, 165, 250, 0.08) 100%
-  );
-  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* AnimatedLine legacy support for other sections */
@@ -607,7 +354,7 @@ body.light-mode .story-highlight {
     gap: 4rem;
   }
 
-  .hanging-rig {
+  .elastic-card-container {
     max-width: 320px;
   }
 }
@@ -617,14 +364,14 @@ body.light-mode .story-highlight {
     padding: 2rem 1rem 5rem 1rem;
   }
 
-  .hanging-rig {
-    max-width: 280px;
+  .elastic-card-container {
+    max-width: 290px;
   }
 
-  .hanging-id-card {
-    padding: 20px 16px 18px 16px;
-    border-radius: 14px;
-    gap: 1.1rem;
+  .elastic-id-card {
+    padding: 20px 18px 22px 18px;
+    border-radius: 16px;
+    gap: 1.2rem;
   }
 
   .story-headline {
@@ -642,11 +389,11 @@ body.light-mode .story-highlight {
 }
 
 @media (max-width: 380px) {
-  .hanging-rig {
-    max-width: 250px;
+  .elastic-card-container {
+    max-width: 260px;
   }
-  .hanging-id-card {
-    padding: 16px 14px;
+  .elastic-id-card {
+    padding: 16px 14px 18px 14px;
   }
   .id-card-headline {
     font-size: 1.05rem;
