@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./GitHubContributions.css";
-import { FiGithub, FiStar, FiGitBranch, FiFolder, FiExternalLink, FiRefreshCw } from "react-icons/fi";
+import {
+  FiGithub,
+  FiStar,
+  FiGitBranch,
+  FiFolder,
+  FiExternalLink,
+  FiRefreshCw,
+  FiZap,
+  FiTrendingUp,
+  FiAward
+} from "react-icons/fi";
 
 interface GitHubUser {
   login: string;
@@ -16,24 +26,10 @@ interface GitHubUser {
 interface GitHubRepo {
   id: number;
   name: string;
-  description: string | null;
-  html_url: string;
   stargazers_count: number;
   forks_count: number;
-  language: string | null;
   updated_at: string;
-  homepage: string | null;
 }
-
-const LANGUAGE_COLORS: Record<string, string> = {
-  TypeScript: "#3178c6",
-  JavaScript: "#f7df1e",
-  Python: "#3776ab",
-  HTML: "#e34f26",
-  CSS: "#1572b6",
-  Java: "#b07219",
-  default: "#4ade80",
-};
 
 export const GitHubContributions: React.FC = () => {
   const [user, setUser] = useState<GitHubUser | null>(null);
@@ -51,9 +47,9 @@ export const GitHubContributions: React.FC = () => {
         setUser(userData);
       }
 
-      // 2. Fetch live repositories
+      // 2. Fetch live repos
       const reposRes = await fetch(
-        "https://api.github.com/users/samjerish/repos?sort=updated&per_page=6"
+        "https://api.github.com/users/samjerish/repos?per_page=100"
       );
       if (reposRes.ok) {
         const reposData = await reposRes.json();
@@ -82,9 +78,13 @@ export const GitHubContributions: React.FC = () => {
             <FiGithub />
           </div>
           <div>
-            <h2 className="github-sync-title">GITHUB ACTIVITY & STATS</h2>
+            <div className="github-live-badge-row">
+              <span className="live-radar-dot"></span>
+              <span className="live-radar-text">LIVE GITHUB SYNC</span>
+            </div>
+            <h2 className="github-sync-title">CODE ACTIVITY & CONTRIBUTIONS</h2>
             <p className="github-sync-subtitle">
-              Live real-time sync with{" "}
+              Real-time telemetry synced with{" "}
               <a
                 href="https://github.com/samjerish"
                 target="_blank"
@@ -126,9 +126,9 @@ export const GitHubContributions: React.FC = () => {
           </div>
           <div className="metric-content">
             <span className="metric-val">
-              {loading ? "..." : user ? user.public_repos : "9+"}
+              {loading ? "..." : user ? user.public_repos : "9"}
             </span>
-            <span className="metric-lbl">Total Repositories</span>
+            <span className="metric-lbl">Public Repositories</span>
           </div>
         </div>
 
@@ -138,7 +138,7 @@ export const GitHubContributions: React.FC = () => {
           </div>
           <div className="metric-content">
             <span className="metric-val">{loading ? "..." : totalStars}</span>
-            <span className="metric-lbl">Total Stars</span>
+            <span className="metric-lbl">Total Stars Earned</span>
           </div>
         </div>
 
@@ -165,103 +165,90 @@ export const GitHubContributions: React.FC = () => {
         </div>
       </div>
 
-      {/* Live GitHub Contributions Heatmap */}
-      <div className="github-chart-container">
+      {/* Dark Mode Activity & Peak Commits Visualizer */}
+      <div className="github-chart-container dark-chart-mode">
+        {/* Top Control Bar */}
         <div className="chart-header-row">
-          <h3 className="chart-title">CONTRIBUTIONS GRAPH</h3>
-          <span className="chart-sync-indicator">
-            <span className="sync-pulse"></span>
-            Real-time GitHub Heatmap
-          </span>
+          <div className="chart-title-group">
+            <span className="chart-badge">CONTRIBUTIONS HEATMAP</span>
+            <h3 className="chart-title">ANNUAL COMMIT VELOCITY</h3>
+          </div>
+
+          <div className="chart-intensity-legend">
+            <span className="legend-label">Less</span>
+            <div className="legend-cells">
+              <span className="legend-cell lvl-0"></span>
+              <span className="legend-cell lvl-1"></span>
+              <span className="legend-cell lvl-2"></span>
+              <span className="legend-cell lvl-3"></span>
+              <span className="legend-cell lvl-4 peak-glow"></span>
+            </div>
+            <span className="legend-label">More (Peak)</span>
+          </div>
         </div>
 
-        <div className="chart-image-wrap">
-          <img
-            src={`https://ghchart.rshah.org/4ade80/samjerish?timestamp=${Date.now()}`}
-            alt="Sam Jerish's GitHub Contribution Graph"
-            className="github-chart-img"
-            loading="lazy"
-            onError={(e) => {
-              // Fallback styling if chart provider is slow
-              (e.currentTarget as HTMLElement).style.opacity = "0.7";
-            }}
-          />
+        {/* Highlight Banner: Peak Activity & Most Committed Day */}
+        <div className="peak-committed-highlights">
+          <div className="highlight-pill peak-day">
+            <div className="highlight-icon-wrap zap-icon">
+              <FiZap />
+            </div>
+            <div className="highlight-text-group">
+              <span className="highlight-small-title">PEAK COMMIT VELOCITY</span>
+              <span className="highlight-main-val">High-Frequency Sprint Days</span>
+            </div>
+          </div>
+
+          <div className="highlight-pill streak-day">
+            <div className="highlight-icon-wrap trend-icon">
+              <FiTrendingUp />
+            </div>
+            <div className="highlight-text-group">
+              <span className="highlight-small-title">COMMIT FREQUENCY</span>
+              <span className="highlight-main-val">Active Development Cycle</span>
+            </div>
+          </div>
+
+          <div className="highlight-pill best-day">
+            <div className="highlight-icon-wrap award-icon">
+              <FiAward />
+            </div>
+            <div className="highlight-text-group">
+              <span className="highlight-small-title">PRIMARY FOCUS</span>
+              <span className="highlight-main-val">Full Stack & AI Architectures</span>
+            </div>
+          </div>
         </div>
 
+        {/* Dark Mode Glowing Heatmap Frame */}
+        <div className="chart-viewport-wrapper">
+          <div className="chart-glow-underlay"></div>
+          <div className="chart-image-wrap">
+            <img
+              src={`https://ghchart.rshah.org/4ade80/samjerish?timestamp=${Date.now()}`}
+              alt="Sam Jerish's GitHub Dark Heatmap Chart"
+              className="github-chart-img dark-themed-graph"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        {/* Footer Meta */}
         <div className="chart-footer-caption">
-          <span>Contributions in the last year</span>
+          <div className="chart-meta-left">
+            <span className="meta-dot"></span>
+            <span>Live commits recorded from GitHub public events and repositories</span>
+          </div>
+
           <a
             href="https://github.com/samjerish"
             target="_blank"
             rel="noreferrer"
             className="chart-inspect-link"
           >
-            Inspect GitHub Graph ↗
+            <span>Explore on GitHub</span>
+            <FiExternalLink />
           </a>
-        </div>
-      </div>
-
-      {/* Featured Live Repositories Grid */}
-      <div className="github-repos-section">
-        <div className="repos-header-row">
-          <h3 className="repos-heading">RECENT REPOSITORIES</h3>
-          <span className="repos-sub">Automatically updated from GitHub</span>
-        </div>
-
-        <div className="github-repos-grid">
-          {repos.map((repo) => {
-            const langColor =
-              repo.language && LANGUAGE_COLORS[repo.language]
-                ? LANGUAGE_COLORS[repo.language]
-                : LANGUAGE_COLORS.default;
-
-            return (
-              <a
-                key={repo.id}
-                href={repo.html_url}
-                target="_blank"
-                rel="noreferrer"
-                className="github-repo-card"
-              >
-                <div className="repo-card-top">
-                  <div className="repo-title-wrap">
-                    <FiFolder className="repo-icon" />
-                    <h4 className="repo-name">{repo.name}</h4>
-                  </div>
-                  <FiExternalLink className="repo-ext-icon" />
-                </div>
-
-                <p className="repo-desc">
-                  {repo.description || "Public repository and code exploration."}
-                </p>
-
-                <div className="repo-card-footer">
-                  {repo.language && (
-                    <div className="repo-lang-badge">
-                      <span
-                        className="lang-color-dot"
-                        style={{ backgroundColor: langColor }}
-                      ></span>
-                      <span>{repo.language}</span>
-                    </div>
-                  )}
-
-                  <div className="repo-stats-right">
-                    {repo.stargazers_count > 0 && (
-                      <span className="repo-stat-item">
-                        <FiStar /> {repo.stargazers_count}
-                      </span>
-                    )}
-                    {repo.forks_count > 0 && (
-                      <span className="repo-stat-item">
-                        <FiGitBranch /> {repo.forks_count}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </a>
-            );
-          })}
         </div>
       </div>
     </section>
