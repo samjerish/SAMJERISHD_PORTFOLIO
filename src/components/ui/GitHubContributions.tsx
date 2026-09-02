@@ -30,6 +30,7 @@ interface GitHubRepo {
 export const GitHubContributions: React.FC = () => {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [chartSvg, setChartSvg] = useState<string>("");
   const [loading, setLoading] = useState(true);
 
   const fetchGitHubData = async () => {
@@ -49,6 +50,25 @@ export const GitHubContributions: React.FC = () => {
       if (reposRes.ok) {
         const reposData = await reposRes.json();
         setRepos(reposData);
+      }
+
+      // 3. Fetch real-time SVG contribution calendar and transform all white/light fills to dark
+      const chartRes = await fetch("https://ghchart.rshah.org/39d353/samjerish");
+      if (chartRes.ok) {
+        let svg = await chartRes.text();
+        // Replace all white/light-gray squares with GitHub dark theme squares (#161b22)
+        svg = svg
+          .replace(/#EEEEEE/gi, "#161b22")
+          .replace(/#ebedf0/gi, "#161b22")
+          .replace(/#ffffff/gi, "#0d1117")
+          .replace(/#767676/gi, "#8b949e");
+
+        // Make SVG fully fluid and stretch across the container
+        svg = svg.replace(
+          "<svg ",
+          '<svg width="100%" height="100%" viewBox="0 0 660 110" preserveAspectRatio="xMidYMid meet" '
+        );
+        setChartSvg(svg);
       }
     } catch (err) {
       console.error("Failed to fetch live GitHub data:", err);
@@ -140,7 +160,7 @@ export const GitHubContributions: React.FC = () => {
         </div>
       </div>
 
-      {/* Clean Dark Mode GitHub Contribution Timeline */}
+      {/* Clean Full-Width Dark Mode GitHub Contribution Timeline */}
       <div className="github-timeline-container">
         <div className="timeline-header-row">
           <div className="timeline-title-wrap">
@@ -153,15 +173,22 @@ export const GitHubContributions: React.FC = () => {
           <span className="timeline-caption-year">Last 12 Months</span>
         </div>
 
-        {/* Heatmap Graph Window */}
+        {/* Full-Cover Heatmap Graph Window */}
         <div className="timeline-graph-window">
           <div className="timeline-graph-scroll">
-            <img
-              src={`https://ghchart.rshah.org/39d353/samjerish?timestamp=${Date.now()}`}
-              alt="Sam Jerish's GitHub Dark Heatmap Chart"
-              className="github-timeline-img"
-              loading="lazy"
-            />
+            {chartSvg ? (
+              <div
+                className="timeline-svg-wrapper"
+                dangerouslySetInnerHTML={{ __html: chartSvg }}
+              />
+            ) : (
+              <img
+                src={`https://ghchart.rshah.org/39d353/samjerish?timestamp=${Date.now()}`}
+                alt="Sam Jerish's GitHub Dark Heatmap Chart"
+                className="github-timeline-img"
+                loading="lazy"
+              />
+            )}
           </div>
         </div>
 
