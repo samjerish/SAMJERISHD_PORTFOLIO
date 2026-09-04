@@ -163,39 +163,100 @@
   -webkit-user-drag: none;
 }
 
-/* Dots Indicator */
+/* Dots Indicator & Touch Targets */
 .avatar-dots-indicator {
   position: absolute;
   bottom: 16px;
   right: 16px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(10, 10, 12, 0.7);
-  padding: 6px 10px;
+  gap: 2px;
+  background: rgba(10, 10, 12, 0.85);
+  padding: 4px 8px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+.avatar-dot-btn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.avatar-dot-inner,
 .avatar-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   border: none;
   padding: 0;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
+.avatar-dot-btn.active .avatar-dot-inner,
 .avatar-dot.active {
   width: 18px;
   border-radius: 10px;
   background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Tap to Flip Button / Touch Badge */
+.photo-flip-hint-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  background: rgba(12, 12, 16, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.photo-flip-hint-btn:hover,
+.photo-flip-hint-btn:active {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: scale(1.04);
+}
+
+.photo-flip-hint-btn .flip-icon {
+  font-size: 0.95rem;
+  color: #4ade80;
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.photo-flip-hint-btn:active .flip-icon {
+  transform: rotate(180deg);
 }
 
 .avatar-status-pill {
@@ -258,14 +319,29 @@
 }
 
 .about-hero-tagline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
   font-family: var(--font-mono, monospace);
   font-size: 0.88rem;
   font-weight: 700;
   color: #888888;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   margin: 0;
   line-height: 1.4;
+}
+
+.tagline-item {
+  color: #a3a3a3;
+  transition: color 0.2s ease;
+}
+
+.tagline-bullet {
+  color: #4ade80;
+  font-weight: 900;
+  opacity: 0.8;
 }
 
 .about-bio-paragraphs {
@@ -553,12 +629,12 @@ body.light-mode .about-social-icon-btn.email-btn:hover {
 
 @media (max-width: 860px) {
   .about-nav {
-    padding: 1.5rem;
+    padding: 1.5rem 2rem 1rem 2rem;
   }
 
   .about-main-container {
-    padding: 0 1.5rem 4rem 1.5rem;
-    gap: 4rem;
+    padding: 0 2rem 4rem 2rem;
+    gap: 3.5rem;
   }
 
   .about-profile-hero {
@@ -567,37 +643,231 @@ body.light-mode .about-social-icon-btn.email-btn:hover {
   }
 
   .about-hero-image-wrapper {
-    max-width: 360px;
+    max-width: 340px;
     margin: 0 auto;
   }
 
   .about-hero-name {
-    font-size: 2.4rem;
+    font-size: clamp(2.4rem, 6vw, 3rem);
+    text-align: left;
   }
 
   .about-hero-tagline {
-    font-size: clamp(0.6rem, 2.9vw, 0.85rem);
-    white-space: nowrap;
-    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    letter-spacing: 0.8px;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-nav {
+    padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+  }
+
+  .about-main-container {
+    padding: 0 1.25rem 3.5rem 1.25rem;
+    gap: 3rem;
+  }
+
+  .about-hero-image-wrapper {
+    max-width: 320px;
+  }
+
+  .about-hero-name {
+    font-size: clamp(2.2rem, 8vw, 2.7rem);
+  }
+
+  .about-hero-tagline {
+    font-size: 0.82rem;
+    gap: 0.4rem 0.6rem;
+  }
+
+  .about-bio-paragraphs p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .about-experience-section {
+    gap: 2rem;
+    padding-top: 2rem;
+  }
+
+  .exp-heading {
+    font-size: 2rem;
+  }
+
+  .timeline-card {
+    padding: 1.6rem 1.4rem;
+    border-radius: 20px;
   }
 }
 
 @media (max-width: 480px) {
+  .about-nav {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+
+  .back-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: 24px;
+  }
+
+  .about-main-container {
+    padding: 0 1rem 3rem 1rem;
+    gap: 2.5rem;
+  }
+
+  .about-profile-hero {
+    gap: 1.8rem;
+  }
+
+  .about-hero-image-wrapper {
+    max-width: 290px;
+  }
+
+  .photo-card-face {
+    border-radius: 20px;
+  }
+
+  .photo-flip-hint-btn {
+    top: 10px;
+    right: 10px;
+    padding: 5px 11px;
+    font-size: 0.68rem;
+  }
+
+  .avatar-dots-indicator {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .about-hero-info {
+    gap: 1rem;
+  }
+
+  .about-hero-name {
+    font-size: clamp(1.9rem, 8.5vw, 2.3rem);
+    letter-spacing: -0.5px;
+  }
+
   .about-hero-tagline {
-    font-size: clamp(0.52rem, 2.75vw, 0.72rem);
-    white-space: nowrap;
-    letter-spacing: 0.3px;
+    font-size: 0.78rem;
+    gap: 0.35rem 0.5rem;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    white-space: normal;
+  }
+
+  .tagline-bullet {
+    font-size: 0.8rem;
+  }
+
+  .about-bio-paragraphs {
+    gap: 1rem;
+    margin-top: 0.2rem;
   }
 
   .about-bio-paragraphs p {
-    font-size: 1rem;
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  /* Work Experience on mobile */
+  .about-experience-section {
+    gap: 1.6rem;
+    padding-top: 1.8rem;
+  }
+
+  .exp-badge {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+  }
+
+  .exp-heading {
+    font-size: 1.65rem;
+  }
+
+  .timeline-card {
+    padding: 1.35rem 1.15rem;
+    border-radius: 18px;
+    gap: 1rem;
+  }
+
+  .timeline-icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+  }
+
+  .timeline-period {
+    font-size: 0.68rem;
+  }
+
+  .timeline-role {
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+
+  .timeline-org {
+    font-size: 0.82rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  /* Bottom Socials on mobile */
+  .about-bottom-socials {
+    padding: 2.2rem 0 1rem 0;
+    gap: 1.1rem;
+  }
+
+  .about-social-icon-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
   }
 }
 
 @media (max-width: 360px) {
+  .about-main-container {
+    padding: 0 0.75rem 2.5rem 0.75rem;
+    gap: 2rem;
+  }
+
+  .about-hero-image-wrapper {
+    max-width: 255px;
+  }
+
+  .about-hero-name {
+    font-size: 1.75rem;
+  }
+
   .about-hero-tagline {
-    font-size: clamp(0.48rem, 2.7vw, 0.65rem);
-    white-space: nowrap;
-    letter-spacing: 0.2px;
+    font-size: 0.72rem;
+    gap: 0.25rem 0.4rem;
+  }
+
+  .about-bio-paragraphs p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .timeline-card {
+    padding: 1.15rem 1rem;
+  }
+
+  .about-bottom-socials {
+    gap: 0.85rem;
+  }
+
+  .about-social-icon-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.15rem;
   }
 }

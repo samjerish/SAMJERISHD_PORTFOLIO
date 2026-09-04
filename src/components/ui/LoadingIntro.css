@@ -29,7 +29,7 @@
 }
 
 /* ===================================================
-   LOCK & PERCENTAGE STAGE
+   PERCENTAGE LOADER STAGE
    =================================================== */
 
 .lock-intro-stage {
@@ -37,220 +37,60 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.75rem;
   z-index: 10;
-  transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lock-intro-stage.is-morphed {
   opacity: 0;
-  transform: scale(2.2) rotate(12deg);
+  transform: scale(1.6);
   filter: blur(14px);
   pointer-events: none;
 }
 
-/* Lock Card Capsule */
-.lock-card-wrapper {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  padding-top: 12px;
-  border-radius: 34px;
-  background: radial-gradient(circle at 50% 0%, #24242a 0%, #0d0d10 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.16);
+.percentage-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-  overflow: visible;
-  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.lock-card-wrapper.is-unlocked {
-  border-color: #4ade80;
-  background: radial-gradient(circle at 50% 0%, #163320 0%, #09130c 100%);
-  transform: scale(1.12);
-  box-shadow:
-    0 0 60px rgba(74, 222, 128, 0.45),
-    inset 0 0 25px rgba(74, 222, 128, 0.2);
-}
-
-.intro-container.phase-morphing .lock-card-wrapper {
-  transform: scale(0.4) rotate(18deg);
-  opacity: 0;
-  filter: blur(10px);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;
-}
-
-/* Morph Energy Beams shooting out to ribbons */
-.lock-morph-beam {
-  position: absolute;
-  height: 6px;
-  background: linear-gradient(90deg, #4ade80, #ffffff, transparent);
-  box-shadow: 0 0 20px #4ade80;
-  border-radius: 6px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 15;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.beam-top-left {
-  top: 35%;
-  right: 50%;
-  width: 0;
-  transform: rotate(4deg);
-}
-
-.beam-bottom-right {
-  bottom: 35%;
-  left: 50%;
-  width: 0;
-  transform: rotate(-4deg);
-}
-
-.intro-container.phase-morphing .beam-top-left {
-  width: 120vw;
-  opacity: 1;
-}
-
-.intro-container.phase-morphing .beam-bottom-right {
-  width: 120vw;
-  opacity: 1;
-}
-
-/* Shockwave Pulse Ring */
-.lock-pulse-ring {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 34px;
-  border: 2px solid #4ade80;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.lock-card-wrapper.is-unlocked .lock-pulse-ring {
-  animation: lock-shockwave 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes lock-shockwave {
-  0% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(2.4);
-    opacity: 0;
-  }
-}
-
-/* Lock SVG & Shackle Physics */
-.lock-icon-assembly {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  overflow: visible;
-}
-
-.lock-svg {
-  width: 48px;
-  height: 48px;
-  overflow: visible;
-  color: #ffffff;
-  transition: color 0.4s ease, filter 0.4s ease;
-}
-
-.lock-shackle {
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), stroke 0.4s ease;
-  transform-origin: 17px 11px;
-}
-
-.lock-svg.unlocked .lock-shackle {
-  transform: translateY(-6px) rotate(-35deg);
-  stroke: #4ade80;
-}
-
-.lock-svg.unlocked .lock-body,
-.lock-svg.unlocked .lock-keyhole,
-.lock-svg.unlocked .lock-keyhole-stem {
-  stroke: #4ade80;
-  color: #4ade80;
-  filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.5));
-}
-
-/* Lock Status Badge */
-.lock-status-badge {
-  position: absolute;
-  bottom: -14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  background: rgba(10, 10, 12, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-}
-
-.lock-status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #f87171;
-  box-shadow: 0 0 8px #f87171;
-  transition: all 0.3s ease;
-}
-
-.lock-status-dot.active-green {
-  background: #4ade80;
-  box-shadow: 0 0 10px #4ade80;
-  animation: dot-pulse 1.2s infinite ease-in-out;
-}
-
-@keyframes dot-pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 0.7;
-  }
-}
-
-.lock-status-label {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  color: #ffffff;
-  text-transform: uppercase;
+  gap: 1.25rem;
 }
 
 /* Percentage Counter */
 .percentage-text {
   font-family: var(--font-primary, "Outfit", sans-serif);
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(3.5rem, 8.5vw, 6.5rem);
   font-weight: 900;
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
   color: #ffffff;
   opacity: 1;
+  line-height: 1;
   transition: opacity 0.4s ease, transform 0.4s ease;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
+  font-variant-numeric: tabular-nums;
 }
 
 .percentage-text.hidden {
   opacity: 0;
   transform: translateY(10px);
+}
+
+.loading-bar-track {
+  width: 160px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffffff, #4ade80);
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+  transition: width 0.04s linear;
 }
 
 /* ===================================================

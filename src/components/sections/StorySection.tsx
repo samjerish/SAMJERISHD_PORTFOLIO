@@ -18,7 +18,10 @@ export const StorySection: React.FC<{
   const textRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
   const dragStartRef = useRef<{ startX: number; startY: number }>({ startX: 0, startY: 0 });
+  const userOffsetRef = useRef({ x: 0, y: 0, rotate: 0 });
+  const userVelRef = useRef({ vx: 0, vy: 0, vRotate: 0 });
   const animFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -26,13 +29,12 @@ export const StorySection: React.FC<{
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (textRef.current) observer.unobserve(textRef.current);
         }
       },
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.2,
+        threshold: 0.1,
       },
     );
 
@@ -43,6 +45,60 @@ export const StorySection: React.FC<{
       setPhotoIndex((prev) => (prev + 1) % STORY_PHOTOS.length);
     }, 3500);
 
+    // Continuous smooth ambient swing animation loop ("moving here and there slowly")
+    const stiffness = 0.055;
+    const damping = 0.88;
+
+    const animate = () => {
+      const t = performance.now() * 0.001;
+      // Gentle compound pendulum swing: slow oscillation back and forth
+      const ambientX = Math.sin(t * 1.3) * 14 + Math.sin(t * 0.65) * 4;
+      const ambientRotate = Math.sin(t * 1.3 - 0.25) * 3.0 + Math.sin(t * 0.65) * 0.8;
+      const ambientY = Math.abs(ambientX) * 0.08;
+
+      if (!isDraggingRef.current) {
+        // Spring physics smoothly damp any user drag offset back to zero
+        const u = userOffsetRef.current;
+        const v = userVelRef.current;
+
+        if (
+          Math.abs(u.x) > 0.05 ||
+          Math.abs(u.y) > 0.05 ||
+          Math.abs(v.vx) > 0.02 ||
+          Math.abs(v.vy) > 0.02
+        ) {
+          const ax = -stiffness * u.x;
+          const ay = -stiffness * u.y;
+          const aRot = -stiffness * u.rotate;
+
+          v.vx = (v.vx + ax) * damping;
+          v.vy = (v.vy + ay) * damping;
+          v.vRotate = (v.vRotate + aRot) * damping;
+
+          u.x += v.vx;
+          u.y += v.vy;
+          u.rotate += v.vRotate;
+        } else {
+          u.x = 0;
+          u.y = 0;
+          u.rotate = 0;
+          v.vx = 0;
+          v.vy = 0;
+          v.vRotate = 0;
+        }
+      }
+
+      setPos({
+        x: ambientX + userOffsetRef.current.x,
+        y: ambientY + userOffsetRef.current.y,
+        rotate: ambientRotate + userOffsetRef.current.rotate,
+      });
+
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+
     return () => {
       if (node) observer.unobserve(node);
       clearInterval(photoInterval);
@@ -51,10 +107,9 @@ export const StorySection: React.FC<{
   }, []);
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    // Prevent default context menus and image drag behaviors
     e.preventDefault();
-    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    isDraggingRef.current = true;
     setIsDragging(true);
     dragStartRef.current = {
       startX: e.clientX - pos.x,
@@ -63,65 +118,34 @@ export const StorySection: React.FC<{
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
+    if (!isDraggingRef.current) return;
     e.preventDefault();
 
-    const newX = e.clientX - dragStartRef.current.startX;
-    const newY = e.clientY - dragStartRef.current.startY;
-    // Rotation tilt based on horizontal drag distance
-    const rotate = Math.max(-20, Math.min(20, newX * 0.08));
-    setPos({ x: newX, y: newY, rotate });
+    const t = performance.now() * 0.001;
+    const ambientX = Math.sin(t * 1.3) * 14 + Math.sin(t * 0.65) * 4;
+    const ambientY = Math.abs(ambientX) * 0.08;
+    const ambientRotate = Math.sin(t * 1.3 - 0.25) * 3.0 + Math.sin(t * 0.65) * 0.8;
+
+    const targetX = e.clientX - dragStartRef.current.startX;
+    const targetY = e.clientY - dragStartRef.current.startY;
+    const targetRotate = Math.max(-20, Math.min(20, targetX * 0.08));
+
+    userOffsetRef.current = {
+      x: targetX - ambientX,
+      y: targetY - ambientY,
+      rotate: targetRotate - ambientRotate,
+    };
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
+    if (!isDraggingRef.current) return;
     try {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
     } catch {
       // ignore
     }
+    isDraggingRef.current = false;
     setIsDragging(false);
-
-    // Smooth, slow elastic spring bounce-back simulation to home (0, 0)
-    let currentX = pos.x;
-    let currentY = pos.y;
-    let currentRotate = pos.rotate;
-    let vx = 0;
-    let vy = 0;
-    let vRotate = 0;
-    // Gentle stiffness and smooth damping for slow, graceful return
-    const stiffness = 0.065;
-    const damping = 0.87;
-
-    const springStep = () => {
-      const ax = -stiffness * currentX;
-      const ay = -stiffness * currentY;
-      const aRotate = -stiffness * currentRotate;
-
-      vx = (vx + ax) * damping;
-      vy = (vy + ay) * damping;
-      vRotate = (vRotate + aRotate) * damping;
-
-      currentX += vx;
-      currentY += vy;
-      currentRotate += vRotate;
-
-      setPos({ x: currentX, y: currentY, rotate: currentRotate });
-
-      if (
-        Math.abs(currentX) > 0.15 ||
-        Math.abs(currentY) > 0.15 ||
-        Math.abs(vx) > 0.04 ||
-        Math.abs(vy) > 0.04
-      ) {
-        animFrameRef.current = requestAnimationFrame(springStep);
-      } else {
-        setPos({ x: 0, y: 0, rotate: 0 });
-      }
-    };
-
-    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-    animFrameRef.current = requestAnimationFrame(springStep);
   };
 
   // Calculate dynamic SVG lanyard path from fixed top origin to moving badge clip
@@ -274,13 +298,6 @@ export const StorySection: React.FC<{
                         );
                       })}
                       <div className="id-photo-specular-glare"></div>
-
-                      {/* Interactive Indicator Pill */}
-                      <div className="id-interactive-pill">
-                        <span className="id-interactive-dot"></span>
-                        <span>Hold & Swing</span>
-                        <span className="id-interactive-arrow">⇄</span>
-                      </div>
                     </div>
 
                     {/* Below Photo: Name and Small Full Stack Developer Text */}

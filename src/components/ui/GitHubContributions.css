@@ -266,6 +266,25 @@
   animation: radar-pulse 2s infinite ease-in-out;
 }
 
+.timeline-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeline-swipe-hint {
+  display: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  padding: 3px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.3px;
+}
+
 .timeline-caption-year {
   font-family: var(--font-mono, monospace);
   font-size: 0.75rem;
@@ -423,27 +442,184 @@
 
 @media (max-width: 1024px) {
   .github-metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 768px) {
+  .github-sync-section {
+    margin: 3.5rem auto 2.5rem auto;
+    gap: 2rem;
+  }
+
   .github-sync-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1.2rem;
   }
 
   .github-header-actions {
     width: 100%;
-    justify-content: space-between;
   }
 
+  .github-open-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .timeline-swipe-hint {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 600px) {
   .github-metrics-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .github-metric-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.1rem 0.95rem;
+    gap: 0.7rem;
+    border-radius: 18px;
+  }
+
+  .metric-icon-wrap {
+    width: 38px;
+    height: 38px;
+    font-size: 1.15rem;
+    border-radius: 11px;
+  }
+
+  .metric-val {
+    font-size: 1.45rem;
+  }
+
+  .metric-lbl {
+    font-size: 0.72rem;
+    line-height: 1.2;
   }
 
   .github-timeline-container {
-    padding: 1.5rem 1.2rem;
+    padding: 1.4rem 1.1rem;
+    border-radius: 20px;
+    gap: 1.3rem;
+  }
+
+  .timeline-title {
+    font-size: 1.15rem;
+  }
+
+  .timeline-graph-window {
+    padding: 1.1rem 0.8rem;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .github-sync-section {
+    margin: 2.8rem auto 1.8rem auto;
+    gap: 1.6rem;
+  }
+
+  .github-icon-bubble {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    font-size: 1.4rem;
+  }
+
+  .github-sync-title {
+    font-size: clamp(1.2rem, 5.5vw, 1.5rem);
+    line-height: 1.2;
+  }
+
+  .github-sync-subtitle {
+    font-size: 0.84rem;
+  }
+
+  .github-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .github-metric-card {
+    padding: 0.9rem 0.7rem;
+    gap: 0.5rem;
+    border-radius: 14px;
+  }
+
+  .metric-icon-wrap {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    border-radius: 9px;
+  }
+
+  .metric-val {
+    font-size: 1.25rem;
+  }
+
+  .metric-lbl {
+    font-size: 0.65rem;
+  }
+
+  .github-timeline-container {
+    padding: 1.15rem 0.85rem;
+    border-radius: 18px;
+    gap: 1rem;
+  }
+
+  .timeline-title {
+    font-size: 1.05rem;
+  }
+
+  .timeline-header-row {
+    gap: 0.5rem;
+  }
+
+  .timeline-swipe-hint {
+    font-size: 0.64rem;
+    padding: 2px 6px;
+  }
+
+  .timeline-caption-year {
+    font-size: 0.68rem;
+  }
+
+  .timeline-graph-window {
+    padding: 0.85rem 0.5rem;
+  }
+
+  .timeline-footer-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .timeline-inspect-btn {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .github-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .github-metric-card {
+    flex-direction: row;
+    align-items: center;
+    padding: 0.8rem 0.9rem;
+    gap: 0.8rem;
+  }
+
+  .metric-val {
+    font-size: 1.3rem;
   }
 }

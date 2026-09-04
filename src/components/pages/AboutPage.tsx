@@ -114,26 +114,44 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
+              {/* Tap to Flip Button for Touch & Mobile Affordance */}
+              <button
+                type="button"
+                className="photo-flip-hint-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsFlipped((prev) => !prev);
+                }}
+                aria-label="Flip photo"
+              >
+                <span>Tap to flip</span>
+                <span className="flip-icon">↺</span>
+              </button>
+
               {/* Photo Indicator Dots */}
               <div className="avatar-dots-indicator">
                 <button
                   type="button"
-                  className={`avatar-dot ${!isFlipped ? "active" : ""}`}
+                  className={`avatar-dot-btn ${!isFlipped ? "active" : ""}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsFlipped(false);
                   }}
                   aria-label="Photo 1"
-                />
+                >
+                  <span className="avatar-dot-inner" />
+                </button>
                 <button
                   type="button"
-                  className={`avatar-dot ${isFlipped ? "active" : ""}`}
+                  className={`avatar-dot-btn ${isFlipped ? "active" : ""}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsFlipped(true);
                   }}
                   aria-label="Photo 2"
-                />
+                >
+                  <span className="avatar-dot-inner" />
+                </button>
               </div>
             </div>
           </div>
@@ -141,7 +159,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="about-hero-info">
             <h1 className="about-hero-name">SAM JERISH D</h1>
             <h2 className="about-hero-tagline">
-              AIML Student • Full Stack Developer • Creative Problem Solver
+              <span className="tagline-item">AIML Student</span>
+              <span className="tagline-bullet">•</span>
+              <span className="tagline-item">Full Stack Developer</span>
+              <span className="tagline-bullet">•</span>
+              <span className="tagline-item">Creative Problem Solver</span>
             </h2>
 
             <div className="about-bio-paragraphs">

@@ -421,58 +421,7 @@ body.light-mode .story-view-more-avatar-wrap {
   z-index: 3;
 }
 
-/* Interactive Drag & Swing Hint Pill */
-.id-interactive-pill {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
-  background: rgba(12, 12, 15, 0.88);
-  border: 1px solid rgba(74, 222, 128, 0.35);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #eeeeee;
-  letter-spacing: 0.5px;
-  z-index: 10;
-  pointer-events: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 12px rgba(74, 222, 128, 0.15);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
 
-.id-badge-unit.is-dragging .id-interactive-pill {
-  opacity: 0.2;
-}
-
-.id-interactive-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 8px #4ade80;
-  animation: dot-pulse 1.4s infinite ease-in-out;
-}
-
-.id-interactive-arrow {
-  color: #4ade80;
-  font-size: 0.82rem;
-  animation: nudge-swing 2s infinite ease-in-out;
-}
-
-@keyframes nudge-swing {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(3px);
-  }
-}
 
 /* Identity Bottom (Name + Small Title) */
 .id-identity-bottom {
@@ -521,43 +470,220 @@ body.light-mode .story-view-more-avatar-wrap {
 
   .story-content-block {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3.5rem;
   }
 
   .story-graphic-column {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .story-headline {
+    white-space: normal;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .story-container {
+    padding: 4.5rem 1.5rem;
+  }
+
+  .story-text-column {
+    gap: 2.8rem;
+  }
+
+  .story-section-part {
+    gap: 1.2rem;
+  }
+
+  .story-headline {
+    font-size: clamp(1.9rem, 6.5vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    white-space: normal;
+  }
+
+  .story-subheadline {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    line-height: 1.15;
+  }
+
+  .story-description {
+    font-size: 1.15rem;
+    line-height: 1.7;
   }
 }
 
 @media (max-width: 480px) {
-  .id-card-assembly {
-    max-width: 320px;
-    height: 560px;
+  .story-container {
+    padding: 3.5rem 1rem 5rem 1rem;
   }
 
-  .id-badge-unit {
-    width: 280px;
-    margin-left: -140px;
+  .story-content-block {
+    gap: 2.8rem;
   }
 
-  .id-person-name {
-    font-size: 1.2rem;
+  .story-text-column {
+    gap: 2.2rem;
   }
 
-  .id-person-subtitle {
-    font-size: 0.7rem;
+  .story-section-part {
+    gap: 1rem;
   }
 
   .story-headline {
-    font-size: clamp(1.4rem, 6.2vw, 2.2rem);
-    white-space: nowrap;
+    font-size: clamp(1.6rem, 7.5vw, 2.1rem);
+    letter-spacing: -0.5px;
+    white-space: normal;
+    line-height: 1.15;
   }
 
   .story-subheadline {
-    font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+    font-size: clamp(1.35rem, 6vw, 1.8rem);
+    letter-spacing: -0.5px;
+    line-height: 1.15;
   }
 
   .story-description {
-    font-size: 1.1rem;
+    font-size: 1.02rem;
+    line-height: 1.65;
+  }
+
+  /* View More Card on Mobile */
+  .story-view-more-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 14px 10px 10px;
+    gap: 0.9rem;
+    border-radius: 30px;
+  }
+
+  .story-view-more-avatar-wrap {
+    width: 42px;
+    height: 42px;
+  }
+
+  .story-view-more-title {
+    font-size: 0.95rem;
+  }
+
+  .story-view-more-sub {
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+
+  /* ID Card Assembly on Mobile - Full Visibility Guaranteed */
+  .story-graphic-column {
+    overflow: visible;
+    width: 100%;
+    padding: 0.5rem 0 2rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .id-card-assembly {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 610px;
+    min-height: 610px;
+    overflow: visible;
+  }
+
+  .id-lanyard-svg {
+    width: 100%;
+    max-width: 320px;
+    height: 610px;
+    overflow: visible;
+  }
+
+  .id-badge-unit {
+    width: 260px;
+    margin-left: -130px;
+    top: 72px;
+    overflow: visible;
+  }
+
+  .badge-outer-frame {
+    border-radius: 22px;
+    padding: 8px;
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.9),
+      0 8px 20px rgba(0, 0, 0, 0.7),
+      inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  }
+
+  .badge-inner-card {
+    border-radius: 16px;
+    padding: 12px 12px 16px 12px;
+  }
+
+  .id-full-photo-frame {
+    border-radius: 12px;
+  }
+
+  .id-identity-bottom {
+    margin-top: 12px;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .id-person-name {
+    font-size: 1.18rem;
+    letter-spacing: 1px;
+  }
+
+  .id-person-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 1.8px;
+    padding: 4px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .story-container {
+    padding: 3rem 0.75rem 4.5rem 0.75rem;
+  }
+
+  .story-headline {
+    font-size: 1.5rem;
+  }
+
+  .story-subheadline {
+    font-size: 1.25rem;
+  }
+
+  .story-description {
+    font-size: 0.95rem;
+  }
+
+  .id-card-assembly {
+    max-width: 280px;
+    height: 570px;
+    min-height: 570px;
+    overflow: visible;
+  }
+
+  .id-lanyard-svg {
+    max-width: 280px;
+    height: 570px;
+    overflow: visible;
+  }
+
+  .id-badge-unit {
+    width: 235px;
+    margin-left: -117px;
+    top: 66px;
+    overflow: visible;
+  }
+
+  .id-person-name {
+    font-size: 1.05rem;
+  }
+
+  .id-person-subtitle {
+    font-size: 0.62rem;
   }
 }

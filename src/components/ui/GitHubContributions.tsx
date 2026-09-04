@@ -230,7 +230,10 @@ export const GitHubContributions: React.FC = () => {
           <div className="timeline-title-wrap">
             <h3 className="timeline-title">CONTRIBUTION ACTIVITY</h3>
           </div>
-          <span className="timeline-caption-year">Last 12 Months</span>
+          <div className="timeline-header-meta">
+            <span className="timeline-swipe-hint">← Swipe calendar →</span>
+            <span className="timeline-caption-year">Last 12 Months</span>
+          </div>
         </div>
 
         {/* Full-Cover Native SVG Contribution Matrix */}
