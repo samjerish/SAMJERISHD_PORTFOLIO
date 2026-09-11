@@ -1,689 +1,513 @@
-/* STORY SECTION (ENLARGED TYPOGRAPHY & BIG ID CARD) */
+/* ===================================================
+   HORIZONTAL EXTENDED STORY EDITORIAL SECTION
+   Theme: Bold Minimalist Large-Type Narrative with Inline Badges
+   (A Little About Me followed by What I Do)
+   =================================================== */
+
 .story-container {
-  min-height: 100vh;
+  min-height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8rem 4vw;
+  padding: 6rem 4vw 7rem 4vw;
   position: relative;
   background-color: transparent;
   z-index: 10;
+  overflow-x: clip;
 }
 
 .story-content-wrapper {
-  max-width: 1400px;
+  max-width: 1540px;
   width: 100%;
   margin: 0 auto;
 }
 
-.story-content-block {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 5rem;
-  align-items: center;
+.story-horizontal-content {
+  width: 100%;
+  position: relative;
+  margin-bottom: 0;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(28px);
   transition:
     opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.story-content-block.is-visible {
+.story-horizontal-content.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.story-text-column {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-}
-
-.story-section-part {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.story-headline {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 3.8vw, 3.8rem);
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -1.5px;
-  text-transform: uppercase;
-  margin: 0;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.story-subheadline {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -1px;
-  text-transform: uppercase;
-  margin: 0;
-  line-height: 1.05;
-}
-
-.story-description {
-  font-family: var(--font-heading, "Inter", sans-serif);
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
-  line-height: 1.75;
-  color: #b8b8b8;
-  margin: 0;
-}
-
-/* View More Pill Card with Click Here Graphic */
-.story-view-more-card {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 12px 22px 12px 14px;
-  background: radial-gradient(circle at 20% 0%, rgba(30, 30, 34, 0.9) 0%, rgba(14, 14, 16, 0.95) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
-  border-radius: 40px;
-  cursor: pointer;
-  width: fit-content;
-  max-width: 100%;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  margin-top: 0.5rem;
-}
-
-.story-view-more-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
-}
-
-.story-view-more-avatar-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.story-view-more-avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}
-
-.story-view-more-card:hover .story-view-more-avatar {
-  transform: scale(1.15);
-}
-
-.story-view-more-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.story-view-more-title {
-  font-family: "Outfit", sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.story-view-more-sub {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  color: #888888;
-}
-
-/* Light Mode Overrides for Story Section */
-body.light-mode .story-headline {
-  color: #111111;
-}
-
-body.light-mode .story-subheadline {
-  color: #222222;
-}
-
-body.light-mode .story-description {
-  color: #444444;
-}
-
-body.light-mode .story-view-more-card {
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.12);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-}
-
-body.light-mode .story-view-more-title {
-  color: #111111;
-}
-
-body.light-mode .story-view-more-avatar-wrap {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.1);
-}
-
-/* ===================================================
-   ENLARGED ID CARD ASSEMBLY (BIG PROPORTIONS)
-   =================================================== */
-
-.story-graphic-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding-top: 1rem;
-}
-
-.id-card-assembly {
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-  height: 680px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: pan-y;
-}
-
-/* Top Fixed Lanyard Mounting Anchor */
-.lanyard-fixed-anchor {
+/* Ambient Radial Glow */
+.editorial-ambient-glow {
   position: absolute;
-  top: 0;
+  top: 30%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 56px;
-  height: 16px;
-  background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  z-index: 30;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.anchor-metal-pin {
-  width: 26px;
-  height: 5px;
-  background: #666666;
-  border-radius: 2px;
-}
-
-/* Dynamic SVG Lanyard Ribbon */
-.id-lanyard-svg {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 420px;
-  height: 700px;
-  pointer-events: none;
-  z-index: 10;
-  overflow: visible;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
-}
-
-/* Draggable ID Badge Unit (Enlarged to 360px) */
-.id-badge-unit {
-  position: absolute;
-  top: 95px;
-  left: 50%;
-  margin-left: -180px; /* half of 360px width */
-  width: 360px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 20;
-  cursor: grab;
-  touch-action: none;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  transform-origin: 50% 0%;
-  will-change: transform;
-}
-
-.id-badge-unit.is-dragging {
-  cursor: grabbing;
-}
-
-/* Dark Chrome Metal Clasp */
-.badge-metal-clasp {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: -1px;
-  z-index: 25;
-}
-
-.clasp-metal-ring {
-  width: 34px;
-  height: 24px;
-  border: 4.5px solid #666666;
-  border-radius: 8px;
-  background: transparent;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-}
-
-.clasp-spring-buckle {
-  width: 24px;
-  height: 16px;
-  background: linear-gradient(180deg, #444444 0%, #1c1c1c 100%);
-  border-radius: 4px;
-  border: 1px solid #555555;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
-  margin-top: -4px;
-}
-
-/* SLEEK BLACK MOLDED CASING */
-.badge-outer-frame {
-  position: relative;
-  width: 100%;
-  background: #141416;
-  border-radius: 28px;
-  padding: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.16);
-  box-shadow:
-    0 30px 75px rgba(0, 0, 0, 0.9),
-    0 12px 30px rgba(0, 0, 0, 0.7),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Top Tab Punch Hole Slot (Dark) */
-.badge-slot-punch {
-  width: 64px;
-  height: 16px;
-  background: #141416;
-  border-radius: 10px 10px 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -3px;
-  margin-bottom: 6px;
-}
-
-.slot-inner-hole {
-  width: 40px;
-  height: 6px;
-  background: #080808;
-  border-radius: 5px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
-}
-
-/* Inner ID Card Surface */
-.badge-inner-card {
-  position: relative;
-  width: 100%;
-  background-color: #0c0c0e;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  padding: 16px 16px 20px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.95);
-}
-
-/* Diagonal Geometric Stripes Background */
-.card-diagonal-stripes {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 18px,
-    rgba(255, 255, 255, 0.02) 18px,
-    rgba(255, 255, 255, 0.02) 36px,
-    transparent 36px,
-    transparent 54px,
-    rgba(255, 255, 255, 0.035) 54px,
-    rgba(255, 255, 255, 0.035) 76px
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-width: 1000px;
+  height: 380px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 234, 0, 0.035) 0%,
+    rgba(56, 189, 248, 0.03) 40%,
+    transparent 70%
   );
+  filter: blur(85px);
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
-/* Full Photo Frame */
-.id-full-photo-frame {
+/* Sequential Narrative Flow: A Little About Me followed by What I Do */
+.story-sequence-flow {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 5.5vw, 6rem);
+  max-width: 1260px;
+  margin: 0 auto;
+  width: 100%;
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 4.8;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #16161a;
-  border: 1.5px solid rgba(255, 255, 255, 0.14);
-  box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.7),
-    inset 0 0 14px rgba(0, 0, 0, 0.6);
-  z-index: 5;
-}
-
-.id-card-full-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.id-card-full-img.hidden {
-  opacity: 0;
-  filter: blur(10px) brightness(1.2);
-  z-index: 1;
-}
-
-.id-card-full-img.active {
-  opacity: 1;
-  filter: blur(0) brightness(1);
   z-index: 2;
 }
 
-.id-photo-specular-glare {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 3;
-}
-
-
-
-/* Identity Bottom (Name + Small Title) */
-.id-identity-bottom {
+/* Borderless, Clean Editorial Step Block */
+.story-sequence-step {
+  position: relative;
   display: flex;
   flex-direction: column;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Theme Kicker Header (Like CURRENTLY in reference screenshot) */
+.story-theme-kicker {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-  gap: 6px;
-  margin-top: 16px;
-  z-index: 5;
-  width: 100%;
-}
-
-.id-person-name {
-  font-family: "Outfit", sans-serif;
-  font-size: 1.45rem;
+  gap: 0.65rem;
+  margin-bottom: clamp(1.4rem, 2.2vw, 2.2rem);
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.82rem;
   font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 1.5px;
-  margin: 0;
+  letter-spacing: 0.22em;
+  color: #71717a;
   text-transform: uppercase;
+  user-select: none;
 }
 
-.id-person-subtitle {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
+.kicker-accent-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  flex-shrink: 0;
+}
+
+.kicker-accent-dot.green {
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+/* Paragraph Content Hierarchy */
+.story-sequence-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 2vw, 2.2rem);
+}
+
+/* Large-Type Bold Editorial Statement (Matching Reference Theme) */
+.story-editorial-statement {
+  font-family: var(--font-heading, "Outfit", -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: clamp(1.85rem, 2.4vw, 2.85rem);
   font-weight: 700;
-  color: #4ade80;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
+  line-height: 1.44;
+  letter-spacing: -0.025em;
+  color: #ededed;
   margin: 0;
-  padding: 5px 14px;
-  background: rgba(74, 222, 128, 0.08);
-  border: 1px solid rgba(74, 222, 128, 0.25);
-  border-radius: 24px;
 }
 
-/* ===================================================
-   RESPONSIVE ADAPTATIONS (Mobile & Tablet)
-   =================================================== */
+/* --- THEME INLINE CHIPS & BADGES (Matching User Reference Image) --- */
 
+/* 1. Yellow Pill Tag (Like "Drape" in the screenshot) */
+.story-chip-yellow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffea00;
+  color: #0c0c0e;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.88em;
+  font-weight: 800;
+  padding: 1px 11px;
+  border-radius: 6px;
+  vertical-align: baseline;
+  box-shadow: 0 2px 10px rgba(255, 234, 0, 0.32);
+  margin: 0 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+}
+
+.story-chip-yellow:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(255, 234, 0, 0.55);
+}
+
+/* 2. Coding Square Chip (Like "m." marketfeed in screenshot) */
+.story-chip-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 4px;
+  vertical-align: baseline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chip-square-box.code-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(28px, 1.8vw, 34px);
+  height: clamp(28px, 1.8vw, 34px);
+  border-radius: 7px;
+  background: #0f2c59;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62em;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(15, 44, 89, 0.4);
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.story-chip-code:hover .chip-square-box.code-box {
+  transform: translateY(-2px) scale(1.08);
+  border-color: #38bdf8;
+  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.4);
+}
+
+.story-chip-code .chip-text {
+  color: #38bdf8;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.story-chip-code:hover .chip-text {
+  color: #7dd3fc;
+}
+
+/* 3. AI Agent / Pixel Bot Chip (Like red robot in reference screenshot) */
+.story-chip-agent {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 4px;
+  vertical-align: baseline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pixel-bot-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(26px, 1.6vw, 32px);
+  height: clamp(22px, 1.4vw, 26px);
+  background: rgba(224, 86, 76, 0.14);
+  border: 1px solid rgba(224, 86, 76, 0.45);
+  border-radius: 6px;
+  padding: 3px 4px;
+  box-shadow: 0 2px 10px rgba(224, 86, 76, 0.25);
+  transition: transform 0.22s ease;
+}
+
+.pixel-bot-svg {
+  width: 16px;
+  height: 12px;
+  display: block;
+}
+
+.story-chip-agent:hover .pixel-bot-wrapper {
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 4px 15px rgba(224, 86, 76, 0.5);
+}
+
+.story-agent-text {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* 4. Curiosity Sparkle Chip */
+.story-chip-curiosity {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 4px;
+  color: #f472b6;
+  vertical-align: baseline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.curiosity-spark {
+  font-size: 1.1em;
+  color: #f472b6;
+  animation: pulseSparkle 2.4s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes pulseSparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+  50% { transform: scale(1.25) rotate(15deg); opacity: 1; filter: drop-shadow(0 0 6px #f472b6); }
+}
+
+.curiosity-text {
+  color: #f472b6;
+  font-weight: 700;
+}
+
+/* 5. Craft Star Chip */
+.story-chip-craft {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 4px;
+  vertical-align: baseline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chip-square-box.craft-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(28px, 1.8vw, 34px);
+  height: clamp(28px, 1.8vw, 34px);
+  border-radius: 7px;
+  background: #1e3a8a;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  color: #60a5fa;
+  font-size: 0.8em;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+  transition: transform 0.22s ease;
+}
+
+.story-chip-craft:hover .chip-square-box.craft-box {
+  transform: translateY(-2px) scale(1.08);
+  border-color: #60a5fa;
+}
+
+.story-chip-craft .chip-text {
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+/* 6. Experiment Energy Bolt Chip */
+.story-chip-experiment {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 4px;
+  vertical-align: baseline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chip-square-box.exp-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(28px, 1.8vw, 34px);
+  height: clamp(28px, 1.8vw, 34px);
+  border-radius: 7px;
+  background: #7c2d12;
+  border: 1px solid rgba(251, 146, 60, 0.45);
+  color: #fb923c;
+  font-size: 0.8em;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(124, 45, 18, 0.4);
+  transition: transform 0.22s ease;
+}
+
+.story-chip-experiment:hover .chip-square-box.exp-box {
+  transform: translateY(-2px) scale(1.08);
+  border-color: #fb923c;
+}
+
+.exp-orange-text {
+  color: #fb923c;
+  font-weight: 700;
+}
+
+/* --- GITHUB CONTRIBUTION CTA BUTTON (Centered Below) --- */
+.story-horizontal-bottom-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: clamp(3.5rem, 5.5vw, 5.5rem);
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.story-read-more-wrapper {
+  display: inline-flex;
+}
+
+.story-read-more-btn.highlighted-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 15px 34px;
+  background: #ffffff;
+  color: #0a0a0c;
+  border: 1.5px solid #ffffff;
+  border-radius: 50px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  box-shadow:
+    0 0 24px rgba(255, 255, 255, 0.3),
+    0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-read-more-btn.highlighted-white:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: #f4f4f5;
+  border-color: #ffffff;
+  box-shadow:
+    0 0 35px rgba(255, 255, 255, 0.65),
+    0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.story-read-more-btn.highlighted-white:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.live-contrib-ping {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ping-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.ping-ring {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(16, 185, 129, 0.6);
+  animation: pingAnimation 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pingAnimation {
+  0% { transform: scale(0.7); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.read-more-arrow {
+  font-size: 1.15rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-read-more-btn.highlighted-white:hover .read-more-arrow {
+  transform: translateX(4px);
+}
+
+/* Character Animation classes for AnimatedLine */
+.story-line {
+  display: inline;
+}
+
+.story-char {
+  display: inline-block;
+  opacity: 1;
+}
+
+.story-highlight {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Light Mode Overrides */
+body.light-mode .story-editorial-statement {
+  color: #18181b;
+}
+
+body.light-mode .story-theme-kicker {
+  color: #71717a;
+}
+
+body.light-mode .story-read-more-btn.highlighted-white {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Breakpoints */
 @media (max-width: 1080px) {
   .story-container {
-    padding: 6rem 4vw;
+    padding: 5rem 4vw 6rem 4vw;
   }
 
-  .story-content-block {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
+  .story-sequence-flow {
+    gap: 3.2rem;
   }
 
-  .story-graphic-column {
-    padding-top: 0.5rem;
-    overflow: visible;
-    width: 100%;
-  }
-
-  .story-headline {
-    white-space: normal;
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
+  .story-editorial-statement {
+    font-size: clamp(1.75rem, 3.8vw, 2.35rem);
   }
 }
 
 @media (max-width: 768px) {
   .story-container {
-    padding: 4.5rem 1.5rem;
+    padding: 3.5rem 1.4rem 4.5rem 1.4rem;
   }
 
-  .story-text-column {
-    gap: 2.8rem;
+  .story-sequence-flow {
+    gap: 2.6rem;
   }
 
-  .story-section-part {
-    gap: 1.2rem;
+  .story-editorial-statement {
+    font-size: 1.55rem;
+    line-height: 1.5;
   }
 
-  .story-headline {
-    font-size: clamp(1.9rem, 6.5vw, 2.6rem);
-    line-height: 1.1;
-    letter-spacing: -1px;
-    white-space: normal;
-  }
-
-  .story-subheadline {
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
-    line-height: 1.15;
-  }
-
-  .story-description {
-    font-size: 1.15rem;
-    line-height: 1.7;
+  .story-read-more-btn.highlighted-white {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 0.88rem;
   }
 }
 
 @media (max-width: 480px) {
   .story-container {
-    padding: 3.5rem 1rem 5rem 1rem;
+    padding: 3rem 1.1rem 4rem 1.1rem;
   }
 
-  .story-content-block {
-    gap: 2.8rem;
-  }
-
-  .story-text-column {
-    gap: 2.2rem;
-  }
-
-  .story-section-part {
-    gap: 1rem;
-  }
-
-  .story-headline {
-    font-size: clamp(1.6rem, 7.5vw, 2.1rem);
-    letter-spacing: -0.5px;
-    white-space: normal;
-    line-height: 1.15;
-  }
-
-  .story-subheadline {
-    font-size: clamp(1.35rem, 6vw, 1.8rem);
-    letter-spacing: -0.5px;
-    line-height: 1.15;
-  }
-
-  .story-description {
-    font-size: 1.02rem;
-    line-height: 1.65;
-  }
-
-  /* View More Card on Mobile */
-  .story-view-more-card {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px 14px 10px 10px;
-    gap: 0.9rem;
-    border-radius: 30px;
-  }
-
-  .story-view-more-avatar-wrap {
-    width: 42px;
-    height: 42px;
-  }
-
-  .story-view-more-title {
-    font-size: 0.95rem;
-  }
-
-  .story-view-more-sub {
-    font-size: 0.72rem;
-    line-height: 1.3;
-  }
-
-  /* ID Card Assembly on Mobile - Full Visibility Guaranteed */
-  .story-graphic-column {
-    overflow: visible;
-    width: 100%;
-    padding: 0.5rem 0 2rem 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .id-card-assembly {
-    position: relative;
-    width: 100%;
-    max-width: 320px;
-    height: 610px;
-    min-height: 610px;
-    overflow: visible;
-  }
-
-  .id-lanyard-svg {
-    width: 100%;
-    max-width: 320px;
-    height: 610px;
-    overflow: visible;
-  }
-
-  .id-badge-unit {
-    width: 260px;
-    margin-left: -130px;
-    top: 72px;
-    overflow: visible;
-  }
-
-  .badge-outer-frame {
-    border-radius: 22px;
-    padding: 8px;
-    box-shadow:
-      0 20px 50px rgba(0, 0, 0, 0.9),
-      0 8px 20px rgba(0, 0, 0, 0.7),
-      inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  }
-
-  .badge-inner-card {
-    border-radius: 16px;
-    padding: 12px 12px 16px 12px;
-  }
-
-  .id-full-photo-frame {
-    border-radius: 12px;
-  }
-
-  .id-identity-bottom {
-    margin-top: 12px;
-    gap: 4px;
-    width: 100%;
-  }
-
-  .id-person-name {
-    font-size: 1.18rem;
-    letter-spacing: 1px;
-  }
-
-  .id-person-subtitle {
-    font-size: 0.68rem;
-    letter-spacing: 1.8px;
-    padding: 4px 10px;
-  }
-}
-
-@media (max-width: 360px) {
-  .story-container {
-    padding: 3rem 0.75rem 4.5rem 0.75rem;
-  }
-
-  .story-headline {
-    font-size: 1.5rem;
-  }
-
-  .story-subheadline {
-    font-size: 1.25rem;
-  }
-
-  .story-description {
-    font-size: 0.95rem;
-  }
-
-  .id-card-assembly {
-    max-width: 280px;
-    height: 570px;
-    min-height: 570px;
-    overflow: visible;
-  }
-
-  .id-lanyard-svg {
-    max-width: 280px;
-    height: 570px;
-    overflow: visible;
-  }
-
-  .id-badge-unit {
-    width: 235px;
-    margin-left: -117px;
-    top: 66px;
-    overflow: visible;
-  }
-
-  .id-person-name {
-    font-size: 1.05rem;
-  }
-
-  .id-person-subtitle {
-    font-size: 0.62rem;
+  .story-editorial-statement {
+    font-size: 1.35rem;
+    line-height: 1.52;
   }
 }

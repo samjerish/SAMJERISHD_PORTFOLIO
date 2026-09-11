@@ -125,19 +125,21 @@
 
 .form-group input,
 .form-group textarea {
-  background-color: transparent;
-  border: 1px solid #333;
-  color: #fff;
-  padding: 1rem;
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 1rem 1.1rem;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  border-radius: 12px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #fff;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .checkbox-group {
@@ -152,7 +154,7 @@
   width: 16px;
   height: 16px;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
@@ -167,33 +169,131 @@
 }
 
 .submit-btn {
-  background-color: #333;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   border: none;
-  padding: 1.2rem;
+  padding: 12px 32px;
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.2px;
+  border-radius: 9999px;
   cursor: pointer;
   align-self: flex-start;
   margin-top: 1rem;
-  transition: background-color 0.2s;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .submit-btn:hover {
-  background-color: #555;
+  background-color: #e5e5e5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.35);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.contact-feedback-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-primary);
+  font-size: 0.92rem;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+.contact-feedback-banner.success {
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+}
+
+.contact-feedback-banner.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.contact-feedback-banner.warning {
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  color: #facc15;
 }
 
 .contact-footer-info {
   display: flex;
-  gap: 4rem;
+  gap: 3.5rem;
   margin-top: auto;
   padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .info-column h4 {
-  color: #fff;
-  margin: 0 0 1rem 0;
-  font-weight: 400;
+  color: #888888;
+  margin: 0 0 0.8rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.contact-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact-social-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-social-circle:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.25);
+  border-color: #ffffff;
+}
+
+.contact-resume-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-resume-pill:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.25);
 }
 
 .info-column p {
@@ -206,26 +306,28 @@
 /* --- MODE TOGGLE --- */
 .mode-toggle {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   margin-bottom: 2rem;
 }
 
 .toggle-btn {
-  background: transparent;
-  border: 1px solid #333;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #a0a0a0;
-  padding: 0.8rem 1.5rem;
-  border-radius: 2rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 9999px;
   font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .toggle-btn:hover {
-  border-color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
   color: #fff;
 }
 
@@ -233,6 +335,7 @@
   background-color: #fff;
   color: #000;
   border-color: #fff;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
 }
 
 /* --- WHITEBOARD CONTAINER --- */

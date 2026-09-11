@@ -1,17 +1,17 @@
 import { useState, useCallback, useEffect } from "react";
 import Lenis from "lenis";
-import { LoadingIntro } from "./components/ui/LoadingIntro";
 import { RibbonTransition } from "./components/ui/RibbonTransition";
 import { PortfolioLayout } from "./components/layout/PortfolioLayout";
+import { CustomCursor } from "./components/ui/CustomCursor";
 
 import { MyMediaPage } from "./components/pages/MyMediaPage";
 import { AboutPage } from "./components/pages/AboutPage";
 import { ProjectsPage } from "./components/pages/ProjectsPage";
 import { ContactPage } from "./components/pages/ContactPage";
 import { ResumePage } from "./components/pages/ResumePage";
+import { BottomMenuBar } from "./components/layout/BottomMenuBar";
 
 function App() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState<
     "home" | "media" | "about" | "projects" | "contact" | "resume"
   >("home");
@@ -42,6 +42,8 @@ function App() {
       syncTouch: false,
     });
 
+    (window as any).__lenis = lenis;
+
     let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
@@ -52,6 +54,7 @@ function App() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      delete (window as any).__lenis;
       lenis.destroy();
     };
   }, []);
@@ -66,7 +69,7 @@ function App() {
 
   return (
     <>
-      {!isLoaded && <LoadingIntro onComplete={() => setIsLoaded(true)} />}
+      <CustomCursor />
 
       {isTransitioning && (
         <RibbonTransition
@@ -90,6 +93,11 @@ function App() {
       {currentPage === "contact" && <ContactPage onNavigate={handleNavigate} />}
 
       {currentPage === "resume" && <ResumePage onNavigate={handleNavigate} />}
+
+      <BottomMenuBar
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+      />
     </>
   );
 }

@@ -14,83 +14,106 @@
 
 /* Default is transparent for transitions */
 .intro-container.phase-loading,
-.intro-container.phase-unlocking,
-.intro-container.phase-morphing,
+.intro-container.phase-typewriter,
+.intro-container.phase-enter,
 .intro-container.phase-ribbons {
   background-color: transparent;
 }
 
 /* Match site background for the initial load */
 .intro-container.is-initial-load.phase-loading,
-.intro-container.is-initial-load.phase-unlocking,
-.intro-container.is-initial-load.phase-morphing,
+.intro-container.is-initial-load.phase-typewriter,
+.intro-container.is-initial-load.phase-enter,
 .intro-container.is-initial-load.phase-ribbons {
   background-color: #080808;
 }
 
 /* ===================================================
-   PERCENTAGE LOADER STAGE
+   TYPEWRITER PRELOADER STAGE
    =================================================== */
 
-.lock-intro-stage {
+.typewriter-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
+  pointer-events: none;
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.lock-intro-stage.is-morphed {
+.intro-container.phase-ribbons .typewriter-stage,
+.intro-container.phase-exit .typewriter-stage {
   opacity: 0;
-  transform: scale(1.6);
-  filter: blur(14px);
+  transform: scale(0.92) translateY(-12px);
+  filter: blur(10px);
   pointer-events: none;
 }
 
-.percentage-container {
+.typewriter-wrapper {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
+  padding: 2rem 3rem;
 }
 
-/* Percentage Counter */
-.percentage-text {
-  font-family: var(--font-primary, "Outfit", sans-serif);
-  font-size: clamp(3.5rem, 8.5vw, 6.5rem);
-  font-weight: 900;
-  letter-spacing: -1.5px;
-  color: #ffffff;
-  opacity: 1;
-  line-height: 1;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  text-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
-  font-variant-numeric: tabular-nums;
+.typewriter-ambient-glow {
+  position: absolute;
+  width: 380px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+  animation: typewriter-breathe 2.4s ease-in-out infinite alternate;
 }
 
-.percentage-text.hidden {
-  opacity: 0;
-  transform: translateY(10px);
+@keyframes typewriter-breathe {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.15); opacity: 0.9; }
 }
 
-.loading-bar-track {
-  width: 160px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  overflow: hidden;
+.typewriter-content {
   position: relative;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono, "SF Mono", "Fira Code", monospace);
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.5),
+               0 0 50px rgba(255, 255, 255, 0.2);
+  user-select: none;
 }
 
-.loading-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #ffffff, #4ade80);
-  border-radius: 6px;
-  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
-  transition: width 0.04s linear;
+.typewriter-text {
+  color: #ffffff;
+  white-space: pre;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 4px;
+  color: #ffffff;
+  font-weight: 300;
+  opacity: 1;
+  transition: opacity 0.1s ease;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.85);
+}
+
+.typewriter-cursor.cursor-hidden {
+  opacity: 0;
 }
 
 /* ===================================================
@@ -209,15 +232,14 @@
    =================================================== */
 
 @media (max-width: 768px) {
-  .lock-card-wrapper {
-    width: 90px;
-    height: 90px;
-    border-radius: 24px;
+  .typewriter-content {
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    letter-spacing: 0.08em;
   }
 
-  .lock-svg {
-    width: 36px;
-    height: 36px;
+  .typewriter-ambient-glow {
+    width: 260px;
+    height: 140px;
   }
 
   .ribbons-container {

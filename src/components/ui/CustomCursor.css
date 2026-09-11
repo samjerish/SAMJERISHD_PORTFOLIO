@@ -1,0 +1,112 @@
+/* React Bits Pro: Interactive Custom Cursor Styles */
+
+/* Hide standard cursor only on fine pointer devices when custom cursor is active */
+@media (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active body,
+  html.custom-cursor-active a,
+  html.custom-cursor-active button,
+  html.custom-cursor-active [role="button"] {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.custom-cursor-root.is-visible {
+  opacity: 1;
+}
+
+/* Inner precise dot */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1000000;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+/* Outer morphing ring */
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-style: solid;
+  border-width: 1.5px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    backdrop-filter 0.2s ease;
+}
+
+/* Hovering target */
+.custom-cursor-ring.is-hovered {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Click/Press Morph */
+.custom-cursor-ring.is-pressed {
+  transform: translate(-50%, -50%) scale(0.88);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Target Morph state (locks onto element bounds) */
+.custom-cursor-ring.is-morphed {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom Text in Cursor (badge pill) */
+.custom-cursor-ring.has-text {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: #ffffff !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.custom-cursor-label {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hide custom cursor completely on touch devices */
+@media (pointer: coarse), (hover: none) {
+  .custom-cursor-root {
+    display: none !important;
+  }
+}

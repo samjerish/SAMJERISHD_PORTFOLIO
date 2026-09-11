@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import "./ProjectsPage.css";
 import "../sections/ProjectsSection.css";
+import { ArrowLeft } from "lucide-react";
 import { projects } from "../../data/projects";
-import { CenterFlow } from "../ui/CenterFlow";
 import { ProjectSwipeDownList } from "../ui/ProjectSwipeDownList";
+import { Footer } from "../layout/Footer";
 
 export const ProjectsPage: React.FC<{
   onNavigate: (
@@ -21,8 +22,14 @@ export const ProjectsPage: React.FC<{
   return (
     <div className="projects-page-wrapper is-visible">
       <nav className="projects-nav">
-        <button className="back-btn" onClick={() => onNavigate("home")}>
-          ← Go Back
+        <button
+          className="back-btn"
+          onClick={() => onNavigate("home")}
+          aria-label="Back to Home"
+          data-cursor-text="BACK"
+        >
+          <ArrowLeft size={16} strokeWidth={2} />
+          <span>Back to Home</span>
         </button>
       </nav>
 
@@ -39,12 +46,6 @@ export const ProjectsPage: React.FC<{
 
         {/* Minimalist Title List with Swipe-Down on Hover */}
         <ProjectSwipeDownList projects={projects} />
-
-        {/* Center Flow Radial Tech Stack */}
-        <CenterFlow
-          title="TECH STACK"
-          subtitle="Core technologies and frameworks powering my applications and experiments"
-        />
 
         <div className="github-cta-section">
           <h2>More on GitHub</h2>
@@ -66,6 +67,7 @@ export const ProjectsPage: React.FC<{
           CREATIVITY AND TECHNOLOGY TO SOLVE REAL WORLD PROBLEMS
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

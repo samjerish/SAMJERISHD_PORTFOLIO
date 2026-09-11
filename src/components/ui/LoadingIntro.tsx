@@ -5,73 +5,84 @@ interface LoadingIntroProps {
   onComplete: () => void;
 }
 
-type Phase = "loading" | "ribbons" | "exit";
+type Phase = "typewriter" | "ribbons" | "exit";
+
+const TARGET_TEXT = "loading.....";
 
 export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
-  const [percentage, setPercentage] = useState(0);
-  const [phase, setPhase] = useState<Phase>("loading");
+  const [phase, setPhase] = useState<Phase>("typewriter");
+  const [displayText, setDisplayText] = useState<string>("");
+  const [showCursor, setShowCursor] = useState<boolean>(true);
 
   useEffect(() => {
-    // Phase 1: Percentage counting up to 100%
-    const duration = 1200; // 1.2s for loading
-    const intervalTime = 25;
-    const steps = duration / intervalTime;
-    let currentStep = 0;
+    let charIndex = 0;
+    let typeInterval: ReturnType<typeof setInterval> | null = null;
+    let finishTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const interval = setInterval(() => {
-      currentStep++;
-      const nextPercentage = Math.min(
-        Math.floor((currentStep / steps) * 100),
-        100,
-      );
-      setPercentage(nextPercentage);
+    // Start typewriter effect after a brief initial pause
+    const startDelay = setTimeout(() => {
+      typeInterval = setInterval(() => {
+        if (charIndex < TARGET_TEXT.length) {
+          setDisplayText(TARGET_TEXT.slice(0, charIndex + 1));
+          charIndex++;
+        } else {
+          if (typeInterval) clearInterval(typeInterval);
+          // Hold the full "loading....." text briefly before triggering ribbons
+          finishTimer = setTimeout(() => {
+            setPhase("ribbons");
+          }, 450);
+        }
+      }, 75);
+    }, 150);
 
-      if (currentStep >= steps) {
-        clearInterval(interval);
-      }
-    }, intervalTime);
-
-    // Phase 2: Ribbons marquee across screen
-    const ribbonsTimer = setTimeout(() => {
-      setPhase("ribbons");
-    }, 1350);
-
-    // Phase 3: Zoom out exit animation revealing website
-    const exitTimer = setTimeout(() => {
-      setPhase("exit");
-    }, 2800);
-
-    // Complete the intro
-    const completeTimer = setTimeout(() => {
-      onComplete();
-    }, 3600);
+    // Blinking cursor
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 450);
 
     return () => {
-      clearInterval(interval);
-      clearTimeout(ribbonsTimer);
-      clearTimeout(exitTimer);
-      clearTimeout(completeTimer);
+      clearTimeout(startDelay);
+      if (typeInterval) clearInterval(typeInterval);
+      if (finishTimer) clearTimeout(finishTimer);
+      clearInterval(cursorInterval);
     };
-  }, [onComplete]);
+  }, []);
 
-  // Repeat text for infinite marquee to look seamless
+  useEffect(() => {
+    if (phase === "ribbons") {
+      // Phase 2: Ribbons enter across screen
+      const exitTimer = setTimeout(() => {
+        setPhase("exit");
+      }, 1400);
+
+      // Phase 3: Ribbons exit and reveal website
+      const completeTimer = setTimeout(() => {
+        onComplete();
+      }, 2600);
+
+      return () => {
+        clearTimeout(exitTimer);
+        clearTimeout(completeTimer);
+      };
+    }
+  }, [phase, onComplete]);
+
+  // Repeat text for infinite marquee ribbons
   const marqueeText = "SAM JERISH D. ".repeat(15);
 
   return (
     <div className={`intro-container phase-${phase} is-initial-load`}>
-      {/* Central Percentage Hub */}
-      <div
-        className={`lock-intro-stage ${
-          phase === "ribbons" || phase === "exit" ? "is-morphed" : ""
-        }`}
-      >
-        <div className="percentage-container">
-          <div className="percentage-text">{percentage}%</div>
-          <div className="loading-bar-track">
-            <div
-              className="loading-bar-fill"
-              style={{ width: `${percentage}%` }}
-            ></div>
+      {/* Typewriter Preloader Text Stage */}
+      <div className="typewriter-stage">
+        <div className="typewriter-wrapper">
+          <div className="typewriter-ambient-glow" />
+          <div className="typewriter-content" aria-label="loading">
+            <span className="typewriter-text">{displayText}</span>
+            <span
+              className={`typewriter-cursor ${!showCursor ? "cursor-hidden" : ""}`}
+            >
+              _
+            </span>
           </div>
         </div>
       </div>

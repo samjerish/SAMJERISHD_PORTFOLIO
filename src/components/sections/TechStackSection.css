@@ -1,9 +1,12 @@
 .tech-stack-container {
-  width: 100%;
-  margin-left: 0;
-  padding: 4rem 0;
-  background-color: #080808; /* Matches hero and layout */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 3rem 0;
+  background-color: transparent;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -11,103 +14,185 @@
   box-sizing: border-box;
 }
 
-.tech-stack-title {
-  font-family: var(--font-primary);
-  color: var(--text-primary);
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 3rem;
-}
-
-.tech-marquee {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  /* Fade out edges */
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
-}
-
-.tech-marquee-content {
-  display: flex;
-  width: max-content;
-  animation: scroll 30s linear infinite;
-}
-
-.tech-item {
+.tech-stack-header {
+  text-align: center;
+  margin-bottom: 3.2rem;
+  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 0 4rem;
-  gap: 1rem;
-  opacity: 1;
-  transition: transform 0.3s ease;
+  gap: 0.65rem;
 }
 
-.tech-item:hover {
-  transform: scale(1.15);
-}
-
-.tech-icon {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
-.tech-name {
-  color: #ffffff;
-  font-family: var(--font-primary);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+.tech-stack-kicker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 15px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #a1a1aa;
   text-transform: uppercase;
 }
 
-@keyframes scroll {
+.kicker-cpu-icon {
+  color: #ffffff;
+}
+
+.tech-stack-title {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  color: #ffffff;
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.tech-stack-sub {
+  font-family: var(--font-primary, sans-serif);
+  color: #8a8a93;
+  font-size: 1.05rem;
+  margin: 0;
+  max-width: 620px;
+  line-height: 1.55;
+}
+
+.tech-marquee-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  /* Smooth edge fade mask */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+}
+
+.tech-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  will-change: transform;
+}
+
+.tech-marquee-track.track-left {
+  animation: marqueeScrollLeft 38s linear infinite;
+}
+
+.tech-marquee-track.track-right {
+  animation: marqueeScrollRight 42s linear infinite;
+}
+
+.tech-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.tech-logo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.tech-logo-pill:hover {
+  transform: translateY(-3px) scale(1.04);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.12);
+}
+
+.tech-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.tech-logo-pill:hover .tech-logo-img {
+  transform: scale(1.12);
+}
+
+.tech-logo-name {
+  color: #e4e4e7;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color 0.25s ease;
+}
+
+.tech-logo-pill:hover .tech-logo-name {
+  color: #ffffff;
+}
+
+@keyframes marqueeScrollLeft {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(calc(-50%));
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeScrollRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @media (max-width: 768px) {
-  .tech-item {
-    margin: 0 2rem;
+  .tech-stack-container {
+    padding: 3.5rem 0;
   }
-  .tech-icon {
-    width: 45px;
-    height: 45px;
+  .tech-stack-header {
+    margin-bottom: 2.2rem;
   }
-  .tech-stack-title {
-    font-size: 2.5rem; /* Make title proportional */
-    margin-bottom: 2rem;
+  .tech-logo-pill {
+    padding: 8px 16px;
+    gap: 10px;
   }
-}
-
-@media (max-width: 480px) {
-  .tech-stack-title {
-    font-size: 2rem;
+  .tech-logo-img {
+    width: 26px;
+    height: 26px;
   }
-  .tech-item {
-    margin: 0 1.5rem;
-  }
-  .tech-icon {
-    width: 35px;
-    height: 35px;
+  .tech-logo-name {
+    font-size: 0.85rem;
   }
 }

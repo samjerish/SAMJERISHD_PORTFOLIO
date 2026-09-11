@@ -22,25 +22,6 @@
   margin: 0 auto;
 }
 
-.back-btn {
-  background: none;
-  border: none;
-  color: #a0a0a0;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
-  font-family: inherit;
-  display: inline-block;
-}
-
-.back-btn:hover {
-  color: #ffffff;
-  transform: translateX(-5px);
-}
-
 .media-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -55,41 +36,38 @@
 
 .media-title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 7vw, 6rem);
-  /* Reduced to fit on one line */
-  font-weight: 900;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -2px;
-  line-height: 1;
-  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 0.8rem;
   color: #ffffff;
-  white-space: nowrap;
-  /* Force one line */
 }
 
 .media-subtitle {
   font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  color: #ff6b00;
-  font-weight: 700;
-  margin-bottom: 3rem;
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+  color: #a1a1aa;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.08em;
 }
 
 .media-story-section {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .media-story-section .story-text {
-  max-width: 900px;
-  font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  line-height: 1.6;
-  color: #cccccc;
+  max-width: 860px;
+  font-family: var(--font-primary);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  line-height: 1.7;
+  color: #b5b5b5;
 }
 
 /* Hover Stack Gallery Styles */
@@ -159,4 +137,67 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .media-nav {
+    padding: 1.25rem 1rem 0.5rem 1rem;
+  }
+
+  .media-content {
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  .media-title {
+    font-size: clamp(2rem, 9vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .media-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .media-story-section .story-text {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .stack-gallery-container {
+    height: 48vh;
+    min-height: 320px;
+    margin-bottom: 2.5rem;
+  }
+
+  .stack-gallery-center {
+    width: 55vw;
+    min-width: 180px;
+    max-width: 260px;
+  }
+
+  .hover-indicator {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    top: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .media-title {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .media-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .stack-gallery-center {
+    width: 65vw;
+    min-width: 160px;
+  }
+
+  .stack-gallery-item {
+    border-radius: 14px;
+  }
 }

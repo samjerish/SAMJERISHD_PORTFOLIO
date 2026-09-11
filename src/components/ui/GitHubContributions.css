@@ -2,7 +2,7 @@
 .github-sync-section {
   width: 100%;
   max-width: 1300px;
-  margin: 5rem auto 3rem auto;
+  margin: 1rem auto 4rem auto;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -75,19 +75,19 @@
 }
 
 .github-sync-title {
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.6rem, 3.5vw, 2.3rem);
-  font-weight: 900;
+  font-weight: 800;
   color: #ffffff;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.03em;
   margin: 0;
   line-height: 1.1;
 }
 
 .github-sync-subtitle {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-primary, "Inter", sans-serif);
   font-size: 0.95rem;
-  color: #888888;
+  color: #a3a3a3;
   margin: 4px 0 0 0;
 }
 
@@ -113,13 +113,14 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 10px 22px;
   background: #ffffff;
   color: #000000;
-  border-radius: 30px;
-  font-family: "Outfit", sans-serif;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
   font-size: 0.88rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
   text-decoration: none;
   transition: all 0.25s ease;
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
@@ -143,12 +144,12 @@
   align-items: center;
   gap: 1.25rem;
   padding: 1.6rem;
-  background: radial-gradient(circle at 30% 0%, rgba(30, 30, 34, 0.8) 0%, rgba(12, 12, 15, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 22px;
+  background: #141416;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.15);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
@@ -188,15 +189,16 @@
 }
 
 .metric-val {
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.9rem;
-  font-weight: 900;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: #ffffff;
   line-height: 1.1;
 }
 
 .metric-lbl {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-primary, "Inter", sans-serif);
   font-size: 0.8rem;
   color: #888888;
   margin-top: 2px;
@@ -207,13 +209,13 @@
    =================================================== */
 
 .github-timeline-container {
-  background: radial-gradient(circle at 50% 0%, #111114 0%, #08080a 100%);
+  background: #141416;
   border: 1.5px solid rgba(255, 255, 255, 0.12);
   border-radius: 26px;
   padding: 2.2rem 2.4rem;
   box-shadow:
     0 25px 60px rgba(0, 0, 0, 0.85),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
@@ -235,11 +237,11 @@
 }
 
 .timeline-title {
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.3rem;
-  font-weight: 900;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: #ffffff;
-  letter-spacing: 0.5px;
   margin: 0;
 }
 

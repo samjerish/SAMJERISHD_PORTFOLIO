@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { HeroSection } from "../sections/HeroSection";
 import { StorySection } from "../sections/StorySection";
 import { ProjectsSection } from "../sections/ProjectsSection";
+import { ExperienceSection } from "../sections/ExperienceSection";
 import { ContactSection } from "../sections/ContactSection";
 import "./PortfolioLayout.css";
-import { FiInstagram, FiLinkedin, FiGithub } from "react-icons/fi";
-import { Navbar } from "./Navbar";
 
 export const PortfolioLayout: React.FC<{
   onNavigate: (
@@ -14,8 +13,6 @@ export const PortfolioLayout: React.FC<{
 }> = ({ onNavigate }) => {
   const progressBarRef = React.useRef<HTMLDivElement>(null);
   const mainRef = React.useRef<HTMLElement>(null);
-  const socialPopupRef = React.useRef<HTMLDivElement>(null);
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,26 +28,6 @@ export const PortfolioLayout: React.FC<{
           const totalScroll = window.scrollY;
           const windowHeight = window.innerHeight;
           const isMobile = window.innerWidth <= 768;
-
-          // Social popup logic
-          if (socialPopupRef.current && mainRef.current) {
-            const sections = mainRef.current.children;
-            const contactSection = sections[sections.length - 1];
-            let isContactVisible = false;
-
-            if (contactSection) {
-              const contactRect = contactSection.getBoundingClientRect();
-              if (contactRect.top < windowHeight - 100) {
-                isContactVisible = true;
-              }
-            }
-
-            if (totalScroll > windowHeight * 0.8 && !isContactVisible) {
-              socialPopupRef.current.classList.add("visible");
-            } else {
-              socialPopupRef.current.classList.remove("visible");
-            }
-          }
 
           const docHeight =
             document.documentElement.scrollHeight -
@@ -119,40 +96,6 @@ export const PortfolioLayout: React.FC<{
 
   return (
     <div className="portfolio-layout">
-      {/* Global Navigation Bar */}
-      <Navbar onNavigate={onNavigate} />
-
-      {/* Floating Social Popup */}
-      <div ref={socialPopupRef} className="social-popup-container">
-        <span className="social-popup-text">Follow me</span>
-        <div className="social-popup-links">
-          <a
-            href="https://instagram.com/samjerishd"
-            className="social-instagram"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FiInstagram />
-          </a>
-          <a
-            href="https://linkedin.com/in/samjerishd"
-            className="social-linkedin"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FiLinkedin />
-          </a>
-          <a
-            href="https://github.com/samjerish"
-            className="social-github"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FiGithub />
-          </a>
-        </div>
-      </div>
-
       <div
         className="scroll-progress-container"
         onClick={(e) => handleTimelineAction(e, false)}
@@ -171,10 +114,13 @@ export const PortfolioLayout: React.FC<{
           <HeroSection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
+          <StorySection onNavigate={onNavigate} />
+        </div>
+        <div className="scroll-fade-wrapper">
           <ProjectsSection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
-          <StorySection onNavigate={onNavigate} />
+          <ExperienceSection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
           <ContactSection onNavigate={onNavigate} />

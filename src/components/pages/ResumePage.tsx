@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./ResumePage.css";
-import { FiDownload, FiArrowLeft } from "react-icons/fi";
+import { ArrowLeft, Download } from "lucide-react";
+import { Footer } from "../layout/Footer";
 
 interface ResumePageProps {
   onNavigate?: (
@@ -27,10 +28,6 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
       url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
     },
     {
-      name: "TypeScript",
-      url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-    },
-    {
       name: "HTML",
       url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
     },
@@ -43,19 +40,19 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
       url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
     },
     {
+      name: "TypeScript",
+      url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    },
+    {
       name: "SQL",
       url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
     },
     {
-      name: "Firebase",
-      url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-    },
-    {
-      name: "Premiere Pro",
+      name: "Adobe Premiere Pro",
       url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg",
     },
     {
-      name: "After Effects",
+      name: "Adobe After Effects",
       url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg",
     },
     {
@@ -69,21 +66,23 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
       {/* ACTION BAR */}
       <div className="resume-action-bar">
         <button
-          className="action-btn back-btn"
+          className="back-btn"
           onClick={() => onNavigate && onNavigate("home")}
+          aria-label="Back to Home"
+          data-cursor-text="BACK"
         >
-          <FiArrowLeft size={20} />
-          <span>BACK TO HOME</span>
+          <ArrowLeft size={16} strokeWidth={2} />
+          <span>Back to Home</span>
         </button>
 
         <a
           href="https://drive.google.com/file/d/1UDob2GDrfJLw3JD4dG5BLQTJCX5e28uz/view?usp=share_link"
           target="_blank"
           rel="noreferrer"
-          className="action-btn download-btn"
+          className="resume-download-pill"
         >
-          <span>DOWNLOAD CV</span>
-          <FiDownload size={20} />
+          <Download size={16} strokeWidth={2} />
+          <span>Download CV</span>
         </a>
       </div>
 
@@ -214,6 +213,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 };

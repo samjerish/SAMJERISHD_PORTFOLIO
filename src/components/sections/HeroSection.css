@@ -164,7 +164,7 @@
 }
 
 .hero-background-text-new span {
-  font-family: var(--font-heading, sans-serif);
+  font-family: "Outfit", var(--font-heading, sans-serif);
   font-weight: 900;
   text-transform: uppercase;
   white-space: nowrap;
@@ -172,16 +172,16 @@
 
 .text-line-1 {
   color: #ffffff;
-  font-size: clamp(4rem, 22vw, 40vw);
-  line-height: 0.8;
-  letter-spacing: 1vw;
+  font-size: clamp(5.8rem, 26.5vw, 46vw);
+  line-height: 0.83;
+  letter-spacing: -0.035em;
 }
 
 .text-line-2 {
   color: #888888;
-  font-size: clamp(3rem, 15vw, 28vw);
-  line-height: 0.8;
-  letter-spacing: 1vw;
+  font-size: clamp(4.1rem, 18.5vw, 32vw);
+  line-height: 0.83;
+  letter-spacing: -0.035em;
 }
 
 .floating-avatar-new {
@@ -207,6 +207,8 @@
   }
 }
 
+
+
 .hero-bottom-elements {
   position: absolute;
   bottom: 0;
@@ -220,13 +222,13 @@
 }
 
 .hero-intro-text {
-  max-width: 450px;
+  max-width: 460px;
   text-align: left;
 }
 
 .hero-intro-text p {
-  font-size: 1.1rem;
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.65;
   color: #a0a0a0;
   margin: 0;
   font-family: var(--font-primary);
@@ -238,34 +240,172 @@
   gap: 1.5rem;
 }
 
+/* --- SCROLL DOWN INDICATOR --- */
+.hero-scroll-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 2.8rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 35;
+  padding: 8px 12px;
+  transition:
+    opacity 0.35s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  text-decoration: none;
+}
+
+.hero-scroll-indicator.is-scrolled {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(12px);
+}
+
+.hero-scroll-indicator:hover {
+  transform: translateX(-50%) translateY(-3px);
+}
+
+.scroll-indicator-mouse {
+  width: 22px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 255, 255, 0.32);
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hero-scroll-indicator:hover .scroll-indicator-mouse {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
+}
+
+.scroll-indicator-wheel {
+  width: 3px;
+  height: 7px;
+  background: #ffffff;
+  border-radius: 9999px;
+  animation: scrollWheel 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollWheel {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.scroll-indicator-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #8e909a;
+  transition: color 0.3s ease;
+}
+
+.hero-scroll-indicator:hover .scroll-indicator-label {
+  color: #ffffff;
+}
+
+.scroll-indicator-chevron {
+  animation: bounceChevron 2s ease-in-out infinite;
+  color: #8e909a;
+  transition: color 0.3s ease;
+}
+
+.hero-scroll-indicator:hover .scroll-indicator-chevron {
+  color: #ffffff;
+}
+
+@keyframes bounceChevron {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
 .book-call-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   background-color: #ffffff;
   color: #111111;
-  font-family: var(--font-primary);
+  font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 1.1rem;
-  padding: 16px 36px;
-  border-radius: 40px;
+  font-size: 0.95rem;
+  padding: 13px 28px;
+  border-radius: 9999px;
   cursor: pointer;
   border: none;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
   transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
 }
 
 .book-call-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.4);
+}
+
+.cta-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cta-status-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #a0a0a0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .cta-dot {
-  width: 14px;
-  height: 14px;
+  width: 8px;
+  height: 8px;
   background-color: #10b981;
   border-radius: 50%;
-  box-shadow: 0 0 15px #10b981;
+  box-shadow: 0 0 10px #10b981;
   animation: pulse 2s infinite;
 }
 
@@ -275,8 +415,8 @@
     opacity: 1;
   }
   50% {
-    transform: scale(1.5);
-    opacity: 0.5;
+    transform: scale(1.35);
+    opacity: 0.6;
   }
   100% {
     transform: scale(1);
@@ -295,6 +435,31 @@ body.light-mode .text-line-1 {
 
 body.light-mode .hero-intro-text p {
   color: #555555;
+}
+
+body.light-mode .scroll-indicator-mouse {
+  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .hero-scroll-indicator:hover .scroll-indicator-mouse {
+  border-color: #000000;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .scroll-indicator-wheel {
+  background: #000000;
+}
+
+body.light-mode .scroll-indicator-label,
+body.light-mode .scroll-indicator-chevron {
+  color: #666666;
+}
+
+body.light-mode .hero-scroll-indicator:hover .scroll-indicator-label,
+body.light-mode .hero-scroll-indicator:hover .scroll-indicator-chevron {
+  color: #000000;
 }
 
 body.light-mode .hero-floating-nav {
@@ -416,9 +581,9 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(3.8rem, 24vw, 6rem);
+    font-size: clamp(5.2rem, 31vw, 8.8rem);
     line-height: 0.85;
-    letter-spacing: 2px;
+    letter-spacing: -0.02em;
     text-align: center;
     color: #ffffff;
     display: block;
@@ -426,9 +591,9 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-2 {
-    font-size: clamp(2.2rem, 13.5vw, 3.8rem);
+    font-size: clamp(3.0rem, 17.5vw, 5.2rem);
     line-height: 0.85;
-    letter-spacing: 1px;
+    letter-spacing: -0.02em;
     margin-top: 0.25rem;
     text-align: center;
     color: #888888;
@@ -463,6 +628,8 @@ body.light-mode .hero-floating-nav button:hover {
     pointer-events: none;
     touch-action: pan-y;
   }
+
+
 
   .hero-bottom-elements {
     position: relative;
@@ -506,6 +673,40 @@ body.light-mode .hero-floating-nav button:hover {
     margin: 0.2rem auto 0 auto;
   }
 
+  .hero-scroll-indicator {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin-top: 0.7rem;
+    gap: 5px;
+    order: 3;
+    padding: 6px 10px;
+  }
+
+  .hero-scroll-indicator.is-scrolled {
+    transform: translateY(8px);
+  }
+
+  .hero-scroll-indicator:hover {
+    transform: translateY(-2px);
+  }
+
+  .scroll-indicator-mouse {
+    width: 20px;
+    height: 32px;
+  }
+
+  .scroll-indicator-wheel {
+    width: 2.5px;
+    height: 6px;
+  }
+
+  .scroll-indicator-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+  }
+
   .book-call-btn {
     background: #ffffff;
     color: #000000;
@@ -542,13 +743,13 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(3.4rem, 23vw, 5rem);
+    font-size: clamp(4.8rem, 30vw, 7.2rem);
     line-height: 0.85;
     letter-spacing: 1px;
   }
 
   .text-line-2 {
-    font-size: clamp(1.9rem, 12.8vw, 3rem);
+    font-size: clamp(2.7rem, 16.5vw, 4.4rem);
     line-height: 0.85;
     letter-spacing: 0.5px;
     margin-top: 0.2rem;
@@ -562,6 +763,8 @@ body.light-mode .hero-floating-nav button:hover {
     width: clamp(240px, 68vw, 320px);
     max-height: 36vh;
   }
+
+
 
   .hero-bottom-elements {
     margin: 1.6rem auto 0 auto;
@@ -591,11 +794,11 @@ body.light-mode .hero-floating-nav button:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(2.9rem, 20vw, 4rem);
+    font-size: clamp(4.0rem, 26vw, 5.4rem);
   }
 
   .text-line-2 {
-    font-size: clamp(1.6rem, 11vw, 2.3rem);
+    font-size: clamp(2.3rem, 15vw, 3.4rem);
   }
 
   .hero-avatar-img-new {
@@ -609,6 +812,8 @@ body.light-mode .hero-floating-nav button:hover {
   .hero-intro-text p {
     font-size: 0.85rem;
   }
+
+
 
   .book-call-btn {
     padding: 11px 24px;

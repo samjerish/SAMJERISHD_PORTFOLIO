@@ -1,70 +1,131 @@
-/* SCROLL STACK COMPONENT (True Sticky Deck Effect) */
+/* ===================================================
+   SCROLL STACK COMPONENT
+   Pinned Cards with Monochromatic Gray & Black Themes
+   Ultra-Smooth 60/120fps Hardware-Accelerated Performance
+   =================================================== */
+
 .scroll-stack-container {
   position: relative;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1260px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  padding-bottom: 6rem;
+  padding-bottom: 2rem;
 }
 
-/* Card Outer Wrapper - Sticky Pinned */
+/* Outer Card Wrapper: Sticky Pinned
+   Tight margin-bottom eliminates dead empty space below pinned cards */
 .scroll-stack-card-wrapper {
   position: sticky;
   width: 100%;
-  margin-bottom: 50vh;
+  margin-bottom: clamp(60px, 12vh, 100px);
   perspective: 1200px;
   will-change: transform;
 }
 
 .scroll-stack-card-wrapper:last-child {
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Inner Stack Card Body - Completely Opaque to cover underlying cards */
+/* Pinned Card Body - Monochromatic Luxury Baseline */
 .scroll-stack-card {
   position: relative;
   width: 100%;
-  background: #111111;
-  background: radial-gradient(circle at 35% 0%, #1e1e1e 0%, #0e0e0e 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  border-radius: 28px;
-  padding: 2.5rem 2.8rem;
+  min-height: clamp(520px, 66vh, 640px);
+  background: #111114;
+  background: radial-gradient(ellipse at 50% -10%, #1c1d21 0%, #111215 45%, #0a0a0c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 26px;
+  padding: clamp(2rem, 3.2vw, 2.6rem) clamp(2.2rem, 3.8vw, 3.2rem);
   box-shadow:
-    0 -15px 35px rgba(0, 0, 0, 0.7),
-    0 35px 80px rgba(0, 0, 0, 0.9),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.16);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: space-between;
+  gap: 1.6rem;
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.15s ease-out,
-              border-color 0.3s ease,
-              box-shadow 0.3s ease;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  user-select: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity, filter;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .scroll-stack-card:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
   box-shadow:
-    0 -15px 35px rgba(0, 0, 0, 0.7),
-    0 45px 95px rgba(0, 0, 0, 0.95),
-    0 0 35px rgba(74, 222, 128, 0.18),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 40px 95px rgba(0, 0, 0, 0.98),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25);
 }
 
-/* Header Top Strip */
+/* ===================================================
+   HEADER ROW (Brand, Tags, Index)
+   =================================================== */
+
 .stack-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1.25rem;
+  padding-bottom: 1.1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.stack-card-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stack-brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.stack-brand-name {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.stack-card-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.stack-pill {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 11px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
 }
 
 .stack-card-index {
@@ -72,192 +133,224 @@
   align-items: baseline;
   gap: 4px;
   font-family: var(--font-mono, monospace);
+  margin-left: auto;
 }
 
 .index-number {
   font-size: 1.25rem;
   font-weight: 800;
   color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.index-divider {
+  color: #52525b;
+  font-size: 1rem;
 }
 
 .index-total {
-  font-size: 0.85rem;
-  color: #666666;
+  color: #71717a;
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
-.stack-card-tag-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #cccccc;
-  letter-spacing: 0.5px;
-}
+/* ===================================================
+   MAIN CARD BODY (2-Column Desktop Grid)
+   =================================================== */
 
-.tag-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #4ade80;
-  box-shadow: 0 0 8px #4ade80;
-}
-
-.stack-card-year {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #777777;
-}
-
-/* Main Body Grid */
 .stack-card-body {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
-  gap: 3rem;
+  gap: clamp(2rem, 3.5vw, 3.8rem);
   align-items: center;
+  flex: 1;
 }
 
-/* Left Side: Information Column */
+/* Left Column: Project Information */
 .stack-card-info {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
+  justify-content: center;
 }
 
-.stack-card-title {
-  font-family: "Outfit", sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 800;
+.stack-card-headline {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: clamp(1.45rem, 2.3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.25;
   color: #ffffff;
-  line-height: 1.15;
-  letter-spacing: 0.5px;
-  margin: 0;
-}
-
-.stack-card-problem {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border-left: 3px solid #4ade80;
-  border-radius: 0 10px 10px 0;
-}
-
-.problem-badge {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: #4ade80;
-  text-transform: uppercase;
-}
-
-.stack-card-problem p {
-  font-size: 0.92rem;
-  color: #a0a0a0;
-  line-height: 1.5;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
 .stack-card-desc {
-  font-size: 0.98rem;
+  font-family: var(--font-primary, sans-serif);
+  font-size: 0.95rem;
   line-height: 1.6;
-  color: #b0b0b0;
+  color: #a1a1aa;
   margin: 0;
+}
+
+/* Monochromatic Tech Badges */
+.stack-card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.2rem;
+}
+
+.stack-tech-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 9px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
 }
 
 /* Action Buttons */
 .stack-card-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
+  gap: 12px;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
 }
 
-.stack-card-btn {
+.stack-card-view-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
+  gap: 7px;
+  padding: 10px 20px;
   background: #ffffff;
-  color: #000000;
+  color: #0a0a0c;
   border: none;
   border-radius: 30px;
-  font-family: "Outfit", sans-serif;
-  font-size: 0.92rem;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
-.stack-card-btn:hover {
-  background: #e0e0e0;
-  transform: scale(1.04);
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+.stack-card-view-btn:hover {
+  background: #e4e4e7;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.stack-card-view-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.stack-card-view-btn:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .stack-card-link-btn {
   display: inline-flex;
   align-items: center;
-  padding: 11px 20px;
-  background: transparent;
+  gap: 6px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 30px;
-  font-family: "Outfit", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
   text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .stack-card-link-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
-/* Right Side: Media Showcase */
+/* ===================================================
+   RIGHT COLUMN: DEVICE MOCKUP FRAME
+   =================================================== */
+
 .stack-card-media {
   position: relative;
   width: 100%;
-}
-
-.media-frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 18px;
-  overflow: hidden;
-  background-color: #0b0b0d;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+}
+
+.stack-device-frame {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  background: #0d0e11;
+  border: 6px solid #1a1b20;
+  border-radius: 18px;
+  box-shadow:
+    0 25px 60px -10px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-stack-card:hover .stack-device-frame {
+  transform: translateY(-3px) scale(1.01);
+}
+
+.stack-device-notch {
+  width: 100%;
+  height: 18px;
+  background: #0d0e11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stack-device-speaker {
+  width: 46px;
+  height: 4px;
+  background: #23242a;
+  border-radius: 9999px;
+}
+
+.stack-device-screen {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 28vh, 360px);
+  overflow: hidden;
+  background: #060608;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stack-project-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  object-position: top center;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-stack-card:hover .stack-project-img {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
-.media-glare-overlay {
+.stack-glare-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -265,139 +358,275 @@
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    transparent 60%
+    rgba(255, 255, 255, 0.06) 0%,
+    transparent 50%
   );
   pointer-events: none;
 }
 
-/* Light Mode Overrides */
-body.light-mode .scroll-stack-card {
-  background: #ffffff;
-  background: radial-gradient(circle at 35% 0%, #ffffff 0%, #f4f4f4 100%);
-  border-color: rgba(0, 0, 0, 0.1);
+/* ===================================================
+   MONOCHROMATIC GRAY & BLACK THEMES
+   (ALL GLOWING COLORS REMOVED)
+   Subtly alternating shades of obsidian black & charcoal grays
+   =================================================== */
+
+/* Project 1: Deep Jet Obsidian & Subtle Ash */
+.theme-focusflow {
+  background: radial-gradient(ellipse at 50% -10%, #1b1c20 0%, #101013 45%, #09090b 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow:
-    0 -10px 25px rgba(0, 0, 0, 0.06),
-    0 25px 50px rgba(0, 0, 0, 0.08),
-    0 5px 15px rgba(0, 0, 0, 0.04);
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.16) !important;
+}
+.theme-focusflow .stack-brand-icon {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+.theme-focusflow .stack-tech-badge {
+  color: #d4d4d8 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.theme-focusflow:hover {
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
-body.light-mode .index-number,
-body.light-mode .stack-card-title {
-  color: #111111;
+/* Project 2: Matte Charcoal Gray */
+.theme-community {
+  background: radial-gradient(ellipse at 50% -10%, #25262c 0%, #17181c 45%, #0e0f12 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow:
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
+}
+.theme-community .stack-brand-icon {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.theme-community .stack-tech-badge {
+  color: #e4e4e7 !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.theme-community:hover {
+  border-color: rgba(255, 255, 255, 0.32) !important;
 }
 
-body.light-mode .stack-card-tag-pill {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.08);
-  color: #555555;
+/* Project 3: Smoky Pitch Black & Gunmetal */
+.theme-firebase {
+  background: radial-gradient(ellipse at 50% -10%, #17181a 0%, #0d0e10 45%, #060608 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.14) !important;
+}
+.theme-firebase .stack-brand-icon {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+.theme-firebase .stack-tech-badge {
+  color: #a1a1aa !important;
+  background: rgba(255, 255, 255, 0.045) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.theme-firebase:hover {
+  border-color: rgba(255, 255, 255, 0.26) !important;
 }
 
-body.light-mode .stack-card-problem {
-  background: rgba(0, 0, 0, 0.03);
+/* Project 4: Slate Graphite Gray */
+.theme-ecotracker {
+  background: radial-gradient(ellipse at 50% -10%, #212228 0%, #15161a 45%, #0b0c0f 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+  box-shadow:
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.17) !important;
+}
+.theme-ecotracker .stack-brand-icon {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+.theme-ecotracker .stack-tech-badge {
+  color: #d4d4d8 !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.theme-ecotracker:hover {
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
-body.light-mode .stack-card-problem p,
-body.light-mode .stack-card-desc {
-  color: #555555;
+/* Project 5: Deep Dark Carbon & Onyx */
+.theme-robot {
+  background: radial-gradient(ellipse at 50% -10%, #191a1e 0%, #101114 45%, #070809 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  box-shadow:
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+}
+.theme-robot .stack-brand-icon {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.theme-robot .stack-tech-badge {
+  color: #a1a1aa !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+.theme-robot:hover {
+  border-color: rgba(255, 255, 255, 0.28) !important;
 }
 
-body.light-mode .stack-card-btn {
-  background: #000000;
-  color: #ffffff;
+/* Project 6: Medium Ash Gray & Obsidian */
+.theme-vision {
+  background: radial-gradient(ellipse at 50% -10%, #232429 0%, #16171b 45%, #0d0e10 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow:
+    0 -10px 30px rgba(0, 0, 0, 0.8),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
 }
-
-body.light-mode .stack-card-link-btn {
-  color: #111111;
-  border-color: rgba(0, 0, 0, 0.2);
+.theme-vision .stack-brand-icon {
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
 }
-
-body.light-mode .media-frame {
-  border-color: rgba(0, 0, 0, 0.08);
+.theme-vision .stack-tech-badge {
+  color: #e4e4e7 !important;
+  background: rgba(255, 255, 255, 0.065) !important;
+  border-color: rgba(255, 255, 255, 0.11) !important;
+}
+.theme-vision:hover {
+  border-color: rgba(255, 255, 255, 0.32) !important;
 }
 
 /* ===================================================
-   RESPONSIVE LAYOUT (Mobile & Tablet)
+   RESPONSIVE DESIGN (Tablets & Mobile)
    =================================================== */
 
 @media (max-width: 960px) {
   .scroll-stack-card-wrapper {
-    margin-bottom: 40vh;
-    top: calc(75px + var(--mobile-offset, 0px));
+    margin-bottom: clamp(40px, 8vh, 70px);
   }
 
   .scroll-stack-card {
-    padding: 2rem 1.8rem;
+    min-height: auto;
+    padding: 1.8rem 1.6rem;
+    gap: 1.4rem;
   }
 
   .stack-card-body {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.8rem;
   }
 
   .stack-card-media {
     order: -1;
   }
 
-  .media-frame {
-    aspect-ratio: 16 / 9;
+  .stack-device-screen {
+    height: 220px;
   }
 }
 
 @media (max-width: 640px) {
   .scroll-stack-container {
-    padding-bottom: 4rem;
+    padding-bottom: 2.5rem;
   }
 
   .scroll-stack-card-wrapper {
-    margin-bottom: 35vh;
+    margin-bottom: clamp(100px, 20vh, 160px);
   }
 
   .scroll-stack-card {
-    padding: 1.4rem 1.2rem;
-    border-radius: 20px;
-    gap: 1.3rem;
+    min-height: auto;
+    padding: 1.25rem 1.05rem;
+    border-radius: 18px;
+    gap: 1rem;
   }
 
-  .stack-card-header {
-    padding-bottom: 0.85rem;
+  .stack-brand-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .stack-brand-name {
+    font-size: 0.98rem;
+  }
+
+  .stack-pill {
+    font-size: 0.66rem;
+    padding: 3px 8px;
   }
 
   .index-number {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
-  .stack-card-tag-pill {
-    padding: 4px 10px;
-    font-size: 0.68rem;
-  }
-
-  .stack-card-title {
-    font-size: 1.45rem;
-  }
-
-  .stack-card-problem {
-    padding: 10px 12px;
-  }
-
-  .stack-card-problem p {
-    font-size: 0.85rem;
+  .stack-card-headline {
+    font-size: 1.3rem;
+    line-height: 1.25;
   }
 
   .stack-card-desc {
     font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .stack-device-frame {
+    border-width: 4px;
+    border-radius: 13px;
+  }
+
+  .stack-device-screen {
+    height: clamp(170px, 26vh, 200px);
   }
 
   .stack-card-actions {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.75rem;
+    gap: 0.6rem;
   }
 
-  .stack-card-btn,
+  .stack-card-view-btn,
   .stack-card-link-btn {
     justify-content: center;
     width: 100%;
     text-align: center;
+    padding: 9px 18px;
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .scroll-stack-card {
+    padding: 1.1rem 0.9rem;
+    border-radius: 16px;
+    gap: 0.85rem;
+  }
+
+  .stack-card-headline {
+    font-size: 1.18rem;
+  }
+
+  .stack-card-desc {
+    font-size: 0.84rem;
+  }
+
+  .stack-device-screen {
+    height: 160px;
+  }
+
+  .stack-pill {
+    font-size: 0.62rem;
+    padding: 2px 7px;
   }
 }

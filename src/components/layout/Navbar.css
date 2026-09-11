@@ -204,10 +204,10 @@ body.menu-open .scroll-progress-container {
 
 .menu-item-text {
   font-size: clamp(2rem, 4.4vw, 4.4rem);
-  font-family: var(--font-heading, "Outfit", sans-serif);
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.03em;
   line-height: 1.1;
   color: #ffffff;
   white-space: nowrap;
@@ -278,10 +278,10 @@ body.menu-open .scroll-progress-container {
 
   /* Monochrome Text Morph */
   .menu-item:hover .menu-item-text {
-    font-style: italic;
-    letter-spacing: 2px;
+    font-style: normal;
+    letter-spacing: -0.02em;
     color: #ffffff;
-    text-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
   }
 
   /* Floating Tag Reveal */
@@ -320,7 +320,7 @@ body.menu-open .scroll-progress-container {
   align-items: center;
   padding: 2rem 8vw;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  font-family: var(--font-secondary, monospace);
+  font-family: var(--font-mono, monospace);
   font-size: 0.9rem;
   color: #888;
 
@@ -395,8 +395,8 @@ body.light-mode .menu-item {
 
   body.light-mode .menu-item:hover .menu-item-text {
     color: #000000;
-    font-style: italic;
-    letter-spacing: 2px;
+    font-style: normal;
+    letter-spacing: -0.02em;
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }
 
@@ -442,8 +442,8 @@ body.light-mode .menu-socials a:hover {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hamburger-btn {
-    top: 1.25rem;
-    right: 1.25rem;
+    top: max(1.1rem, env(safe-area-inset-top, 1.1rem));
+    right: max(1.1rem, env(safe-area-inset-right, 1.1rem));
     width: 48px;
     height: 48px;
     -webkit-tap-highlight-color: transparent;

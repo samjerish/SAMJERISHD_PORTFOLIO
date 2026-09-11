@@ -77,12 +77,12 @@
 }
 
 .story-line {
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4.5vw, 3.8rem);
-  font-weight: 900;
-  line-height: 1.1;
+  font-weight: 800;
+  line-height: 1.15;
   text-transform: uppercase;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.03em;
   transition: all 0.5s ease;
 }
 
@@ -92,13 +92,14 @@
 
 .story-line.line-what-if {
   color: #ffffff;
-  font-family: "Outfit", sans-serif;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-weight: 800;
   font-size: clamp(3rem, 7vw, 5.2rem);
-  background: linear-gradient(135deg, #ffffff 0%, #4ade80 50%, #60a5fa 100%);
+  background: linear-gradient(135deg, #ffffff 15%, #4ade80 65%, #93c5fd 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 30px rgba(74, 222, 128, 0.3));
+  filter: drop-shadow(0 0 35px rgba(74, 222, 128, 0.2));
+  letter-spacing: -0.03em;
 }
 
 /* Minimalist Tech Grid */
@@ -164,15 +165,16 @@
 }
 
 .github-cta-section h2 {
-  font-family: "Outfit", sans-serif;
-  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
   font-weight: 700;
   color: #ffffff;
+  letter-spacing: -0.02em;
 }
 
 .github-cta-section p {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
   color: #a0a0a0;
   max-width: 600px;
   line-height: 1.6;
@@ -180,19 +182,20 @@
 
 .github-link-btn {
   display: inline-block;
-  padding: 1rem 3rem;
+  padding: 0.9rem 2.5rem;
   background-color: #ffffff;
   color: #000000;
   text-decoration: none;
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
   border-radius: 50px;
   transition:
     background-color 0.3s ease,
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .github-link-btn:hover {

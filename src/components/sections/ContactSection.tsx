@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./ContactSection.css";
 import { FiInstagram, FiLinkedin, FiGithub } from "react-icons/fi";
-import { FileText } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import thumpsupImage from "../../assets/thumpsup.png";
 
 interface ContactSectionProps {
@@ -49,6 +49,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   return (
     <section
       ref={sectionRef}
+      id="contact"
       className={`dark-contact-section ${isVisible ? "is-visible" : ""}`}
     >
       <div className="dark-contact-content">
@@ -67,43 +68,38 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         {/* Info Grid */}
         <div className="contact-info-grid">
           <div className="info-block">
-            <span className="info-label">Email</span>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: "1.5rem",
-                flexWrap: "wrap",
-              }}
-            >
-              <a href="mailto:samjerishd@gmail.com" className="info-value">
+            <span className="info-label">Email & Actions</span>
+            <div className="contact-email-row">
+              <a
+                href="mailto:samjerishd@gmail.com"
+                className="info-value"
+                data-cursor-text="EMAIL"
+              >
                 samjerishd@gmail.com
               </a>
               {onNavigate && (
-                <button
-                  onClick={() => onNavigate("resume")}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: 0,
-                    fontSize: "0.9rem",
-                    fontFamily: "var(--font-heading)",
-                    textTransform: "uppercase",
-                    letterSpacing: "1px",
-                    fontWeight: "bold",
-                    transition: "color 0.2s",
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = "#ccc")}
-                  onMouseOut={(e) => (e.currentTarget.style.color = "#ffffff")}
-                >
-                  <FileText size={16} /> VIEW RESUME
-                </button>
+                <div className="contact-actions-group">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("contact")}
+                    className="contact-highlight-btn send-message-btn"
+                    aria-label="Send a Message"
+                    data-cursor-text="MESSAGE"
+                  >
+                    <Mail size={16} />
+                    <span>Send Message</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("resume")}
+                    className="contact-highlight-btn view-resume-btn"
+                    aria-label="View Resume"
+                    data-cursor-text="RESUME"
+                  >
+                    <FileText size={16} />
+                    <span>View Resume</span>
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -111,32 +107,46 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <div className="contact-splitter-vertical"></div>
 
           <div className="info-block">
-            <span className="info-label">Social</span>
-            <div className="social-circles">
-              <a
-                href="https://instagram.com/samjerishd"
-                target="_blank"
-                rel="noreferrer"
-                className="social-circle"
-              >
-                <FiInstagram />
-              </a>
-              <a
-                href="https://linkedin.com/in/samjerishd"
-                target="_blank"
-                rel="noreferrer"
-                className="social-circle"
-              >
-                <FiLinkedin />
-              </a>
-              <a
-                href="https://github.com/samjerish"
-                target="_blank"
-                rel="noreferrer"
-                className="social-circle"
-              >
-                <FiGithub />
-              </a>
+            <span className="info-label">Social Media</span>
+            <div className="contact-social-row">
+              <span className="info-value social-subtitle">
+                Connect & Follow
+              </span>
+              <div className="contact-social-group">
+                <a
+                  href="https://instagram.com/samjerishd"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-social-pill social-instagram"
+                  data-cursor-text="INSTA"
+                  aria-label="Instagram Profile"
+                >
+                  <FiInstagram size={17} />
+                  <span>Instagram</span>
+                </a>
+                <a
+                  href="https://linkedin.com/in/samjerishd"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-social-pill social-linkedin"
+                  data-cursor-text="LINKEDIN"
+                  aria-label="LinkedIn Profile"
+                >
+                  <FiLinkedin size={17} />
+                  <span>LinkedIn</span>
+                </a>
+                <a
+                  href="https://github.com/samjerish"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-social-pill social-github"
+                  data-cursor-text="GITHUB"
+                  aria-label="GitHub Profile"
+                >
+                  <FiGithub size={17} />
+                  <span>GitHub</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -146,29 +156,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
       {/* Massive Text and Footer */}
       <div className="contact-massive-text-container">
-        <div className="contact-massive-text">
-          SAM <span className="contact-massive-text-grey">JERISH D</span>
+        <div className="contact-massive-text-wrapper">
+          <div className="contact-massive-text">
+            SAM <span className="contact-massive-text-grey">JERISH D</span>
+          </div>
+          <img
+            src={thumpsupImage}
+            alt="Sam Jerish"
+            className="contact-thumpsup-image"
+          />
         </div>
 
         <div className="contact-footer-line"></div>
 
         <div className="contact-footer-links">
           <div className="contact-footer-left">
-            © 2026 Sam Jerish D / Reject all substitutes
+            <span>Reject all substitutes</span>
           </div>
-          <div className="contact-footer-right">
-            <span>Security</span>
-            <span>Terms of service</span>
-            <span>Privacy policy</span>
+          <div className="contact-footer-center">
+            <span>© 2026 Sam Jerish. All rights reserved.</span>
           </div>
+          <div className="contact-footer-right" aria-hidden="true"></div>
         </div>
       </div>
-
-      <img
-        src={thumpsupImage}
-        alt="Thumbs Up"
-        className="contact-thumpsup-image"
-      />
     </section>
   );
 };

@@ -128,20 +128,22 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                     </div>
 
                     {/* Live Project Action */}
-                    {project.link && (
-                      <div className="drawer-actions">
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="drawer-live-btn"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <span>Live Project Demo</span>
-                          <FiExternalLink />
-                        </a>
-                      </div>
-                    )}
+                    {Boolean(project.link) &&
+                      (project.name.toUpperCase().includes("FOCUSFLOW") ||
+                        project.name.toUpperCase().includes("ECOTRACKER")) && (
+                        <div className="drawer-actions">
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="drawer-live-btn"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <span>View Project</span>
+                            <FiExternalLink />
+                          </a>
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>

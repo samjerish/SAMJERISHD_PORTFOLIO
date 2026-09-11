@@ -2,14 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import "./ContactPage.css";
 import mailboxImg from "../../assets/mailbox.jpg";
 import {
-  ArrowUpRight,
+  ArrowLeft,
   PenTool,
   Eraser,
   Trash2,
   Type,
   FileText,
+  CheckCircle2,
+  AlertCircle,
 } from "lucide-react";
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
+import { Footer } from "../layout/Footer";
 
 export const ContactPage: React.FC<{
   onNavigate?: (
@@ -24,19 +27,26 @@ export const ContactPage: React.FC<{
   const [hasDrawn, setHasDrawn] = useState(false);
   const [activeTool, setActiveTool] = useState<"pen" | "eraser">("pen");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error" | "warning";
+    message: string;
+  } | null>(null);
+
+  const showFeedback = (type: "success" | "error" | "warning", message: string) => {
+    setFeedback({ type, message });
+    setTimeout(() => setFeedback(null), 5000);
+  };
 
   const submitDrawing = async () => {
     const canvas = canvasRef.current;
     if (!canvas || !hasDrawn) {
-      alert("Please draw a message before sending!");
+      showFeedback("warning", "Please draw a message before sending.");
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // Use JPEG with 0.5 quality to keep the base64 string very small
-      // Formspree free tier ignores file blobs, so we send it as a text field.
       const dataUrl = canvas.toDataURL("image/jpeg", 0.5);
 
       const formData = new FormData();
@@ -52,13 +62,13 @@ export const ContactPage: React.FC<{
       });
 
       if (response.ok) {
-        alert("Message sent successfully!");
+        showFeedback("success", "Your message was sent successfully!");
         clearCanvas();
       } else {
-        alert("Failed to send message. Please try again.");
+        showFeedback("error", "Failed to send message. Please try again.");
       }
     } catch {
-      alert("An error occurred. Please try again later.");
+      showFeedback("error", "An error occurred. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -190,15 +200,22 @@ export const ContactPage: React.FC<{
       <div className="contact-form-section">
         <div className="form-header">
           <button
-            className="return-btn"
+            className="back-btn"
             onClick={() => onNavigate && onNavigate("home")}
+            aria-label="Back to Home"
           >
-            Return to home{" "}
-            <span className="arrow-box">
-              <ArrowUpRight size={14} />
-            </span>
+            <ArrowLeft size={16} strokeWidth={2} />
+            <span>Back to Home</span>
           </button>
         </div>
+
+        {feedback && (
+          <div className={`contact-feedback-banner ${feedback.type}`}>
+            {feedback.type === "success" && <CheckCircle2 size={18} />}
+            {feedback.type !== "success" && <AlertCircle size={18} />}
+            <span>{feedback.message}</span>
+          </div>
+        )}
 
         <div className="form-title-row">
           <h1 className="form-title">Send a message</h1>
@@ -341,54 +358,36 @@ export const ContactPage: React.FC<{
           </div>
         )}
 
-        <div
-          className="contact-footer-info"
-          style={{ gap: "2rem", flexWrap: "wrap", marginTop: "1rem" }}
-        >
+        <div className="contact-footer-info">
           <div className="info-column">
             <h4>Socials</h4>
-            <div style={{ display: "flex", gap: "1rem" }}>
+            <div className="contact-social-icons">
               <a
                 href="https://instagram.com/samjerishd"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: "#E1306C", transition: "transform 0.2s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.1)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
+                className="contact-social-circle"
+                aria-label="Instagram"
               >
-                <FiInstagram size={24} />
+                <FiInstagram size={18} />
               </a>
               <a
                 href="https://linkedin.com/in/samjerishd"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: "#0077b5", transition: "transform 0.2s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.1)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
+                className="contact-social-circle"
+                aria-label="LinkedIn"
               >
-                <FiLinkedin size={24} />
+                <FiLinkedin size={18} />
               </a>
               <a
                 href="https://github.com/samjerish"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: "#ffffff", transition: "transform 0.2s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.1)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
+                className="contact-social-circle"
+                aria-label="GitHub"
               >
-                <FiGithub size={24} />
+                <FiGithub size={18} />
               </a>
             </div>
           </div>
@@ -396,27 +395,15 @@ export const ContactPage: React.FC<{
             <h4>Resume</h4>
             <button
               onClick={() => onNavigate && onNavigate("resume")}
-              style={{
-                background: "transparent",
-                border: "none",
-                color: "#ffffff",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: 0,
-                fontSize: "0.9rem",
-                fontFamily: "monospace",
-                transition: "color 0.2s",
-                fontWeight: "bold",
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "#ccc")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "#ffffff")}
+              className="contact-resume-pill"
             >
-              <FileText size={16} /> VIEW RESUME
+              <FileText size={16} />
+              <span>View Resume</span>
             </button>
           </div>
         </div>
+
+        <Footer />
       </div>
     </div>
   );

@@ -1,0 +1,502 @@
+/* React Bits Pro: About 12 Block Styles */
+
+.about-12-section {
+  position: relative;
+  width: 100%;
+  padding: 10vh 3vw 8vh 3vw;
+  background-color: transparent;
+  color: #ffffff;
+  overflow: hidden;
+  font-family: var(--font-primary, sans-serif);
+
+  /* Entrance scroll animation */
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-12-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-12-inner {
+  max-width: 1380px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* --- SECTION HEADER --- */
+.about-12-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+  max-width: 820px;
+}
+
+.about-12-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #c4c4c4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
+.about-12-badge-icon {
+  color: #ffffff;
+}
+
+.about-12-headline {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.about-12-subheadline {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.65;
+  color: #a0a0a0;
+  margin: 0;
+  max-width: 720px;
+}
+
+/* --- 2-COLUMN GRID --- */
+.about-12-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  gap: 2.5rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* --- LEFT: INVERTED FOUNDER PULL-QUOTE PANEL --- */
+.about-12-founder-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(24, 24, 28, 0.9) 0%, rgba(12, 12, 14, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: clamp(2rem, 3.5vw, 3.2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-12-founder-card:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  transform: translateY(-2px);
+}
+
+.about-12-card-glow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(30px);
+}
+
+.about-12-quote-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.about-12-quote-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.about-12-quote-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #888888;
+  text-transform: uppercase;
+}
+
+.about-12-quote-body {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(1.25rem, 1.85vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.about-12-quote-reflection {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #b0b0b8;
+  margin: 0;
+}
+
+/* Founder Profile Row inside panel */
+.about-12-founder-profile {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-12-avatar-wrapper {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 100%);
+  flex-shrink: 0;
+}
+
+.about-12-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.about-12-avatar-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #10b981;
+  border: 2px solid #141416;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.about-12-founder-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.about-12-founder-name {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.about-12-founder-role {
+  font-size: 0.85rem;
+  color: #a0a0a0;
+  font-weight: 500;
+}
+
+.about-12-founder-location {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #707070;
+  letter-spacing: 0.02em;
+}
+
+/* Call to action button */
+.about-12-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  color: #ffffff;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-12-more-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+}
+
+.about-12-btn-arrow {
+  transition: transform 0.25s ease;
+}
+
+.about-12-more-btn:hover .about-12-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* --- RIGHT: NUMBERED OPERATING-VALUES LEDGER --- */
+.about-12-ledger {
+  background: rgba(18, 18, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: clamp(1.8rem, 3vw, 2.8rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.about-12-ledger-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-12-ledger-title {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #888888;
+  text-transform: uppercase;
+}
+
+.about-12-ledger-count {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #a0a0a0;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+}
+
+.about-12-ledger-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Individual Ledger Row Item */
+.about-12-ledger-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  overflow: hidden;
+}
+
+.about-12-ledger-item:hover,
+.about-12-ledger-item.is-active {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.about-12-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.about-12-item-number {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #666666;
+  transition: color 0.25s ease;
+  letter-spacing: -0.02em;
+}
+
+.about-12-ledger-item:hover .about-12-item-number,
+.about-12-ledger-item.is-active .about-12-item-number {
+  color: #ffffff;
+}
+
+.about-12-item-heading-wrap {
+  flex: 1;
+}
+
+.about-12-item-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.about-12-item-status-icon {
+  color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.about-12-ledger-item:hover .about-12-item-status-icon,
+.about-12-ledger-item.is-active .about-12-item-status-icon {
+  color: #10b981;
+  transform: scale(1.1);
+}
+
+.about-12-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-left: 2.4rem;
+}
+
+.about-12-item-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #a4a4b0;
+  margin: 0;
+}
+
+.about-12-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-12-tag-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #c0c0cc;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+/* Active Indicator Bar on Left */
+.about-12-item-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.25s ease;
+}
+
+.about-12-ledger-item:hover .about-12-item-indicator,
+.about-12-ledger-item.is-active .about-12-item-indicator {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 1024px) {
+  .about-12-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-12-section {
+    padding: 8vh 1.2rem 6vh 1.2rem;
+  }
+
+  .about-12-inner {
+    gap: 2.5rem;
+  }
+
+  .about-12-headline {
+    font-size: clamp(2rem, 7vw, 2.6rem);
+  }
+
+  .about-12-founder-card,
+  .about-12-ledger {
+    border-radius: 22px;
+    padding: 1.6rem 1.2rem;
+  }
+
+  .about-12-quote-body {
+    font-size: 1.25rem;
+  }
+
+  .about-12-item-content {
+    padding-left: 0;
+  }
+
+  .hidden-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-12-headline {
+    font-size: 1.85rem;
+  }
+
+  .about-12-subheadline {
+    font-size: 0.92rem;
+  }
+
+  .about-12-ledger-item {
+    padding: 1.1rem 1rem;
+  }
+
+  .about-12-item-title {
+    font-size: 1.02rem;
+  }
+
+  .about-12-item-desc {
+    font-size: 0.86rem;
+  }
+}

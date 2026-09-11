@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import "./MyMediaPage.css";
+import { ArrowLeft } from "lucide-react";
 import { AnimatedLine } from "../sections/StorySection";
+import { Footer } from "../layout/Footer";
 
 interface MyMediaPageProps {
   onNavigate: (
@@ -219,8 +221,14 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
   return (
     <div className="my-media-page">
       <nav className="media-nav">
-        <button className="back-btn" onClick={() => onNavigate("home")}>
-          ← Back to Home
+        <button
+          className="back-btn"
+          onClick={() => onNavigate("home")}
+          aria-label="Back to Home"
+          data-cursor-text="BACK"
+        >
+          <ArrowLeft size={16} strokeWidth={2} />
+          <span>Back to Home</span>
         </button>
       </nav>
 
@@ -265,6 +273,7 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
           colorShiftOnHover={false}
         />
       </div>
+      <Footer />
     </div>
   );
 };

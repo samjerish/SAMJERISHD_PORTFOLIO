@@ -198,17 +198,19 @@ const ProjectParallaxItem: React.FC<ProjectItemProps> = ({
             </svg>
           </button>
 
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="parallax-demo-btn"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Live Demo ↗
-            </a>
-          )}
+          {Boolean(project.link) &&
+            (project.name.toUpperCase().includes("FOCUSFLOW") ||
+              project.name.toUpperCase().includes("ECOTRACKER")) && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                className="parallax-demo-btn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                View Project ↗
+              </a>
+            )}
         </div>
       </div>
     </div>
