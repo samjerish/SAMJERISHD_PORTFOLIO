@@ -444,10 +444,11 @@
   }
 
   .contact-splitter-vertical {
-    width: 100%;
-    height: 0;
-    border-left: none;
-    border-top: 2px dotted #444444;
+    display: none;
+  }
+
+  .contact-splitter-horizontal {
+    margin: 2rem 0;
   }
 
   .contact-massive-text-wrapper {
@@ -515,11 +516,21 @@
 
 @media (max-width: 480px) {
   .dark-contact-section {
-    padding: 5vh 1rem 0 1rem;
+    padding: 4vh 1rem 0 1rem;
+  }
+  .contact-hero-header {
+    margin-bottom: 1.6rem;
   }
   .contact-hero-header h1 {
     font-size: clamp(1.85rem, 8.5vw, 2.6rem);
     line-height: 1.15;
+  }
+  .contact-splitter-horizontal {
+    margin: 1.5rem 0;
+  }
+  .contact-info-grid {
+    gap: 1.6rem;
+    margin-bottom: 0;
   }
   .contact-massive-text-wrapper {
     gap: clamp(0.4rem, 1.2vw, 0.8rem);
