@@ -69,10 +69,11 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
   currentPage,
   onNavigate,
 }) => {
-  // Swipe out logic: Hide in Hero section and Contact section
-  const [isHidden, setIsHidden] = useState<boolean>(
-    () => currentPage === "home" || currentPage === "contact",
-  );
+  // Dynamic swipe out in Hero and Contact sections on home page
+  const [isHidden, setIsHidden] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return currentPage === "home" && window.scrollY < 200;
+  });
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -90,9 +91,76 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
 
   const dockContainerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const liquidPillRef = useRef<HTMLDivElement>(null);
+  const specularEdgeRef = useRef<HTMLDivElement>(null);
+  const rafIdRef = useRef<number | null>(null);
 
   const activeIndex = useMemo(() => {
     return NAV_ITEMS.findIndex((item) => item.id === currentPage);
+  }, [currentPage]);
+
+  // Dynamic scroll listener: Swipes out menu bar in Hero (#home) and Contact (#contact)
+  useEffect(() => {
+    if (currentPage !== "home") {
+      setIsHidden(false);
+      return;
+    }
+
+    let ticking = false;
+
+    const checkVisibility = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const heroEl = document.getElementById("home");
+          const contactEl = document.getElementById("contact");
+          const scrollY = window.scrollY;
+          const vh = window.innerHeight;
+          const docHeight = document.documentElement.scrollHeight;
+
+          // 1. Hero Section Detection: Swiped out when Hero occupies the viewport
+          let inHero = false;
+          if (heroEl) {
+            const heroRect = heroEl.getBoundingClientRect();
+            inHero = heroRect.bottom > vh * 0.4 || scrollY < 120;
+          } else {
+            inHero = scrollY < vh * 0.5;
+          }
+
+          // 2. Contact Section Detection: Swiped out when Contact section comes into view
+          let inContact = false;
+          if (contactEl) {
+            const contactRect = contactEl.getBoundingClientRect();
+            const atBottom = vh + scrollY >= docHeight - 70;
+            inContact = contactRect.top <= vh * 0.7 || atBottom;
+          }
+
+          setIsHidden(inHero || inContact);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    checkVisibility();
+
+    window.addEventListener("scroll", checkVisibility, { passive: true });
+    window.addEventListener("resize", checkVisibility);
+
+    const lenis = (window as any).__lenis;
+    if (lenis && typeof lenis.on === "function") {
+      lenis.on("scroll", checkVisibility);
+    }
+
+    const timeoutId = setTimeout(checkVisibility, 150);
+
+    return () => {
+      window.removeEventListener("scroll", checkVisibility);
+      window.removeEventListener("resize", checkVisibility);
+      if (lenis && typeof lenis.off === "function") {
+        lenis.off("scroll", checkVisibility);
+      }
+      clearTimeout(timeoutId);
+    };
   }, [currentPage]);
 
   const updatePillToItem = useCallback((targetIdx: number) => {
@@ -110,92 +178,51 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
     }
   }, []);
 
-  // Update pill position based on hover or active page when not dragging
+  // Update pill position based on active page when not dragging
   useEffect(() => {
     if (!isDraggingRef.current) {
-      const targetIdx = hoveredIndex !== null ? hoveredIndex : activeIndex;
-      updatePillToItem(targetIdx);
-      const timer = setTimeout(() => updatePillToItem(targetIdx), 60);
+      updatePillToItem(activeIndex);
+      const timer = setTimeout(() => updatePillToItem(activeIndex), 60);
       return () => clearTimeout(timer);
     }
-  }, [hoveredIndex, activeIndex, updatePillToItem]);
+  }, [activeIndex, updatePillToItem]);
 
   useEffect(() => {
     const handleResize = () => {
       if (!isDraggingRef.current) {
-        const targetIdx = hoveredIndex !== null ? hoveredIndex : activeIndex;
-        updatePillToItem(targetIdx);
+        updatePillToItem(activeIndex);
       }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [hoveredIndex, activeIndex, updatePillToItem]);
-
-  // Swipe out logic: Hide in Hero section and Contact section
-  useEffect(() => {
-    if (currentPage === "contact") {
-      setIsHidden(true);
-      return;
-    }
-
-    if (currentPage !== "home") {
-      setIsHidden(false);
-      return;
-    }
-
-    let ticking = false;
-
-    const evaluateVisibility = () => {
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-
-      // 1. Hero section threshold: top ~60% of viewport
-      const inHero = scrollY < viewportHeight * 0.6;
-
-      // 2. Contact section threshold: when contact section enters viewport
-      const contactEl = document.getElementById("contact");
-      let inContact = false;
-      if (contactEl) {
-        const rect = contactEl.getBoundingClientRect();
-        // Trigger swipe-out as contact section approaches viewport
-        if (rect.top <= viewportHeight * 0.8 && rect.bottom >= 0) {
-          inContact = true;
-        }
-      }
-
-      setIsHidden(inHero || inContact);
-    };
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          evaluateVisibility();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    evaluateVisibility();
-    const timer = setTimeout(evaluateVisibility, 150);
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-      clearTimeout(timer);
-    };
-  }, [currentPage]);
+  }, [activeIndex, updatePillToItem]);
 
   const handleItemClick = (item: NavItem) => {
     if (item.id === "home") {
       if (currentPage === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        const lenis = (window as any).__lenis;
+        if (lenis) {
+          lenis.scrollTo(0, { duration: 1.1 });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       } else {
         onNavigate("home");
       }
+    } else if (item.id === "contact") {
+      if (currentPage === "home") {
+        const contactEl = document.getElementById("contact");
+        if (contactEl) {
+          const lenis = (window as any).__lenis;
+          if (lenis) {
+            lenis.scrollTo(contactEl, { duration: 1.1 });
+          } else {
+            contactEl.scrollIntoView({ behavior: "smooth" });
+          }
+          return;
+        }
+      }
+      onNavigate("contact");
     } else {
       onNavigate(item.id);
     }
@@ -267,10 +294,17 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
         width: targetWidth,
         opacity: 1,
       });
+
+      if (liquidPillRef.current) {
+        liquidPillRef.current.style.transition = "none";
+        liquidPillRef.current.style.transform = `translate3d(${pillLeft}px, 0, 0)`;
+        liquidPillRef.current.style.width = `${targetWidth}px`;
+        liquidPillRef.current.style.opacity = "1";
+      }
     }
   };
 
-  // Apple Liquid Glass Drag: Pointer Move (Dragging through options)
+  // Apple Liquid Glass Drag: Pointer Move (Dragging through options with 120fps direct transform)
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDraggingRef.current) return;
 
@@ -281,10 +315,8 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
       hasDraggedRef.current = true;
     }
 
-    const vx = e.clientX - lastClientXRef.current;
-    lastClientXRef.current = e.clientX;
-
-    const closestIdx = getClosestOptionIndex(e.clientX);
+    const clientX = e.clientX;
+    const closestIdx = getClosestOptionIndex(clientX);
 
     // Haptic feedback on switching options
     if (closestIdx !== lastHoveredIndexRef.current) {
@@ -295,23 +327,31 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
 
     if (dockContainerRef.current) {
       const dockRect = dockContainerRef.current.getBoundingClientRect();
-      const relX = e.clientX - dockRect.left;
+      const relX = clientX - dockRect.left;
       const itemEl = itemRefs.current[closestIdx];
-      const baseWidth = itemEl ? itemEl.offsetWidth : 68;
+      const targetWidth = itemEl ? itemEl.offsetWidth : 68;
 
-      // Fluid viscous stretch: elongates slightly with movement velocity
-      const velocityStretch = Math.min(22, Math.abs(vx) * 1.6);
-      const currentWidth = baseWidth + velocityStretch;
-
-      // Center pill on pointer, constrained within dock
+      // Center pill smoothly on pointer, constrained within dock
       const minLeft = 8;
-      const maxLeft = Math.max(minLeft, dockRect.width - currentWidth - 8);
-      const pillLeft = Math.max(minLeft, Math.min(maxLeft, relX - currentWidth / 2));
+      const maxLeft = Math.max(minLeft, dockRect.width - targetWidth - 8);
+      const pillLeft = Math.max(minLeft, Math.min(maxLeft, relX - targetWidth / 2));
 
-      setPillStyle({
-        left: pillLeft,
-        width: currentWidth,
-        opacity: 1,
+      // Direct hardware-accelerated transform via rAF (zero buffering, zero React lag)
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+      rafIdRef.current = requestAnimationFrame(() => {
+        if (liquidPillRef.current && isDraggingRef.current) {
+          liquidPillRef.current.style.transition = "none";
+          liquidPillRef.current.style.transform = `translate3d(${pillLeft}px, 0, 0)`;
+          liquidPillRef.current.style.width = `${targetWidth}px`;
+          liquidPillRef.current.style.opacity = "1";
+        }
+        if (specularEdgeRef.current && isDraggingRef.current) {
+          specularEdgeRef.current.style.background = `radial-gradient(ellipse 90px 2px at ${
+            pillLeft + targetWidth / 2
+          }px 0%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.3) 50%, transparent 100%)`;
+        }
       });
     }
   };
@@ -319,6 +359,11 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
   // Apple Liquid Glass Drag: Pointer Up (Release to navigate)
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDraggingRef.current) return;
+
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
 
     isDraggingRef.current = false;
     setIsDragging(false);
@@ -331,6 +376,14 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
 
     const finalIdx = getClosestOptionIndex(e.clientX);
     const selectedItem = NAV_ITEMS[finalIdx];
+
+    // Re-enable smooth spring transitions on release
+    if (liquidPillRef.current) {
+      liquidPillRef.current.style.transition = "";
+    }
+    if (specularEdgeRef.current) {
+      specularEdgeRef.current.style.background = "";
+    }
 
     // If dragged or clicked on an option, navigate to it
     if (selectedItem) {
@@ -346,6 +399,11 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
   const handlePointerCancel = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDraggingRef.current) return;
 
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+
     isDraggingRef.current = false;
     setIsDragging(false);
 
@@ -353,6 +411,13 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
     } catch {
       // ignore
+    }
+
+    if (liquidPillRef.current) {
+      liquidPillRef.current.style.transition = "";
+    }
+    if (specularEdgeRef.current) {
+      specularEdgeRef.current.style.background = "";
     }
 
     const targetIdx = activeIndex >= 0 ? activeIndex : 0;
@@ -377,14 +442,10 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
             setHoveredIndex(null);
           }
         }}
-        data-cursor-text={
-          isDragging && hoveredIndex !== null
-            ? NAV_ITEMS[hoveredIndex].cursor
-            : undefined
-        }
       >
         {/* Specular curved top rim light reflection that tracks with the pill */}
         <div
+          ref={specularEdgeRef}
           className="dock-specular-edge"
           style={{
             background: isDragging
@@ -398,6 +459,7 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
 
         {/* Apple Fluid Liquid Morphing Pill Indicator */}
         <div
+          ref={liquidPillRef}
           className={`liquid-pill ${isDragging ? "is-dragging" : ""}`}
           style={{
             transform: `translate3d(${pillStyle.left}px, 0, 0)`,
@@ -439,13 +501,12 @@ export const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
               }}
               aria-label={item.label}
               aria-current={isActive ? "page" : undefined}
-              data-cursor-text={item.cursor}
             >
               <Icon size={24} strokeWidth={1.85} className="dock-icon" />
 
-              {/* Active liquid dot indicator */}
+              {/* Active liquid dot indicator: strictly one dot even during dragging */}
               <span
-                className={`active-dot ${isActive || (isDragging && isItemHovered) ? "visible" : ""}`}
+                className={`active-dot ${(isDragging ? isItemHovered : isActive) ? "visible" : ""}`}
                 aria-hidden="true"
               />
 

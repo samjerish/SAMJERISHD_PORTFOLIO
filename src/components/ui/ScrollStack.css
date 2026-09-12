@@ -5,6 +5,8 @@
    =================================================== */
 
 .scroll-stack-container {
+  --stack-offset: 26px;
+  --stack-top-base: 75px;
   position: relative;
   width: 100%;
   max-width: 1260px;
@@ -15,33 +17,33 @@
 }
 
 /* Outer Card Wrapper: Sticky Pinned
-   Tight margin-bottom eliminates dead empty space below pinned cards */
+   Spacious margin-bottom gives each project breathing room before next card stacks */
 .scroll-stack-card-wrapper {
   position: sticky;
   width: 100%;
-  margin-bottom: clamp(60px, 12vh, 100px);
+  margin-bottom: clamp(140px, 22vh, 220px);
   perspective: 1200px;
   will-change: transform;
 }
 
 .scroll-stack-card-wrapper:last-child {
-  margin-bottom: 2.5rem;
+  margin-bottom: clamp(60px, 12vh, 100px);
 }
 
 /* Pinned Card Body - Monochromatic Luxury Baseline */
 .scroll-stack-card {
   position: relative;
   width: 100%;
-  min-height: clamp(520px, 66vh, 640px);
+  min-height: clamp(500px, 64vh, 620px);
   background: #111114;
   background: radial-gradient(ellipse at 50% -10%, #1c1d21 0%, #111215 45%, #0a0a0c 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 26px;
-  padding: clamp(2rem, 3.2vw, 2.6rem) clamp(2.2rem, 3.8vw, 3.2rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: clamp(1.8rem, 2.8vw, 2.4rem) clamp(2rem, 3.4vw, 3rem);
   box-shadow:
-    0 -10px 30px rgba(0, 0, 0, 0.8),
-    0 30px 80px rgba(0, 0, 0, 0.95),
-    inset 0 1px 1px rgba(255, 255, 255, 0.16);
+    0 -8px 24px rgba(0, 0, 0, 0.65),
+    0 28px 70px rgba(0, 0, 0, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -65,6 +67,23 @@
     0 -10px 30px rgba(0, 0, 0, 0.8),
     0 40px 95px rgba(0, 0, 0, 0.98),
     inset 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+.scroll-stack-card:active {
+  box-shadow:
+    0 -4px 15px rgba(0, 0, 0, 0.7),
+    0 15px 40px rgba(0, 0, 0, 0.9),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.scroll-stack-card:active .stack-card-body {
+  transform: scale(0.985);
+  transition: transform 0.08s ease;
+}
+
+.scroll-stack-card:active .stack-device-frame {
+  transform: scale(0.975);
+  transition: transform 0.08s ease;
 }
 
 /* ===================================================
@@ -513,8 +532,13 @@
    =================================================== */
 
 @media (max-width: 960px) {
+  .scroll-stack-container {
+    --stack-offset: 20px;
+    --stack-top-base: 65px;
+  }
+
   .scroll-stack-card-wrapper {
-    margin-bottom: clamp(40px, 8vh, 70px);
+    margin-bottom: clamp(100px, 18vh, 160px);
   }
 
   .scroll-stack-card {
@@ -539,11 +563,17 @@
 
 @media (max-width: 640px) {
   .scroll-stack-container {
-    padding-bottom: 2.5rem;
+    --stack-offset: 16px;
+    --stack-top-base: 55px;
+    padding-bottom: calc(6.5rem + env(safe-area-inset-bottom, 20px));
   }
 
   .scroll-stack-card-wrapper {
-    margin-bottom: clamp(100px, 20vh, 160px);
+    margin-bottom: clamp(90px, 16vh, 130px);
+  }
+
+  .scroll-stack-card-wrapper:last-child {
+    margin-bottom: calc(5.5rem + env(safe-area-inset-bottom, 20px));
   }
 
   .scroll-stack-card {

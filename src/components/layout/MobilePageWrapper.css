@@ -1,0 +1,86 @@
+/* ===================================================
+   MOBILE PAGE WRAPPER - INSTAGRAM ON IPHONE TRANSITION
+   Full-Bleed Rightward Shift & Edge-Swipe Navigation
+   (Mobile View Alone)
+   =================================================== */
+
+@media (max-width: 768px) {
+  /* Scrim overlay behind the sliding subpage */
+  .mobile-page-backdrop-scrim {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 40;
+    pointer-events: auto;
+    transition: opacity 0.28s ease;
+    will-change: opacity;
+  }
+
+  /* Base shell for subpages on mobile */
+  .mobile-page-slide-shell {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: var(--bg-secondary, #050507);
+    z-index: 45;
+    box-shadow: -12px 0 35px rgba(0, 0, 0, 0.8);
+    will-change: transform;
+    overscroll-behavior-y: contain;
+  }
+
+  /* Entry Push Animation: Slides in from right like iOS Push */
+  .mobile-page-slide-shell.is-entering {
+    animation: iosPagePushIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes iosPagePushIn {
+    from {
+      transform: translate3d(100vw, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  /* Exit Shift Right Animation: Shifts rightwards off screen like iOS Pop / Instagram */
+  .mobile-page-slide-shell.is-shifting-right {
+    animation: iosPageShiftRight 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) forwards !important;
+  }
+
+  @keyframes iosPageShiftRight {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(100vw, 0, 0);
+    }
+  }
+
+  /* Home background layer when a subpage is open on mobile */
+  .app-home-layer.is-under-subpage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none !important;
+    transform: scale(0.97);
+    opacity: 0.85;
+    transform-origin: center center;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.32s ease;
+  }
+}
+
+.app-home-layer {
+  width: 100%;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.32s ease;
+}

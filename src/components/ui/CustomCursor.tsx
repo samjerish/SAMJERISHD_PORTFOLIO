@@ -16,7 +16,7 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
   ringSize = 34,
   ringColor = "rgba(255, 255, 255, 0.45)",
   dotColor = "#ffffff",
-  targetSelector = 'a, button, [role="button"], input, textarea, select, .showcase-card, .timeline-card, .about-12-ledger-item, .project-card, .social-circle, .segmented-tab-btn, .photo-3d-card, .back-btn, [data-cursor]',
+  targetSelector = 'a, button, [role="button"], input, textarea, select, .showcase-card, .timeline-card, .timeline-card-content, .story-timeline-item, .about-12-ledger-item, .project-card, .social-circle, .segmented-tab-btn, .photo-3d-card, .back-btn, [data-cursor], [data-cursor-text]',
   hideDefaultCursor = true,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -69,6 +69,14 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
       // Ensure active element text stays updated even during continuous dragging
       const elFromPoint = document.elementFromPoint(clientX, clientY);
       if (elFromPoint) {
+        if (elFromPoint.closest(".dock-liquid-glass, .bottom-menu-bar")) {
+          setIsHovered(false);
+          setCursorText("");
+          setTargetRect(null);
+          activeTargetRef.current = null;
+          return;
+        }
+
         const interactive = elFromPoint.closest(targetSelector) as HTMLElement | null;
         if (interactive) {
           setIsHovered(true);
@@ -100,6 +108,14 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
+
+      if (target.closest(".dock-liquid-glass, .bottom-menu-bar")) {
+        setIsHovered(false);
+        setCursorText("");
+        setTargetRect(null);
+        activeTargetRef.current = null;
+        return;
+      }
 
       const interactive = target.closest(targetSelector) as HTMLElement | null;
 

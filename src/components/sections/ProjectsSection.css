@@ -1,12 +1,12 @@
 .portfolio-container {
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  padding: 8rem 4vw;
+  padding: clamp(4.5rem, 6.5vh, 6rem) 4vw;
   position: relative;
   overflow: visible;
 }
@@ -23,7 +23,9 @@
 }
 
 .portfolio-header-static {
-  margin-bottom: 4rem;
+  max-width: 1260px;
+  width: 100%;
+  margin: 0 auto 4rem auto;
   opacity: 0;
   transform: translateY(20px);
   transition:
@@ -31,10 +33,10 @@
     transform 0.6s ease;
   z-index: 10;
   position: relative;
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .portfolio-container.is-visible .portfolio-header-static {
@@ -51,7 +53,7 @@
   margin: 0 0 1.25rem 0;
   text-transform: uppercase;
   letter-spacing: -0.035em;
-  text-align: center;
+  text-align: left;
 }
 
 .portfolio-subtext {
@@ -60,8 +62,8 @@
   line-height: 1.7;
   color: #a0a0a0;
   max-width: 780px;
-  margin: 0 auto;
-  text-align: center;
+  margin: 0;
+  text-align: left;
 }
 
 /* ===================================================
@@ -110,6 +112,12 @@
   transform: translateY(-6px);
   border-color: rgba(255, 255, 255, 0.24);
   box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.85);
+}
+
+.showcase-card:active .showcase-visual-box {
+  transform: translateY(-2px) scale(0.985);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.85);
+  transition: transform 0.08s ease;
 }
 
 /* FocusFlow: Deep ocean / cyan glow */
@@ -539,7 +547,7 @@ body.light-mode .showcase-view-btn {
 
 @media (max-width: 480px) {
   .portfolio-container {
-    padding: 3rem 1rem;
+    padding: 3rem 1.2rem;
   }
 
   .portfolio-headline {
@@ -549,7 +557,7 @@ body.light-mode .showcase-view-btn {
 
 @media (max-width: 380px) {
   .portfolio-container {
-    padding: 2.5rem 0.5rem;
+    padding: 2.5rem 0.8rem;
   }
   .portfolio-headline {
     font-size: 1.8rem;

@@ -1,6 +1,7 @@
 /* ===================================================
-   PROJECT DETAIL MODAL - DELUXE SPRING POP-UP
-   (Content-Only, Spacious & Tactile 3D Pop-up Effect)
+   PROFESSIONAL FULL-STACK PROJECT MODAL
+   Landscape Workstation Window Layout (Zero-Scroll on Desktop)
+   100% Contained & Fit Screenshot Preview + Crisp Typography
    =================================================== */
 
 .modal-overlay {
@@ -8,389 +9,566 @@
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.82);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  z-index: 100000;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  z-index: 999990;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: clamp(1rem, 3.5vh, 2.8rem) clamp(1rem, 3.5vw, 2.5rem);
+  padding: clamp(0.75rem, 2vh, 2rem) clamp(0.75rem, 2vw, 1.8rem);
   box-sizing: border-box;
-  animation: modalBackdropFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: modalBackdropFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 .modal-overlay.is-closing {
-  animation: modalBackdropFadeOut 0.24s ease forwards;
+  animation: modalBackdropFadeOut 0.2s ease forwards;
 }
 
-/* --- THE POP-UP CONTAINER --- */
-.modal-container.modal-popup-clean {
+/* ===================================================
+   THE WORKSTATION MODAL CONTAINER
+   =================================================== */
+
+.dev-modal-container {
   position: relative;
-  width: 100%;
-  max-width: 860px;
-  max-height: min(90vh, 720px);
+  z-index: 999995;
+  width: min(1120px, 94vw);
+  height: min(640px, 88vh);
+  max-height: 88vh;
   margin: auto;
-  border-radius: 26px;
-  overflow: hidden;
+  border-radius: 18px;
+  overflow: hidden !important; /* Strict No Scroll on Desktop */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   transform-origin: center center;
-  animation: modalPopSpringIn 0.44s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
-  /* Sleek Obsidian Glass with Specular Highlights */
-  background: radial-gradient(ellipse at 50% -15%, #1d1e28 0%, #12131a 50%, #0a0a0f 100%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  /* Elastic Tactile Spring Pop-Up Entry */
+  animation:
+    modalPopSpringIn 0.42s cubic-bezier(0.2, 1, 0.35, 1) forwards,
+    modalBorderPulse 1s ease-out forwards;
+  touch-action: auto;
+
+  /* Pure Jet Black Obsidian Luxury */
+  background: #09090b;
+  background: linear-gradient(180deg, #0e0e12 0%, #050507 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
-    0 35px 100px rgba(0, 0, 0, 0.94),
-    0 0 50px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    0 35px 90px rgba(0, 0, 0, 0.98),
+    0 0 50px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
-.modal-container.is-closing {
-  animation: modalPopSpringOut 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.dev-modal-container.is-closing {
+  animation: modalPopSpringOut 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Ambient Spotlight Behind the Modal Card */
-.modal-glow-ambient {
-  position: absolute;
-  top: -50px;
-  left: 15%;
-  right: 15%;
-  height: 200px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.18) 0%, rgba(168, 85, 247, 0.09) 50%, transparent 80%);
-  pointer-events: none;
-  border-radius: 50%;
-  filter: blur(40px);
-  z-index: 1;
-}
+/* ===================================================
+   TOP WINDOW CHROME (macOS Workstation Bar)
+   =================================================== */
 
-/* --- CLOSE BUTTON --- */
-.modal-close-btn {
-  position: absolute;
-  top: 1.3rem;
-  right: 1.3rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #ffffff;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.dev-modal-topbar {
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 1.25rem;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: #111115;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.dev-window-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.window-traffic-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: none;
+  display: inline-block;
+  padding: 0;
+}
+
+.window-traffic-dot.dot-close {
+  background-color: #ff5f56;
   cursor: pointer;
-  z-index: 60;
-  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, filter 0.15s ease;
 }
 
-.modal-close-btn:hover {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
-  transform: scale(1.1) rotate(90deg);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+.window-traffic-dot.dot-close:hover {
+  filter: brightness(1.2);
+  transform: scale(1.15);
 }
 
-/* --- INNER SCROLLABLE CONTENT --- */
-.modal-inner-content {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-  padding: clamp(2rem, 3.8vw, 3rem) clamp(2rem, 4.2vw, 3.4rem);
-  overflow-y: auto;
-  max-height: 100%;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-  box-sizing: border-box;
+.window-traffic-dot.dot-min {
+  background-color: #ffbd2e;
 }
 
-.modal-inner-content::-webkit-scrollbar {
-  width: 6px;
+.window-traffic-dot.dot-max {
+  background-color: #27c93f;
 }
 
-.modal-inner-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.modal-inner-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 9999px;
-}
-
-/* Header Info */
-.modal-header-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding-right: 3rem; /* Clearance for close btn */
-}
-
-.modal-top-meta-row {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-}
-
-.modal-brand-badge {
+.dev-window-tab-title {
   font-family: var(--font-mono, monospace);
   font-size: 0.76rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  padding: 4px 12px;
-  border-radius: 9999px;
+  color: #a1a1aa;
+  margin-left: 10px;
+  letter-spacing: 0.04em;
 }
 
-.modal-date-badge {
+.dev-topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dev-meta-pill {
   font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+.dev-meta-date {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
   font-weight: 600;
   color: #71717a;
 }
 
-.modal-tag-badge {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
-  color: #a1a1aa;
-}
-
-.modal-title {
-  font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
-  font-weight: 900;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
-  text-shadow: 0 0 35px rgba(255, 255, 255, 0.2);
-}
-
-.modal-headline {
-  font-family: var(--font-primary, sans-serif);
-  font-size: clamp(0.95rem, 1.4vw, 1.12rem);
-  font-weight: 500;
-  color: #c4c4cc;
-  line-height: 1.55;
-  margin: 0;
-}
-
-.modal-pills-row {
+.dev-close-action-btn {
+  background: transparent;
+  border: none;
+  color: #71717a;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 0.2rem;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-.modal-meta-pill {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: #e4e4e7;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 4px 12px;
-  border-radius: 9999px;
-  backdrop-filter: blur(10px);
+.dev-close-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
-/* Overview Section */
-.modal-section-overview {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 16px;
-  padding: 1.3rem 1.6rem;
-}
+/* ===================================================
+   TWO-COLUMN LANDSCAPE BODY
+   =================================================== */
 
-.modal-section-heading {
-  font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: 0.75rem;
-  color: #a1a1aa;
-  margin: 0 0 0.5rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 800;
-}
-
-.modal-section-desc {
-  line-height: 1.65;
-  font-size: 0.96rem;
-  color: #e4e4e7;
-  margin: 0;
-}
-
-/* Split: Problem & Solution */
-.modal-split {
+.dev-modal-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.1rem;
+  grid-template-columns: clamp(380px, 46%, 490px) 1fr;
+  gap: clamp(1.4rem, 2.2vw, 2.2rem);
+  padding: clamp(1.2rem, 2vw, 1.8rem) clamp(1.4rem, 2.4vw, 2rem);
+  flex: 1;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.modal-callout {
-  padding: 1.2rem 1.4rem;
-  border-radius: 14px;
-  box-sizing: border-box;
+/* ===================================================
+   LEFT COLUMN: BROWSER WINDOW WITH FIT SCREENSHOT
+   =================================================== */
+
+.dev-col-preview {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  justify-content: space-between;
+  height: 100%;
+  gap: 0.9rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.modal-callout:hover {
-  transform: translateY(-2px);
+.dev-browser-window {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #0c0d10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.8);
 }
 
-.modal-callout.problem {
-  background: linear-gradient(145deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.03) 100%);
-  border: 1px solid rgba(239, 68, 68, 0.22);
-  border-left: 4px solid #ef4444;
-}
-
-.modal-callout.solution {
-  background: linear-gradient(145deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 100%);
-  border: 1px solid rgba(34, 197, 94, 0.22);
-  border-left: 4px solid #22c55e;
-}
-
-.callout-header {
+.dev-browser-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #14151a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  gap: 8px;
 }
 
-.callout-icon {
-  font-size: 1.1rem;
+.dev-address-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  flex: 1;
+  min-width: 0;
 }
 
-.problem .callout-icon,
-.problem .callout-heading {
-  color: #f87171;
+.dev-lock-icon {
+  font-size: 0.65rem;
+  opacity: 0.7;
 }
 
-.solution .callout-icon,
-.solution .callout-heading {
+.dev-address-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: #a1a1aa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dev-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 700;
   color: #4ade80;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
-.callout-heading {
+.live-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+/* Contained Screenshot Viewport (100% Fit & Visible) */
+.dev-screenshot-viewport {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: clamp(200px, 28vh, 310px);
+  background: #050507;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dev-screenshot-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* Full Screenshot Guaranteed Fit without Cropping */
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.75);
+  transition: transform 0.25s ease;
+}
+
+.dev-screenshot-viewport:hover .dev-screenshot-img {
+  transform: scale(1.015);
+}
+
+/* Action Bar */
+.dev-action-bar {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.dev-visit-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: #ffffff;
+  color: #000000;
   font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: 0.78rem;
   font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  border-radius: 8px;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+}
+
+.dev-visit-btn:hover {
+  background: #f4f4f5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.28);
+}
+
+.dev-visit-btn:active {
+  transform: scale(0.98);
+}
+
+.dev-arch-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #a1a1aa;
+  box-sizing: border-box;
+}
+
+.arch-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+/* ===================================================
+   RIGHT COLUMN: PROFESSIONAL FULL-STACK NARRATIVE
+   =================================================== */
+
+.dev-col-narrative {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 0.7rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dev-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.dev-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.dev-pill-tag {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #a1a1aa;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.dev-title {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.dev-headline {
+  font-family: var(--font-primary, sans-serif);
+  font-size: clamp(0.8rem, 0.9vw, 0.88rem);
+  font-weight: 400;
+  color: #a1a1aa;
+  line-height: 1.4;
   margin: 0;
 }
 
-.callout-desc {
-  font-size: 0.88rem;
-  line-height: 1.55;
+/* Architecture & Implementation Box */
+.dev-section-box {
+  background: #0e0f14;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 0.7rem 0.95rem;
+  flex-shrink: 0;
+}
+
+.dev-section-label {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71717a;
+  margin-bottom: 0.3rem;
+}
+
+.dev-section-text {
+  font-size: 0.82rem;
+  line-height: 1.48;
   color: #d4d4d8;
   margin: 0;
 }
 
-/* Tech Stack Row */
-.modal-tech-stack-row {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  flex-wrap: wrap;
-  padding: 0.9rem 1.2rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
+/* Challenge & Engineering Solution Grid */
+.dev-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  flex-shrink: 0;
 }
 
-.tech-stack-lbl {
+.dev-spec-card {
+  background: #0e0f14;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 2px solid #38bdf8;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dev-spec-card:last-child {
+  border-left-color: #4ade80;
+}
+
+.dev-spec-label {
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a1a1aa;
+}
+
+.dev-spec-text {
+  font-size: 0.76rem;
+  line-height: 1.42;
+  color: #a1a1aa;
+  margin: 0;
+}
+
+/* Tech Stack Row */
+.dev-tech-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  background: #0e0f14;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.dev-tech-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #71717a;
 }
 
-.tech-stack-pills {
+.dev-tech-tags {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
   flex-wrap: wrap;
 }
 
-.tech-stack-pill {
+.dev-tech-badge {
   font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.22);
-  padding: 3px 10px;
-  border-radius: 6px;
-  letter-spacing: 0.02em;
+  color: #e4e4e7;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 
-/* Footer / Action */
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 0.6rem;
-}
+/* ===================================================
+   ANIMATIONS
+   =================================================== */
 
-.modal-view-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 26px;
-  background-color: #ffffff;
-  color: #000000;
-  font-family: var(--font-heading, sans-serif);
-  font-weight: 800;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.22);
-}
-
-.modal-view-btn:hover {
-  background-color: #e4e4e7;
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 28px rgba(255, 255, 255, 0.35);
-}
-
-/* Animations */
 @keyframes modalBackdropFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+  }
 }
 
 @keyframes modalBackdropFadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes modalPopSpringIn {
   0% {
     opacity: 0;
-    transform: scale(0.78) translateY(42px);
-    filter: blur(12px);
+    transform: scale(0.7) translateY(32px);
+    filter: blur(10px);
   }
-  65% {
+  50% {
     opacity: 1;
-    transform: scale(1.025) translateY(-4px);
     filter: blur(0px);
+  }
+  74% {
+    transform: scale(1.025) translateY(-3px);
+  }
+  88% {
+    transform: scale(0.992) translateY(1px);
   }
   100% {
     opacity: 1;
@@ -405,41 +583,92 @@
   }
   100% {
     opacity: 0;
-    transform: scale(0.86) translateY(24px);
-    filter: blur(10px);
+    transform: scale(0.85) translateY(20px);
+    filter: blur(8px);
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .modal-container.modal-popup-clean {
-    max-height: 88vh;
-    border-radius: 20px;
+@keyframes modalBorderPulse {
+  0% {
+    box-shadow:
+      0 35px 90px rgba(0, 0, 0, 0.98),
+      0 0 0px rgba(255, 255, 255, 0);
+  }
+  45% {
+    box-shadow:
+      0 35px 90px rgba(0, 0, 0, 0.98),
+      0 0 35px rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    box-shadow:
+      0 35px 90px rgba(0, 0, 0, 0.98),
+      0 0 15px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* ===================================================
+   RESPONSIVE FALLBACK (Tablets & Mobile Viewports)
+   =================================================== */
+
+@media (max-width: 860px) {
+  .dev-modal-container {
+    width: 100%;
+    height: auto;
+    max-height: 90dvh;
+    overflow-y: auto !important; /* Allow natural scroll only on mobile */
+    border-radius: 16px;
   }
 
-  .modal-inner-content {
-    padding: 1.6rem 1.4rem;
-    gap: 1.2rem;
-  }
-
-  .modal-title {
-    font-size: 1.6rem;
-  }
-
-  .modal-split {
+  .dev-modal-body {
     grid-template-columns: 1fr;
-    gap: 0.85rem;
+    gap: 1.2rem;
+    padding: 1.1rem;
+    overflow: visible;
   }
 
-  .modal-header-block {
-    padding-right: 2.2rem;
+  .dev-col-preview,
+  .dev-col-narrative {
+    height: auto;
   }
 
-  .modal-close-btn {
-    top: 1rem;
-    right: 1rem;
-    width: 36px;
-    height: 36px;
-    font-size: 1.1rem;
+  .dev-screenshot-viewport {
+    min-height: 200px;
+    height: 220px;
   }
+
+  .dev-specs-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}
+
+/* ===================================================
+   LIGHT MODE OVERRIDES - LOCK IN OBSIDIAN DARK
+   =================================================== */
+
+body.light-mode .dev-modal-container {
+  background: #09090b;
+  background: linear-gradient(180deg, #0e0e12 0%, #050507 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.light-mode .dev-title {
+  color: #ffffff !important;
+}
+
+body.light-mode .dev-headline {
+  color: #a1a1aa !important;
+}
+
+body.light-mode .dev-section-text {
+  color: #d4d4d8 !important;
+}
+
+body.light-mode .dev-spec-text {
+  color: #a1a1aa !important;
+}
+
+body.light-mode .dev-visit-btn {
+  background: #ffffff;
+  color: #000000 !important;
 }

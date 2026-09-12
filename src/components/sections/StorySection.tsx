@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./StorySection.css";
-import { GitHubModal } from "../ui/GitHubModal";
+import { WireframeSphere } from "../ui/WireframeSphere";
 
 const PixelBotSvg: React.FC = () => (
   <svg
@@ -73,6 +73,10 @@ export const AnimatedLine = ({
           const innerText = part.replace(/<[^>]+>/g, "");
           return <React.Fragment key={index}>{renderWords(innerText, true)}</React.Fragment>;
         }
+        if (part.startsWith("<") && part.endsWith(">")) {
+          const innerText = part.slice(1, -1);
+          return <React.Fragment key={index}>{renderWords(innerText, true)}</React.Fragment>;
+        }
         if (part.startsWith("<")) return null;
         return <React.Fragment key={index}>{renderWords(part, false)}</React.Fragment>;
       })}
@@ -86,7 +90,6 @@ export const StorySection: React.FC<{
   ) => void;
 }> = ({ onNavigate: _onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isGithubModalOpen, setIsGithubModalOpen] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
@@ -127,107 +130,57 @@ export const StorySection: React.FC<{
           {/* Ambient Spotlight Background */}
           <div className="editorial-ambient-glow" aria-hidden="true" />
 
-          {/* Sequential Story Flow: A Little About Me and What I Do (Horizontal Extended Alignment) */}
-          <div className="story-sequence-flow">
-            {/* Part 1: A LITTLE ABOUT ME */}
-            <div className="story-sequence-step">
-              <div className="story-theme-kicker">
-                <span className="kicker-accent-dot" />
-                <span>A LITTLE ABOUT ME</span>
-              </div>
+          {/* 2-Column Split Grid: Narrative Flow + Rotating 3D Geodesic Polyhedron */}
+          <div className="story-split-grid">
+            <div className="story-sequence-flow">
+              {/* Part 1: A LITTLE ABOUT ME */}
+              <div className="story-sequence-step">
+                <div className="story-theme-kicker">
+                  <span className="kicker-accent-dot" />
+                  <span>A LITTLE ABOUT ME</span>
+                </div>
 
-              <div className="story-sequence-content">
-                <p className="story-editorial-statement">
-                  It started with a curiosity about how computers work. That curiosity grew into a passion for{" "}
-                  <span className="story-chip story-chip-code" data-cursor-text="DEV">
-                    <span className="chip-square-box code-box">&lt;/&gt;</span>
-                    <span className="chip-text">coding</span>
-                  </span>
-                  , problem-solving, and{" "}
-                  <span className="story-chip story-chip-yellow" data-cursor-text="BUILD">
-                    building
-                  </span>.
-                </p>
-
-                <p className="story-editorial-statement">
-                  From exploring technology to developing{" "}
-                  <span className="story-chip story-chip-agent" data-cursor-text="AI">
-                    <span className="pixel-bot-wrapper">
-                      <PixelBotSvg />
+                <div className="story-sequence-content">
+                  <p className="story-editorial-statement">
+                    It started with a curiosity about how computers work. That curiosity grew into a passion for{" "}
+                    <span className="story-chip story-chip-code" data-cursor-text="DEV">
+                      <span className="chip-square-box code-box">&lt;/&gt;</span>
+                      <span className="chip-text">coding</span>
                     </span>
-                    <span className="story-agent-text">intelligent solutions</span>
-                  </span>
-                  , my journey is about turning{" "}
-                  <span className="story-chip story-chip-curiosity" data-cursor-text="SPARK">
-                    <span className="curiosity-spark">✧</span>
-                    <span className="curiosity-text">curiosity</span>
-                  </span>{" "}
-                  into code and ideas into reality.
-                </p>
+                    , problem-solving, and{" "}
+                    <span className="story-chip story-chip-yellow" data-cursor-text="BUILD">
+                      building
+                    </span>.
+                  </p>
+
+                  <p className="story-editorial-statement">
+                    From exploring technology to developing{" "}
+                    <span className="story-chip story-chip-agent" data-cursor-text="AI">
+                      <span className="pixel-bot-wrapper">
+                        <PixelBotSvg />
+                      </span>
+                      <span className="story-agent-text">intelligent solutions</span>
+                    </span>
+                    , my journey is about turning{" "}
+                    <span className="story-chip story-chip-curiosity" data-cursor-text="SPARK">
+                      <span className="curiosity-spark">✧</span>
+                      <span className="curiosity-text">curiosity</span>
+                    </span>{" "}
+                    into code and ideas into reality.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Part 2: WHAT I DO */}
-            <div className="story-sequence-step">
-              <div className="story-theme-kicker">
-                <span className="kicker-accent-dot green" />
-                <span>WHAT I DO</span>
+            {/* Right Column: 3D Rotating Wireframe Geodesic Polyhedron */}
+            <div className="story-wireframe-column">
+              <div className="story-wireframe-sticky">
+                <WireframeSphere />
               </div>
-
-              <div className="story-sequence-content">
-                <p className="story-editorial-statement">
-                  I’m someone who loves to{" "}
-                  <span className="story-chip story-chip-yellow" data-cursor-text="LEARN">
-                    learn
-                  </span>
-                  ,{" "}
-                  <span className="story-chip story-chip-craft" data-cursor-text="CRAFT">
-                    <span className="chip-square-box craft-box">✦</span>
-                    <span className="chip-text">create</span>
-                  </span>
-                  , and{" "}
-                  <span className="story-chip story-chip-experiment" data-cursor-text="ENERGY">
-                    <span className="chip-square-box exp-box">⚡</span>
-                    <span className="exp-orange-text">experiment</span>
-                  </span>
-                  .
-                </p>
-
-                <p className="story-editorial-statement">
-                  I enjoy exploring different ways to turn an idea into something real. I’m still figuring things out, still learning, and still creating. And honestly, that’s the part of the journey I enjoy the most.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* GitHub CTA - Prominently Highlighted in White */}
-          <div className="story-horizontal-bottom-bar plain-bar">
-            <div className="story-read-more-wrapper">
-              <button
-                type="button"
-                className="story-read-more-btn highlighted-white"
-                onClick={() => setIsGithubModalOpen(true)}
-                data-cursor-text="GITHUB"
-                aria-label="View my GitHub contributions"
-              >
-                <span className="btn-ambient-glow" />
-                <span className="live-contrib-ping">
-                  <span className="ping-dot" />
-                  <span className="ping-ring" />
-                </span>
-                <span className="btn-label">VIEW MY GITHUB CONTRIBUTION</span>
-                <span className="read-more-arrow">→</span>
-              </button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Real-time GitHub Activity Modal */}
-      <GitHubModal
-        isOpen={isGithubModalOpen}
-        onClose={() => setIsGithubModalOpen(false)}
-      />
     </section>
   );
 };

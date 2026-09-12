@@ -25,7 +25,7 @@
 .media-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem 2rem 2rem;
+  padding: 0 2rem calc(6.5rem + env(safe-area-inset-bottom, 20px)) 2rem;
   position: relative;
   z-index: 20;
   display: flex;
@@ -63,11 +63,31 @@
 }
 
 .media-story-section .story-text {
-  max-width: 860px;
-  font-family: var(--font-primary);
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-  line-height: 1.7;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: var(--font-primary, sans-serif);
+  font-size: clamp(0.92rem, 1.45vw, 1.25rem);
+  line-height: 1.85;
   color: #b5b5b5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.media-story-section .story-line {
+  display: block;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .media-story-section .story-line {
+    white-space: normal;
+  }
 }
 
 /* Hover Stack Gallery Styles */

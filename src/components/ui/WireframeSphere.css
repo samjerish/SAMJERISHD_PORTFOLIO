@@ -1,0 +1,100 @@
+/* ===================================================
+   3D WIREFRAME GEODESIC POLYHEDRON SPHERE
+   High-Precision Mathematical Geodesic Wireframe Canvas
+   Continuous 3D Rotation with Interactive Drag Physics
+   =================================================== */
+
+.wireframe-polyhedron-container {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: grab;
+}
+
+.wireframe-polyhedron-container:active {
+  cursor: grabbing;
+}
+
+/* Ambient Radial Glow Behind Wireframe */
+.wireframe-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(168, 85, 247, 0.04) 35%,
+    rgba(56, 189, 248, 0.03) 60%,
+    transparent 80%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle Specular Orbital Ring Accent */
+.wireframe-orbit-accent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(72deg);
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Canvas Output Element */
+.wireframe-canvas {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 440px;
+  max-height: 440px;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .wireframe-polyhedron-container {
+    max-width: 380px;
+    height: 380px;
+  }
+
+  .wireframe-ambient-glow {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wireframe-polyhedron-container {
+    max-width: 310px;
+    height: 310px;
+    margin: 1.5rem auto 0 auto;
+  }
+
+  .wireframe-ambient-glow {
+    width: 220px;
+    height: 220px;
+  }
+
+  .wireframe-orbit-accent {
+    width: 280px;
+    height: 280px;
+  }
+}

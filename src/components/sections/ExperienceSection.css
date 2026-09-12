@@ -3,12 +3,12 @@
    =================================================== */
 
 .experience-container {
-  min-height: 100vh;
+  min-height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6rem 4vw 8rem 4vw;
+  padding: clamp(4.5rem, 6.5vh, 6rem) 4vw;
   position: relative;
   background-color: transparent;
   z-index: 10;
@@ -391,17 +391,19 @@
 
 /* Timeline Container & Vertical Spine */
 .story-timeline-wrapper {
+  --timeline-spine-x: 10px;
+  --wrapper-padding: 2.5rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-left: 2.5rem;
+  padding-left: var(--wrapper-padding);
 }
 
 .story-timeline-line {
   position: absolute;
-  top: 24px;
-  bottom: 32px;
-  left: 9px;
+  top: 34px;
+  left: var(--timeline-spine-x);
+  transform: translateX(-50%);
   width: 2px;
   background: linear-gradient(
     180deg,
@@ -416,7 +418,8 @@
 /* Traveling Progress Beam that follows scroll */
 .story-timeline-progress-line {
   position: absolute;
-  left: 9px;
+  left: var(--timeline-spine-x);
+  transform: translateX(-50%);
   width: 2px;
   background: linear-gradient(
     180deg,
@@ -436,7 +439,7 @@
 /* Glowing Active Traveling Pointer */
 .story-timeline-pointer {
   position: absolute;
-  left: 10px;
+  left: var(--timeline-spine-x);
   transform: translate(-50%, -50%);
   width: 14px;
   height: 14px;
@@ -452,7 +455,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pointer-core-dot {
@@ -503,7 +505,8 @@
 .timeline-node-container {
   position: absolute;
   top: 24px;
-  left: -2.5rem;
+  left: calc(-1 * var(--wrapper-padding) + var(--timeline-spine-x));
+  transform: translateX(-50%);
   width: 20px;
   height: 20px;
   display: flex;
@@ -754,7 +757,7 @@
 
 @media (max-width: 1080px) {
   .experience-container {
-    padding: 5rem 4vw 6rem 4vw;
+    padding: 3.8rem 4vw;
   }
 
   .story-experience-combo-block {
@@ -786,7 +789,7 @@
 
 @media (max-width: 768px) {
   .experience-container {
-    padding: 3.5rem 1.2rem 5rem 1.2rem;
+    padding: 3.2rem 1.2rem;
   }
 
   /* COMBO BLOCK ON MOBILE: Experience Timeline FIRST, ID Card SECOND */
@@ -814,22 +817,15 @@
   }
 
   .story-timeline-wrapper {
-    padding-left: 2rem;
-  }
-
-  .story-timeline-line,
-  .story-timeline-progress-line {
-    left: 8px;
+    --wrapper-padding: 2rem;
   }
 
   .story-timeline-pointer {
-    left: 9px;
     width: 12px;
     height: 12px;
   }
 
   .timeline-node-container {
-    left: -2rem;
     top: 20px;
   }
 
@@ -962,7 +958,7 @@
 
 @media (max-width: 480px) {
   .experience-container {
-    padding: 3rem 1rem 4rem 1rem;
+    padding: 2.8rem 1rem;
   }
 
   .story-experience-combo-block {
@@ -971,22 +967,15 @@
   }
 
   .story-timeline-wrapper {
-    padding-left: 1.7rem;
-  }
-
-  .story-timeline-line,
-  .story-timeline-progress-line {
-    left: 6px;
+    --wrapper-padding: 1.7rem;
   }
 
   .story-timeline-pointer {
-    left: 7px;
     width: 11px;
     height: 11px;
   }
 
   .timeline-node-container {
-    left: -1.7rem;
     top: 18px;
   }
 
@@ -1045,15 +1034,11 @@
 
 @media (max-width: 360px) {
   .experience-container {
-    padding: 2.5rem 0.75rem 3.5rem 0.75rem;
+    padding: 2.4rem 0.75rem;
   }
 
   .story-timeline-wrapper {
-    padding-left: 1.5rem;
-  }
-
-  .timeline-node-container {
-    left: -1.5rem;
+    --wrapper-padding: 1.5rem;
   }
 
   .timeline-card-content {

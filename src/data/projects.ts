@@ -22,19 +22,20 @@ export const projects: Project[] = [
     id: 1,
     name: "FOCUSFLOW",
     brandName: "FocusFlow",
-    headline: "Productivity System That Helped Students Eliminate Distractions & Build Focus",
-    pills: ["Productivity", "Task Management", "Students"],
+    headline: "A simple productivity tool that helps students stay focused and manage tasks.",
+    pills: ["Productivity", "Task Timer", "Students"],
     cardClass: "theme-focusflow",
-    shortDesc: "Turned the urge to procrastinate into an intuitive, structured focus engine developed specifically for students.",
+    shortDesc:
+      'A distraction-free web app built for students to organize assignments, run focus timers, and track study habits. <span style="color: #4ade80; font-weight: 600;">Made for students.</span>',
     techStack: ["React", "TypeScript", "Tailwind CSS", "Vite", "LocalStorage"],
     description:
-      '<span style="color: #4ade80; font-weight: 600;">Developed for students.</span>',
+      '<span style="color: #4ade80; font-weight: 600;">Made for students.</span>',
     details:
-      'A productivity application combining task management, focus sessions, progress tracking, and productivity monitoring to help users work more efficiently. <span style="color: #4ade80; font-weight: 600;">Developed for students.</span>',
+      'A clean web application combining a to-do list, timed focus sessions, and daily habit tracking to help students get their work done without distractions. <span style="color: #4ade80; font-weight: 600;">Made for students.</span>',
     problemStatement:
-      "Students and professionals often struggle with distractions, poor time management, and difficulty maintaining focus while studying or working.",
+      "Students often get distracted by social media, procrastinate on assignments, and struggle to manage their daily study schedule.",
     solution:
-      "FOCUSFLOW is a productivity system that helps users organize tasks, manage their time, and maintain focused work sessions.",
+      "FocusFlow gives students a clear task list and timed focus sessions so they can finish their schoolwork one step at a time.",
     link: "https://samjerish.github.io/FOCUSFLOW",
     image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/focsuflow.png`,
     tag: "Productivity • Task Management",
@@ -44,43 +45,43 @@ export const projects: Project[] = [
     id: 3,
     name: "COMMUNITY MAINTENANCE MANAGEMENT SYSTEM",
     brandName: "Community Maintenance",
-    headline: "Digital Platform for Tracking Resident Maintenance Collection Records",
-    pills: ["Payment Tracking", "Collections", "Database"],
+    headline: "A web app for tracking monthly maintenance collections from residents.",
+    pills: ["Payment Records", "Collections", "Database"],
     cardClass: "theme-community",
     shortDesc:
-      'A web-based platform maintaining digital records of resident collections, payment histories, and financial contributions. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Developed for SSN Nagar @Hosur.</span>',
+      'Replaced manual paper notebooks with a simple digital system to record resident maintenance payments. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Built for SSN Nagar, Hosur.</span>',
     techStack: ["React", "Node.js", "Express", "MongoDB", "REST API"],
     description:
-      '<span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Developed for SSN Nagar @Hosur.</span>',
+      '<span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Built for SSN Nagar, Hosur.</span>',
     details:
-      'A web-based platform designed to maintain digital records of money collected from residents. It allows the organization to record payments, track individual contributions, manage collection history, and maintain a centralized database for easy monitoring and record keeping. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Developed for SSN Nagar @Hosur.</span>',
+      'A web-based dashboard designed to record money collected from residents. It lets the manager log payments, check past payment history, and see pending amounts instantly. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Built for SSN Nagar, Hosur.</span>',
     problemStatement:
-      "Residential communities often struggle with manual paper bookkeeping, tracking individual resident payments, and maintaining transparent collection histories.",
+      "The neighborhood association was writing all payment records by hand in paper notebooks, leading to lost receipts, calculation errors, and confusion over who had paid.",
     solution:
-      "A web-based platform designed to maintain digital records of money collected from residents. It allows the organization to record payments, track individual contributions, manage collection history, and maintain a centralized database for easy monitoring and record keeping.",
+      "Built an easy online system where the manager can enter resident payments, see instant receipts, and check pending dues with a single click.",
     link: "",
     image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/community_maintance.png`,
-    tag: "Community Management • Database",
+    tag: "Community Tool • Database",
     date: "2025",
   },
   {
     id: 4,
     name: "DATABASE MANAGEMENT SYSTEM USING FIREBASE",
     brandName: "Firebase DBMS",
-    headline: "Cloud Database & Real-Time Engine Built for Dynamic Tooling System",
-    pills: ["Cloud Database", "Auth", "Real-Time"],
+    headline: "A cloud database system built for managing tool records in real time.",
+    pills: ["Cloud Database", "User Auth", "Real-Time Data"],
     cardClass: "theme-firebase",
     shortDesc:
-      'Cloud database architecture demonstrating real-time CRUD operations, security rules, and user auth. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Developed for Dynamic Tooling System.</span>',
+      'A fast cloud database to add, update, and track tooling inventory with secure user logins. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Built for Dynamic Tooling System.</span>',
     techStack: ["Firebase", "Firestore", "JavaScript", "Cloud Auth", "Security Rules"],
     description:
-      '<span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Developed for Dynamic Tooling System.</span>',
+      '<span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Built for Dynamic Tooling System.</span>',
     details:
-      'A Firebase-based project demonstrating CRUD operations, user authentication, cloud data storage, and real-time data management. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Developed for Dynamic Tooling System.</span>',
+      'A web database project that allows users to securely log in, add new tool records, update equipment statuses, and view changes in real time. <span style="color: #ffffff; font-weight: 700; text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);">Built for Dynamic Tooling System.</span>',
     problemStatement:
-      "Applications require a reliable way to store, retrieve, update, and manage data efficiently without building complex backend infrastructure from scratch.",
+      "Using paper forms or local spreadsheets made it hard to keep equipment lists up to date across multiple staff members.",
     solution:
-      "A cloud-based database management system using Firebase for data storage, authentication, and real-time database operations.",
+      "Connected the system to Google Firebase, allowing the team to view and update equipment details live from any phone or computer.",
     link: "",
     image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/DATABASE_MANGANMENT.png`,
     tag: "Firebase • Cloud Database",
@@ -90,60 +91,63 @@ export const projects: Project[] = [
     id: 2,
     name: "ECOTRACKER",
     brandName: "EcoTracker",
-    headline: "Environmental Impact Tracker Inspiring Sustainable Daily Habits",
-    pills: ["Sustainability", "Analytics", "Eco"],
+    headline: "A daily tracker that encourages simple, eco-friendly everyday habits.",
+    pills: ["Daily Habits", "Green Living", "Progress Tracker"],
     cardClass: "theme-ecotracker",
-    shortDesc: "Environmental application helping users record eco actions, track carbon footprints, and visualize green progress.",
+    shortDesc:
+      "A clean web app where users can log green activities like saving electricity or recycling, and see their positive impact over time.",
     techStack: ["JavaScript", "HTML5", "CSS3", "Data Analytics", "GitHub Pages"],
     description: "",
     details:
-      "An environmental tracking application that allows users to record eco-friendly activities, monitor their environmental impact, and visualize their sustainability progress.",
+      "An environmental habit tracker that makes it fun and easy to log green actions, check carbon savings, and build sustainable daily habits.",
     problemStatement:
-      "People often lack awareness of their environmental impact, including waste generation, resource consumption, and daily sustainability habits.",
+      "Many people want to help the environment, but do not know which small daily actions make a meaningful difference.",
     solution:
-      "ECOTRACKER helps users monitor their environmental activities and encourages more sustainable everyday habits.",
+      "EcoTracker provides a clear daily checklist of simple green activities and shows users their positive progress over time.",
     link: "https://samjerish.github.io/ECOTRACKER",
     image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/ecotracker.png`,
-    tag: "Sustainability • Data Tracking",
+    tag: "Sustainability • Habit Tracker",
     date: "2026",
   },
   {
     id: 5,
     name: "AUTONOMOUS UNIVERSITY ROBOT",
     brandName: "Campus Rover",
-    headline: "Autonomous Navigation & Multi-Sensor Obstacle Avoidance Vehicle",
-    pills: ["Robotics", "Embedded", "Hardware"],
+    headline: "A smart mobile robot that navigates college hallways and avoids obstacles.",
+    pills: ["Robotics", "Hardware", "Arduino"],
     cardClass: "theme-robot",
-    shortDesc: "Intelligent campus robot integrating infrared obstacle detection arrays, intelligent pathfinding, and autonomous university transit.",
+    shortDesc:
+      "A self-driving robot built with infrared sensors to safely move through campus corridors without bumping into walls or people.",
     techStack: ["Embedded C++", "Arduino", "IR Sensors", "Motor Drivers", "Robotics"],
     description: "",
     details:
-      "An intelligent robotic system combining sensors, obstacle detection, navigation, decision-making, and autonomous movement to operate within a university environment.",
+      "A hardware robotics project built with Arduino and infrared sensors that can drive on its own, sense obstacles ahead, and steer around them.",
     problemStatement:
-      "Large university campuses require systems that can navigate different environments and perform tasks without continuous human control.",
+      "Carrying physical documents and lab equipment across large university buildings takes a lot of time and manual effort.",
     solution:
-      "An autonomous university robot capable of navigating campus environments and performing predefined tasks using sensors and intelligent decision-making.",
+      "Built an autonomous robot using motor drivers and IR sensors that automatically detects obstacles in front of it and steers safely around them.",
     link: "",
     image: `${import.meta.env.BASE_URL}PROJECTS%20ASSESTS/ir%20project.png`,
-    tag: "Robotics • Autonomous Navigation",
+    tag: "Robotics • Autonomous Driving",
     date: "2024",
   },
   {
     id: 6,
     name: "AUTONOMOUS ROBOT USING COMPUTER VISION",
     brandName: "Vision Bot",
-    headline: "AI Vision-Guided Pathfinding & Real-Time Object Recognition",
-    pills: ["Computer Vision", "AI", "Navigation"],
+    headline: "A camera-guided robot that uses artificial intelligence to see and navigate.",
+    pills: ["Computer Vision", "Python", "AI Navigation"],
     cardClass: "theme-vision",
-    shortDesc: "Vision-driven robotics system leveraging live camera feeds and image classification algorithms for intelligent environmental traversal.",
+    shortDesc:
+      "An intelligent robot that uses a live camera and Python vision software to recognize objects in front of it and steer automatically.",
     techStack: ["Python", "OpenCV", "Vision AI", "Robotics", "NumPy"],
     description: "",
     details:
-      "A computer-vision-based autonomous robotic system that uses a camera and vision algorithms to understand its surroundings and navigate accordingly.",
+      "A robotics project combining a live video camera, Python, and OpenCV to help a robot understand its surroundings and navigate smoothly.",
     problemStatement:
-      "Traditional robots may have limited awareness of their surroundings and often depend on predefined paths or basic sensors.",
+      "Basic distance sensors only detect close-range walls, but cannot tell what kind of object is in front of the robot.",
     solution:
-      "Computer vision enables the robot to visually perceive its environment, detect objects and obstacles, and make navigation decisions.",
+      "Equipped the robot with a camera and image-recognition software so it can visually identify objects and make smarter driving decisions in real time.",
     link: "",
     image:
       "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=800&auto=format&fit=crop",

@@ -15,10 +15,10 @@ export interface ScrollStackProps {
 export const ScrollStack: React.FC<ScrollStackProps> = ({
   projects,
   onProjectClick,
-  stackOffset = 22,
-  scaleStep = 0.038,
-  rotationStep = 1.3,
-  dissolveStep = 0.15,
+  stackOffset = 26,
+  scaleStep = 0.024,
+  rotationStep = 0,
+  dissolveStep = 0.025,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardWrapperRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -29,8 +29,9 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
     if (!containerRef.current) return;
 
     const isMobile = window.innerWidth <= 768;
-    const currentStackOffset = isMobile ? 14 : stackOffset;
-    const stickyTopBase = isMobile ? 60 : 75;
+    const currentStackOffset = isMobile ? 16 : stackOffset;
+    const stickyTopBase = isMobile ? 55 : 75;
+    const transitionZone = isMobile ? 240 : 360;
 
     for (let i = 0; i < projects.length; i++) {
       const cardEl = cardInnerRefs.current[i];
@@ -43,28 +44,32 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
           const nextRect = nextWrapper.getBoundingClientRect();
           const targetStickyTop = stickyTopBase + j * currentStackOffset;
 
-          // Progressive overlap detection window with smooth quadratic ease-out
-          if (nextRect.top <= targetStickyTop + 180) {
+          // Progressive overlap detection window with smooth cubic ease-out
+          if (nextRect.top <= targetStickyTop + transitionZone) {
             const rawProgress = Math.min(
               1,
-              Math.max(0, (targetStickyTop + 180 - nextRect.top) / 180)
+              Math.max(
+                0,
+                (targetStickyTop + transitionZone - nextRect.top) / transitionZone
+              )
             );
-            // Quadratic ease-out curve for natural physical resistance
-            const easedProgress = rawProgress * (2 - rawProgress);
+            // Cubic ease-out curve for natural, elegant physical deceleration
+            const easedProgress = 1 - Math.pow(1 - rawProgress, 3);
             cardsOnTop += easedProgress;
           }
         }
       }
 
-      // Smooth stacking properties: scale down, alternate subtle tilt, dissolve
-      const scale = Math.max(0.82, 1 - cardsOnTop * scaleStep);
-      const rotDirection = i % 2 === 0 ? -1 : 1;
-      const rotation = cardsOnTop * rotationStep * rotDirection;
-      const opacity = Math.max(0.2, 1 - cardsOnTop * dissolveStep);
-      const brightness = Math.max(0.52, 1 - cardsOnTop * 0.08);
+      // Smooth, squared, perfectly aligned stack without unwanted tilting
+      const scale = Math.max(0.88, 1 - cardsOnTop * scaleStep);
+      const opacity = Math.max(0.85, 1 - cardsOnTop * dissolveStep);
+      const brightness = Math.max(0.68, 1 - cardsOnTop * 0.05);
+      const rotation = rotationStep > 0 ? (i % 2 === 0 ? -1 : 1) * cardsOnTop * rotationStep : 0;
 
-      // Direct GPU compositor mutation
-      cardEl.style.transform = `scale3d(${scale.toFixed(4)}, ${scale.toFixed(4)}, 1) rotate(${rotation.toFixed(2)}deg)`;
+      // Direct GPU compositor mutation - perfectly aligned and squared
+      cardEl.style.transform = rotation !== 0
+        ? `scale3d(${scale.toFixed(4)}, ${scale.toFixed(4)}, 1) rotate(${rotation.toFixed(2)}deg)`
+        : `scale3d(${scale.toFixed(4)}, ${scale.toFixed(4)}, 1)`;
       cardEl.style.opacity = opacity.toFixed(3);
       cardEl.style.filter = `brightness(${brightness.toFixed(2)})`;
     }
@@ -111,11 +116,6 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
   return (
     <div ref={containerRef} className="scroll-stack-container">
       {projects.map((project, index) => {
-        const isMobile =
-          typeof window !== "undefined" && window.innerWidth <= 768;
-        const currentStackOffset = isMobile ? 14 : stackOffset;
-        const stickyTop = (isMobile ? 60 : 75) + index * currentStackOffset;
-
         return (
           <div
             key={project.id}
@@ -124,7 +124,7 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
             }}
             className="scroll-stack-card-wrapper"
             style={{
-              top: `${stickyTop}px`,
+              top: `calc(var(--stack-top-base, 75px) + var(--stack-offset, 26px) * ${index})`,
               zIndex: index + 10,
             }}
           >
@@ -134,7 +134,7 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
               }}
               className={`scroll-stack-card ${project.cardClass || ""}`}
               style={{
-                transformOrigin: "center 15%",
+                transformOrigin: "top center",
               }}
               onClick={() => onProjectClick?.(project)}
               data-cursor-text="VIEW"

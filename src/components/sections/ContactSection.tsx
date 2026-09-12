@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./ContactSection.css";
-import { FiInstagram, FiLinkedin, FiGithub } from "react-icons/fi";
-import { FileText, Mail } from "lucide-react";
-import thumpsupImage from "../../assets/thumpsup.png";
+import { Mail } from "lucide-react";
 
 interface ContactSectionProps {
   onNavigate?: (
@@ -15,6 +13,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
+  const [currentTime, setCurrentTime] = useState("");
   const words = ["build", "create", "innovate"];
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -40,9 +39,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       setWordIndex((prev) => (prev + 1) % words.length);
     }, 2000);
 
+    // Live Indian Standard Time (IST) Clock
+    const updateTime = () => {
+      const now = new Date();
+      const istString = now.toLocaleTimeString("en-GB", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
+      setCurrentTime(istString);
+    };
+
+    updateTime();
+    const timeInterval = setInterval(updateTime, 1000);
+
     return () => {
       if (node) observer.unobserve(node);
       clearInterval(wordInterval);
+      clearInterval(timeInterval);
     };
   }, [words.length]);
 
@@ -55,6 +70,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       <div className="dark-contact-content">
         {/* Header Section */}
         <div className="contact-hero-header">
+          <span className="contact-section-kicker">GET IN TOUCH</span>
           <h1>
             Let's{" "}
             <span key={wordIndex} className="handwriting-pink word-animate">
@@ -63,120 +79,152 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             <br />
             incredible work together.
           </h1>
+          <div className="contact-hero-email-wrap">
+            <a
+              href="mailto:samjerishd@gmail.com"
+              className="contact-hero-email-btn"
+              data-cursor-text="EMAIL"
+            >
+              <Mail size={16} strokeWidth={2} />
+              <span>samjerishd@gmail.com</span>
+              <span className="contact-arrow-icon">↗</span>
+            </a>
+          </div>
         </div>
 
-        {/* Info Grid */}
-        <div className="contact-info-grid">
-          <div className="info-block">
-            <span className="info-label">Email & Actions</span>
-            <div className="contact-email-row">
+        {/* 4-Column Architectural Grid in Reference Theme */}
+        <div className="contact-theme-grid">
+          {/* Column 1: INDEX */}
+          <div className="contact-theme-col">
+            <span className="contact-col-header">INDEX</span>
+            <nav className="contact-col-list" aria-label="Page navigation">
+              <button
+                type="button"
+                className="contact-nav-btn"
+                onClick={() => {
+                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Work
+              </button>
+              <button
+                type="button"
+                className="contact-nav-btn"
+                onClick={() => {
+                  document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                About me
+              </button>
+              <button
+                type="button"
+                className="contact-nav-btn"
+                onClick={() => {
+                  document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Experience
+              </button>
+              <button
+                type="button"
+                className="contact-nav-btn"
+                onClick={() => {
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Contact
+              </button>
+              <button
+                type="button"
+                className="contact-nav-btn"
+                onClick={() => onNavigate?.("resume")}
+              >
+                <span>Resume</span>
+                <span className="contact-arrow-icon">↗</span>
+              </button>
+            </nav>
+          </div>
+
+          {/* Column 2: CONNECT */}
+          <div className="contact-theme-col">
+            <span className="contact-col-header">CONNECT</span>
+            <div className="contact-col-list">
+              <a
+                href="https://linkedin.com/in/samjerishd"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-link-item"
+                data-cursor-text="LINKEDIN"
+              >
+                <span>LinkedIn</span>
+                <span className="contact-arrow-icon">↗</span>
+              </a>
               <a
                 href="mailto:samjerishd@gmail.com"
-                className="info-value"
+                className="contact-link-item"
                 data-cursor-text="EMAIL"
               >
-                samjerishd@gmail.com
+                <span>Email</span>
+                <span className="contact-arrow-icon">↗</span>
               </a>
-              {onNavigate && (
-                <div className="contact-actions-group">
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("contact")}
-                    className="contact-highlight-btn send-message-btn"
-                    aria-label="Send a Message"
-                    data-cursor-text="MESSAGE"
-                  >
-                    <Mail size={16} />
-                    <span>Send Message</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("resume")}
-                    className="contact-highlight-btn view-resume-btn"
-                    aria-label="View Resume"
-                    data-cursor-text="RESUME"
-                  >
-                    <FileText size={16} />
-                    <span>View Resume</span>
-                  </button>
-                </div>
-              )}
+              <a
+                href="https://github.com/samjerish"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-link-item"
+                data-cursor-text="GITHUB"
+              >
+                <span>GitHub</span>
+                <span className="contact-arrow-icon">↗</span>
+              </a>
+              <a
+                href="https://instagram.com/samjerishd"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-link-item"
+                data-cursor-text="INSTA"
+              >
+                <span>Instagram</span>
+                <span className="contact-arrow-icon">↗</span>
+              </a>
             </div>
           </div>
 
-          <div className="contact-splitter-vertical"></div>
-
-          <div className="info-block">
-            <span className="info-label">Social Media</span>
-            <div className="contact-social-row">
-              <span className="info-value social-subtitle">
-                Connect & Follow
-              </span>
-              <div className="contact-social-group">
-                <a
-                  href="https://instagram.com/samjerishd"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-pill social-instagram"
-                  data-cursor-text="INSTA"
-                  aria-label="Instagram Profile"
-                >
-                  <FiInstagram size={17} />
-                  <span>Instagram</span>
-                </a>
-                <a
-                  href="https://linkedin.com/in/samjerishd"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-pill social-linkedin"
-                  data-cursor-text="LINKEDIN"
-                  aria-label="LinkedIn Profile"
-                >
-                  <FiLinkedin size={17} />
-                  <span>LinkedIn</span>
-                </a>
-                <a
-                  href="https://github.com/samjerish"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-pill social-github"
-                  data-cursor-text="GITHUB"
-                  aria-label="GitHub Profile"
-                >
-                  <FiGithub size={17} />
-                  <span>GitHub</span>
-                </a>
+          {/* Column 3: BASED IN */}
+          <div className="contact-theme-col">
+            <span className="contact-col-header">BASED IN</span>
+            <div className="contact-col-list">
+              <div className="contact-based-location">
+                <span className="location-flag">🇮🇳</span>
+                <span className="location-name">Nagarcoil, India</span>
+              </div>
+              <div className="contact-based-time">
+                <span className="contact-live-dot" aria-hidden="true" />
+                <span className="time-text">
+                  {currentTime || "21:53"} IST
+                </span>
               </div>
             </div>
           </div>
+
+          {/* Column 4: COPYRIGHT */}
+          <div className="contact-theme-col">
+            <span className="contact-col-header">© 2026</span>
+            <div className="contact-col-list">
+              <span className="contact-author-title">Sam Jerish D</span>
+              <span className="contact-rights-text">All rights reserved</span>
+            </div>
+          </div>
         </div>
 
-        <div className="contact-splitter-horizontal"></div>
-      </div>
+        {/* Subtle Dividing Line */}
+        <div className="contact-theme-divider" />
 
-      {/* Massive Text and Footer */}
-      <div className="contact-massive-text-container">
-        <div className="contact-massive-text-wrapper">
-          <div className="contact-massive-text">
-            SAM <span className="contact-massive-text-grey">JERISH D</span>
+        {/* Massive Full-Width Typographic Signature (Khaled Batt Style) */}
+        <div className="contact-theme-massive-wrap">
+          <div className="contact-theme-massive-text">
+            SAM JERISH D
           </div>
-          <img
-            src={thumpsupImage}
-            alt="Sam Jerish"
-            className="contact-thumpsup-image"
-          />
-        </div>
-
-        <div className="contact-footer-line"></div>
-
-        <div className="contact-footer-links">
-          <div className="contact-footer-left">
-            <span>Reject all substitutes</span>
-          </div>
-          <div className="contact-footer-center">
-            <span>© 2026 Sam Jerish. All rights reserved.</span>
-          </div>
-          <div className="contact-footer-right" aria-hidden="true"></div>
         </div>
       </div>
     </section>

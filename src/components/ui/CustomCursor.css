@@ -62,6 +62,15 @@
     backdrop-filter 0.2s ease;
 }
 
+/* Suppress cursor ring over bottom menu bar and dock during drag or hover */
+body:has(.bottom-menu-bar:hover) .custom-cursor-ring,
+body:has(.dock-liquid-glass.is-dragging) .custom-cursor-ring,
+.bottom-menu-bar:hover ~ .custom-cursor-root .custom-cursor-ring {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0.2) !important;
+  pointer-events: none !important;
+}
+
 /* Hovering target */
 .custom-cursor-ring.is-hovered {
   background-color: rgba(255, 255, 255, 0.12);

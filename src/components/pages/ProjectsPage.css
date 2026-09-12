@@ -53,7 +53,7 @@
 .projects-page-content {
   max-width: 1360px;
   margin: 0 auto;
-  padding: 0 3rem 4rem 3rem;
+  padding: 0 3rem calc(6.5rem + env(safe-area-inset-bottom, 20px)) 3rem;
   width: 100%;
   position: relative;
   z-index: 10;
@@ -220,11 +220,15 @@
 /* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
   .projects-page-content {
-    padding: 0 2rem 4rem 2rem;
+    padding: 0 2rem calc(6.5rem + env(safe-area-inset-bottom, 20px)) 2rem;
   }
 }
 
 @media (max-width: 768px) {
+  .projects-page-content {
+    padding: 0 1.25rem calc(6.5rem + env(safe-area-inset-bottom, 20px)) 1.25rem;
+  }
+
   .tech-stack-grid {
     gap: 1rem;
   }

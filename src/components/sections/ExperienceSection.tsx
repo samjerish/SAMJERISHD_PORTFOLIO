@@ -57,6 +57,7 @@ export const ExperienceSection: React.FC<{
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
+  const hasDraggedRef = useRef(false);
   const dragStartRef = useRef<{ startX: number; startY: number }>({ startX: 0, startY: 0 });
   const userOffsetRef = useRef({ x: 0, y: 0, rotate: 0 });
   const userVelRef = useRef({ vx: 0, vy: 0, vRotate: 0 });
@@ -64,6 +65,7 @@ export const ExperienceSection: React.FC<{
 
   // Timeline Scroll Tracking Refs
   const timelineWrapperRef = useRef<HTMLDivElement>(null);
+  const staticLineRef = useRef<HTMLDivElement>(null);
   const progressLineRef = useRef<HTMLDivElement>(null);
   const pointerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -149,33 +151,71 @@ export const ExperienceSection: React.FC<{
   useEffect(() => {
     const handleScroll = () => {
       const wrapper = timelineWrapperRef.current;
+      const staticLine = staticLineRef.current;
       const progLine = progressLineRef.current;
       const pointer = pointerRef.current;
       if (!wrapper || !progLine || !pointer) return;
 
-      const rect = wrapper.getBoundingClientRect();
+      const firstItem = itemRefs.current[0];
+      const lastItem = itemRefs.current[itemRefs.current.length - 1];
+      if (!firstItem || !lastItem) return;
+
+      const getNodeCenterY = (itemEl: HTMLDivElement): number => {
+        const nodeContainer = itemEl.querySelector(
+          ".timeline-node-container",
+        ) as HTMLElement | null;
+        if (nodeContainer) {
+          return (
+            itemEl.offsetTop +
+            nodeContainer.offsetTop +
+            nodeContainer.offsetHeight / 2
+          );
+        }
+        return itemEl.offsetTop + 34;
+      };
+
+      const startY = getNodeCenterY(firstItem);
+      const endY = getNodeCenterY(lastItem);
+
+      // Keep static background track aligned strictly from first node center to last node center
+      if (staticLine) {
+        staticLine.style.top = `${startY}px`;
+        staticLine.style.height = `${Math.max(0, endY - startY)}px`;
+        staticLine.style.bottom = "auto";
+      }
+
       const windowH = window.innerHeight;
+      const triggerY = windowH * 0.52;
 
-      // Trigger line when wrapper enters view
-      const triggerY = windowH * 0.55;
-      const topOffset = triggerY - rect.top;
-      const totalH = rect.height;
+      // Calculate node centers in viewport coordinates
+      const firstNodeOffset = getNodeCenterY(firstItem) - firstItem.offsetTop;
+      const lastNodeOffset = getNodeCenterY(lastItem) - lastItem.offsetTop;
 
-      let progress = topOffset / totalH;
-      progress = Math.max(0, Math.min(1, progress));
+      const firstNodeViewportY = firstItem.getBoundingClientRect().top + firstNodeOffset;
+      const lastNodeViewportY = lastItem.getBoundingClientRect().top + lastNodeOffset;
+      const totalScrollRange = lastNodeViewportY - firstNodeViewportY;
 
-      const currentH = progress * totalH;
-      progLine.style.height = `${currentH}px`;
-      pointer.style.top = `${currentH}px`;
+      let progress = 0;
+      if (totalScrollRange > 0) {
+        const rawProgress = (triggerY - firstNodeViewportY) / totalScrollRange;
+        progress = Math.max(0, Math.min(1, rawProgress));
+      }
 
-      // Update active focused card
+      const targetPointerY = startY + progress * (endY - startY);
+
+      progLine.style.top = `${startY}px`;
+      progLine.style.height = `${Math.max(0, targetPointerY - startY)}px`;
+      pointer.style.top = `${targetPointerY}px`;
+
+      // Update active focused card strictly based on node center proximity
       let closestIdx = 0;
       let minDistance = Infinity;
 
       itemRefs.current.forEach((el, index) => {
         if (!el) return;
-        const itemRect = el.getBoundingClientRect();
-        const dist = Math.abs(itemRect.top + itemRect.height * 0.3 - triggerY);
+        const nodeOffset = getNodeCenterY(el) - el.offsetTop;
+        const nodeViewportY = el.getBoundingClientRect().top + nodeOffset;
+        const dist = Math.abs(nodeViewportY - triggerY);
         if (dist < minDistance) {
           minDistance = dist;
           closestIdx = index;
@@ -186,15 +226,49 @@ export const ExperienceSection: React.FC<{
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    const lenis = (window as any).__lenis;
+    if (lenis && typeof lenis.on === "function") {
+      lenis.on("scroll", handleScroll);
+    }
+
+    // Observe wrapper resize to instantly recalculate when layout reflows
+    let resizeObserver: ResizeObserver | null = null;
+    const wrapper = timelineWrapperRef.current;
+    if (typeof ResizeObserver !== "undefined" && wrapper) {
+      resizeObserver = new ResizeObserver(() => {
+        handleScroll();
+      });
+      resizeObserver.observe(wrapper);
+    }
+
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (lenis && typeof lenis.off === "function") {
+        lenis.off("scroll", handleScroll);
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    };
   }, []);
 
   const scrollToItem = (index: number) => {
     const el = itemRefs.current[index];
     if (el) {
+      const nodeContainer = el.querySelector(
+        ".timeline-node-container",
+      ) as HTMLElement | null;
+      const nodeCenterOffset = nodeContainer
+        ? nodeContainer.offsetTop + nodeContainer.offsetHeight / 2
+        : 34;
       const rect = el.getBoundingClientRect();
-      const targetY = window.scrollY + rect.top - window.innerHeight * 0.35;
+      const targetY =
+        window.scrollY + rect.top + nodeCenterOffset - window.innerHeight * 0.52;
       window.scrollTo({ top: targetY, behavior: "smooth" });
     }
   };
@@ -203,6 +277,7 @@ export const ExperienceSection: React.FC<{
     e.preventDefault();
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     isDraggingRef.current = true;
+    hasDraggedRef.current = false;
     setIsDragging(true);
     dragStartRef.current = {
       startX: e.clientX - pos.x,
@@ -214,13 +289,17 @@ export const ExperienceSection: React.FC<{
     if (!isDraggingRef.current) return;
     e.preventDefault();
 
+    const targetX = e.clientX - dragStartRef.current.startX;
+    const targetY = e.clientY - dragStartRef.current.startY;
+    if (Math.hypot(targetX - pos.x, targetY - pos.y) > 3) {
+      hasDraggedRef.current = true;
+    }
+
     const t = performance.now() * 0.001;
     const ambientX = Math.sin(t * 1.3) * 14 + Math.sin(t * 0.65) * 4;
     const ambientY = Math.abs(ambientX) * 0.08;
     const ambientRotate = Math.sin(t * 1.3 - 0.25) * 3.0 + Math.sin(t * 0.65) * 0.8;
 
-    const targetX = e.clientX - dragStartRef.current.startX;
-    const targetY = e.clientY - dragStartRef.current.startY;
     const targetRotate = Math.max(-20, Math.min(20, targetX * 0.08));
 
     userOffsetRef.current = {
@@ -239,6 +318,18 @@ export const ExperienceSection: React.FC<{
     }
     isDraggingRef.current = false;
     setIsDragging(false);
+  };
+
+  const handleBadgeClick = () => {
+    // In mobile view, tap to swap is removed — only drag is kept
+    if (typeof window !== "undefined" && window.innerWidth <= 768) {
+      return;
+    }
+    // Prevent swap if the badge was actively dragged
+    if (hasDraggedRef.current) {
+      return;
+    }
+    setPhotoIndex((prev) => (prev + 1) % STORY_PHOTOS.length);
   };
 
   // Calculate dynamic SVG lanyard path from fixed top origin to moving badge clip
@@ -265,7 +356,11 @@ export const ExperienceSection: React.FC<{
 
             <div ref={timelineWrapperRef} className="story-timeline-wrapper">
               {/* Background Static Track */}
-              <div className="story-timeline-line" aria-hidden="true" />
+              <div
+                ref={staticLineRef}
+                className="story-timeline-line"
+                aria-hidden="true"
+              />
 
               {/* Glowing Active Track Beam that follows scroll */}
               <div
@@ -395,10 +490,8 @@ export const ExperienceSection: React.FC<{
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
-                onClick={() =>
-                  setPhotoIndex((prev) => (prev + 1) % STORY_PHOTOS.length)
-                }
-                data-cursor-text="SWAP"
+                onClick={handleBadgeClick}
+                data-cursor-text="DRAG"
               >
                 {/* Silver Metal Clip Clasp */}
                 <div className="badge-metal-clasp">
@@ -450,7 +543,7 @@ export const ExperienceSection: React.FC<{
 
             {/* Mobile Touch & Drag Hint */}
             <div className="id-card-mobile-hint" aria-hidden="true">
-              <span>✦ DRAG TO SWING • TAP TO SWAP ✦</span>
+              <span>✦ DRAG TO SWING ✦</span>
             </div>
           </div>
         </div>

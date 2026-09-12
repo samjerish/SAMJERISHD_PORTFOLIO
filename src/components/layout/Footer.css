@@ -1,7 +1,7 @@
 .site-page-footer {
   width: 100%;
   margin-top: auto;
-  padding: 3rem 0 5.5rem 0;
+  padding: 3rem 0 calc(6.5rem + env(safe-area-inset-bottom, 24px)) 0;
   position: relative;
   z-index: 20;
 }
@@ -41,7 +41,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .site-page-footer {
-    padding: 2rem 0 5rem 0;
+    padding: 2.2rem 1rem calc(7rem + env(safe-area-inset-bottom, 24px)) 1rem;
   }
 
   .site-page-footer-text {
