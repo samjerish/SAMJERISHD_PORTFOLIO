@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import "./ProjectModal.css";
 import type { Project } from "../../data/projects";
-import { FiX, FiExternalLink } from "react-icons/fi";
+import { FiX, FiExternalLink, FiGithub } from "react-icons/fi";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -134,14 +134,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   if (!isOpen || !project) return null;
 
-  const isLiveProject =
-    Boolean(project.link) &&
-    (project.name.toUpperCase().includes("FOCUSFLOW") ||
-      project.name.toUpperCase().includes("ECOTRACKER"));
+  const isLiveProject = Boolean(project.link);
+  const hasGithub = Boolean(project.githubUrl);
 
   const displayUrl = project.link
     ? project.link.replace(/^https?:\/\//, "").replace(/\/$/, "")
-    : `local://${project.name.toLowerCase().replace(/[^a-z0-9]/g, "-")}.internal`;
+    : project.githubUrl
+      ? project.githubUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
+      : `local://${project.name.toLowerCase().replace(/[^a-z0-9]/g, "-")}.internal`;
 
   return createPortal(
     <div
@@ -192,7 +192,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           </div>
 
           <div className="dev-topbar-meta">
-            <span className="dev-meta-pill">{project.tag || "Full-Stack System"}</span>
+            <span className="dev-meta-pill">{project.tag || "Featured Project"}</span>
             {project.date && (
               <span className="dev-meta-date">{project.date}</span>
             )}
@@ -245,22 +245,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* Action Bar Beneath Browser Window */}
             <div className="dev-action-bar">
-              {isLiveProject ? (
+              {isLiveProject && (
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="dev-visit-btn"
                   data-cursor-text="VISIT"
+                  aria-label={`Open live application of ${project.name}`}
                 >
                   <span>Open Live App</span>
                   <FiExternalLink size={13} />
                 </a>
-              ) : (
-                <div className="dev-arch-badge">
-                  <span className="arch-dot" />
-                  <span>System &amp; Database Project</span>
-                </div>
+              )}
+              {hasGithub && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="dev-github-btn"
+                  data-cursor-text="GITHUB"
+                  aria-label={`View ${project.name} source code on GitHub`}
+                >
+                  <FiGithub size={13} />
+                  <span>GitHub Repository</span>
+                </a>
               )}
             </div>
           </div>
@@ -290,27 +299,30 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* About the Project Overview */}
             <div className="dev-section-box">
-              <span className="dev-section-label">About the Project</span>
-              <p
-                className="dev-section-text"
-                dangerouslySetInnerHTML={{
-                  __html:
-                    project.shortDesc || project.details || project.description,
-                }}
-              />
+              <span className="dev-section-label">What it is</span>
+              <p className="dev-section-text">
+                {project.shortDesc || project.details || project.description}
+              </p>
             </div>
 
             {/* Challenge & Solution Cards */}
             <div className="dev-specs-grid">
               <div className="dev-spec-card">
-                <span className="dev-spec-label">The Problem</span>
+                <span className="dev-spec-label">Why I built this</span>
                 <p className="dev-spec-text">{project.problemStatement}</p>
               </div>
 
               <div className="dev-spec-card">
-                <span className="dev-spec-label">The Solution</span>
+                <span className="dev-spec-label">How it works &amp; Technical challenge</span>
                 <p className="dev-spec-text">{project.solution}</p>
               </div>
+
+              {project.impact && (
+                <div className="dev-spec-card impact-card">
+                  <span className="dev-spec-label">Current state &amp; Details</span>
+                  <p className="dev-spec-text">{project.impact}</p>
+                </div>
+              )}
             </div>
 
             {/* Tech Stack */}

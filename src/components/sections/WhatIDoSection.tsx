@@ -41,25 +41,11 @@ export const WhatIDoSection: React.FC = () => {
 
             <div className="what-i-do-statements">
               <p className="story-editorial-statement">
-                I’m someone who loves to{" "}
-                <span className="story-chip story-chip-yellow" data-cursor-text="LEARN">
-                  learn
-                </span>
-                ,{" "}
-                <span className="story-chip story-chip-craft" data-cursor-text="CRAFT">
-                  <span className="chip-square-box craft-box">✦</span>
-                  <span className="chip-text">create</span>
-                </span>
-                , and{" "}
-                <span className="story-chip story-chip-experiment" data-cursor-text="ENERGY">
-                  <span className="chip-square-box exp-box">⚡</span>
-                  <span className="exp-orange-text">experiment</span>
-                </span>
-                .
+                My approach to building software is simple: build things that actually work, keep code clean, and don't add complexity where a straightforward solution does the job.
               </p>
 
               <p className="story-editorial-statement">
-                I enjoy exploring different ways to turn an idea into something real. I’m still figuring things out, still learning, and still creating. And honestly, that’s the part of the journey I enjoy the most.
+                Most of my projects start from noticing a slow or broken manual process—like tracking neighborhood collections on paper logbooks or getting distracted by bloated timer apps. I like taking those problems, understanding the real requirements, and shipping clean software that makes them effortless.
               </p>
             </div>
 
@@ -70,14 +56,14 @@ export const WhatIDoSection: React.FC = () => {
                 className="story-read-more-btn highlighted-white"
                 onClick={() => setIsGithubModalOpen(true)}
                 data-cursor-text="GITHUB"
-                aria-label="View my GitHub contributions"
+                aria-label="View my GitHub activity and contributions"
               >
                 <span className="btn-ambient-glow" />
                 <span className="live-contrib-ping">
                   <span className="ping-dot" />
                   <span className="ping-ring" />
                 </span>
-                <span className="btn-label">VIEW MY GITHUB CONTRIBUTION</span>
+                <span className="btn-label">EXPLORE GITHUB ACTIVITY</span>
                 <span className="read-more-arrow">→</span>
               </button>
             </div>

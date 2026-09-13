@@ -2,29 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "./StorySection.css";
 import { WireframeSphere } from "../ui/WireframeSphere";
 
-const PixelBotSvg: React.FC = () => (
-  <svg
-    className="pixel-bot-svg"
-    viewBox="0 0 16 12"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <rect x="2" y="0" width="2" height="2" fill="#e0564c" />
-    <rect x="12" y="0" width="2" height="2" fill="#e0564c" />
-    <rect x="4" y="2" width="2" height="2" fill="#e0564c" />
-    <rect x="10" y="2" width="2" height="2" fill="#e0564c" />
-    <rect x="2" y="4" width="12" height="4" fill="#e0564c" />
-    <rect x="4" y="4" width="2" height="2" fill="#ffffff" className="bot-eye left-eye" />
-    <rect x="10" y="4" width="2" height="2" fill="#ffffff" className="bot-eye right-eye" />
-    <rect x="0" y="6" width="2" height="4" fill="#e0564c" />
-    <rect x="14" y="6" width="2" height="4" fill="#e0564c" />
-    <rect x="2" y="8" width="2" height="2" fill="#e0564c" />
-    <rect x="12" y="8" width="2" height="2" fill="#e0564c" />
-    <rect x="4" y="10" width="2" height="2" fill="#e0564c" />
-    <rect x="10" y="10" width="2" height="2" fill="#e0564c" />
-  </svg>
-);
 
 export const AnimatedLine = ({
   text,
@@ -88,7 +65,7 @@ export const StorySection: React.FC<{
   onNavigate?: (
     page: "home" | "media" | "about" | "projects" | "contact" | "resume",
   ) => void;
-}> = ({ onNavigate: _onNavigate }) => {
+}> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -118,6 +95,7 @@ export const StorySection: React.FC<{
       ref={sectionRef}
       id="about"
       className="story-container"
+      aria-label="About Sam Jerish"
     >
       <div className="story-content-wrapper">
         {/* ===================================================
@@ -136,44 +114,74 @@ export const StorySection: React.FC<{
               {/* Part 1: A LITTLE ABOUT ME */}
               <div className="story-sequence-step">
                 <div className="story-theme-kicker">
-                  <span className="kicker-accent-dot" />
+                  <span className="kicker-accent-dot" aria-hidden="true" />
                   <span>A LITTLE ABOUT ME</span>
                 </div>
 
                 <div className="story-sequence-content">
                   <p className="story-editorial-statement">
-                    It started with a curiosity about how computers work. That curiosity grew into a passion for{" "}
-                    <span className="story-chip story-chip-code" data-cursor-text="DEV">
-                      <span className="chip-square-box code-box">&lt;/&gt;</span>
-                      <span className="chip-text">coding</span>
-                    </span>
-                    , problem-solving, and{" "}
-                    <span className="story-chip story-chip-yellow" data-cursor-text="BUILD">
-                      building
-                    </span>.
+                    I'm <strong className="statement-name">Sam Jerish D</strong>, a computer science student and developer based in India. Most of my work centers on <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Python</strong>.
                   </p>
 
                   <p className="story-editorial-statement">
-                    From exploring technology to developing{" "}
-                    <span className="story-chip story-chip-agent" data-cursor-text="AI">
-                      <span className="pixel-bot-wrapper">
-                        <PixelBotSvg />
-                      </span>
-                      <span className="story-agent-text">intelligent solutions</span>
-                    </span>
-                    , my journey is about turning{" "}
-                    <span className="story-chip story-chip-curiosity" data-cursor-text="SPARK">
-                      <span className="curiosity-spark">✧</span>
-                      <span className="curiosity-text">curiosity</span>
-                    </span>{" "}
-                    into code and ideas into reality.
+                    I like building software that solves concrete, day-to-day problems—like replacing paper payment logbooks for a residential community in Hosur with a web ledger, or creating a distraction-free Pomodoro workspace for students.
                   </p>
+
+                  <p className="story-editorial-statement">
+                    I value straightforward code over over-engineered abstractions. When building an application, my priority is making it fast, obvious to use, and easy to maintain months later.
+                  </p>
+                </div>
+
+                {/* Grounded Technical Summary */}
+                <div className="story-recruiter-matrix" aria-label="Technical Background">
+                  <div className="recruiter-matrix-item">
+                    <span className="matrix-label">CORE TECHNOLOGIES</span>
+                    <span className="matrix-value">React, TypeScript, Python, Node.js, Firebase, MongoDB</span>
+                  </div>
+                  <div className="recruiter-matrix-item">
+                    <span className="matrix-label">WHAT I ENJOY BUILDING</span>
+                    <span className="matrix-value">Focused web tools, database ledgers &amp; automation scripts</span>
+                  </div>
+                  <div className="recruiter-matrix-item">
+                    <span className="matrix-label">EDUCATION</span>
+                    <span className="matrix-value">B.Tech CSE (AI &amp; ML) • Karunya University (2024–2028)</span>
+                  </div>
+                  <div className="recruiter-matrix-item">
+                    <span className="matrix-label">CURRENTLY EXPLORING</span>
+                    <span className="matrix-value">OpenCV computer vision &amp; distributed backend architectures</span>
+                  </div>
+                </div>
+
+                {/* Quick Navigation CTAs */}
+                <div className="story-cta-row">
+                  <button
+                    type="button"
+                    className="story-action-btn primary"
+                    onClick={() => {
+                      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    data-cursor-text="WORK"
+                    aria-label="Scroll to featured projects"
+                  >
+                    <span>Explore Featured Projects</span>
+                    <span className="btn-arrow" aria-hidden="true">↓</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="story-action-btn secondary"
+                    onClick={() => onNavigate?.("resume")}
+                    data-cursor-text="RESUME"
+                    aria-label="View professional resume"
+                  >
+                    <span>View Resume</span>
+                    <span className="btn-arrow" aria-hidden="true">↗</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             {/* Right Column: 3D Rotating Wireframe Geodesic Polyhedron */}
-            <div className="story-wireframe-column">
+            <div className="story-wireframe-column" aria-hidden="true">
               <div className="story-wireframe-sticky">
                 <WireframeSphere />
               </div>

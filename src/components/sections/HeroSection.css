@@ -356,6 +356,11 @@
   }
 }
 
+.hero-strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
 .book-call-btn {
   display: inline-flex;
   align-items: center;
@@ -363,22 +368,44 @@
   background-color: #ffffff;
   color: #111111;
   font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 13px 28px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 12px 24px;
   border-radius: 9999px;
   cursor: pointer;
-  border: none;
+  border: 1.5px solid #ffffff;
   text-decoration: none;
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
   transition:
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease,
+    border-color 0.2s ease,
     box-shadow 0.25s ease;
 }
 
 .book-call-btn:hover {
+  background-color: #f4f4f5;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 28px rgba(255, 255, 255, 0.35);
+}
+
+.book-call-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.book-call-btn.resume-hero-btn {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
+.book-call-btn.resume-hero-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 .cta-status-indicator {

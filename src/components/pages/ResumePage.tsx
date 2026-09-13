@@ -111,17 +111,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
         <section className="resume-doc-section">
           <h3 className="section-heading">ABOUT ME</h3>
           <p className="resume-doc-text">
-            Full Stack Developer passionate about continuously learning new
-            skills and technologies to{" "}
-            <strong>solve real-world problems</strong> through creativity and
-            innovation. Skilled in frontend and backend development, UI/UX
-            design, database management, APIs, and application development, with
-            a focus on building scalable, responsive, and user-friendly
-            solutions. I enjoy{" "}
-            <strong>transforming ideas into practical applications</strong> by
-            combining technology, creativity, and problem-solving while
-            constantly exploring new tools and technologies to grow as a
-            developer.
+            Computer Science student and developer with hands-on experience building web applications, databases, and automation tools. I work mainly with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Python</strong>, focusing on clean UI architecture, reliable data flow, and software that directly solves practical problems.
           </p>
         </section>
 

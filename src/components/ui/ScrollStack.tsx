@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useCallback } from "react";
 import "./ScrollStack.css";
 import type { Project } from "../../data/projects";
 import { Layers, ArrowUpRight } from "lucide-react";
+import { FiGithub } from "react-icons/fi";
 
 export interface ScrollStackProps {
   projects: Project[];
@@ -116,6 +117,9 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
   return (
     <div ref={containerRef} className="scroll-stack-container">
       {projects.map((project, index) => {
+        const hasLiveDemo = Boolean(project.link);
+        const hasGithub = Boolean(project.githubUrl);
+
         return (
           <div
             key={project.id}
@@ -138,11 +142,13 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
               }}
               onClick={() => onProjectClick?.(project)}
               data-cursor-text="VIEW"
+              role="article"
+              aria-label={`Project card for ${project.brandName || project.name}`}
             >
               {/* Header Top Strip */}
               <div className="stack-card-header">
                 <div className="stack-card-brand">
-                  <div className="stack-brand-icon">
+                  <div className="stack-brand-icon" aria-hidden="true">
                     <Layers size={18} strokeWidth={2.2} />
                   </div>
                   <span className="stack-brand-name">
@@ -150,7 +156,7 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                   </span>
                 </div>
 
-                <div className="stack-card-pills">
+                <div className="stack-card-pills" aria-label="Technologies used">
                   {project.pills?.map((pill) => (
                     <span key={pill} className="stack-pill">
                       {pill}
@@ -158,15 +164,11 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                   ))}
                 </div>
 
-                <div className="stack-card-index">
-                  <span className="index-number">
-                    {String(index + 1).padStart(2, "0")}
+                {project.date && (
+                  <span className="stack-card-year" aria-label="Year built">
+                    {project.date}
                   </span>
-                  <span className="index-divider">/</span>
-                  <span className="index-total">
-                    {String(projects.length).padStart(2, "0")}
-                  </span>
-                </div>
+                )}
               </div>
 
               {/* Main Card Body (2-Column Desktop Split) */}
@@ -177,15 +179,22 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                     {project.headline || project.name}
                   </h2>
 
-                  <p
-                    className="stack-card-desc"
-                    dangerouslySetInnerHTML={{
-                      __html: project.shortDesc || project.details,
-                    }}
-                  />
+                  <p className="stack-card-desc">{project.shortDesc}</p>
+
+                  {/* Grounded Technical Notes */}
+                  <div className="stack-card-notes">
+                    <div className="stack-note-item">
+                      <span className="stack-note-title">Why I built it:</span>
+                      <p className="stack-note-body">{project.problemStatement}</p>
+                    </div>
+                    <div className="stack-note-item">
+                      <span className="stack-note-title">Technical highlight:</span>
+                      <p className="stack-note-body">{project.solution}</p>
+                    </div>
+                  </div>
 
                   {project.techStack && (
-                    <div className="stack-card-tech">
+                    <div className="stack-card-tech" aria-label="Tech Stack">
                       {project.techStack.map((tech) => (
                         <span key={tech} className="stack-tech-badge">
                           {tech}
@@ -194,40 +203,69 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                     </div>
                   )}
 
-                  {Boolean(project.link) &&
-                    (project.name.toUpperCase().includes("FOCUSFLOW") ||
-                      project.name.toUpperCase().includes("ECOTRACKER")) && (
-                      <div className="stack-card-actions">
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="stack-card-view-btn"
-                          onClick={(e) => e.stopPropagation()}
-                          data-cursor-text="VIEW"
-                        >
-                          <span>View Project</span>
-                          <ArrowUpRight size={17} strokeWidth={2.2} />
-                        </a>
-                      </div>
+                  {/* Action Buttons: Live Demo, GitHub, Case Study */}
+                  <div className="stack-card-actions">
+                    {hasLiveDemo && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="stack-card-view-btn stack-live-btn"
+                        onClick={(e) => e.stopPropagation()}
+                        data-cursor-text="DEMO"
+                        aria-label={`Open live demo for ${project.name}`}
+                      >
+                        <span>Live Demo</span>
+                        <ArrowUpRight size={16} strokeWidth={2.2} />
+                      </a>
                     )}
+
+                    {hasGithub && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="stack-card-link-btn stack-github-btn"
+                        onClick={(e) => e.stopPropagation()}
+                        data-cursor-text="CODE"
+                        aria-label={`View ${project.name} source code on GitHub`}
+                      >
+                        <FiGithub size={15} />
+                        <span>Source Code</span>
+                      </a>
+                    )}
+
+                    <button
+                      type="button"
+                      className="stack-card-link-btn stack-case-study-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onProjectClick?.(project);
+                      }}
+                      data-cursor-text="DETAILS"
+                      aria-label={`View deep-dive case study for ${project.name}`}
+                    >
+                      <span>Case Study</span>
+                      <span className="case-arrow" aria-hidden="true">→</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Right Side: Media Showcase Mockup */}
                 <div className="stack-card-media">
                   <div className="stack-device-frame">
-                    <div className="stack-device-notch">
+                    <div className="stack-device-notch" aria-hidden="true">
                       <div className="stack-device-speaker" />
                     </div>
                     <div className="stack-device-screen">
                       <img
                         src={project.image}
-                        alt={project.name}
+                        alt={`${project.name} interface preview`}
                         className="stack-project-img"
                         loading="lazy"
                         draggable={false}
                       />
-                      <div className="stack-glare-overlay" />
+                      <div className="stack-glare-overlay" aria-hidden="true" />
                     </div>
                   </div>
                 </div>

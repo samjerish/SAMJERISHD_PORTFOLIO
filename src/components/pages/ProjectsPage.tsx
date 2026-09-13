@@ -37,10 +37,8 @@ export const ProjectsPage: React.FC<{
         <div className="projects-story-section">
           <div className="projects-story-text-container">
             <p className="story-line line-1">
-              For me, every project starts with a problem, an idea, or simply a
-              question
+              Things I've built to solve everyday problems, explore new tools, and understand how systems work.
             </p>
-            <p className="story-line line-what-if">"What if?"</p>
           </div>
         </div>
 
@@ -48,10 +46,9 @@ export const ProjectsPage: React.FC<{
         <ProjectSwipeDownList projects={projects} />
 
         <div className="github-cta-section">
-          <h2>More on GitHub</h2>
+          <h2>Code on GitHub</h2>
           <p>
-            Want to see the code behind these projects or explore my other
-            technical experiments? Dive into my repositories.
+            Explore the repositories for these projects, setup instructions, and smaller technical experiments.
           </p>
           <a
             href="https://github.com/samjerish"
@@ -59,12 +56,12 @@ export const ProjectsPage: React.FC<{
             rel="noopener noreferrer"
             className="github-link-btn"
           >
-            View My GitHub
+            Visit GitHub Profile
           </a>
         </div>
 
         <div className="projects-watermark">
-          CREATIVITY AND TECHNOLOGY TO SOLVE REAL WORLD PROBLEMS
+          SAM JERISH D • SELECTED WORK
         </div>
       </div>
       <Footer />

@@ -306,15 +306,18 @@
 .dev-action-bar {
   width: 100%;
   flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .dev-visit-btn {
-  width: 100%;
+  flex: 1 1 140px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 18px;
+  padding: 10px 16px;
   background: #ffffff;
   color: #000000;
   font-family: var(--font-heading, "Outfit", sans-serif);
@@ -336,6 +339,38 @@
 }
 
 .dev-visit-btn:active {
+  transform: scale(0.98);
+}
+
+.dev-github-btn {
+  flex: 1 1 140px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dev-github-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.dev-github-btn:active {
   transform: scale(0.98);
 }
 
@@ -469,8 +504,13 @@
   gap: 0.25rem;
 }
 
-.dev-spec-card:last-child {
+.dev-spec-card:nth-child(2) {
   border-left-color: #4ade80;
+}
+
+.dev-spec-card.impact-card {
+  grid-column: 1 / -1;
+  border-left-color: #a855f7;
 }
 
 .dev-spec-label {

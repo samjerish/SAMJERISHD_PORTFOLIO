@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProjectSwipeDownList.css";
 import type { Project } from "../../data/projects";
-import { FiChevronDown, FiExternalLink } from "react-icons/fi";
+import { FiChevronDown, FiExternalLink, FiGithub } from "react-icons/fi";
 
 interface ProjectSwipeDownListProps {
   projects: Project[];
@@ -18,8 +18,10 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
 
   return (
     <div className="project-swipe-list">
-      {projects.map((project, index) => {
+      {projects.map((project) => {
         const isOpen = openId === project.id;
+        const hasLive = Boolean(project.link);
+        const hasGithub = Boolean(project.githubUrl);
 
         return (
           <div
@@ -41,8 +43,7 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
               }}
             >
               <div className="project-title-left">
-                <span className="project-number">0{index + 1}</span>
-                <h3 className="project-name-heading">{project.name}</h3>
+                <h3 className="project-name-heading">{project.brandName || project.name}</h3>
               </div>
 
               <div className="project-title-right">
@@ -84,7 +85,6 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                   {/* Right: Project Highlights, Problem & Solution */}
                   <div className="drawer-info-col">
                     <div className="drawer-meta-tags">
-                      <span className="drawer-highlight-badge">CASE STUDY</span>
                       {project.tag && (
                         <span className="drawer-category-tag">{project.tag}</span>
                       )}
@@ -94,23 +94,19 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                     </div>
 
                     {/* Overview / Details */}
-                    {project.details && (
+                    {project.shortDesc && (
                       <div className="drawer-overview-block">
-                        <span className="drawer-section-label">OVERVIEW</span>
-                        <p
-                          className="drawer-desc-text"
-                          dangerouslySetInnerHTML={{ __html: project.details }}
-                        ></p>
+                        <span className="drawer-section-label">WHAT IT IS</span>
+                        <p className="drawer-desc-text">{project.shortDesc}</p>
                       </div>
                     )}
 
-                    {/* Problem & Solution Showcase Cards */}
+                    {/* Problem, Solution & Impact Showcase Cards */}
                     <div className="drawer-case-study-grid">
                       {project.problemStatement && (
                         <div className="drawer-callout-card problem-card">
                           <div className="callout-header">
-                            <span className="callout-indicator problem-dot"></span>
-                            <span className="callout-title">PROBLEM STATEMENT</span>
+                            <span className="callout-title">WHY I BUILT THIS</span>
                           </div>
                           <p className="callout-text">{project.problemStatement}</p>
                         </div>
@@ -119,31 +115,62 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                       {project.solution && (
                         <div className="drawer-callout-card solution-card">
                           <div className="callout-header">
-                            <span className="callout-indicator solution-dot"></span>
-                            <span className="callout-title">THE SOLUTION</span>
+                            <span className="callout-title">HOW IT WORKS &amp; CHALLENGE</span>
                           </div>
                           <p className="callout-text">{project.solution}</p>
                         </div>
                       )}
-                    </div>
 
-                    {/* Live Project Action */}
-                    {Boolean(project.link) &&
-                      (project.name.toUpperCase().includes("FOCUSFLOW") ||
-                        project.name.toUpperCase().includes("ECOTRACKER")) && (
-                        <div className="drawer-actions">
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="drawer-live-btn"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <span>View Project</span>
-                            <FiExternalLink />
-                          </a>
+                      {project.impact && (
+                        <div className="drawer-callout-card impact-card">
+                          <div className="callout-header">
+                            <span className="callout-title">CURRENT STATE &amp; DETAILS</span>
+                          </div>
+                          <p className="callout-text">{project.impact}</p>
                         </div>
                       )}
+                    </div>
+
+                    {/* Tech Stack Chips */}
+                    {project.techStack && (
+                      <div className="drawer-tech-stack">
+                        {project.techStack.map((tech) => (
+                          <span key={tech} className="drawer-tech-pill">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Live Project & GitHub Actions */}
+                    <div className="drawer-actions">
+                      {hasLive && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="drawer-live-btn"
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label={`Open live demo for ${project.name}`}
+                        >
+                          <span>Live Demo</span>
+                          <FiExternalLink />
+                        </a>
+                      )}
+                      {hasGithub && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="drawer-github-btn"
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label={`View ${project.name} source code on GitHub`}
+                        >
+                          <FiGithub />
+                          <span>Source Code</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

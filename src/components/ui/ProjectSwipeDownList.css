@@ -324,6 +324,11 @@
 }
 
 .drawer-callout-card.solution-card {
+  border-left: 3.5px solid #60a5fa;
+  background: linear-gradient(90deg, rgba(96, 165, 250, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
+
+.drawer-callout-card.impact-card {
   border-left: 3.5px solid #4ade80;
   background: linear-gradient(90deg, rgba(74, 222, 128, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
 }
@@ -346,6 +351,11 @@
 }
 
 .solution-dot {
+  background: #60a5fa;
+  box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
+}
+
+.impact-dot {
   background: #4ade80;
   box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
 }
@@ -363,6 +373,10 @@
 }
 
 .solution-card .callout-title {
+  color: #60a5fa;
+}
+
+.impact-card .callout-title {
   color: #4ade80;
 }
 
@@ -373,36 +387,77 @@
   margin: 0;
 }
 
+/* Tech Stack Pills in Drawer */
+.drawer-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.4rem;
+}
+
+.drawer-tech-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
 .drawer-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
 }
 
 .drawer-live-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 22px;
-  background: #4ade80;
+  padding: 9px 20px;
+  background: #ffffff;
   color: #050505;
-  border: 1px solid #4ade80;
+  border: 1px solid #ffffff;
   border-radius: 30px;
-  font-family: "Outfit", sans-serif;
-  font-size: 0.88rem;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.86rem;
   font-weight: 800;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.25);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
   transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .drawer-live-btn:hover {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: #000000;
+  background: #e4e4e7;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.35);
+}
+
+.drawer-github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 30px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.drawer-github-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Light Mode Overrides */

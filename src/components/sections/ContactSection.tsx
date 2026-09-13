@@ -14,7 +14,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState("");
-  const words = ["build", "create", "innovate"];
+  const words = ["build", "create", "make"];
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               {words[wordIndex]}
             </span>
             <br />
-            incredible work together.
+            something great together.
           </h1>
           <div className="contact-hero-email-wrap">
             <a

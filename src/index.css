@@ -321,3 +321,40 @@ body.modal-open .menu-overlay {
   transform: scale(0.9) !important;
   transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease !important;
 }
+
+/* ===================================================
+   ACCESSIBILITY: KEYBOARD FOCUS & REDUCED MOTION
+   =================================================== */
+
+/* Clear, accessible keyboard focus rings */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+body.light-mode a:focus-visible,
+body.light-mode button:focus-visible,
+body.light-mode input:focus-visible,
+body.light-mode textarea:focus-visible,
+body.light-mode [tabindex]:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 3px;
+}
+
+/* Honor user's motion sensitivity preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

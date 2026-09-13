@@ -147,30 +147,13 @@
   letter-spacing: 0.02em;
 }
 
-.stack-card-index {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
+.stack-card-year {
   font-family: var(--font-mono, monospace);
-  margin-left: auto;
-}
-
-.index-number {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-}
-
-.index-divider {
-  color: #52525b;
-  font-size: 1rem;
-}
-
-.index-total {
+  font-size: 0.8rem;
+  font-weight: 500;
   color: #71717a;
-  font-size: 0.95rem;
-  font-weight: 600;
+  margin-left: auto;
+  letter-spacing: 0.05em;
 }
 
 /* ===================================================
@@ -195,7 +178,7 @@
 
 .stack-card-headline {
   font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: clamp(1.45rem, 2.3vw, 2.1rem);
+  font-size: clamp(1.4rem, 2.2vw, 2.1rem);
   font-weight: 700;
   line-height: 1.25;
   color: #ffffff;
@@ -208,6 +191,40 @@
   font-size: 0.95rem;
   line-height: 1.6;
   color: #a1a1aa;
+  margin: 0;
+}
+
+/* Grounded Technical Notes */
+.stack-card-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+
+.stack-note-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.stack-note-title {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a1a1aa;
+}
+
+.stack-note-body {
+  font-family: var(--font-primary, sans-serif);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #e4e4e7;
   margin: 0;
 }
 
@@ -229,14 +246,22 @@
   padding: 3px 9px;
   border-radius: 6px;
   letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.stack-tech-badge:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 /* Action Buttons */
 .stack-card-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 0.6rem;
+  gap: 10px;
+  margin-top: 0.4rem;
   flex-wrap: wrap;
 }
 
@@ -244,14 +269,15 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 10px 20px;
+  padding: 9px 18px;
   background: #ffffff;
   color: #0a0a0c;
   border: none;
   border-radius: 30px;
   font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
   transition:
     background 0.2s ease,
@@ -261,9 +287,14 @@
 }
 
 .stack-card-view-btn:hover {
-  background: #e4e4e7;
+  background: #f4f4f5;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+.stack-card-view-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
 }
 
 .stack-card-view-btn svg {
@@ -278,25 +309,54 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 9px 16px;
+  background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 30px;
   font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .stack-card-link-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.stack-card-link-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+}
+
+.stack-case-study-btn {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #e4e4e7;
+}
+
+.stack-case-study-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.case-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.stack-case-study-btn:hover .case-arrow {
+  transform: translateX(3px);
 }
 
 /* ===================================================
@@ -620,19 +680,38 @@
     height: clamp(170px, 26vh, 200px);
   }
 
-  .stack-card-actions {
+  .stack-card-narrative {
+    padding: 0.75rem 0.85rem;
+    gap: 0.45rem;
+  }
+
+  .narrative-row {
     flex-direction: column;
-    align-items: stretch;
-    gap: 0.6rem;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .narrative-text {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .stack-card-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   .stack-card-view-btn,
   .stack-card-link-btn {
+    flex: 1 1 auto;
+    min-width: 120px;
     justify-content: center;
-    width: 100%;
     text-align: center;
-    padding: 9px 18px;
-    font-size: 0.84rem;
+    padding: 8px 14px;
+    font-size: 0.82rem;
   }
 }
 

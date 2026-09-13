@@ -20,10 +20,10 @@ const EXPERIENCES: ExperienceItem[] = [
     id: "exp-1",
     period: "2024 — PRESENT",
     isCurrent: true,
-    company: "Freelance & Independent Projects",
-    role: "Full Stack & AI Developer",
-    desc: "Building and deploying web applications, working with React, TypeScript, Python, and cloud backends. Focused on clean UI, smooth performance, and practical user experience.",
-    skills: ["React", "TypeScript", "Python", "Cloud Backends", "AI Integration"],
+    company: "Independent Projects",
+    role: "Web & Software Developer",
+    desc: "Building web applications and tools with React, TypeScript, and Python. I handle projects end-to-end—from designing clean interfaces to writing backend endpoints and structuring databases.",
+    skills: ["React", "TypeScript", "Python", "Node.js", "Firebase", "MongoDB"],
   },
   {
     id: "exp-2",
@@ -31,8 +31,8 @@ const EXPERIENCES: ExperienceItem[] = [
     isCurrent: false,
     company: "@Swiftant",
     role: "Python Development Intern",
-    desc: "Worked on Python-based application development, applying Object-Oriented Programming (OOP) principles to build structured and maintainable solutions. Strengthened debugging, problem-solving, and software development skills through hands-on projects.",
-    skills: ["Python", "OOP Architecture", "Software Development", "Debugging"],
+    desc: "Worked on Python application development using object-oriented principles. Focused on writing modular classes, debugging logic errors, and understanding practical software development workflows.",
+    skills: ["Python", "OOP", "Debugging", "Modular Architecture"],
   },
   {
     id: "exp-3",
@@ -40,8 +40,8 @@ const EXPERIENCES: ExperienceItem[] = [
     isCurrent: false,
     company: "@MatrixKarunya",
     role: "Media Coordinator",
-    desc: "Delivered multimedia coverage for 50+ events, producing 35K+ visual assets and 25+ videos while managing the department’s official social media platforms to enhance public engagement.",
-    skills: ["Multimedia Direction", "50+ Events", "35K+ Visual Assets", "Public Engagement"],
+    desc: "Handled multimedia coverage for college events, managing photography, video editing with Premiere Pro and After Effects, and social media updates for the department.",
+    skills: ["Video Production", "Event Coverage", "Premiere Pro", "After Effects"],
   },
 ];
 

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./HeroSection.css";
 import animatedProfile from "../../assets/animated_profile.png";
 import { SpaceBackground } from "../ui/SpaceBackground";
-import { Mail, ChevronDown } from "lucide-react";
+import { Mail, ChevronDown, FileText } from "lucide-react";
 
 export const HeroSection: React.FC<{
   onNavigate?: (
     page: "home" | "media" | "about" | "projects" | "contact" | "resume",
   ) => void;
-}> = ({ onNavigate: _onNavigate }) => {
+}> = ({ onNavigate }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const HeroSection: React.FC<{
   };
 
   return (
-    <section className="hero-container new-hero" id="home">
+    <section className="hero-container new-hero" id="home" aria-label="Hero">
       <SpaceBackground colorTheme="black" />
 
       <div className="hero-content-wrapper center-layout">
@@ -55,22 +55,19 @@ export const HeroSection: React.FC<{
         <div className="floating-avatar-new">
           <img
             src={animatedProfile}
-            alt="Sam Jerish"
+            alt="Sam Jerish D avatar"
             className="hero-avatar-img-new"
           />
         </div>
       </div>
 
-
-
       {/* Bottom Elements */}
       <div className="hero-bottom-elements">
         <div className="hero-intro-text">
           <p>
-            <span className="waving-hand">👋</span> I'm a Full Stack Developer
-            who loves to learn, create, and experiment.
-            <br />I enjoy exploring different ways to turn an idea into
-            something real.
+            Developer building with <strong className="hero-strong">React, TypeScript, and Python</strong>.
+            <br />
+            I focus on clean interfaces, simple architectures, and software that solves real everyday problems.
           </p>
         </div>
 
@@ -79,30 +76,43 @@ export const HeroSection: React.FC<{
           type="button"
           className={`hero-scroll-indicator ${scrolled ? "is-scrolled" : ""}`}
           onClick={handleScrollDown}
-          aria-label="Scroll down to story"
+          aria-label="Scroll down to about section"
           data-cursor-text="SCROLL"
         >
-          <div className="scroll-indicator-mouse">
+          <div className="scroll-indicator-mouse" aria-hidden="true">
             <div className="scroll-indicator-wheel" />
           </div>
           <div className="scroll-indicator-label">
             <span>SCROLL</span>
-            <ChevronDown size={13} className="scroll-indicator-chevron" />
+            <ChevronDown size={13} className="scroll-indicator-chevron" aria-hidden="true" />
           </div>
         </button>
 
         <div className="hero-cta-group">
           <a
             href="mailto:samjerishd@gmail.com"
-            className="book-call-btn"
+            className="book-call-btn primary-cta"
             data-cursor-text="EMAIL"
+            aria-label="Email samjerishd@gmail.com"
           >
             <Mail size={16} strokeWidth={2} />
-            <span>Email Me</span>
+            <span>Get in Touch</span>
           </a>
-          <div className="cta-status-indicator" title="Available for work">
-            <div className="cta-dot"></div>
-            <span className="cta-status-label">Available for work</span>
+
+          <button
+            type="button"
+            className="book-call-btn resume-hero-btn"
+            onClick={() => onNavigate?.("resume")}
+            data-cursor-text="RESUME"
+            aria-label="View Resume"
+          >
+            <FileText size={16} strokeWidth={2} />
+            <span>Resume</span>
+          </button>
+
+          <div className="cta-status-indicator" title="Open for software developer internships and projects">
+            <div className="cta-dot" aria-hidden="true"></div>
+            <span className="cta-status-label">Open for internships &amp; work</span>
           </div>
         </div>
       </div>

@@ -36,25 +36,22 @@ export const Navbar: React.FC<{
   };
 
   const navItems = [
-    { id: "about", label: "ABOUT ME", number: "01", tag: "Story & Journey" },
-    { id: "projects", label: "PROJECTS", number: "02", tag: "Selected Works" },
+    { id: "about", label: "About", tag: "Background & Approach" },
+    { id: "projects", label: "Projects", tag: "Selected Work" },
     {
       id: "media",
-      label: "BEYOND THE FRAME",
-      number: "03",
-      tag: "Gallery & Moments",
+      label: "Beyond Code",
+      tag: "Media & Moments",
     },
     {
       id: "resume",
-      label: "RESUME",
-      number: "04",
-      tag: "Skills & Experience",
+      label: "Resume",
+      tag: "Experience & Skills",
     },
     {
       id: "contact",
-      label: "CONNECT WITH ME",
-      number: "05",
-      tag: "Let's Talk",
+      label: "Contact",
+      tag: "Get in Touch",
     },
   ];
 
@@ -82,7 +79,6 @@ export const Navbar: React.FC<{
                 onClick={(e) => handleNavigate(item.id as any, e)}
               >
                 <div className="menu-item-left">
-                  <span className="menu-item-number">{item.number}</span>
                   <div className="menu-text-group">
                     <span className="menu-item-text">{item.label}</span>
                     <span className="menu-item-tag">{item.tag}</span>
