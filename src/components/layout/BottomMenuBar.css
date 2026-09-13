@@ -329,50 +329,10 @@ body.menu-open .bottom-menu-bar {
   box-shadow: 0 0 10px #ffffff;
 }
 
-/* Mobile & Tablet Responsiveness */
+/* Mobile & Tablet Responsiveness: Hide BottomMenuBar on mobile; desktop remains unchanged */
 @media (max-width: 768px) {
-  /* Rich Deep Obsidian Black Glass Capsule for Mobile */
-  .dock-liquid-glass {
-    background: linear-gradient(
-      135deg,
-      rgba(22, 22, 28, 0.96) 0%,
-      rgba(12, 12, 16, 0.97) 45%,
-      rgba(6, 6, 8, 0.98) 100%
-    ) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow:
-      0 22px 55px -6px rgba(0, 0, 0, 0.95),
-      0 10px 24px rgba(0, 0, 0, 0.75),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.16),
-      inset 0 -1px 1px 0 rgba(0, 0, 0, 0.8) !important;
-    backdrop-filter: blur(32px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
-  }
-
-  .dock-specular-edge {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent) !important;
-  }
-
-  .liquid-pill {
-    background: radial-gradient(
-      circle at 50% 15%,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.08) 60%,
-      rgba(255, 255, 255, 0.02) 100%
-    ) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow:
-      0 4px 14px rgba(0, 0, 0, 0.5),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
-      inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4) !important;
-  }
-
-  .dock-item {
-    color: #8e8e9c;
-  }
-
-  .dock-item.is-active {
-    color: #ffffff;
+  .bottom-menu-bar {
+    display: none !important;
   }
 }
 

@@ -26,6 +26,14 @@ main {
   will-change: opacity;
 }
 
+/* Remove section fade-out transition on mobile alone */
+@media (max-width: 768px) {
+  .scroll-fade-wrapper {
+    opacity: 1 !important;
+    will-change: auto;
+  }
+}
+
 /* Scroll Progress Bar */
 .scroll-progress-container {
   position: fixed;

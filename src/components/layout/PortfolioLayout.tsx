@@ -42,8 +42,18 @@ export const PortfolioLayout: React.FC<{
             }
           }
 
-          // Smooth fade-out effect for desktop
-          if (!isMobile && mainRef.current) {
+          // Section fade-out transition: Active on desktop alone, disabled on mobile
+          if (isMobile) {
+            if (mainRef.current) {
+              const sections = mainRef.current.children;
+              for (let i = 0; i < sections.length; i++) {
+                const section = sections[i] as HTMLElement;
+                if (section.style.opacity !== "1") {
+                  section.style.opacity = "1";
+                }
+              }
+            }
+          } else if (mainRef.current) {
             const sections = mainRef.current.children;
 
             for (let i = 0; i < sections.length; i++) {
@@ -66,11 +76,22 @@ export const PortfolioLayout: React.FC<{
       }
     };
 
+    const handleResize = () => {
+      if (window.innerWidth <= 768 && mainRef.current) {
+        const sections = mainRef.current.children;
+        for (let i = 0; i < sections.length; i++) {
+          (sections[i] as HTMLElement).style.opacity = "1";
+        }
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
       clearTimeout(timer);
     };
   }, []);

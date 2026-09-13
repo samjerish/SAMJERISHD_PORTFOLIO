@@ -10,6 +10,7 @@ import { ProjectsPage } from "./components/pages/ProjectsPage";
 import { ContactPage } from "./components/pages/ContactPage";
 import { ResumePage } from "./components/pages/ResumePage";
 import { BottomMenuBar } from "./components/layout/BottomMenuBar";
+import { Navbar } from "./components/layout/Navbar";
 import { MobilePageWrapper } from "./components/layout/MobilePageWrapper";
 
 function App() {
@@ -150,6 +151,13 @@ function App() {
         </MobilePageWrapper>
       )}
 
+      {/* Mobile Top 3-Line Menu Bar (Hidden on Desktop) */}
+      <Navbar
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+      />
+
+      {/* Desktop Bottom Menu Bar (Hidden on Mobile) */}
       <BottomMenuBar
         currentPage={currentPage}
         onNavigate={handleNavigate}

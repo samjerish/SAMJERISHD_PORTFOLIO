@@ -27,6 +27,8 @@
     width: 100vw;
     height: 100vh;
     height: 100dvh;
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    box-sizing: border-box;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     background-color: var(--bg-secondary, #050507);

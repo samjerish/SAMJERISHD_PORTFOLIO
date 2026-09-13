@@ -241,26 +241,26 @@ export const MyMediaPage: React.FC<MyMediaPageProps> = ({ onNavigate }) => {
         <div className="media-story-section">
           <div
             ref={storyRef}
-            className={`story-text ${isStoryVisible ? "is-visible" : ""}`}
+            className={`media-story-text ${isStoryVisible ? "is-visible" : ""}`}
           >
-            <div className="story-line">
+            <p className="media-story-line">
               <AnimatedLine
-                text="What began as a hobby slowly became a passion for <photography and video editing>."
+                text="What began as a hobby slowly became a passion for <photography and video editing.>"
                 baseDelay={0.15}
               />
-            </div>
-            <div className="story-line">
+            </p>
+            <p className="media-story-line">
               <AnimatedLine
                 text="With every photo I captured and every video I edited,"
                 baseDelay={0.45}
               />
-            </div>
-            <div className="story-line">
+            </p>
+            <p className="media-story-line">
               <AnimatedLine
-                text="I discovered a new way to express <creativity>."
+                text="I discovered a new way to express <creativity.>"
                 baseDelay={0.75}
               />
-            </div>
+            </p>
           </div>
         </div>
       </div>
