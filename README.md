@@ -8,7 +8,7 @@ Welcome to my personal portfolio repository — a place where I showcase my
 
 ### 🌐 Explore My Portfolio
 
-**[🚀 Visit Portfolio →](https://samjerish.github.io/SAMJERISHD_PORTFOLIO/)**
+**[🚀 Visit Portfolio (Live on Vercel) →](https://samjerishd.vercel.app)**
 
 <p align="center">
 
