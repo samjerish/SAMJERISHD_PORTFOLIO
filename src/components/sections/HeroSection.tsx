@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./HeroSection.css";
-import animatedProfile from "../../assets/animated_profile.png";
+import animatedProfile from "../../assets/animated_profile_opt.png";
 import { SpaceBackground } from "../ui/SpaceBackground";
 import { Mail, ChevronDown, FileText } from "lucide-react";
 
@@ -41,7 +41,11 @@ export const HeroSection: React.FC<{
   };
 
   return (
-    <section className="hero-container new-hero" id="home" aria-label="Hero">
+    <section
+      className="hero-container new-hero"
+      id="home"
+      aria-label="Hero"
+    >
       <SpaceBackground colorTheme="black" />
 
       <div className="hero-content-wrapper center-layout">
@@ -52,12 +56,16 @@ export const HeroSection: React.FC<{
         </div>
 
         {/* Floating Avatar */}
-        <div className="floating-avatar-new">
-          <img
-            src={animatedProfile}
-            alt="Sam Jerish D avatar"
-            className="hero-avatar-img-new"
-          />
+        <div className="hero-avatar-preloader-wrapper">
+          <div className="floating-avatar-new">
+            <img
+              src={animatedProfile}
+              alt="Sam Jerish D avatar"
+              className="hero-avatar-img-new"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
 
@@ -109,11 +117,6 @@ export const HeroSection: React.FC<{
             <FileText size={16} strokeWidth={2} />
             <span>Resume</span>
           </button>
-
-          <div className="cta-status-indicator" title="Open for software developer internships and projects">
-            <div className="cta-dot" aria-hidden="true"></div>
-            <span className="cta-status-label">Open for internships &amp; work</span>
-          </div>
         </div>
       </div>
     </section>

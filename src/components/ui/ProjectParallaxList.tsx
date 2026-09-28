@@ -167,21 +167,15 @@ const ProjectParallaxItem: React.FC<ProjectItemProps> = ({
         {/* Project Title */}
         <h3 className="parallax-project-title">{project.name}</h3>
 
-        {/* Highlighted Problem Statement */}
-        {project.problemStatement && (
-          <div className="parallax-problem-box">
-            <div className="problem-pill">PROBLEM SOLVED</div>
-            <p>{project.problemStatement}</p>
-          </div>
-        )}
-
-        {/* Project Details Description */}
-        {project.details && (
-          <p
-            className="parallax-project-desc"
-            dangerouslySetInnerHTML={{ __html: project.details }}
-          ></p>
-        )}
+        {/* 3-Line Concise Summary */}
+        <div className="parallax-summary-lines">
+          {project.summaryLines.map((line, idx) => (
+            <div key={idx} className="parallax-summary-line">
+              <span className="parallax-line-index">0{idx + 1}</span>
+              <p className="parallax-line-text">{line}</p>
+            </div>
+          ))}
+        </div>
 
         {/* Action Button Row */}
         <div className="parallax-action-row">

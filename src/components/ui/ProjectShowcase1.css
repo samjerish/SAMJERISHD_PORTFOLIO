@@ -1,0 +1,554 @@
+/* ==========================================================================
+   REACT BITS PRO - SHOWCASE 1
+   Animated Background Showcase with Four Items
+   ========================================================================== */
+
+.rb-showcase-container {
+  position: relative;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  overflow: hidden;
+  border-radius: 28px;
+  background: radial-gradient(circle at 50% 0%, rgba(20, 24, 38, 0.45) 0%, rgba(5, 5, 7, 0.95) 80%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  isolation: isolate;
+}
+
+/* Dynamic Animated Canvas Background */
+.rb-showcase-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+/* Subtle Geometric Grid Mesh */
+.rb-showcase-grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 85%);
+}
+
+/* Header & Tab Selector Bar */
+.rb-showcase-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
+  padding: 0 4px;
+}
+
+.rb-showcase-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.rb-tag-sparkle {
+  color: #ffffff;
+  animation: rbSparklePulse 2.4s infinite ease-in-out;
+}
+
+@keyframes rbSparklePulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+  50% { transform: scale(1.25) rotate(180deg); opacity: 1; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8)); }
+}
+
+.rb-showcase-nav-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rb-nav-item-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+}
+
+.rb-nav-item-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.rb-nav-item-btn.is-active {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);
+}
+
+.rb-nav-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #a1a1aa;
+  opacity: 0.9;
+}
+
+/* Four Featured Items Grid (2x2 on desktop) */
+.rb-showcase-grid {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+/* Individual Showcase Card with 3D Tilt & Glass Layer */
+.rb-showcase-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background: rgba(14, 16, 24, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: perspective(1000px) rotateX(var(--card-rotate-x, 0deg)) rotateY(var(--card-rotate-y, 0deg));
+  transition: transform 0.15s ease-out, border-color 0.35s ease, box-shadow 0.35s ease;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.rb-showcase-card:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* Spotlight Border Glow Layer that tracks cursor coordinates */
+.rb-card-spotlight-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    450px circle at var(--card-local-x, 50%) var(--card-local-y, 50%),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.04) 40%,
+    transparent 75%
+  );
+  z-index: 1;
+}
+
+.rb-showcase-card:hover .rb-card-spotlight-border {
+  opacity: 1;
+}
+
+.rb-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 22px;
+}
+
+/* Media Screenshot Container with 3D Depth & Case Study Trigger */
+.rb-card-media-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9.8;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #090a10;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.rb-media-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rb-media-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  display: block;
+}
+
+.rb-card-media-wrapper:hover .rb-media-image {
+  transform: scale(1.055);
+  filter: brightness(1.05);
+}
+
+.rb-media-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(5, 5, 7, 0.85) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.rb-card-media-wrapper:hover .rb-media-vignette {
+  opacity: 0.9;
+}
+
+/* "✦ Click to View Case Study" Animated Glowing Pill */
+.rb-media-overlay-pill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: rgba(12, 12, 14, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(255, 255, 255, 0.15);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+.rb-card-media-wrapper:hover .rb-media-overlay-pill {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.rb-pill-icon {
+  color: #ffffff;
+}
+
+.rb-pill-sparkle {
+  color: #ffffff;
+  animation: rbSparklePulse 2s infinite ease-in-out;
+}
+
+/* Floating Item Number Indicator */
+.rb-media-number-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(5, 5, 7, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(10px);
+  z-index: 4;
+}
+
+/* Information & Description Area */
+.rb-card-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-top: 20px;
+}
+
+.rb-info-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.rb-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a1a1aa;
+  font-size: 0.74rem;
+  font-weight: 500;
+}
+
+.rb-brand-icon {
+  color: #a1a1aa;
+}
+
+.rb-reading-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.rb-card-title {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+  transition: color 0.25s ease;
+}
+
+.rb-showcase-card:hover .rb-card-title {
+  color: #ffffff;
+}
+
+.rb-card-headline {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 10px 0;
+  line-height: 1.45;
+}
+
+.rb-card-description {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.76);
+  margin: 0 0 18px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tech Stack Chips */
+.rb-card-tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+
+.rb-tech-chip {
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+}
+
+.rb-showcase-card:hover .rb-tech-chip {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.rb-tech-chip.more-chip {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Action Buttons Row */
+.rb-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.rb-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 12px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.rb-action-btn.primary-btn {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+}
+
+.rb-action-btn.primary-btn:hover {
+  background: #e4e4e7;
+  border-color: #e4e4e7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.25);
+  filter: none;
+}
+
+.rb-action-btn.secondary-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.rb-action-btn.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.rb-action-btn.icon-btn {
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: auto;
+}
+
+.rb-action-btn.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Footer Statistics Note */
+.rb-showcase-footer {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.rb-footer-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 18px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.rb-footer-icon {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
+@media (max-width: 980px) {
+  .rb-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .rb-showcase-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .rb-showcase-container {
+    padding: 18px 14px 40px;
+    border-radius: 20px;
+  }
+
+  .rb-card-content {
+    padding: 16px;
+  }
+
+  .rb-card-title {
+    font-size: 1.2rem;
+  }
+
+  .rb-card-actions {
+    flex-wrap: wrap;
+  }
+
+  .rb-action-btn.icon-btn {
+    margin-left: 0;
+  }
+
+  .rb-media-overlay-pill {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
+}

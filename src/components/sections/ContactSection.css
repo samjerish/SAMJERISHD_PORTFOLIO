@@ -10,11 +10,11 @@
   width: 100%;
   background-color: transparent;
   color: #ffffff;
-  padding: clamp(4.5rem, 6.5vh, 6rem) 4vw 0 4vw;
+  padding: clamp(4.5rem, 6.5vh, 6rem) 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: var(--font-primary, "Inter", sans-serif);
 
   /* Scroll animation entrance */
@@ -35,6 +35,8 @@
   flex-direction: column;
   width: 100%;
   max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 3.5rem);
+  box-sizing: border-box;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -57,7 +59,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.8rem;
   font-weight: 600;
-  color: #71717a;
+  color: #a1a1aa;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   margin-bottom: 1.2rem;
@@ -65,7 +67,7 @@
 }
 
 .contact-hero-header h1 {
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-size: clamp(2.4rem, 5.2vw, 5.2rem);
   font-family: var(--font-heading, "Outfit", sans-serif);
   font-weight: 800;
   line-height: 1.08;
@@ -74,6 +76,11 @@
   letter-spacing: -0.035em;
   text-align: left;
   max-width: 1050px;
+}
+
+.contact-heading-together {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .handwriting-pink {
@@ -178,7 +185,7 @@
   font-family: var(--font-mono, "SF Mono", "Fira Code", monospace);
   font-size: 0.76rem;
   font-weight: 500;
-  color: #71717a;
+  color: #a1a1aa;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-bottom: 1.35rem;
@@ -241,7 +248,7 @@
 .contact-arrow-icon {
   font-size: 0.88rem;
   line-height: 1;
-  color: #71717a;
+  color: #a1a1aa;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
@@ -322,7 +329,7 @@
 .contact-rights-text {
   font-family: var(--font-primary, "Inter", sans-serif);
   font-size: 0.88rem;
-  color: #71717a;
+  color: #a1a1aa;
 }
 
 /* ===================================================
@@ -340,42 +347,43 @@
 
 /* ===================================================
    MASSIVE FULL-WIDTH ARCHITECTURAL TYPOGRAPHY
-   (Khaled Batt Reference: Bold, Dark Matte, Edge-to-Edge)
+   (Extended Left to Right Fully with Bottom Gap)
    =================================================== */
 
 .contact-theme-massive-wrap {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 0 max(0.5rem, env(safe-area-inset-bottom, 8px)) 0;
-  margin: 0;
+  margin: clamp(2rem, 3.5vh, 3.5rem) 0 clamp(3.5rem, 6.5vh, 5.5rem) 0;
+  padding: 0;
   position: relative;
   z-index: 5;
   user-select: none;
   pointer-events: auto;
 }
 
-.contact-theme-massive-text {
-  font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: clamp(3.2rem, 14.2vw, 18.5rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.8;
-  color: rgba(255, 255, 255, 0.12);
-  text-transform: uppercase;
-  text-align: center;
-  white-space: nowrap;
+.contact-theme-massive-svg {
   width: 100%;
-  margin: 0;
-  padding: 0;
-  cursor: default;
-  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  height: auto;
+  max-height: 220px;
+  display: block;
+  overflow: visible;
 }
 
-.contact-theme-massive-text:hover {
-  color: rgba(255, 255, 255, 0.22);
+.contact-theme-massive-svg-text {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  fill: rgba(255, 255, 255, 0.12);
+  letter-spacing: -0.02em;
+  transition: fill 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.contact-theme-massive-svg:hover .contact-theme-massive-svg-text {
+  fill: rgba(255, 255, 255, 0.24);
 }
 
 /* ===================================================
@@ -390,69 +398,89 @@
   }
 
   .contact-hero-header h1 {
-    font-size: clamp(2.4rem, 7.5vw, 4.2rem);
+    font-size: clamp(1.8rem, 5.5vw, 3.2rem);
   }
 
-  .contact-theme-massive-text {
-    font-size: clamp(3rem, 13.8vw, 7.8rem);
-    white-space: nowrap;
-    line-height: 0.82;
+  .contact-theme-massive-wrap {
+    margin: clamp(1.8rem, 3vh, 2.8rem) 0 clamp(3.2rem, 6vh, 4.8rem) 0;
   }
 }
 
 @media (max-width: 640px) {
   .dark-contact-section {
-    padding: 3.2rem 1.2rem 0 1.2rem;
+    padding: 2.2rem 0 0 0;
+  }
+
+  .dark-contact-content {
+    padding: 0 1.25rem;
+  }
+
+  .contact-hero-header {
+    margin-bottom: 1rem;
+  }
+
+  .contact-section-kicker {
+    margin-bottom: 0.6rem;
+  }
+
+  .contact-hero-header h1 {
+    font-size: clamp(1.35rem, 5.6vw, 1.95rem);
+    margin: 0 0 1rem 0;
   }
 
   .contact-theme-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 2.2rem 1.2rem;
-    padding: 1.8rem 0;
+    gap: 1.4rem 1.1rem;
+    padding: 1.2rem 0;
   }
 
   .contact-col-header {
     font-size: 0.72rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .contact-nav-btn,
   .contact-link-item,
   .contact-based-location,
   .contact-author-title {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .contact-rights-text,
   .time-text {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
   }
 
   .contact-theme-divider {
-    margin: 2.5rem 0 1rem 0;
+    margin: 1.4rem 0 0.8rem 0;
   }
 
   .contact-theme-massive-wrap {
-    padding: 0.25rem 0 max(0.5rem, env(safe-area-inset-bottom, 8px)) 0;
-  }
-
-  .contact-theme-massive-text {
-    font-size: clamp(2.5rem, 13.6vw, 5rem);
-    letter-spacing: -0.035em;
-    line-height: 0.82;
-    white-space: nowrap;
+    margin: 1.2rem 0 clamp(2.5rem, 5.5vh, 4.2rem) 0;
+    padding: 0;
   }
 }
 
 @media (max-width: 380px) {
-  .contact-theme-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .dark-contact-section {
+    padding: 1.8rem 0 0 0;
   }
 
-  .contact-theme-massive-text {
-    font-size: clamp(2.1rem, 13vw, 3.2rem);
-    white-space: nowrap;
+  .dark-contact-content {
+    padding: 0 1rem;
+  }
+
+  .contact-hero-header h1 {
+    font-size: clamp(1.15rem, 5.2vw, 1.4rem);
+  }
+
+  .contact-theme-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .contact-theme-massive-wrap {
+    margin: 1rem 0 clamp(2.2rem, 5vh, 3.8rem) 0;
   }
 }
 
@@ -487,6 +515,10 @@ body.light-mode .contact-theme-divider {
   background: rgba(0, 0, 0, 0.08);
 }
 
-body.light-mode .contact-theme-massive-text {
-  color: rgba(0, 0, 0, 0.06);
+body.light-mode .contact-theme-massive-svg-text {
+  fill: rgba(0, 0, 0, 0.07);
+}
+
+body.light-mode .contact-theme-massive-svg:hover .contact-theme-massive-svg-text {
+  fill: rgba(0, 0, 0, 0.16);
 }

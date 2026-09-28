@@ -4,6 +4,7 @@ import { StorySection } from "../sections/StorySection";
 import { ProjectsSection } from "../sections/ProjectsSection";
 import { WhatIDoSection } from "../sections/WhatIDoSection";
 import { ExperienceSection } from "../sections/ExperienceSection";
+import { DriftWallSection } from "../sections/DriftWallSection";
 import { ContactSection } from "../sections/ContactSection";
 import "./PortfolioLayout.css";
 
@@ -63,8 +64,11 @@ export const PortfolioLayout: React.FC<{
 
               if (rect.top < 0 && rect.bottom < fadeThreshold) {
                 const fadeAmount = 1 - rect.bottom / fadeThreshold;
-                section.style.opacity = Math.max(0, 1 - fadeAmount).toString();
-              } else {
+                const nextOpacity = Math.max(0, 1 - fadeAmount).toFixed(2);
+                if (section.style.opacity !== nextOpacity) {
+                  section.style.opacity = nextOpacity;
+                }
+              } else if (section.style.opacity !== "1") {
                 section.style.opacity = "1";
               }
             }
@@ -139,13 +143,16 @@ export const PortfolioLayout: React.FC<{
           <StorySection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
-          <ProjectsSection onNavigate={onNavigate} />
-        </div>
-        <div className="scroll-fade-wrapper">
           <WhatIDoSection />
         </div>
         <div className="scroll-fade-wrapper">
+          <ProjectsSection onNavigate={onNavigate} />
+        </div>
+        <div className="scroll-fade-wrapper experience-section-wrapper">
           <ExperienceSection onNavigate={onNavigate} />
+        </div>
+        <div className="scroll-fade-wrapper drift-wall-section-wrapper">
+          <DriftWallSection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
           <ContactSection onNavigate={onNavigate} />

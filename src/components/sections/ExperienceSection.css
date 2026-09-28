@@ -11,14 +11,21 @@
   padding: clamp(4.5rem, 6.5vh, 6rem) 4vw;
   position: relative;
   background-color: transparent;
-  z-index: 10;
-  overflow-x: clip;
+  z-index: 30;
+  overflow: visible;
+}
+
+.experience-container.is-card-dragging {
+  z-index: 99999 !important;
 }
 
 .experience-content-wrapper {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 30;
+  overflow: visible;
 }
 
 /* ===================================================
@@ -45,6 +52,12 @@
   -webkit-user-select: none;
   touch-action: pan-y;
   margin: 0 auto;
+  z-index: 45;
+  overflow: visible;
+}
+
+.id-card-assembly.is-card-dragging {
+  z-index: 99999 !important;
 }
 
 /* Top Fixed Lanyard Mounting Anchor */
@@ -59,7 +72,7 @@
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  z-index: 30;
+  z-index: 55;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,7 +94,7 @@
   width: 420px;
   height: 700px;
   pointer-events: none;
-  z-index: 10;
+  z-index: 50;
   overflow: visible;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
 }
@@ -96,7 +109,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 20;
+  z-index: 60;
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -108,6 +121,8 @@
 
 .id-badge-unit.is-dragging {
   cursor: grabbing;
+  z-index: 100000 !important;
+  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.95)) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8));
 }
 
 /* Dark Chrome Metal Clasp */
@@ -293,13 +308,13 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.8rem;
   font-weight: 700;
-  color: #4ade80;
+  color: #ffffff;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   margin: 0;
   padding: 5px 14px;
-  background: rgba(74, 222, 128, 0.08);
-  border: 1px solid rgba(74, 222, 128, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 24px;
 }
 
@@ -347,6 +362,13 @@
   align-self: center;
   margin-top: 0;
   padding-top: 0;
+  position: relative;
+  z-index: 45;
+  overflow: visible;
+}
+
+.experience-id-card-col.is-card-dragging {
+  z-index: 99999 !important;
 }
 
 .id-card-mobile-hint {
@@ -358,7 +380,7 @@
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.16em;
-  color: #71717a;
+  color: #a1a1aa;
   text-transform: uppercase;
   user-select: none;
   pointer-events: none;
@@ -375,7 +397,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.76rem;
   font-weight: 600;
-  color: #71717a;
+  color: #a1a1aa;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -579,52 +601,59 @@
 
 /* Timeline Card Content */
 .timeline-card-content {
-  background: rgba(20, 20, 24, 0.65);
+  background: linear-gradient(
+    145deg,
+    rgba(20, 20, 26, 0.72) 0%,
+    rgba(12, 12, 16, 0.82) 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   padding: 1.6rem 2rem;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 14px 34px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transition:
     transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.35s ease,
     box-shadow 0.35s ease,
-    background-color 0.35s ease,
-    opacity 0.35s ease,
-    filter 0.35s ease;
+    background 0.35s ease,
+    opacity 0.35s ease;
 }
 
 .story-timeline-item:not(.is-focused) .timeline-card-content {
-  opacity: 0.52;
-  filter: grayscale(20%);
+  opacity: 0.88;
   transform: translateX(0);
 }
 
 .story-timeline-item:not(.is-focused):hover .timeline-card-content {
-  opacity: 0.85;
-  filter: none;
+  opacity: 1;
   transform: translateX(4px);
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .story-timeline-item.is-focused .timeline-card-content {
   opacity: 1;
-  filter: none;
-  transform: translateX(10px);
-  background: rgba(24, 24, 30, 0.96);
-  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateX(8px);
+  background: linear-gradient(
+    145deg,
+    rgba(24, 24, 32, 0.92) 0%,
+    rgba(15, 15, 20, 0.98) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.7),
-    0 0 32px rgba(255, 255, 255, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    0 22px 50px rgba(0, 0, 0, 0.7),
+    0 0 24px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .story-timeline-item.is-focused .timeline-role-name {
   color: #ffffff;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
 }
 
 .story-timeline-item.is-focused .timeline-node {
@@ -651,42 +680,149 @@
   box-shadow: 0 0 6px #ffffff;
 }
 
-.timeline-top-row {
+/* Card Header */
+.timeline-card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 0.85rem;
+  margin-bottom: 1.1rem;
 }
 
-.timeline-badge-group {
+.timeline-brand-group {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.timeline-logo-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-logo-badge.is-light-bg {
+  background: #ffffff;
+  padding: 5px;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.story-timeline-item.is-focused .timeline-logo-badge {
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: scale(1.05);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(255, 255, 255, 0.1);
+}
+
+.timeline-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.timeline-title-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.timeline-role-name {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0;
+  line-height: 1.25;
+  transition: color 0.3s ease;
+}
+
+.timeline-company-subline {
+  display: flex;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: #a1a1aa;
+}
+
+.timeline-company-name {
+  font-weight: 600;
+  color: #e4e4e7;
+}
+
+.timeline-meta-dot {
+  color: #52525b;
+  font-size: 0.75rem;
+  user-select: none;
+}
+
+.timeline-meta-tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a1a1aa;
+}
+
+.timeline-meta-location {
+  font-size: 0.8rem;
+  color: #a1a1aa;
 }
 
 .timeline-period-badge {
   font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  padding: 4px 12px;
+  padding: 5px 13px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #a1a1aa;
+  color: #c4c4cc;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.25s ease;
 }
 
-.timeline-period-badge.current,
+.timeline-period-badge.current {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
 .story-timeline-item.is-focused .timeline-period-badge {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.story-timeline-item.is-focused .timeline-period-badge.current {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
 }
 
@@ -695,32 +831,14 @@
   height: 6px;
   border-radius: 50%;
   background: #ffffff;
-  box-shadow: 0 0 6px #ffffff;
-}
-
-.timeline-company-badge {
-  font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: 0.96rem;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-}
-
-.timeline-role-name {
-  font-family: var(--font-heading, "Outfit", sans-serif);
-  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
-  font-weight: 700;
-  color: #f4f4f5;
-  letter-spacing: -0.015em;
-  margin: 0 0 0.65rem 0;
-  transition: color 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .timeline-role-desc {
   font-family: var(--font-primary, sans-serif);
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   line-height: 1.65;
-  color: #8f8f9d;
+  color: #b4b4be;
   margin: 0 0 1.2rem 0;
   max-width: 820px;
 }
@@ -733,11 +851,11 @@
 
 .skill-chip {
   font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
+  font-size: 0.73rem;
   font-weight: 500;
-  color: #71717a;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: #a1a1aa;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   padding: 3px 10px;
   border-radius: 6px;
   letter-spacing: 0.02em;
@@ -746,9 +864,9 @@
 
 .story-timeline-item.is-focused .skill-chip,
 .story-timeline-item:hover .skill-chip {
-  color: #d4d4d8;
-  border-color: rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.05);
+  color: #e4e4e7;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* ===================================================
@@ -768,48 +886,65 @@
     align-items: center;
   }
 
-  /* 1. Experience Timeline First */
-  .experience-timeline-col {
+  /* 1. Hanging ID Card First (In Front) */
+  .experience-id-card-col {
     order: 1;
     width: 100%;
-  }
-
-  /* 2. Hanging ID Card Second */
-  .experience-id-card-col {
-    order: 2;
-    width: 100%;
-    margin-top: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
     position: relative;
     top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 45;
+  }
+
+  /* 2. Experience Timeline Second */
+  .experience-timeline-col {
+    order: 2;
+    width: 100%;
   }
 }
 
 @media (max-width: 768px) {
   .experience-container {
-    padding: 3.2rem 1.2rem;
+    padding: 2.2rem 1.25rem 2.4rem 1.25rem;
   }
 
   /* COMBO BLOCK ON MOBILE: Experience Timeline FIRST, ID Card SECOND */
   .story-experience-combo-block {
     display: flex;
     flex-direction: column;
-    gap: 2.8rem;
-    padding-top: 1rem;
+    gap: 1.6rem;
+    padding-top: 0;
     align-items: center;
     width: 100%;
   }
 
-  /* Step 1: Experience Timeline (First) */
-  .experience-timeline-col {
+  /* Step 1: Hanging ID Card (First / In Front) */
+  .experience-id-card-col {
     order: 1;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 1.8rem;
+    padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    z-index: 45;
+  }
+
+  /* Step 2: Experience Timeline Second */
+  .experience-timeline-col {
+    order: 2;
     width: 100%;
   }
 
   .story-experience-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.1rem;
   }
 
   .story-experience-title {
@@ -839,19 +974,44 @@
     border-radius: 16px;
   }
 
+  .timeline-logo-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
   .story-timeline-item.is-focused .timeline-card-content {
     transform: translateX(4px);
   }
 
+  .timeline-card-header {
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .timeline-brand-group {
+    gap: 0.8rem;
+  }
+
   .timeline-role-name {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-company-subline {
+    font-size: 0.8rem;
+    gap: 0.35rem;
+  }
+
+  .timeline-period-badge {
+    font-size: 0.7rem;
+    padding: 4px 10px;
   }
 
   .timeline-role-desc {
     font-size: 0.88rem;
     line-height: 1.6;
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.95rem;
     color: #9da0aa;
   }
 
@@ -862,19 +1022,6 @@
   .skill-chip {
     font-size: 0.7rem;
     padding: 3px 8px;
-  }
-
-  /* Step 2: Hanging ID Card (Second, Centered & Proportional) */
-  .experience-id-card-col {
-    order: 2;
-    width: 100%;
-    margin-top: 1.5rem;
-    padding: 0;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
   }
 
   .id-card-assembly {
@@ -958,12 +1105,16 @@
 
 @media (max-width: 480px) {
   .experience-container {
-    padding: 2.8rem 1rem;
+    padding: 1.8rem 1rem 2rem 1rem;
   }
 
   .story-experience-combo-block {
-    gap: 2.2rem;
-    padding-top: 1rem;
+    gap: 1.3rem;
+    padding-top: 0;
+  }
+
+  .story-experience-header {
+    margin-bottom: 0.9rem;
   }
 
   .story-timeline-wrapper {
@@ -999,7 +1150,8 @@
   }
 
   .experience-id-card-col {
-    margin-top: 1rem;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
   }
 
   .id-card-assembly {

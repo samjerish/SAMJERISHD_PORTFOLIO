@@ -108,7 +108,7 @@ export const About12: React.FC<About12Props> = ({ onNavigate, className = "" }) 
             </div>
 
             <blockquote className="about-12-quote-body">
-              "Good software isn’t just about writing code—it’s about empathy for the user,
+              "Good software isn’t just about writing code; it’s about empathy for the user,
               relentless attention to detail, and building systems that endure."
             </blockquote>
 

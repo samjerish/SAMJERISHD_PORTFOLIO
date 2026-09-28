@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import "./ResumePage.css";
 import { ArrowLeft, Download } from "lucide-react";
 import { Footer } from "../layout/Footer";
+import dtsLogo from "../../assets/companies/dts-logo.png";
+import swiftantLogo from "../../assets/companies/swiftant-logo.png";
 
 interface ResumePageProps {
   onNavigate?: (
@@ -121,8 +123,13 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
 
           <div className="resume-doc-item">
             <div className="item-header">
-              <h4 className="item-title">FULL STACK DEVELOPER | INDEPENDENT</h4>
-              <span className="item-date">2026 - NOW</span>
+              <div className="item-header-brand">
+                <div>
+                  <h4 className="item-title">FULL STACK DEVELOPER | INDEPENDENT</h4>
+                  <div className="item-meta-subtitle">Independent Projects</div>
+                </div>
+              </div>
+              <span className="item-date">2024 – PRESENT</span>
             </div>
             <p className="resume-doc-text mb-2">
               Independent Full-Stack Developer, building responsive and
@@ -144,9 +151,59 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onNavigate }) => {
 
           <div className="resume-doc-item mt-4">
             <div className="item-header">
-              <h4 className="item-title">
-                PYTHON DEVELOPMENT INTERN | @SWIFTANT
-              </h4>
+              <div className="item-header-brand">
+                <div className="item-logo-frame is-light-bg">
+                  <img
+                    src={dtsLogo}
+                    alt="Dynamic Tooling Systems Logo"
+                    className="item-logo-img"
+                  />
+                </div>
+                <div>
+                  <h4 className="item-title">
+                    WEB DEVELOPER | DYNAMIC TOOLING SYSTEMS - INDIA
+                  </h4>
+                  <div className="item-meta-subtitle">
+                    Freelance · Hosur, Tamil Nadu, India
+                  </div>
+                </div>
+              </div>
+              <span className="item-date">MAY 2026 – PRESENT</span>
+            </div>
+            <p className="resume-doc-text mb-2">
+              Developed and delivered responsive, user-friendly websites
+              tailored to company requirements, transforming business needs into
+              practical and functional web solutions.
+            </p>
+            <ul className="resume-doc-list">
+              <li>
+                Engineered and delivered responsive, user-friendly web solutions
+                tailored to industrial requirements.
+              </li>
+              <li>
+                Transformed business and operational needs into practical,
+                high-performance digital solutions.
+              </li>
+            </ul>
+          </div>
+
+          <div className="resume-doc-item mt-4">
+            <div className="item-header">
+              <div className="item-header-brand">
+                <div className="item-logo-frame is-light-bg">
+                  <img
+                    src={swiftantLogo}
+                    alt="SwiftAnt Logo"
+                    className="item-logo-img"
+                  />
+                </div>
+                <div>
+                  <h4 className="item-title">
+                    PYTHON DEVELOPMENT INTERN | @SWIFTANT
+                  </h4>
+                  <div className="item-meta-subtitle">Internship</div>
+                </div>
+              </div>
               <span className="item-date">JUNE 2026</span>
             </div>
             <p className="resume-doc-text mb-2">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AboutPage.css";
 import { ArrowLeft, FileText, ArrowUpRight } from "lucide-react";
-import profilePhoto from "../../assets/me.jpg";
+import profilePhoto from "../../assets/me-opt.jpg";
 import { GitHubContributions } from "../ui/GitHubContributions";
 import { Footer } from "../layout/Footer";
 

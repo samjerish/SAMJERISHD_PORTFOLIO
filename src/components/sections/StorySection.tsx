@@ -120,15 +120,15 @@ export const StorySection: React.FC<{
 
                 <div className="story-sequence-content">
                   <p className="story-editorial-statement">
-                    I'm <strong className="statement-name">Sam Jerish D</strong>, a computer science student and developer based in India. Most of my work centers on <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Python</strong>.
+                    With a foundation in engineering, I bring <strong>problem-solving</strong>, <strong>systems thinking</strong>, and <strong>analytical skills</strong> into the world of product design.
                   </p>
 
                   <p className="story-editorial-statement">
-                    I like building software that solves concrete, day-to-day problems—like replacing paper payment logbooks for a residential community in Hosur with a web ledger, or creating a distraction-free Pomodoro workspace for students.
+                    My approach blends <strong>technical precision</strong> with <strong>creativity</strong> to craft solutions that are functional, intuitive, and user-centered.
                   </p>
 
                   <p className="story-editorial-statement">
-                    I value straightforward code over over-engineered abstractions. When building an application, my priority is making it fast, obvious to use, and easy to maintain months later.
+                    My goal is to design products that not only work seamlessly but also create meaningful experiences.
                   </p>
                 </div>
 

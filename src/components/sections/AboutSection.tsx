@@ -46,12 +46,12 @@ export const AboutSection: React.FC = () => {
             className={`description about-story-text ${isVisible ? "is-visible" : ""}`}
           >
             <AnimatedLine
-              text="I’m someone who loves to <learn, create, and experiment>."
+              text="With a foundation in engineering, I bring <problem-solving, systems thinking, and analytical skills> into the world of product design."
               baseDelay={0.2}
             />
             <br />
             <AnimatedLine
-              text="I enjoy exploring different ways to turn an <idea into something real>. I’m still figuring things out, <still learning, and still creating>. And honestly, that’s the part of the <journey I enjoy the most>."
+              text="My approach blends <technical precision with creativity> to craft solutions that are functional, intuitive, and user-centered. My goal is to design products that not only work seamlessly but also create <meaningful experiences>."
               baseDelay={1.4}
             />
           </div>

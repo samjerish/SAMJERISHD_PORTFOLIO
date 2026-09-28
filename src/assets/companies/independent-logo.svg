@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Background Gradient (Obsidian to Charcoal) -->
+    <linearGradient id="adminBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141416" />
+      <stop offset="50%" stop-color="#0c0c0e" />
+      <stop offset="100%" stop-color="#050506" />
+    </linearGradient>
+
+    <!-- Metallic Platinum / Silver Crest Glow -->
+    <linearGradient id="adminSilver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#d4d4d8" />
+      <stop offset="100%" stop-color="#71717a" />
+    </linearGradient>
+
+    <!-- Chrome / Off-White Core -->
+    <linearGradient id="adminWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#a1a1aa" />
+    </linearGradient>
+
+    <!-- Shield Inner Fill Gradient -->
+    <linearGradient id="shieldFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#27272a" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Subtle White Ambient Filter -->
+    <filter id="adminGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container -->
+  <rect x="8" y="8" width="184" height="184" rx="42" fill="url(#adminBg)" stroke="#27272a" stroke-width="2" />
+  <rect x="12" y="12" width="176" height="176" rx="38" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+
+  <!-- Ambient Radar / Geometric Grid Rings -->
+  <circle cx="100" cy="90" r="54" fill="none" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1.2" stroke-dasharray="4,6" />
+
+  <!-- Master Admin Symbol Group -->
+  <g filter="url(#adminGlow)">
+    <!-- Admin Security Shield Outer Outline -->
+    <path
+      d="M 100 34 
+         L 142 50 
+         C 142 92, 100 120, 100 120 
+         C 100 120, 58 92, 58 50 
+         Z"
+      fill="url(#shieldFill)"
+      stroke="url(#adminSilver)"
+      stroke-width="2.5"
+      stroke-linejoin="round"
+    />
+
+    <!-- Admin Crown / Crest atop Shield -->
+    <path
+      d="M 85 58 
+         L 90 65 
+         L 100 56 
+         L 110 65 
+         L 115 58 
+         L 113 70 
+         L 87 70 
+         Z"
+      fill="url(#adminSilver)"
+    />
+
+    <!-- Admin User Avatar: Head -->
+    <circle cx="100" cy="83" r="11" fill="url(#adminWhite)" />
+
+    <!-- Admin User Avatar: Shoulders / Torso -->
+    <path
+      d="M 80 110 
+         C 80 97, 120 97, 120 110 
+         Z"
+      fill="url(#adminWhite)"
+    />
+
+    <!-- Admin Key / Star Emblem on Chest -->
+    <circle cx="100" cy="103" r="2.5" fill="#ffffff" />
+  </g>
+
+  <!-- Typography Labels: INDEPENDENT • ADMIN -->
+  <text x="100" y="146" font-family="'JetBrains Mono', 'Roboto Mono', monospace" font-size="8" font-weight="700" fill="#a1a1aa" letter-spacing="3.2" text-anchor="middle">INDEPENDENT</text>
+  <text x="100" y="159" font-family="'JetBrains Mono', 'Roboto Mono', monospace" font-size="6.5" font-weight="600" fill="#ffffff" letter-spacing="3" text-anchor="middle">ADMIN • DEV</text>
+</svg>

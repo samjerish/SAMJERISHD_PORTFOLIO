@@ -93,42 +93,24 @@ export const ProjectSwipeDownList: React.FC<ProjectSwipeDownListProps> = ({
                       )}
                     </div>
 
-                    {/* Overview / Details */}
-                    {project.shortDesc && (
-                      <div className="drawer-overview-block">
-                        <span className="drawer-section-label">WHAT IT IS</span>
-                        <p className="drawer-desc-text">{project.shortDesc}</p>
-                      </div>
+                    {/* Headline */}
+                    {project.headline && (
+                      <p className="drawer-headline-text">{project.headline}</p>
                     )}
 
-                    {/* Problem, Solution & Impact Showcase Cards */}
-                    <div className="drawer-case-study-grid">
-                      {project.problemStatement && (
-                        <div className="drawer-callout-card problem-card">
-                          <div className="callout-header">
-                            <span className="callout-title">WHY I BUILT THIS</span>
+                    {/* 3-Line Concise Summary */}
+                    <div className="drawer-summary-block">
+                      <span className="drawer-section-label">PROJECT SUMMARY</span>
+                      <div className="drawer-summary-lines">
+                        {project.summaryLines.map((line, idx) => (
+                          <div key={idx} className="drawer-summary-line">
+                            <span className="drawer-line-index" aria-hidden="true">
+                              0{idx + 1}
+                            </span>
+                            <p className="drawer-line-text">{line}</p>
                           </div>
-                          <p className="callout-text">{project.problemStatement}</p>
-                        </div>
-                      )}
-
-                      {project.solution && (
-                        <div className="drawer-callout-card solution-card">
-                          <div className="callout-header">
-                            <span className="callout-title">HOW IT WORKS &amp; CHALLENGE</span>
-                          </div>
-                          <p className="callout-text">{project.solution}</p>
-                        </div>
-                      )}
-
-                      {project.impact && (
-                        <div className="drawer-callout-card impact-card">
-                          <div className="callout-header">
-                            <span className="callout-title">CURRENT STATE &amp; DETAILS</span>
-                          </div>
-                          <p className="callout-text">{project.impact}</p>
-                        </div>
-                      )}
+                        ))}
+                      </div>
                     </div>
 
                     {/* Tech Stack Chips */}

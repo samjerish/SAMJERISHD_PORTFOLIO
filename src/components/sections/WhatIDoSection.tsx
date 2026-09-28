@@ -45,7 +45,7 @@ export const WhatIDoSection: React.FC = () => {
               </p>
 
               <p className="story-editorial-statement">
-                Most of my projects start from noticing a slow or broken manual process—like tracking neighborhood collections on paper logbooks or getting distracted by bloated timer apps. I like taking those problems, understanding the real requirements, and shipping clean software that makes them effortless.
+                Most of my projects start from noticing a slow or broken manual process, like tracking neighborhood collections on paper logbooks or getting distracted by bloated timer apps. I like taking those problems, understanding the real requirements, and shipping clean software that makes them effortless.
               </p>
             </div>
 

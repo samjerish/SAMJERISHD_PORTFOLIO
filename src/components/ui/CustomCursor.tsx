@@ -58,37 +58,10 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
     }
 
     const handleMouseMove = (e: MouseEvent) => {
-      const clientX = e.clientX;
-      const clientY = e.clientY;
-
-      mouseX.set(clientX);
-      mouseY.set(clientY);
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
 
       if (!isVisible) setIsVisible(true);
-
-      // Ensure active element text stays updated even during continuous dragging
-      const elFromPoint = document.elementFromPoint(clientX, clientY);
-      if (elFromPoint) {
-        if (elFromPoint.closest(".dock-liquid-glass, .bottom-menu-bar")) {
-          setIsHovered(false);
-          setCursorText("");
-          setTargetRect(null);
-          activeTargetRef.current = null;
-          return;
-        }
-
-        const interactive = elFromPoint.closest(targetSelector) as HTMLElement | null;
-        if (interactive) {
-          setIsHovered(true);
-          activeTargetRef.current = interactive;
-          const customText =
-            interactive.getAttribute("data-cursor-text") ||
-            interactive.getAttribute("data-cursor");
-          if (customText && customText !== "true") {
-            setCursorText(customText);
-          }
-        }
-      }
     };
 
     const handleMouseDown = () => setIsPressed(true);

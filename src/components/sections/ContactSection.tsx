@@ -77,7 +77,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               {words[wordIndex]}
             </span>
             <br />
-            something great together.
+            <span className="contact-heading-together">
+              something great together.
+            </span>
           </h1>
           <div className="contact-hero-email-wrap">
             <a
@@ -219,13 +221,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
         {/* Subtle Dividing Line */}
         <div className="contact-theme-divider" />
+      </div>
 
-        {/* Massive Full-Width Typographic Signature (Khaled Batt Style) */}
-        <div className="contact-theme-massive-wrap">
-          <div className="contact-theme-massive-text">
+      {/* Massive Full-Width Typographic Signature (Extended Left to Right Fully) */}
+      <div className="contact-theme-massive-wrap" aria-label="SAM JERISH D">
+        <svg
+          className="contact-theme-massive-svg"
+          viewBox="0 0 1440 165"
+          preserveAspectRatio="xMidYMid meet"
+          role="img"
+          aria-hidden="true"
+        >
+          <text
+            x="50%"
+            y="76%"
+            textAnchor="middle"
+            fontSize="140"
+            fontWeight="800"
+            textLength="98%"
+            lengthAdjust="spacing"
+            className="contact-theme-massive-svg-text"
+          >
             SAM JERISH D
-          </div>
-        </div>
+          </text>
+        </svg>
       </div>
     </section>
   );

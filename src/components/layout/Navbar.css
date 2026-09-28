@@ -16,12 +16,10 @@ body.menu-open .scroll-progress-container {
   pointer-events: none !important;
 }
 
-/* --- DESKTOP RULE: HIDE TOP NAVBAR AND OVERLAY ON DESKTOP --- */
-@media (min-width: 769px) {
-  .mobile-top-nav-bar,
-  .menu-overlay {
-    display: none !important;
-  }
+/* --- TOP NAVBAR AND OVERLAY REMOVED IN FAVOR OF LIQUID GLASS BOTTOM MENU BAR --- */
+.mobile-top-nav-bar,
+.menu-overlay {
+  display: none !important;
 }
 
 /* ===================================================

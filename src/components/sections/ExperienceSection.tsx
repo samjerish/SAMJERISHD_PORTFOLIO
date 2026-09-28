@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./ExperienceSection.css";
-import profileImg1 from "../../assets/me.jpg";
-import profileImg2 from "../../assets/me2.jpg";
+import profileImg1 from "../../assets/me-opt.jpg";
+import profileImg2 from "../../assets/me2-opt.jpg";
+import dtsLogo from "../../assets/companies/dts-logo.png";
+import swiftantLogo from "../../assets/companies/swiftant-logo.png";
+import karunyaLogo from "../../assets/companies/karunya-logo.svg";
 
 const STORY_PHOTOS = [profileImg1, profileImg2];
 
@@ -13,17 +16,35 @@ interface ExperienceItem {
   role: string;
   desc: string;
   skills: string[];
+  logo?: string;
+  logoTheme?: "dark" | "light";
+  employmentType?: string;
+  location?: string;
 }
 
 const EXPERIENCES: ExperienceItem[] = [
   {
     id: "exp-1",
-    period: "2024 — PRESENT",
+    period: "2024 – PRESENT",
     isCurrent: true,
     company: "Independent Projects",
-    role: "Web & Software Developer",
-    desc: "Building web applications and tools with React, TypeScript, and Python. I handle projects end-to-end—from designing clean interfaces to writing backend endpoints and structuring databases.",
+    role: "Full Stack Developer",
+    desc: "Building web applications and tools end-to-end with React, TypeScript, and modern backend services, focusing on clean architecture and responsive UI.",
     skills: ["React", "TypeScript", "Python", "Node.js", "Firebase", "MongoDB"],
+    employmentType: "Independent",
+  },
+  {
+    id: "exp-dts",
+    period: "MAY 2026 – PRESENT",
+    isCurrent: true,
+    company: "Dynamic Tooling Systems - India",
+    role: "Web Developer",
+    desc: "Developing responsive websites and digital solutions tailored to industrial tooling operations, converting technical needs into clean web experiences.",
+    skills: ["React", "TypeScript", "Responsive Design", "UI/UX"],
+    logo: dtsLogo,
+    logoTheme: "light",
+    employmentType: "Freelance",
+    location: "Hosur, Tamil Nadu, India",
   },
   {
     id: "exp-2",
@@ -31,17 +52,23 @@ const EXPERIENCES: ExperienceItem[] = [
     isCurrent: false,
     company: "@Swiftant",
     role: "Python Development Intern",
-    desc: "Worked on Python application development using object-oriented principles. Focused on writing modular classes, debugging logic errors, and understanding practical software development workflows.",
+    desc: "Engineered Python modules applying object-oriented principles, modular classes, automated scripts, and practical debugging workflows.",
     skills: ["Python", "OOP", "Debugging", "Modular Architecture"],
+    logo: swiftantLogo,
+    logoTheme: "light",
+    employmentType: "Internship",
   },
   {
     id: "exp-3",
-    period: "2024 — 2027",
+    period: "2024 – 2027",
     isCurrent: false,
     company: "@MatrixKarunya",
     role: "Media Coordinator",
-    desc: "Handled multimedia coverage for college events, managing photography, video editing with Premiere Pro and After Effects, and social media updates for the department.",
+    desc: "Handled multimedia coverage, event photography, video editing, and digital media assets for university events and department symposiums.",
     skills: ["Video Production", "Event Coverage", "Premiere Pro", "After Effects"],
+    logo: karunyaLogo,
+    logoTheme: "light",
+    employmentType: "Organization",
   },
 ];
 
@@ -321,7 +348,7 @@ export const ExperienceSection: React.FC<{
   };
 
   const handleBadgeClick = () => {
-    // In mobile view, tap to swap is removed — only drag is kept
+    // In mobile view, tap to swap is removed - only drag is kept
     if (typeof window !== "undefined" && window.innerWidth <= 768) {
       return;
     }
@@ -343,7 +370,7 @@ export const ExperienceSection: React.FC<{
     <section
       ref={sectionRef}
       id="experience"
-      className="experience-container"
+      className={`experience-container ${isDragging ? "is-card-dragging" : ""}`}
     >
       <div className="experience-content-wrapper">
         <div className={`story-experience-combo-block ${isVisible ? "is-visible" : ""}`}>
@@ -407,23 +434,61 @@ export const ExperienceSection: React.FC<{
                     </div>
 
                     <div className="timeline-card-content">
-                      <div className="timeline-top-row">
-                        <div className="timeline-badge-group">
-                          <span
-                            className={`timeline-period-badge ${
-                              exp.isCurrent ? "current" : ""
-                            }`}
-                          >
-                            {exp.isCurrent && <span className="live-dot" />}
-                            {exp.period}
-                          </span>
-                          <span className="timeline-company-badge">
-                            {exp.company}
-                          </span>
+                      <div className="timeline-card-header">
+                        <div className="timeline-brand-group">
+                          {exp.logo && (
+                            <div
+                              className={`timeline-logo-badge ${
+                                exp.logoTheme === "light" ? "is-light-bg" : ""
+                              }`}
+                            >
+                              <img
+                                src={exp.logo}
+                                alt={`${exp.company} Logo`}
+                                className="timeline-logo-img"
+                                loading="lazy"
+                              />
+                            </div>
+                          )}
+                          <div className="timeline-title-meta">
+                            <h4 className="timeline-role-name">{exp.role}</h4>
+                            <div className="timeline-company-subline">
+                              <span className="timeline-company-name">
+                                {exp.company}
+                              </span>
+                              {exp.employmentType && (
+                                <>
+                                  <span className="timeline-meta-dot" aria-hidden="true">
+                                    •
+                                  </span>
+                                  <span className="timeline-meta-tag">
+                                    {exp.employmentType}
+                                  </span>
+                                </>
+                              )}
+                              {exp.location && (
+                                <>
+                                  <span className="timeline-meta-dot" aria-hidden="true">
+                                    •
+                                  </span>
+                                  <span className="timeline-meta-location">
+                                    {exp.location}
+                                  </span>
+                                </>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
 
-                      <h4 className="timeline-role-name">{exp.role}</h4>
+                        <span
+                          className={`timeline-period-badge ${
+                            exp.isCurrent ? "current" : ""
+                          }`}
+                        >
+                          {exp.isCurrent && <span className="live-dot" />}
+                          {exp.period}
+                        </span>
+                      </div>
 
                       <p className="timeline-role-desc">{exp.desc}</p>
 
@@ -442,10 +507,10 @@ export const ExperienceSection: React.FC<{
           </div>
 
           {/* Right Side: The Hanging ID Card */}
-          <div className="experience-id-card-col">
+          <div className={`experience-id-card-col ${isDragging ? "is-card-dragging" : ""}`}>
             <div
               ref={containerRef}
-              className="id-card-assembly"
+              className={`id-card-assembly ${isDragging ? "is-card-dragging" : ""}`}
               onContextMenu={(e) => e.preventDefault()}
             >
               {/* Dynamic SVG Elastic Lanyard Strap */}

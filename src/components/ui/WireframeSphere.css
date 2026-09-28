@@ -83,9 +83,14 @@
 
 @media (max-width: 768px) {
   .wireframe-polyhedron-container {
-    max-width: 310px;
-    height: 310px;
-    margin: 1.5rem auto 0 auto;
+    max-width: 300px;
+    height: 300px;
+    margin: 1.2rem auto 0 auto;
+    touch-action: pan-y;
+  }
+
+  .wireframe-canvas {
+    touch-action: pan-y;
   }
 
   .wireframe-ambient-glow {
@@ -94,7 +99,25 @@
   }
 
   .wireframe-orbit-accent {
-    width: 280px;
-    height: 280px;
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wireframe-polyhedron-container {
+    max-width: 260px;
+    height: 260px;
+    margin: 1rem auto 0 auto;
+  }
+
+  .wireframe-ambient-glow {
+    width: 190px;
+    height: 190px;
+  }
+
+  .wireframe-orbit-accent {
+    width: 230px;
+    height: 230px;
   }
 }

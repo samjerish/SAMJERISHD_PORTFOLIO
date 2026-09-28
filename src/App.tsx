@@ -9,11 +9,13 @@ import { AboutPage } from "./components/pages/AboutPage";
 import { ProjectsPage } from "./components/pages/ProjectsPage";
 import { ContactPage } from "./components/pages/ContactPage";
 import { ResumePage } from "./components/pages/ResumePage";
-import { BottomMenuBar } from "./components/layout/BottomMenuBar";
-import { Navbar } from "./components/layout/Navbar";
 import { MobilePageWrapper } from "./components/layout/MobilePageWrapper";
+import { DriftWallSection } from "./components/sections/DriftWallSection";
+import { ExperienceSection } from "./components/sections/ExperienceSection";
+import { ContactSection } from "./components/sections/ContactSection";
 
 function App() {
+  const preview = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("preview") : null;
   const [currentPage, setCurrentPage] = useState<
     "home" | "media" | "about" | "projects" | "contact" | "resume"
   >("home");
@@ -106,62 +108,74 @@ function App() {
     <>
       <CustomCursor />
 
-      {/* Desktop Ribbon Transition */}
-      {!isMobile && isTransitioning && (
-        <RibbonTransition
-          onReveal={handleReveal}
-          onComplete={handleTransitionComplete}
-        />
+      {preview === "drift" && (
+        <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
+          <DriftWallSection />
+        </div>
       )}
 
-      {/* Home Page: Always preserved under subpages on mobile for smooth Instagram-style reveal */}
-      <div
-        className={`app-home-layer ${
-          isMobile && currentPage !== "home" ? "is-under-subpage" : ""
-        }`}
-        style={{
-          display: !isMobile && currentPage !== "home" ? "none" : "block",
-        }}
-      >
-        <PortfolioLayout onNavigate={handleNavigate} />
-      </div>
-
-      {/* Subpages: Wrapped in MobilePageWrapper for native iOS edge-swipe and shift-right transitions */}
-      {currentPage !== "home" && (
-        <MobilePageWrapper
-          onSwipeBack={handleMobileSwipeBack}
-          isExiting={isShiftingRight}
-          onExitComplete={handleExitComplete}
-        >
-          {currentPage === "media" && (
-            <MyMediaPage onNavigate={handleNavigate} />
-          )}
-          {currentPage === "about" && (
-            <AboutPage onNavigate={handleNavigate} />
-          )}
-          {currentPage === "projects" && (
-            <ProjectsPage onNavigate={handleNavigate} />
-          )}
-          {currentPage === "contact" && (
-            <ContactPage onNavigate={handleNavigate} />
-          )}
-          {currentPage === "resume" && (
-            <ResumePage onNavigate={handleNavigate} />
-          )}
-        </MobilePageWrapper>
+      {preview === "experience" && (
+        <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
+          <ExperienceSection />
+        </div>
       )}
 
-      {/* Mobile Top 3-Line Menu Bar (Hidden on Desktop) */}
-      <Navbar
-        currentPage={currentPage}
-        onNavigate={handleNavigate}
-      />
+      {preview === "contact" && (
+        <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
+          <ContactSection />
+        </div>
+      )}
 
-      {/* Desktop Bottom Menu Bar (Hidden on Mobile) */}
-      <BottomMenuBar
-        currentPage={currentPage}
-        onNavigate={handleNavigate}
-      />
+      {!preview && (
+        <>
+
+          {/* Desktop Ribbon Transition */}
+          {!isMobile && isTransitioning && (
+            <RibbonTransition
+              onReveal={handleReveal}
+              onComplete={handleTransitionComplete}
+            />
+          )}
+
+          {/* Home Page: Always preserved under subpages on mobile for smooth Instagram-style reveal */}
+          <div
+            className={`app-home-layer ${
+              isMobile && currentPage !== "home" ? "is-under-subpage" : ""
+            }`}
+            style={{
+              display: !isMobile && currentPage !== "home" ? "none" : "block",
+            }}
+          >
+            <PortfolioLayout onNavigate={handleNavigate} />
+          </div>
+
+          {/* Subpages: Wrapped in MobilePageWrapper for native iOS edge-swipe and shift-right transitions */}
+          {currentPage !== "home" && (
+            <MobilePageWrapper
+              onSwipeBack={handleMobileSwipeBack}
+              isExiting={isShiftingRight}
+              onExitComplete={handleExitComplete}
+            >
+              {currentPage === "media" && (
+                <MyMediaPage onNavigate={handleNavigate} />
+              )}
+              {currentPage === "about" && (
+                <AboutPage onNavigate={handleNavigate} />
+              )}
+              {currentPage === "projects" && (
+                <ProjectsPage onNavigate={handleNavigate} />
+              )}
+              {currentPage === "contact" && (
+                <ContactPage onNavigate={handleNavigate} />
+              )}
+              {currentPage === "resume" && (
+                <ResumePage onNavigate={handleNavigate} />
+              )}
+            </MobilePageWrapper>
+          )}
+
+        </>
+      )}
     </>
   );
 }

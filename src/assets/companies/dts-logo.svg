@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="dtsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141416" />
+      <stop offset="50%" stop-color="#0c0c0e" />
+      <stop offset="100%" stop-color="#050506" />
+    </linearGradient>
+    <linearGradient id="monoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#a1a1aa" />
+    </linearGradient>
+    <filter id="dtsGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container -->
+  <rect x="8" y="8" width="184" height="184" rx="42" fill="url(#dtsBg)" stroke="#27272a" stroke-width="2" />
+  <rect x="12" y="12" width="176" height="176" rx="38" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+
+  <!-- Industrial Tooling Hexagon & Precision Calibration Marks -->
+  <polygon points="100,24 164,60 164,136 100,172 36,136 36,60" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5" stroke-dasharray="6,4" />
+  
+  <!-- Calibrated Crosshairs & Center Rings -->
+  <circle cx="100" cy="98" r="54" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
+  <circle cx="100" cy="98" r="44" fill="rgba(255, 255, 255, 0.02)" stroke="#71717a" stroke-width="1.5" />
+  
+  <!-- Mechanical Precision Tooling Caliper / Gear Accents -->
+  <path d="M 100 48 L 100 58 M 100 138 L 100 148 M 50 98 L 60 98 M 140 98 L 150 98" stroke="#a1a1aa" stroke-width="2" stroke-linecap="round" />
+  
+  <!-- Monogram DTS Geometric Lettering -->
+  <g filter="url(#dtsGlow)">
+    <!-- "D" -->
+    <path d="M 64 80 L 78 80 C 88 80 93 85 93 93 C 93 101 88 106 78 106 L 64 106 Z M 71 86 L 71 100 L 77 100 C 82 100 85 98 85 93 C 85 88 82 86 77 86 Z" fill="url(#monoGrad)" />
+    
+    <!-- "T" -->
+    <path d="M 92 80 L 114 80 L 114 86 L 106 86 L 106 116 L 99 116 L 99 86 L 92 86 Z" fill="#ffffff" />
+    
+    <!-- "S" -->
+    <path d="M 129 82 C 124 80 118 82 115 85 L 119 90 C 122 87 126 86 129 87 C 132 88 134 90 133 92 C 131 94 127 95 122 97 C 115 99 111 103 112 108 C 113 113 118 117 124 117 C 130 117 135 114 138 110 L 133 106 C 131 109 127 111 124 111 C 120 111 118 109 118 107 C 119 104 122 103 127 102 C 134 99 140 96 139 89 C 138 84 134 82 129 82 Z" fill="url(#monoGrad)" />
+  </g>
+
+  <!-- Technical Division Indicator Dot -->
+  <circle cx="100" cy="128" r="2.5" fill="#ffffff" />
+  <circle cx="86" cy="128" r="1.5" fill="rgba(255, 255, 255, 0.4)" />
+  <circle cx="114" cy="128" r="1.5" fill="rgba(255, 255, 255, 0.4)" />
+
+  <!-- Subtitle Tag: DYNAMIC TOOLING -->
+  <text x="100" y="148" font-family="'JetBrains Mono', 'Roboto Mono', monospace" font-size="7.5" font-weight="700" fill="#a1a1aa" letter-spacing="2.8" text-anchor="middle">DYNAMIC TOOLING</text>
+  <text x="100" y="159" font-family="'JetBrains Mono', 'Roboto Mono', monospace" font-size="6" font-weight="600" fill="#ffffff" letter-spacing="3" text-anchor="middle">SYSTEMS • INDIA</text>
+</svg>

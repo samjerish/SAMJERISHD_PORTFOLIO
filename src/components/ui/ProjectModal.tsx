@@ -206,6 +206,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             title="Close (Esc)"
             data-cursor-text="CLOSE"
           >
+            <span className="dev-close-esc-badge">ESC</span>
             <FiX size={16} />
           </button>
         </div>
@@ -297,32 +298,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               )}
             </div>
 
-            {/* About the Project Overview */}
-            <div className="dev-section-box">
-              <span className="dev-section-label">What it is</span>
-              <p className="dev-section-text">
-                {project.shortDesc || project.details || project.description}
-              </p>
-            </div>
-
-            {/* Challenge & Solution Cards */}
-            <div className="dev-specs-grid">
-              <div className="dev-spec-card">
-                <span className="dev-spec-label">Why I built this</span>
-                <p className="dev-spec-text">{project.problemStatement}</p>
+            {/* 3-Line Concise Summary */}
+            <div className="dev-summary-box">
+              <span className="dev-section-label">Summary</span>
+              <div className="dev-summary-lines">
+                {project.summaryLines.map((line, idx) => (
+                  <div key={idx} className="dev-summary-line">
+                    <span className="dev-line-index">0{idx + 1}</span>
+                    <p className="dev-line-text">{line}</p>
+                  </div>
+                ))}
               </div>
-
-              <div className="dev-spec-card">
-                <span className="dev-spec-label">How it works &amp; Technical challenge</span>
-                <p className="dev-spec-text">{project.solution}</p>
-              </div>
-
-              {project.impact && (
-                <div className="dev-spec-card impact-card">
-                  <span className="dev-spec-label">Current state &amp; Details</span>
-                  <p className="dev-spec-text">{project.impact}</p>
-                </div>
-              )}
             </div>
 
             {/* Tech Stack */}

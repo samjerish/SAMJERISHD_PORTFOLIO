@@ -24,3 +24,10 @@ dist-ssr
 *.sw?
 .vercel
 .env*
+
+# AI agent caches and skills
+.agent/
+.agents/
+.codex/
+.gemini/
+skills-lock.json

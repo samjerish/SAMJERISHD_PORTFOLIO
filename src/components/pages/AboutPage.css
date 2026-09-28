@@ -309,7 +309,7 @@
 
 .photo-flip-hint-btn .flip-icon {
   font-size: 0.95rem;
-  color: #4ade80;
+  color: #ffffff;
   display: inline-block;
   transition: transform 0.4s ease;
 }
@@ -359,7 +359,7 @@
 }
 
 .tagline-bullet {
-  color: #4ade80;
+  color: #a1a1aa;
   font-weight: 900;
   opacity: 0.8;
 }
@@ -411,7 +411,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.75rem;
   font-weight: 700;
-  color: #4ade80;
+  color: #ffffff;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -542,7 +542,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.85rem;
   font-weight: 700;
-  color: #4ade80;
+  color: #ffffff;
   letter-spacing: 0.5px;
   margin: 0 0 0.4rem 0;
 }

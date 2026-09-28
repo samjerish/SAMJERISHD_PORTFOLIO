@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import "./ScrollStack.css";
 import type { Project } from "../../data/projects";
-import { Layers, ArrowUpRight } from "lucide-react";
+import { Layers, ArrowUpRight, BookOpen } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
+import { ProjectBlogShowcase } from "./ProjectBlogShowcase";
 
 export interface ScrollStackProps {
   projects: Project[];
-  onProjectClick?: (project: Project) => void;
   stackOffset?: number;
   scaleStep?: number;
   rotationStep?: number;
@@ -15,7 +15,6 @@ export interface ScrollStackProps {
 
 export const ScrollStack: React.FC<ScrollStackProps> = ({
   projects,
-  onProjectClick,
   stackOffset = 26,
   scaleStep = 0.024,
   rotationStep = 0,
@@ -25,14 +24,25 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
   const cardWrapperRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardInnerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Project Blog 5 Case Study Modal State
+  const [selectedProjectForBlog, setSelectedProjectForBlog] = useState<Project | null>(null);
+  const [isBlogOpen, setIsBlogOpen] = useState(false);
+
+  const openBlogShowcase = (proj: Project) => {
+    setSelectedProjectForBlog(proj);
+    setIsBlogOpen(true);
+  };
+
   // 60/120fps direct hardware-accelerated style calculation without React state lag
   const updateStackTransforms = useCallback(() => {
     if (!containerRef.current) return;
 
-    const isMobile = window.innerWidth <= 768;
-    const currentStackOffset = isMobile ? 16 : stackOffset;
-    const stickyTopBase = isMobile ? 55 : 75;
-    const transitionZone = isMobile ? 240 : 360;
+    const isMobile = window.innerWidth <= 860;
+    const currentStackOffset = isMobile ? 14 : stackOffset;
+    const stickyTopBase = isMobile ? 68 : 90;
+    const transitionZone = isMobile ? 260 : 360;
+    const currentScaleStep = isMobile ? 0.016 : scaleStep;
+    const currentDissolveStep = isMobile ? 0.018 : dissolveStep;
 
     for (let i = 0; i < projects.length; i++) {
       const cardEl = cardInnerRefs.current[i];
@@ -62,10 +72,10 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
       }
 
       // Smooth, squared, perfectly aligned stack without unwanted tilting
-      const scale = Math.max(0.88, 1 - cardsOnTop * scaleStep);
-      const opacity = Math.max(0.85, 1 - cardsOnTop * dissolveStep);
-      const brightness = Math.max(0.68, 1 - cardsOnTop * 0.05);
-      const rotation = rotationStep > 0 ? (i % 2 === 0 ? -1 : 1) * cardsOnTop * rotationStep : 0;
+      const scale = Math.max(isMobile ? 0.92 : 0.88, 1 - cardsOnTop * currentScaleStep);
+      const opacity = Math.max(0.85, 1 - cardsOnTop * currentDissolveStep);
+      const brightness = Math.max(0.72, 1 - cardsOnTop * 0.04);
+      const rotation = (!isMobile && rotationStep > 0) ? (i % 2 === 0 ? -1 : 1) * cardsOnTop * rotationStep : 0;
 
       // Direct GPU compositor mutation - perfectly aligned and squared
       cardEl.style.transform = rotation !== 0
@@ -140,8 +150,6 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
               style={{
                 transformOrigin: "top center",
               }}
-              onClick={() => onProjectClick?.(project)}
-              data-cursor-text="VIEW"
               role="article"
               aria-label={`Project card for ${project.brandName || project.name}`}
             >
@@ -175,36 +183,43 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
               <div className="stack-card-body">
                 {/* Left Side: Information Column */}
                 <div className="stack-card-info">
-                  <h2 className="stack-card-headline">
-                    {project.headline || project.name}
-                  </h2>
-
-                  <p className="stack-card-desc">{project.shortDesc}</p>
-
-                  {/* Grounded Technical Notes */}
-                  <div className="stack-card-notes">
-                    <div className="stack-note-item">
-                      <span className="stack-note-title">Why I built it:</span>
-                      <p className="stack-note-body">{project.problemStatement}</p>
-                    </div>
-                    <div className="stack-note-item">
-                      <span className="stack-note-title">Technical highlight:</span>
-                      <p className="stack-note-body">{project.solution}</p>
-                    </div>
+                  <div className="stack-card-heading-group">
+                    <h2 className="stack-card-headline">
+                      {project.brandName || project.name}
+                    </h2>
+                    {project.headline && (
+                      <p className="stack-card-subheadline">{project.headline}</p>
+                    )}
                   </div>
 
-                  {project.techStack && (
-                    <div className="stack-card-tech" aria-label="Tech Stack">
-                      {project.techStack.map((tech) => (
-                        <span key={tech} className="stack-tech-badge">
-                          {tech}
+                  {/* 3-Line Concise Summary: Instant understanding for any visitor */}
+                  <div className="stack-card-summary" aria-label="Project Summary">
+                    {project.summaryLines.map((line, idx) => (
+                      <div key={idx} className="stack-summary-line">
+                        <span className="summary-line-index" aria-hidden="true">
+                          0{idx + 1}
                         </span>
-                      ))}
-                    </div>
-                  )}
+                        <p className="summary-line-text">{line}</p>
+                      </div>
+                    ))}
+                  </div>
 
-                  {/* Action Buttons: Live Demo, GitHub, Case Study */}
+                  {/* Action Buttons: Live Demo, GitHub & Case Study */}
                   <div className="stack-card-actions">
+                    <button
+                      type="button"
+                      className="stack-card-view-btn stack-article-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openBlogShowcase(project);
+                      }}
+                      data-cursor-text="READ"
+                      aria-label={`Read case study for ${project.name}`}
+                    >
+                      <BookOpen size={15} />
+                      <span>Case Study</span>
+                    </button>
+
                     {hasLiveDemo && (
                       <a
                         href={project.link}
@@ -234,26 +249,25 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                         <span>Source Code</span>
                       </a>
                     )}
-
-                    <button
-                      type="button"
-                      className="stack-card-link-btn stack-case-study-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onProjectClick?.(project);
-                      }}
-                      data-cursor-text="DETAILS"
-                      aria-label={`View deep-dive case study for ${project.name}`}
-                    >
-                      <span>Case Study</span>
-                      <span className="case-arrow" aria-hidden="true">→</span>
-                    </button>
                   </div>
                 </div>
 
-                {/* Right Side: Media Showcase Mockup */}
-                <div className="stack-card-media">
-                  <div className="stack-device-frame">
+                {/* Right Side: Media Showcase Mockup with Click-to-View Trigger */}
+                <div
+                  className="stack-card-media"
+                  onClick={() => openBlogShowcase(project)}
+                  data-cursor-text="VIEW"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openBlogShowcase(project);
+                    }
+                  }}
+                  aria-label={`Click to view detailed case study for ${project.brandName || project.name}`}
+                >
+                  <div className="stack-device-frame is-clickable">
                     <div className="stack-device-notch" aria-hidden="true">
                       <div className="stack-device-speaker" />
                     </div>
@@ -266,6 +280,14 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                         draggable={false}
                       />
                       <div className="stack-glare-overlay" aria-hidden="true" />
+
+                      {/* Click to View Case Study Animated Hover Pill */}
+                      <div className="stack-photo-view-overlay" aria-hidden="true">
+                        <div className="stack-photo-view-pill">
+                          <BookOpen size={14} className="pill-book-icon" />
+                          <span>✦ Click to View Case Study</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -274,6 +296,15 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
           </div>
         );
       })}
+
+      {/* Blog 5 Detailed Article Showcase with Scroll Progress and AI Input */}
+      <ProjectBlogShowcase
+        project={selectedProjectForBlog}
+        projects={projects}
+        isOpen={isBlogOpen}
+        onClose={() => setIsBlogOpen(false)}
+        onSelectProject={(newProject) => setSelectedProjectForBlog(newProject)}
+      />
     </div>
   );
 };

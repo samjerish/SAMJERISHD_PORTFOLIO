@@ -27,7 +27,8 @@
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 70px);
     box-sizing: border-box;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;

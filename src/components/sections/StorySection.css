@@ -50,8 +50,8 @@
   height: 380px;
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 234, 0, 0.035) 0%,
-    rgba(56, 189, 248, 0.03) 40%,
+    rgba(255, 255, 255, 0.035) 0%,
+    rgba(255, 255, 255, 0.015) 40%,
     transparent 70%
   );
   filter: blur(85px);
@@ -132,7 +132,7 @@
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.22em;
-  color: #71717a;
+  color: #a1a1aa;
   text-transform: uppercase;
   user-select: none;
 }
@@ -141,14 +141,14 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
   flex-shrink: 0;
 }
 
 .kicker-accent-dot.green {
-  background: #4ade80;
-  box-shadow: 0 0 8px #4ade80;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 /* Paragraph Content Hierarchy */
@@ -169,22 +169,22 @@
   margin: 0;
 }
 
-/* --- THEME INLINE CHIPS & BADGES (Matching User Reference Image) --- */
+/* --- THEME INLINE CHIPS & BADGES (Monochrome) --- */
 
-/* 1. Yellow Pill Tag (Like "Drape" in the screenshot) */
+/* 1. White Pill Tag */
 .story-chip-yellow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #ffea00;
-  color: #0c0c0e;
+  background: #ffffff;
+  color: #000000;
   font-family: var(--font-heading, "Outfit", sans-serif);
   font-size: 0.88em;
   font-weight: 800;
   padding: 1px 11px;
   border-radius: 6px;
   vertical-align: baseline;
-  box-shadow: 0 2px 10px rgba(255, 234, 0, 0.32);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
   margin: 0 4px;
   cursor: pointer;
   white-space: nowrap;
@@ -193,10 +193,10 @@
 
 .story-chip-yellow:hover {
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 6px 18px rgba(255, 234, 0, 0.55);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.35);
 }
 
-/* 2. Coding Square Chip (Like "m." marketfeed in screenshot) */
+/* 2. Coding Square Chip */
 .story-chip-code {
   display: inline-flex;
   align-items: center;
@@ -214,33 +214,33 @@
   width: clamp(28px, 1.8vw, 34px);
   height: clamp(28px, 1.8vw, 34px);
   border-radius: 7px;
-  background: #0f2c59;
-  border: 1px solid rgba(56, 189, 248, 0.45);
-  color: #38bdf8;
+  background: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   font-family: var(--font-mono, monospace);
   font-size: 0.62em;
   font-weight: 800;
-  box-shadow: 0 4px 12px rgba(15, 44, 89, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.22s ease, border-color 0.22s ease;
 }
 
 .story-chip-code:hover .chip-square-box.code-box {
   transform: translateY(-2px) scale(1.08);
-  border-color: #38bdf8;
-  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.4);
+  border-color: #ffffff;
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
 }
 
 .story-chip-code .chip-text {
-  color: #38bdf8;
+  color: #ffffff;
   font-weight: 700;
   transition: color 0.2s ease;
 }
 
 .story-chip-code:hover .chip-text {
-  color: #7dd3fc;
+  color: #d4d4d8;
 }
 
-/* 3. AI Agent / Pixel Bot Chip (Like red robot in reference screenshot) */
+/* 3. AI Agent / Pixel Bot Chip */
 .story-chip-agent {
   display: inline-flex;
   align-items: center;
@@ -257,11 +257,11 @@
   justify-content: center;
   width: clamp(26px, 1.6vw, 32px);
   height: clamp(22px, 1.4vw, 26px);
-  background: rgba(224, 86, 76, 0.14);
-  border: 1px solid rgba(224, 86, 76, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 6px;
   padding: 3px 4px;
-  box-shadow: 0 2px 10px rgba(224, 86, 76, 0.25);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   transition: transform 0.22s ease;
 }
 
@@ -273,7 +273,7 @@
 
 .story-chip-agent:hover .pixel-bot-wrapper {
   transform: translateY(-2px) scale(1.1);
-  box-shadow: 0 4px 15px rgba(224, 86, 76, 0.5);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
 .story-agent-text {
@@ -287,7 +287,7 @@
   align-items: center;
   gap: 6px;
   margin: 0 4px;
-  color: #f472b6;
+  color: #ffffff;
   vertical-align: baseline;
   cursor: pointer;
   white-space: nowrap;
@@ -295,18 +295,18 @@
 
 .curiosity-spark {
   font-size: 1.1em;
-  color: #f472b6;
+  color: #ffffff;
   animation: pulseSparkle 2.4s infinite ease-in-out;
   display: inline-block;
 }
 
 @keyframes pulseSparkle {
   0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
-  50% { transform: scale(1.25) rotate(15deg); opacity: 1; filter: drop-shadow(0 0 6px #f472b6); }
+  50% { transform: scale(1.25) rotate(15deg); opacity: 1; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8)); }
 }
 
 .curiosity-text {
-  color: #f472b6;
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -328,22 +328,22 @@
   width: clamp(28px, 1.8vw, 34px);
   height: clamp(28px, 1.8vw, 34px);
   border-radius: 7px;
-  background: #1e3a8a;
-  border: 1px solid rgba(96, 165, 250, 0.45);
-  color: #60a5fa;
+  background: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   font-size: 0.8em;
   font-weight: 800;
-  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.22s ease;
 }
 
 .story-chip-craft:hover .chip-square-box.craft-box {
   transform: translateY(-2px) scale(1.08);
-  border-color: #60a5fa;
+  border-color: #ffffff;
 }
 
 .story-chip-craft .chip-text {
-  color: #60a5fa;
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -365,22 +365,22 @@
   width: clamp(28px, 1.8vw, 34px);
   height: clamp(28px, 1.8vw, 34px);
   border-radius: 7px;
-  background: #7c2d12;
-  border: 1px solid rgba(251, 146, 60, 0.45);
-  color: #fb923c;
+  background: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   font-size: 0.8em;
   font-weight: 800;
-  box-shadow: 0 4px 12px rgba(124, 45, 18, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.22s ease;
 }
 
 .story-chip-experiment:hover .chip-square-box.exp-box {
   transform: translateY(-2px) scale(1.08);
-  border-color: #fb923c;
+  border-color: #ffffff;
 }
 
 .exp-orange-text {
-  color: #fb923c;
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -580,7 +580,7 @@
 }
 
 .story-action-btn:focus-visible {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #ffffff;
   outline-offset: 3px;
 }
 
@@ -656,17 +656,29 @@ body.light-mode .story-read-more-btn.highlighted-white {
 
 @media (max-width: 900px) {
   .story-container {
-    padding: 0.8rem 1.4rem 2.4rem 1.4rem;
+    padding: 1.6rem 1.4rem;
   }
 }
 
 @media (max-width: 768px) {
   .story-container {
-    padding: 0.8rem 1.4rem 2.4rem 1.4rem;
+    padding: 2.2rem 1.25rem 2rem 1.25rem;
+  }
+
+  .story-split-grid {
+    gap: 1.6rem;
+  }
+
+  .story-split-grid .story-horizontal-bottom-bar {
+    margin-top: 1.4rem;
+  }
+
+  .story-horizontal-bottom-bar {
+    margin-top: 1.4rem;
   }
 
   .story-sequence-flow {
-    gap: 2.2rem;
+    gap: 1.5rem;
   }
 
   .story-editorial-statement {
@@ -705,7 +717,23 @@ body.light-mode .story-read-more-btn.highlighted-white {
 
 @media (max-width: 480px) {
   .story-container {
-    padding: 0.65rem 1.1rem 2rem 1.1rem;
+    padding: 1.8rem 1rem 1.6rem 1rem;
+  }
+
+  .story-split-grid {
+    gap: 1.3rem;
+  }
+
+  .story-split-grid .story-horizontal-bottom-bar {
+    margin-top: 1.2rem;
+  }
+
+  .story-horizontal-bottom-bar {
+    margin-top: 1.2rem;
+  }
+
+  .story-sequence-flow {
+    gap: 1.2rem;
   }
 
   .story-editorial-statement {
@@ -717,3 +745,4 @@ body.light-mode .story-read-more-btn.highlighted-white {
     font-size: 0.85rem;
   }
 }
+

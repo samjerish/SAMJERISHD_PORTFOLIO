@@ -26,11 +26,29 @@ main {
   will-change: opacity;
 }
 
+.scroll-fade-wrapper.experience-section-wrapper {
+  position: relative;
+  z-index: 25;
+  margin-bottom: clamp(3.5rem, 6vh, 6.5rem);
+}
+
+.scroll-fade-wrapper.experience-section-wrapper:has(.is-card-dragging) {
+  z-index: 99999 !important;
+}
+
+.scroll-fade-wrapper.drift-wall-section-wrapper {
+  position: relative;
+  z-index: 10;
+}
+
 /* Remove section fade-out transition on mobile alone */
 @media (max-width: 768px) {
   .scroll-fade-wrapper {
     opacity: 1 !important;
     will-change: auto;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
   }
 }
 

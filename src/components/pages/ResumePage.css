@@ -112,7 +112,7 @@
   font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 600;
-  color: #4ade80;
+  color: #ffffff;
   margin: 0 0 1.2rem 0;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -124,7 +124,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   font-size: 0.95rem;
-  color: #888888;
+  color: #a1a1aa;
   font-family: "JetBrains Mono", monospace;
 }
 
@@ -139,7 +139,7 @@
 }
 
 .dot-divider {
-  color: #444444;
+  color: #52525b;
 }
 
 .resume-divider {
@@ -173,7 +173,7 @@
     sans-serif;
   font-size: 1.05rem;
   line-height: 1.6;
-  color: #a0a0a0;
+  color: #b4b4be;
   margin: 0;
 }
 
@@ -195,29 +195,71 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.6rem;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.item-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.item-logo-frame {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.item-logo-frame.is-light-bg {
+  background: #ffffff;
+  padding: 3px;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.item-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.item-meta-subtitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  color: #a1a1aa;
+  margin-top: 0.25rem;
+  letter-spacing: 0.02em;
 }
 
 .item-title {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0;
-  flex: 1;
 }
 
 .item-date {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.9rem;
-  color: #888888;
+  font-size: 0.88rem;
+  color: #a1a1aa;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .resume-doc-list {
   padding-left: 1.2rem;
-  color: #a0a0a0;
+  color: #b4b4be;
   margin: 1rem 0 0 0;
   display: flex;
   flex-direction: column;

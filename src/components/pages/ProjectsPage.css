@@ -76,7 +76,7 @@
   margin-bottom: 2rem;
 }
 
-.story-line {
+.projects-story-section .story-line {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 4.5vw, 3.8rem);
   font-weight: 800;
@@ -86,19 +86,15 @@
   transition: all 0.5s ease;
 }
 
-.story-line.line-1 {
+.projects-story-section .story-line.line-1 {
   color: #888888;
 }
 
-.story-line.line-what-if {
+.projects-story-section .story-line.line-what-if {
   color: #ffffff;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: clamp(3rem, 7vw, 5.2rem);
-  background: linear-gradient(135deg, #ffffff 15%, #4ade80 65%, #93c5fd 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 35px rgba(74, 222, 128, 0.2));
   letter-spacing: -0.03em;
 }
 
@@ -241,11 +237,11 @@
     padding: 1.5rem;
   }
 
-  .story-line {
+  .projects-story-section .story-line {
     font-size: 2.2rem;
   }
 
-  .story-line.line-what-if {
+  .projects-story-section .story-line.line-what-if {
     font-size: 2.8rem;
   }
 }
@@ -268,11 +264,11 @@
     font-size: 0.95rem;
   }
 
-  .story-line {
+  .projects-story-section .story-line {
     font-size: 1.8rem;
   }
 
-  .story-line.line-what-if {
+  .projects-story-section .story-line.line-what-if {
     font-size: 2.2rem;
   }
 }
