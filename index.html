@@ -4,7 +4,28 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/SAMJERISHD_PORTFOLIO/favicon.png?v=3" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=1280, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes, viewport-fit=cover" />
+  <script>
+    (function () {
+      function adjustViewport() {
+        var targetWidth = 1280;
+        var currentWidth = window.innerWidth || window.screen.width || 1280;
+        if (currentWidth < targetWidth) {
+          var scale = Math.min(1, currentWidth / targetWidth);
+          var meta = document.querySelector('meta[name="viewport"]');
+          if (meta) {
+            meta.setAttribute(
+              'content',
+              'width=' + targetWidth + ', initial-scale=' + scale.toFixed(4) + ', maximum-scale=3.0, user-scalable=yes, viewport-fit=cover'
+            );
+          }
+        }
+      }
+      adjustViewport();
+      window.addEventListener('orientationchange', adjustViewport);
+      window.addEventListener('resize', adjustViewport);
+    })();
+  </script>
   <meta name="description"
     content="Portfolio of Sam Jerish D — Full-Stack Developer specializing in React, TypeScript, Python, and cloud-native systems. Explore featured projects, engineering case studies, and career timeline." />
   <meta name="author" content="Sam Jerish D" />
@@ -26,8 +47,8 @@
     href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&family=Great+Vibes&display=swap"
     rel="stylesheet" />
   <title>SAM JERISH D</title>
-  <script type="module" crossorigin src="/SAMJERISHD_PORTFOLIO/assets/index-D_yBpeBQ.js"></script>
-  <link rel="stylesheet" crossorigin href="/SAMJERISHD_PORTFOLIO/assets/index-YFITxHVC.css">
+  <script type="module" crossorigin src="/SAMJERISHD_PORTFOLIO/assets/index-CUjuOYQz.js"></script>
+  <link rel="stylesheet" crossorigin href="/SAMJERISHD_PORTFOLIO/assets/index-BOljsEdn.css">
 </head>
 
 <body>
