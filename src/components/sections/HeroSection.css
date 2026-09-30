@@ -162,7 +162,7 @@
   align-items: center;
   z-index: 1;
   width: 100%;
-  max-width: 1540px;
+  max-width: 1720px;
   margin: 0 auto;
   pointer-events: none;
 }
@@ -176,14 +176,14 @@
 
 .text-line-1 {
   color: #ffffff;
-  font-size: clamp(5.8rem, 26.5vw, 24.5rem);
+  font-size: clamp(6.8rem, 29.5vw, 27.5rem);
   line-height: 0.83;
   letter-spacing: -0.035em;
 }
 
 .text-line-2 {
   color: #888888;
-  font-size: clamp(4.1rem, 18.5vw, 17.2rem);
+  font-size: clamp(4.8rem, 20.8vw, 19.4rem);
   line-height: 0.83;
   letter-spacing: -0.035em;
 }
@@ -600,7 +600,7 @@ body.light-mode .book-call-btn.resume-hero-btn:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(5.4rem, 29vw, 8.8rem);
+    font-size: clamp(6.0rem, 32vw, 9.8rem);
     line-height: 0.82;
     letter-spacing: -0.025em;
     text-align: center;
@@ -611,7 +611,7 @@ body.light-mode .book-call-btn.resume-hero-btn:hover {
   }
 
   .text-line-2 {
-    font-size: clamp(2.8rem, 15.5vw, 5.0rem);
+    font-size: clamp(3.2rem, 17.5vw, 5.8rem);
     line-height: 0.82;
     letter-spacing: -0.015em;
     margin-top: 0.25rem;
@@ -804,13 +804,13 @@ body.light-mode .book-call-btn.resume-hero-btn:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(4.6rem, 28vw, 7.2rem);
+    font-size: clamp(5.2rem, 31vw, 8.2rem);
     line-height: 0.82;
     letter-spacing: -0.02em;
   }
 
   .text-line-2 {
-    font-size: clamp(2.4rem, 15vw, 4.2rem);
+    font-size: clamp(2.8rem, 17vw, 4.8rem);
     line-height: 0.82;
     letter-spacing: -0.01em;
     margin-top: 0.2rem;
@@ -863,11 +863,11 @@ body.light-mode .book-call-btn.resume-hero-btn:hover {
   }
 
   .text-line-1 {
-    font-size: clamp(3.8rem, 25vw, 5.2rem);
+    font-size: clamp(4.3rem, 28vw, 6.0rem);
   }
 
   .text-line-2 {
-    font-size: clamp(2.0rem, 13.5vw, 3.2rem);
+    font-size: clamp(2.3rem, 15vw, 3.8rem);
   }
 
   .hero-avatar-img-new {

@@ -118,6 +118,18 @@
   animation: welcome-float 3.5s ease-in-out infinite;
   user-select: none;
   -webkit-user-drag: none;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 66%,
+    rgba(0, 0, 0, 0) 98%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 66%,
+    rgba(0, 0, 0, 0) 98%
+  );
 }
 
 @keyframes welcome-float {

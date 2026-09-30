@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import "./ProjectShowcase1.css";
 import type { Project } from "../../data/projects";
-import { ArrowUpRight, BookOpen, Layers, Sparkles, Cpu } from "lucide-react";
+import { ArrowUpRight, Layers, Sparkles, Cpu } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
 import { ProjectBlogShowcase } from "./ProjectBlogShowcase";
 
@@ -348,16 +348,6 @@ export const ProjectShowcase1: React.FC<ProjectShowcase1Props> = ({
 
                   {/* Action Buttons Row */}
                   <div className="rb-card-actions">
-                    <button
-                      className="rb-action-btn primary-btn"
-                      onClick={() => openBlogShowcase(project)}
-                      data-cursor-text="READ"
-                      aria-label={`Open Blog 5 Case Study for ${project.name}`}
-                    >
-                      <BookOpen size={15} />
-                      <span>Case Study</span>
-                    </button>
-
                     {project.link && (
                       <a
                         href={project.link}

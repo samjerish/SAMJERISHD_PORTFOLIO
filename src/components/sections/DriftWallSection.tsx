@@ -9,63 +9,68 @@ export const DriftWallSection: React.FC<{
 }> = () => {
   const basePath = import.meta.env.BASE_URL;
 
-  const [columns, setColumns] = useState<number>(12);
-  const [tileWidth, setTileWidth] = useState<number>(240);
-  const [tileHeight, setTileHeight] = useState<number>(160);
+  const [columns, setColumns] = useState<number>(6);
+  const [tileWidth, setTileWidth] = useState<number>(245);
+  const [tileHeight, setTileHeight] = useState<number>(168);
   const [gap, setGap] = useState<number>(18);
   const [tilt, setTilt] = useState<number>(12);
   const [turn, setTurn] = useState<number>(-10);
   const [roll, setRoll] = useState<number>(-8);
-  const [speed, setSpeed] = useState<number>(36);
+  const [speed, setSpeed] = useState<number>(34);
 
   useEffect(() => {
     const updateDimensions = () => {
       const w = window.innerWidth;
       if (w < 480) {
-        setColumns(5);
-        setTileWidth(110);
-        setTileHeight(76);
-        setGap(10);
+        // Mobile view: 3 spacious columns so photos are large, readable, and 100% unique without crowding
+        setColumns(3);
+        setTileWidth(140);
+        setTileHeight(98);
+        setGap(12);
         setTilt(7);
         setTurn(-3);
         setRoll(-2);
-        setSpeed(28);
+        setSpeed(22);
       } else if (w < 768) {
-        setColumns(6);
-        setTileWidth(130);
-        setTileHeight(90);
-        setGap(12);
-        setTilt(9);
-        setTurn(-5);
-        setRoll(-4);
-        setSpeed(32);
+        // Large mobile / small tablet: 4 columns
+        setColumns(4);
+        setTileWidth(165);
+        setTileHeight(115);
+        setGap(14);
+        setTilt(8);
+        setTurn(-4);
+        setRoll(-3);
+        setSpeed(26);
       } else if (w < 1200) {
-        setColumns(12);
-        setTileWidth(200);
-        setTileHeight(135);
+        // Tablet / Small Laptop: 5 columns
+        setColumns(5);
+        setTileWidth(215);
+        setTileHeight(148);
         setGap(16);
-        setTilt(12);
-        setTurn(-10);
-        setRoll(-8);
-        setSpeed(36);
+        setTilt(11);
+        setTurn(-8);
+        setRoll(-6);
+        setSpeed(32);
       } else if (w < 1600) {
-        setColumns(15);
-        setTileWidth(235);
-        setTileHeight(155);
+        // Standard Desktop: 6 columns
+        setColumns(6);
+        setTileWidth(245);
+        setTileHeight(168);
         setGap(18);
         setTilt(12);
         setTurn(-10);
         setRoll(-8);
-        setSpeed(38);
+        setSpeed(34);
       } else {
-        setColumns(18);
-        setTileWidth(260);
-        setTileHeight(172);
+        // Ultra-wide Desktop: 7 columns
+        setColumns(7);
+        setTileWidth(265);
+        setTileHeight(180);
         setGap(20);
         setTilt(12);
         setTurn(-10);
         setRoll(-8);
-        setSpeed(40);
+        setSpeed(36);
       }
     };
 
@@ -74,6 +79,7 @@ export const DriftWallSection: React.FC<{
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
+  // Exclusively the 31 photography moments from the "Beyond the Frame" visual archive
   const items = useMemo<DriftWallItem[]>(() => [
     { image: `${basePath}media-opt/media-1.jpg` },
     { image: `${basePath}media-opt/media-2.jpg` },

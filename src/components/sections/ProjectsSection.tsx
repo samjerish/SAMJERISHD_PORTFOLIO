@@ -53,8 +53,8 @@ export const ProjectsSection: React.FC<{
         {/* Scroll Stack Pinned Cards Deck - Layered stack with peek-out headers */}
         <ScrollStack
           projects={projects}
-          stackOffset={28}
-          scaleStep={0.026}
+          stackOffset={30}
+          scaleStep={0.024}
           rotationStep={0}
         />
       </div>

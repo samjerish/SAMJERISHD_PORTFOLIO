@@ -195,16 +195,17 @@
   padding: 22px;
 }
 
-/* Media Screenshot Container with 3D Depth & Case Study Trigger */
+/* Media Screenshot Container with 3D Depth */
 .rb-card-media-wrapper {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9.8;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  cursor: default;
   background: #090a10;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: none !important;
+  outline: none !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 

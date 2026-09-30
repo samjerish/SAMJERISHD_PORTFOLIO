@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useCallback, useState } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import "./ScrollStack.css";
 import type { Project } from "../../data/projects";
-import { Layers, ArrowUpRight, BookOpen } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
-import { ProjectBlogShowcase } from "./ProjectBlogShowcase";
 
 export interface ScrollStackProps {
   projects: Project[];
@@ -15,34 +14,30 @@ export interface ScrollStackProps {
 
 export const ScrollStack: React.FC<ScrollStackProps> = ({
   projects,
-  stackOffset = 28,
-  scaleStep = 0.026,
+  stackOffset = 30,
+  scaleStep = 0.024,
   rotationStep: _rotationStep = 0,
-  dissolveStep = 0.025,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardWrapperRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardInnerRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  // Project Blog 5 Case Study Modal State
-  const [selectedProjectForBlog, setSelectedProjectForBlog] = useState<Project | null>(null);
-  const [isBlogOpen, setIsBlogOpen] = useState(false);
-
-  const openBlogShowcase = (proj: Project) => {
-    setSelectedProjectForBlog(proj);
-    setIsBlogOpen(true);
-  };
 
   // 60/120fps direct hardware-accelerated style calculation without React state lag
   const updateStackTransforms = useCallback(() => {
     if (!containerRef.current) return;
 
     const isMobile = window.innerWidth <= 860;
-    const currentStackOffset = isMobile ? 16 : stackOffset;
+    const currentStackOffset = isMobile ? 18 : stackOffset;
     const stickyTopBase = isMobile ? 54 : 75;
-    const transitionZone = isMobile ? 220 : 300;
-    const currentScaleStep = isMobile ? 0.016 : scaleStep;
-    const currentDissolveStep = isMobile ? 0.018 : dissolveStep;
+    const transitionZone = isMobile ? 200 : 280;
+    const currentScaleStep = isMobile ? 0.015 : scaleStep;
+
+    // Pre-calculate wrapper tops in a single read pass to eliminate layout thrashing
+    const wrapperTops: number[] = new Array(projects.length);
+    for (let j = 0; j < projects.length; j++) {
+      const wrapperEl = cardWrapperRefs.current[j];
+      wrapperTops[j] = wrapperEl ? wrapperEl.getBoundingClientRect().top : 99999;
+    }
 
     for (let i = 0; i < projects.length; i++) {
       const cardEl = cardInnerRefs.current[i];
@@ -50,38 +45,34 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
 
       let cardsOnTop = 0;
       for (let j = i + 1; j < projects.length; j++) {
-        const nextWrapper = cardWrapperRefs.current[j];
-        if (nextWrapper) {
-          const nextRect = nextWrapper.getBoundingClientRect();
-          const targetStickyTop = stickyTopBase + j * currentStackOffset;
+        const nextTop = wrapperTops[j];
+        const targetStickyTop = stickyTopBase + j * currentStackOffset;
 
-          // Progressive overlap detection window with smooth cubic ease-out
-          if (nextRect.top <= targetStickyTop + transitionZone) {
-            const rawProgress = Math.min(
-              1,
-              Math.max(
-                0,
-                (targetStickyTop + transitionZone - nextRect.top) / transitionZone
-              )
-            );
-            // Cubic ease-out curve for natural, elegant physical deceleration
-            const easedProgress = 1 - Math.pow(1 - rawProgress, 3);
-            cardsOnTop += easedProgress;
-          }
+        // Progressive overlap detection window with smooth cubic ease-out
+        if (nextTop <= targetStickyTop + transitionZone) {
+          const rawProgress = Math.min(
+            1,
+            Math.max(
+              0,
+              (targetStickyTop + transitionZone - nextTop) / transitionZone
+            )
+          );
+          // Cubic ease-out curve for natural, elegant physical deceleration
+          const easedProgress = 1 - Math.pow(1 - rawProgress, 3);
+          cardsOnTop += easedProgress;
         }
       }
 
-      // Smooth, squared stack with progressive depth scale so cards are never fully covered
-      const scale = Math.max(isMobile ? 0.93 : 0.88, 1 - cardsOnTop * currentScaleStep);
-      const opacity = Math.max(0.85, 1 - cardsOnTop * currentDissolveStep);
-      const brightness = Math.max(0.72, 1 - cardsOnTop * 0.045);
+      // Smooth, squared stack with progressive depth scale - 100% SOLID OPAQUE (NO TRANSPARENCY)
+      const scale = Math.max(isMobile ? 0.94 : 0.90, 1 - cardsOnTop * currentScaleStep);
+      const brightness = Math.max(0.75, 1 - cardsOnTop * 0.04);
 
       // Direct GPU compositor mutation - card stays squarely aligned while shrinking into background
       cardEl.style.transform = `scale3d(${scale.toFixed(4)}, ${scale.toFixed(4)}, 1)`;
-      cardEl.style.opacity = opacity.toFixed(3);
+      cardEl.style.opacity = "1";
       cardEl.style.filter = `brightness(${brightness.toFixed(2)})`;
     }
-  }, [projects, stackOffset, scaleStep, dissolveStep]);
+  }, [projects, stackOffset, scaleStep]);
 
   useEffect(() => {
     let animId: number;
@@ -132,7 +123,7 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
             }}
             className="scroll-stack-card-wrapper"
             style={{
-              top: `calc(var(--stack-top-base, 75px) + var(--stack-offset, 28px) * ${index})`,
+              top: `calc(var(--stack-top-base, 75px) + var(--stack-offset, ${stackOffset}px) * ${index})`,
               zIndex: index + 10,
             }}
           >
@@ -153,9 +144,6 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                   <span className="stack-card-index" aria-label={`Project 0${index + 1}`}>
                     0{index + 1}
                   </span>
-                  <div className="stack-brand-icon" aria-hidden="true">
-                    <Layers size={16} strokeWidth={2.2} />
-                  </div>
                   <span className="stack-brand-name">
                     {project.brandName || project.name}
                   </span>
@@ -217,39 +205,19 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
                         <span>Source Code</span>
                       </a>
                     )}
-
-                    <button
-                      type="button"
-                      className="stack-card-link-btn stack-article-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openBlogShowcase(project);
-                      }}
-                      data-cursor-text="READ"
-                      aria-label={`Read case study for ${project.name}`}
-                    >
-                      <BookOpen size={15} />
-                      <span>Case Study</span>
-                    </button>
                   </div>
                 </div>
 
-                {/* Right Side: Media Showcase Mockup (Clean Display, No Click to View Overlay) */}
+                {/* Right Side: Project Photo (Borderless with curved corners alone) */}
                 <div className="stack-card-media">
-                  <div className="stack-device-frame">
-                    <div className="stack-device-notch" aria-hidden="true">
-                      <div className="stack-device-speaker" />
-                    </div>
-                    <div className="stack-device-screen">
-                      <img
-                        src={project.image}
-                        alt={`${project.name} interface preview`}
-                        className="stack-project-img"
-                        loading="lazy"
-                        draggable={false}
-                      />
-                      <div className="stack-glare-overlay" aria-hidden="true" />
-                    </div>
+                  <div className="stack-photo-frame">
+                    <img
+                      src={project.image}
+                      alt={`${project.name} interface preview`}
+                      className="stack-project-img"
+                      loading="lazy"
+                      draggable={false}
+                    />
                   </div>
                 </div>
               </div>
@@ -257,15 +225,6 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
           </div>
         );
       })}
-
-      {/* Blog 5 Detailed Article Showcase with Scroll Progress and AI Input */}
-      <ProjectBlogShowcase
-        project={selectedProjectForBlog}
-        projects={projects}
-        isOpen={isBlogOpen}
-        onClose={() => setIsBlogOpen(false)}
-        onSelectProject={(newProject) => setSelectedProjectForBlog(newProject)}
-      />
     </div>
   );
 };

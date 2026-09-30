@@ -10,7 +10,6 @@ import { AboutPage } from "./components/pages/AboutPage";
 import { ProjectsPage } from "./components/pages/ProjectsPage";
 import { ContactPage } from "./components/pages/ContactPage";
 import { ResumePage } from "./components/pages/ResumePage";
-import { MobilePageWrapper } from "./components/layout/MobilePageWrapper";
 import { DriftWallSection } from "./components/sections/DriftWallSection";
 import { ExperienceSection } from "./components/sections/ExperienceSection";
 import { ContactSection } from "./components/sections/ContactSection";
@@ -25,59 +24,28 @@ function App() {
   const [targetPage, setTargetPage] = useState<
     "home" | "media" | "about" | "projects" | "contact" | "resume"
   >("home");
-  const [isShiftingRight, setIsShiftingRight] = useState(false);
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth <= 768 : false
-  );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const handleNavigate = (
     page: "home" | "media" | "about" | "projects" | "contact" | "resume",
   ) => {
     if (page === currentPage) return;
-
-    // In mobile view: instant iOS Instagram push/pop rightward shift transitions
-    if (isMobile) {
-      if (page === "home") {
-        setIsShiftingRight(true);
-      } else {
-        setIsShiftingRight(false);
-        setCurrentPage(page);
-      }
-      return;
-    }
-
-    // Desktop view: cinematic ribbon transition
     setTargetPage(page);
     setIsTransitioning(true);
   };
 
-  const handleMobileSwipeBack = useCallback(() => {
-    setCurrentPage("home");
-    setIsShiftingRight(false);
-  }, []);
-
-  const handleExitComplete = useCallback(() => {
-    setCurrentPage("home");
-    setIsShiftingRight(false);
-  }, []);
-
   useEffect(() => {
+    const isTouch =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
     const lenis = new Lenis({
-      duration: isMobile ? 0.8 : 1.1,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
-      smoothWheel: true,
+      smoothWheel: !isTouch,
       wheelMultiplier: 1,
-      touchMultiplier: 1,
+      touchMultiplier: 0,
       syncTouch: false,
     });
 
@@ -96,7 +64,7 @@ function App() {
       delete (window as any).__lenis;
       lenis.destroy();
     };
-  }, [isMobile]);
+  }, []);
 
   const handleReveal = useCallback(() => {
     setCurrentPage(targetPage);
@@ -135,33 +103,27 @@ function App() {
             <LoadingIntro onComplete={() => setIsLoaded(true)} />
           )}
 
-          {/* Desktop Ribbon Transition */}
-          {!isMobile && isTransitioning && (
+          {/* Ribbon Transition for all devices */}
+          {isTransitioning && (
             <RibbonTransition
               onReveal={handleReveal}
               onComplete={handleTransitionComplete}
             />
           )}
 
-          {/* Home Page: Always preserved under subpages on mobile for smooth Instagram-style reveal */}
+          {/* Home Page */}
           <div
-            className={`app-home-layer ${
-              isMobile && currentPage !== "home" ? "is-under-subpage" : ""
-            }`}
+            className="app-home-layer"
             style={{
-              display: !isMobile && currentPage !== "home" ? "none" : "block",
+              display: currentPage !== "home" ? "none" : "block",
             }}
           >
             <PortfolioLayout onNavigate={handleNavigate} />
           </div>
 
-          {/* Subpages: Wrapped in MobilePageWrapper for native iOS edge-swipe and shift-right transitions */}
+          {/* Subpages */}
           {currentPage !== "home" && (
-            <MobilePageWrapper
-              onSwipeBack={handleMobileSwipeBack}
-              isExiting={isShiftingRight}
-              onExitComplete={handleExitComplete}
-            >
+            <>
               {currentPage === "media" && (
                 <MyMediaPage onNavigate={handleNavigate} />
               )}
@@ -177,7 +139,7 @@ function App() {
               {currentPage === "resume" && (
                 <ResumePage onNavigate={handleNavigate} />
               )}
-            </MobilePageWrapper>
+            </>
           )}
 
         </>

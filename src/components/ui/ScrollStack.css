@@ -5,7 +5,7 @@
    =================================================== */
 
 .scroll-stack-container {
-  --stack-offset: 28px;
+  --stack-offset: 30px;
   --stack-top-base: 75px;
   position: relative;
   width: 100%;
@@ -21,13 +21,13 @@
 .scroll-stack-card-wrapper {
   position: sticky;
   width: 100%;
-  margin-bottom: clamp(90px, 14vh, 140px);
+  margin-bottom: clamp(70px, 11vh, 100px);
   perspective: 1200px;
   will-change: transform;
 }
 
 .scroll-stack-card-wrapper:last-child {
-  margin-bottom: clamp(40px, 8vh, 60px);
+  margin-bottom: clamp(90px, 14vh, 130px);
 }
 
 /* Pinned Card Body - Monochromatic Luxury Baseline with Crisp Stack Edges */
@@ -37,7 +37,7 @@
   height: 520px;
   min-height: 520px;
   max-height: 520px;
-  background: #111114;
+  background: #111215;
   background: radial-gradient(ellipse at 50% -10%, #1c1d21 0%, #111215 45%, #0a0a0c 100%);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-top: 1px solid rgba(255, 255, 255, 0.28);
@@ -53,12 +53,11 @@
   gap: 1.6rem;
   cursor: default;
   overflow: hidden;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   user-select: none;
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  will-change: transform, opacity, filter;
+  opacity: 1 !important;
+  will-change: transform, filter;
   transition:
     border-color 0.25s ease,
     box-shadow 0.25s ease;
@@ -364,48 +363,49 @@
   cursor: default;
 }
 
+.stack-photo-frame,
 .stack-device-frame {
   position: relative;
   width: 100%;
   max-width: 540px;
-  background: #0d0e11;
-  border: 6px solid #1a1b20;
-  border-radius: 18px;
+  height: clamp(260px, 32vw, 340px);
+  background: #090a0e;
+  border: none !important;
+  outline: none !important;
+  border-radius: 18px !important;
   box-shadow:
-    0 25px 60px -10px rgba(0, 0, 0, 0.9),
-    0 0 20px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    0 18px 45px -10px rgba(0, 0, 0, 0.75),
+    0 4px 16px rgba(0, 0, 0, 0.5);
+  overflow: hidden !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.stack-card-media:hover .stack-photo-frame,
+.scroll-stack-card:hover .stack-photo-frame,
 .stack-card-media:hover .stack-device-frame,
 .scroll-stack-card:hover .stack-device-frame {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
+  border: none !important;
 }
 
-.stack-device-notch {
-  width: 100%;
-  height: 18px;
-  background: #0d0e11;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+.stack-device-notch,
 .stack-device-speaker {
-  width: 46px;
-  height: 4px;
-  background: #23242a;
-  border-radius: 9999px;
+  display: none !important;
 }
 
 .stack-device-screen {
   position: relative;
   width: 100%;
-  height: 320px;
-  overflow: hidden;
-  background: #060608;
+  height: 100%;
+  border-radius: 14px !important;
+  border: none !important;
+  outline: none !important;
+  overflow: hidden !important;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -414,9 +414,12 @@
 .stack-project-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: top center;
+  object-fit: contain !important;
+  object-position: center center;
   display: block;
+  border-radius: 14px !important;
+  border: none !important;
+  outline: none !important;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -425,17 +428,7 @@
 }
 
 .stack-glare-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    transparent 50%
-  );
-  pointer-events: none;
+  display: none !important;
 }
 
 /* ===================================================
@@ -589,21 +582,21 @@
 
 @media (max-width: 860px) {
   .scroll-stack-container {
-    --stack-offset: 16px;
+    --stack-offset: 18px;
     --stack-top-base: calc(env(safe-area-inset-top, 0px) + 52px);
-    padding-bottom: 0.5rem;
+    padding-bottom: 1.5rem;
   }
 
   /* Pinned Sticky Stacking Cards on Mobile View - Visible stacked layers */
   .scroll-stack-card-wrapper {
     position: sticky;
-    margin-bottom: clamp(35px, 7vh, 55px);
+    margin-bottom: clamp(40px, 8vh, 60px);
     perspective: 1000px;
     will-change: transform;
   }
 
   .scroll-stack-card-wrapper:last-child {
-    margin-bottom: 1.2rem;
+    margin-bottom: clamp(60px, 10vh, 80px);
   }
 
   .scroll-stack-card {
@@ -633,13 +626,17 @@
     order: -1;
   }
 
+  .stack-photo-frame,
   .stack-device-frame {
-    border-width: 3px;
-    border-radius: 12px;
+    border: none !important;
+    border-radius: 14px !important;
+    height: clamp(150px, 24vh, 200px);
   }
 
-  .stack-device-screen {
-    height: clamp(130px, 19vh, 165px);
+  .stack-device-screen,
+  .stack-project-img {
+    border: none !important;
+    border-radius: 14px !important;
   }
 
   .stack-card-info {

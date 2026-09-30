@@ -23,7 +23,15 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [cursorText, setCursorText] = useState<string>("");
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia("(pointer: coarse)").matches
+    );
+  });
+
   const [targetRect, setTargetRect] = useState<{
     x: number;
     y: number;
@@ -43,15 +51,7 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
   const activeTargetRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    // Detect touch-only devices
-    if (
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      window.matchMedia("(pointer: coarse)").matches
-    ) {
-      setIsTouchDevice(true);
-      return;
-    }
+    if (isTouchDevice) return;
 
     if (hideDefaultCursor) {
       document.documentElement.classList.add("custom-cursor-active");

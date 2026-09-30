@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { HeroSection } from "../sections/HeroSection";
-import { StorySection } from "../sections/StorySection";
 import { ProjectsSection } from "../sections/ProjectsSection";
 import { ExperienceSection } from "../sections/ExperienceSection";
 import { DriftWallSection } from "../sections/DriftWallSection";
@@ -27,9 +26,6 @@ export const PortfolioLayout: React.FC<{
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const totalScroll = window.scrollY;
-          const windowHeight = window.innerHeight;
-          const isMobile = window.innerWidth <= 768;
-
           const docHeight =
             document.documentElement.scrollHeight -
             document.documentElement.clientHeight;
@@ -41,60 +37,19 @@ export const PortfolioLayout: React.FC<{
               container.style.opacity = totalScroll > 10 ? "1" : "0";
             }
           }
-
-          // Section fade-out transition: Active on desktop alone, disabled on mobile
-          if (isMobile) {
-            if (mainRef.current) {
-              const sections = mainRef.current.children;
-              for (let i = 0; i < sections.length; i++) {
-                const section = sections[i] as HTMLElement;
-                if (section.style.opacity !== "1") {
-                  section.style.opacity = "1";
-                }
-              }
-            }
-          } else if (mainRef.current) {
-            const sections = mainRef.current.children;
-
-            for (let i = 0; i < sections.length; i++) {
-              const section = sections[i] as HTMLElement;
-              const rect = section.getBoundingClientRect();
-              const fadeThreshold = Math.min(windowHeight * 0.8, rect.height);
-
-              if (rect.top < 0 && rect.bottom < fadeThreshold) {
-                const fadeAmount = 1 - rect.bottom / fadeThreshold;
-                const nextOpacity = Math.max(0, 1 - fadeAmount).toFixed(2);
-                if (section.style.opacity !== nextOpacity) {
-                  section.style.opacity = nextOpacity;
-                }
-              } else if (section.style.opacity !== "1") {
-                section.style.opacity = "1";
-              }
-            }
-          }
-
           ticking = false;
         });
         ticking = true;
       }
     };
 
-    const handleResize = () => {
-      if (window.innerWidth <= 768 && mainRef.current) {
-        const sections = mainRef.current.children;
-        for (let i = 0; i < sections.length; i++) {
-          (sections[i] as HTMLElement).style.opacity = "1";
-        }
-      }
-    };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleScroll);
       clearTimeout(timer);
     };
   }, []);
@@ -137,9 +92,6 @@ export const PortfolioLayout: React.FC<{
       <main ref={mainRef}>
         <div className="scroll-fade-wrapper">
           <HeroSection onNavigate={onNavigate} />
-        </div>
-        <div className="scroll-fade-wrapper">
-          <StorySection onNavigate={onNavigate} />
         </div>
         <div className="scroll-fade-wrapper">
           <ProjectsSection onNavigate={onNavigate} />

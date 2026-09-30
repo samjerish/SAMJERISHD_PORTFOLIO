@@ -102,23 +102,24 @@ export const DriftWall: React.FC<DriftWallProps> = ({
   }, []);
 
   const columnItems = useMemo(() => {
-    const cols: DriftWallItem[][] = Array.from({ length: columns }, () => []);
-    items.forEach((item, i) => cols[i % columns].push(item));
-    return cols.map((col, colIdx) => {
-      let result = col.length ? [...col] : items.slice(0, 1);
-      while (result.length < 8 && items.length > 0) {
-        const additions = items.filter((_, idx) => (idx + colIdx) % 3 === 0);
-        result.push(...(additions.length ? additions : items.slice(0, 2)));
-      }
-      return result;
+    if (!items.length) return [];
+    const count = Math.max(1, columns);
+    const cols: DriftWallItem[][] = Array.from({ length: count }, () => []);
+
+    // Distribute all unique items evenly across columns without injecting duplicate items
+    items.forEach((item, index) => {
+      cols[index % count].push(item);
     });
+
+    return cols;
   }, [items, columns]);
 
   const columnMeta = useMemo(() => {
     const unit = tileHeight + gap;
     return columnItems.map(col => {
       const copyHeight = Math.max(unit, col.length * unit);
-      const copies = Math.max(8, Math.ceil((containerHeight * 5.0) / copyHeight) + 6);
+      // Ensure smooth infinite wrap without creating excess repetitive DOM copies
+      const copies = Math.max(3, Math.ceil((containerHeight * 2.8) / copyHeight) + 1);
       return { copyHeight, copies };
     });
   }, [columnItems, tileHeight, gap, containerHeight]);
@@ -253,9 +254,6 @@ export const DriftWall: React.FC<DriftWallProps> = ({
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
-
-    animId = requestAnimationFrame(animate);
-    rafRef.current = animId;
 
     return () => {
       observer.disconnect();

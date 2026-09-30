@@ -84,7 +84,7 @@ export const HeroSection: React.FC<{
           type="button"
           className={`hero-scroll-indicator ${scrolled ? "is-scrolled" : ""}`}
           onClick={handleScrollDown}
-          aria-label="Scroll down to about section"
+          aria-label="Scroll down to featured projects"
           data-cursor-text="SCROLL"
         >
           <div className="scroll-indicator-mouse" aria-hidden="true">
