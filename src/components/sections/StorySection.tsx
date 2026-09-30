@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./StorySection.css";
-import firstPhoto from "../../assets/first_photo.png";
+import firstPhoto from "../../assets/first_photo-opt.jpg";
 import currentPhoto from "../../assets/me-opt.jpg";
 import { GitHubModal } from "../ui/GitHubModal";
 
