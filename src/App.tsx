@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import Lenis from "lenis";
+import { LoadingIntro } from "./components/ui/LoadingIntro";
 import { RibbonTransition } from "./components/ui/RibbonTransition";
 import { PortfolioLayout } from "./components/layout/PortfolioLayout";
 import { CustomCursor } from "./components/ui/CustomCursor";
@@ -16,6 +17,7 @@ import { ContactSection } from "./components/sections/ContactSection";
 
 function App() {
   const preview = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("preview") : null;
+  const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState<
     "home" | "media" | "about" | "projects" | "contact" | "resume"
   >("home");
@@ -128,6 +130,10 @@ function App() {
 
       {!preview && (
         <>
+          {/* Initial Preloader: LatticeLoader + Marquee Ribbons */}
+          {!isLoaded && (
+            <LoadingIntro onComplete={() => setIsLoaded(true)} />
+          )}
 
           {/* Desktop Ribbon Transition */}
           {!isMobile && isTransitioning && (

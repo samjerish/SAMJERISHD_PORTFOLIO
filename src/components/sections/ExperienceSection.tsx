@@ -234,22 +234,22 @@ export const ExperienceSection: React.FC<{
       progLine.style.height = `${Math.max(0, targetPointerY - startY)}px`;
       pointer.style.top = `${targetPointerY}px`;
 
-      // Update active focused card strictly based on node center proximity
-      let closestIdx = 0;
-      let minDistance = Infinity;
+      // Determine active focused item:
+      // Only highlight the next section when the traveling scroll pointer actually reaches and touches its node.
+      const TOUCH_THRESHOLD = 8; // Pointer circle (14px) touches node circle (14px) when within 8px
+      let touchedIdx = 0;
 
-      itemRefs.current.forEach((el, index) => {
-        if (!el) return;
-        const nodeOffset = getNodeCenterY(el) - el.offsetTop;
-        const nodeViewportY = el.getBoundingClientRect().top + nodeOffset;
-        const dist = Math.abs(nodeViewportY - triggerY);
-        if (dist < minDistance) {
-          minDistance = dist;
-          closestIdx = index;
+      for (let i = itemRefs.current.length - 1; i >= 0; i--) {
+        const el = itemRefs.current[i];
+        if (!el) continue;
+        const nodeY = getNodeCenterY(el);
+        if (targetPointerY >= nodeY - TOUCH_THRESHOLD) {
+          touchedIdx = i;
+          break;
         }
-      });
+      }
 
-      setActiveExpIndex(closestIdx);
+      setActiveExpIndex(touchedIdx);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -428,7 +428,7 @@ export const ExperienceSection: React.FC<{
                           exp.isCurrent ? "is-current" : ""
                         } ${isFocused ? "is-node-focused" : ""}`}
                       >
-                        {exp.isCurrent && <div className="timeline-node-pulse" />}
+                        {exp.isCurrent && isFocused && <div className="timeline-node-pulse" />}
                         <div className="timeline-node-inner" />
                       </div>
                     </div>

@@ -299,12 +299,7 @@ export const ProjectShowcase1: React.FC<ProjectShowcase1Props> = ({
                     {/* Gradient Depth Vignette */}
                     <div className="rb-media-vignette" />
 
-                    {/* "✦ Click to View Case Study" Animated Glowing Pill */}
-                    <div className="rb-media-overlay-pill">
-                      <BookOpen size={14} className="rb-pill-icon" />
-                      <span>Click to View Case Study</span>
-                      <Sparkles size={12} className="rb-pill-sparkle" />
-                    </div>
+
 
                     {/* Floating Item Number Indicator */}
                     <div className="rb-media-number-badge">

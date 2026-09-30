@@ -1,93 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./LoadingIntro.css";
 
 interface LoadingIntroProps {
   onComplete: () => void;
 }
 
-type Phase = "typewriter" | "ribbons" | "exit";
-
-const TARGET_TEXT = "loading.....";
+type Phase = "welcome" | "ribbons" | "exit";
 
 export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
-  const [phase, setPhase] = useState<Phase>("typewriter");
-  const [displayText, setDisplayText] = useState<string>("");
-  const [showCursor, setShowCursor] = useState<boolean>(true);
+  const [phase, setPhase] = useState<Phase>("welcome");
+  const [isExiting, setIsExiting] = useState(false);
 
-  useEffect(() => {
-    let charIndex = 0;
-    let typeInterval: ReturnType<typeof setInterval> | null = null;
-    let finishTimer: ReturnType<typeof setTimeout> | null = null;
+  const handleEnter = useCallback(() => {
+    if (isExiting) return;
+    setIsExiting(true);
+    setPhase("ribbons");
 
-    // Start typewriter effect after a brief initial pause
-    const startDelay = setTimeout(() => {
-      typeInterval = setInterval(() => {
-        if (charIndex < TARGET_TEXT.length) {
-          setDisplayText(TARGET_TEXT.slice(0, charIndex + 1));
-          charIndex++;
-        } else {
-          if (typeInterval) clearInterval(typeInterval);
-          // Hold the full "loading....." text briefly before triggering ribbons
-          finishTimer = setTimeout(() => {
-            setPhase("ribbons");
-          }, 450);
-        }
-      }, 75);
-    }, 150);
+    // Sequence ribbons parting and revealing the portfolio
+    const exitTimer = setTimeout(() => {
+      setPhase("exit");
+    }, 1100);
 
-    // Blinking cursor
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 450);
+    const completeTimer = setTimeout(() => {
+      onComplete();
+    }, 2200);
 
     return () => {
-      clearTimeout(startDelay);
-      if (typeInterval) clearInterval(typeInterval);
-      if (finishTimer) clearTimeout(finishTimer);
-      clearInterval(cursorInterval);
+      clearTimeout(exitTimer);
+      clearTimeout(completeTimer);
     };
-  }, []);
+  }, [isExiting, onComplete]);
 
-  useEffect(() => {
-    if (phase === "ribbons") {
-      // Phase 2: Ribbons enter across screen
-      const exitTimer = setTimeout(() => {
-        setPhase("exit");
-      }, 1400);
+  // Explicit click required to enter website (auto-enter removed as requested)
 
-      // Phase 3: Ribbons exit and reveal website
-      const completeTimer = setTimeout(() => {
-        onComplete();
-      }, 2600);
-
-      return () => {
-        clearTimeout(exitTimer);
-        clearTimeout(completeTimer);
-      };
-    }
-  }, [phase, onComplete]);
-
-  // Repeat text for infinite marquee ribbons
+  // Repeat text for marquee ribbons transition
   const marqueeText = "SAM JERISH D. ".repeat(15);
 
   return (
     <div className={`intro-container phase-${phase} is-initial-load`}>
-      {/* Typewriter Preloader Text Stage */}
-      <div className="typewriter-stage">
-        <div className="typewriter-wrapper">
-          <div className="typewriter-ambient-glow" />
-          <div className="typewriter-content" aria-label="loading">
-            <span className="typewriter-text">{displayText}</span>
-            <span
-              className={`typewriter-cursor ${!showCursor ? "cursor-hidden" : ""}`}
-            >
-              _
-            </span>
+      {/* Welcome Preloader Stage (Featuring transparent cutout of Sam Jerish at laptop) */}
+      <div className={`welcome-stage ${isExiting ? "is-exiting" : ""}`}>
+        <div className="welcome-glow-ambient" aria-hidden="true" />
+        <div className="welcome-card-content">
+          {/* Animated Illustration with completely transparent background */}
+          <div className="welcome-avatar-wrapper">
+            <img
+              src={`${import.meta.env.BASE_URL}sam_laptop.png`}
+              alt="Sam Jerish D working on laptop"
+              className="welcome-avatar-img"
+              draggable={false}
+            />
+            <div className="welcome-avatar-aura" aria-hidden="true" />
           </div>
+
+          {/* Name & Role in Website Font Theme */}
+          <h1 className="welcome-name">Sam Jerish D</h1>
+          <p className="welcome-role">Developer to solve real world problems</p>
+
+          {/* Welcome Call-To-Action Pill Button */}
+          <button
+            type="button"
+            className="welcome-enter-btn"
+            onClick={handleEnter}
+            aria-label="Welcome to my portfolio - Enter site"
+          >
+            <span>Welcome to my portfolio</span>
+          </button>
         </div>
       </div>
 
-      {/* Marquee Ribbons */}
+      {/* Marquee Ribbons Transition */}
       <div className="ribbons-container">
         <div className="ribbon ribbon-top">
           <div className="marquee-content marquee-content-left">
@@ -105,3 +87,4 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
     </div>
   );
 };
+

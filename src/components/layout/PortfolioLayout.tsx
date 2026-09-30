@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { HeroSection } from "../sections/HeroSection";
 import { StorySection } from "../sections/StorySection";
 import { ProjectsSection } from "../sections/ProjectsSection";
-import { WhatIDoSection } from "../sections/WhatIDoSection";
 import { ExperienceSection } from "../sections/ExperienceSection";
 import { DriftWallSection } from "../sections/DriftWallSection";
 import { ContactSection } from "../sections/ContactSection";
@@ -141,9 +140,6 @@ export const PortfolioLayout: React.FC<{
         </div>
         <div className="scroll-fade-wrapper">
           <StorySection onNavigate={onNavigate} />
-        </div>
-        <div className="scroll-fade-wrapper">
-          <WhatIDoSection />
         </div>
         <div className="scroll-fade-wrapper">
           <ProjectsSection onNavigate={onNavigate} />

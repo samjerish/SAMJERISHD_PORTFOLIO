@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./StorySection.css";
-import { WireframeSphere } from "../ui/WireframeSphere";
-
+import firstPhoto from "../../assets/first_photo.png";
+import currentPhoto from "../../assets/me-opt.jpg";
+import { GitHubModal } from "../ui/GitHubModal";
 
 export const AnimatedLine = ({
   text,
@@ -67,8 +68,11 @@ export const StorySection: React.FC<{
   ) => void;
 }> = ({ onNavigate }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isGithubModalOpen, setIsGithubModalOpen] = useState(false);
+
   const sectionRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+  const whatIDoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.body.classList.remove("light-mode");
@@ -79,14 +83,37 @@ export const StorySection: React.FC<{
           setIsVisible(true);
         }
       },
-      { root: null, rootMargin: "0px", threshold: 0.15 },
+      { root: null, rootMargin: "0px", threshold: 0.1 },
     );
 
     const node = sectionRef.current;
     if (node) observer.observe(node);
 
+    // Scroll flip trigger: when "What I Do" reaches the viewport
+    const flipObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsFlipped(true);
+        } else {
+          // If "What I Do" is below the viewport, user is looking at "A Little About Me"
+          if (entry.boundingClientRect.top > 0) {
+            setIsFlipped(false);
+          }
+        }
+      },
+      {
+        root: null,
+        threshold: 0.2,
+        rootMargin: "-10% 0px -20% 0px",
+      },
+    );
+
+    const whatIDoNode = whatIDoRef.current;
+    if (whatIDoNode) flipObserver.observe(whatIDoNode);
+
     return () => {
       if (node) observer.unobserve(node);
+      if (whatIDoNode) flipObserver.unobserve(whatIDoNode);
     };
   }, []);
 
@@ -98,17 +125,11 @@ export const StorySection: React.FC<{
       aria-label="About Sam Jerish"
     >
       <div className="story-content-wrapper">
-        {/* ===================================================
-            HORIZONTAL STORY SECTION (About Me & What I Do)
-            =================================================== */}
-        <div
-          ref={textRef}
-          className={`story-horizontal-content ${isVisible ? "is-visible" : ""}`}
-        >
+        <div className={`story-horizontal-content ${isVisible ? "is-visible" : ""}`}>
           {/* Ambient Spotlight Background */}
           <div className="editorial-ambient-glow" aria-hidden="true" />
 
-          {/* 2-Column Split Grid: Narrative Flow + Rotating 3D Geodesic Polyhedron */}
+          {/* 2-Column Split Grid: Narrative Flow + Sticky 3D Photo Flip Card */}
           <div className="story-split-grid">
             <div className="story-sequence-flow">
               {/* Part 1: A LITTLE ABOUT ME */}
@@ -130,26 +151,6 @@ export const StorySection: React.FC<{
                   <p className="story-editorial-statement">
                     My goal is to design products that not only work seamlessly but also create meaningful experiences.
                   </p>
-                </div>
-
-                {/* Grounded Technical Summary */}
-                <div className="story-recruiter-matrix" aria-label="Technical Background">
-                  <div className="recruiter-matrix-item">
-                    <span className="matrix-label">CORE TECHNOLOGIES</span>
-                    <span className="matrix-value">React, TypeScript, Python, Node.js, Firebase, MongoDB</span>
-                  </div>
-                  <div className="recruiter-matrix-item">
-                    <span className="matrix-label">WHAT I ENJOY BUILDING</span>
-                    <span className="matrix-value">Focused web tools, database ledgers &amp; automation scripts</span>
-                  </div>
-                  <div className="recruiter-matrix-item">
-                    <span className="matrix-label">EDUCATION</span>
-                    <span className="matrix-value">B.Tech CSE (AI &amp; ML) • Karunya University (2024–2028)</span>
-                  </div>
-                  <div className="recruiter-matrix-item">
-                    <span className="matrix-label">CURRENTLY EXPLORING</span>
-                    <span className="matrix-value">OpenCV computer vision &amp; distributed backend architectures</span>
-                  </div>
                 </div>
 
                 {/* Quick Navigation CTAs */}
@@ -178,17 +179,115 @@ export const StorySection: React.FC<{
                   </button>
                 </div>
               </div>
+
+              {/* Part 2: WHAT I DO (Triggers photo flip when scrolled into view) */}
+              <div ref={whatIDoRef} id="what-i-do" className="story-sequence-step what-i-do-step-block">
+                <div className="story-theme-kicker">
+                  <span className="kicker-accent-dot green" aria-hidden="true" />
+                  <span>WHAT I DO</span>
+                </div>
+
+                <div className="story-sequence-content">
+                  <p className="story-editorial-statement">
+                    My approach to building software is simple: build things that actually work, keep code clean, and don't add complexity where a straightforward solution does the job.
+                  </p>
+
+                  <p className="story-editorial-statement">
+                    Most of my projects start from noticing a slow or broken manual process, like tracking neighborhood collections on paper logbooks or getting distracted by bloated timer apps. I like taking those problems, understanding the real requirements, and shipping clean software that makes them effortless.
+                  </p>
+                </div>
+
+                {/* GitHub Contribution Activity Modal Trigger */}
+                <div className="what-i-do-bottom-bar">
+                  <button
+                    type="button"
+                    className="story-read-more-btn highlighted-white"
+                    onClick={() => setIsGithubModalOpen(true)}
+                    data-cursor-text="GITHUB"
+                    aria-label="View my GitHub activity and contributions"
+                  >
+                    <span className="btn-ambient-glow" />
+                    <span className="live-contrib-ping">
+                      <span className="ping-dot" />
+                      <span className="ping-ring" />
+                    </span>
+                    <span className="btn-label">EXPLORE GITHUB ACTIVITY</span>
+                    <span className="read-more-arrow" aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
-            {/* Right Column: 3D Rotating Wireframe Geodesic Polyhedron */}
-            <div className="story-wireframe-column" aria-hidden="true">
-              <div className="story-wireframe-sticky">
-                <WireframeSphere />
+            {/* Right Column: Sticky 3D Photo Flip Card */}
+            <div className="story-flip-column" aria-label="Interactive Photo Card">
+              <div className="story-flip-sticky">
+                <div
+                  className={`story-flip-card-container ${isFlipped ? "is-flipped" : ""}`}
+                  onClick={() => setIsFlipped((prev) => !prev)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setIsFlipped((prev) => !prev);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Click to flip photo between early beginnings and current work"
+                  data-cursor-text="FLIP"
+                >
+                  <div className="story-flip-card-inner">
+                    {/* Front Face: A Little About Me (Early Beginnings) */}
+                    <div className="story-flip-card-face story-flip-card-front">
+                      <img
+                        src={firstPhoto}
+                        alt="Young Sam Jerish exploring computers"
+                        className="story-flip-img"
+                        loading="eager"
+                        draggable={false}
+                      />
+                      <div className="story-flip-glass-overlay" aria-hidden="true" />
+                      <div className="story-flip-badge">
+                        <span className="flip-badge-dot" aria-hidden="true" />
+                        <span>Where It Began</span>
+                      </div>
+                      <div className="story-flip-hint">
+                        <span>Scroll or click to flip</span>
+                        <span className="flip-hint-icon" aria-hidden="true">↻</span>
+                      </div>
+                    </div>
+
+                    {/* Back Face: What I Do (Current Engineer Portrait) */}
+                    <div className="story-flip-card-face story-flip-card-back">
+                      <img
+                        src={currentPhoto}
+                        alt="Sam Jerish D building software today"
+                        className="story-flip-img"
+                        loading="lazy"
+                        draggable={false}
+                      />
+                      <div className="story-flip-glass-overlay" aria-hidden="true" />
+                      <div className="story-flip-badge active">
+                        <span className="flip-badge-dot active" aria-hidden="true" />
+                        <span>Building Solutions Today</span>
+                      </div>
+                      <div className="story-flip-hint">
+                        <span>Sam Jerish D</span>
+                        <span className="flip-hint-icon" aria-hidden="true">↻</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* GitHub Contribution Modal */}
+      <GitHubModal
+        isOpen={isGithubModalOpen}
+        onClose={() => setIsGithubModalOpen(false)}
+      />
     </section>
   );
 };

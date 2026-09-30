@@ -572,6 +572,18 @@
   box-shadow: 0 0 8px #ffffff;
 }
 
+/* Unreached items stay in resting state until the scroll pointer reaches and touches their node */
+.story-timeline-item:not(.is-passed):not(.is-focused) .timeline-node.is-current {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: #121214;
+  box-shadow: 0 0 0 4px #0c0c0e;
+}
+
+.story-timeline-item:not(.is-passed):not(.is-focused) .timeline-node.is-current .timeline-node-inner {
+  background: #a1a1aa;
+  box-shadow: none;
+}
+
 .timeline-node-pulse {
   position: absolute;
   top: -8px;

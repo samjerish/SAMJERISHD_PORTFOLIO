@@ -13,26 +13,25 @@
 }
 
 /* Default is transparent for transitions */
+/* Default is transparent for transitions */
 .intro-container.phase-loading,
-.intro-container.phase-typewriter,
-.intro-container.phase-enter,
+.intro-container.phase-welcome,
 .intro-container.phase-ribbons {
   background-color: transparent;
 }
 
 /* Match site background for the initial load */
 .intro-container.is-initial-load.phase-loading,
-.intro-container.is-initial-load.phase-typewriter,
-.intro-container.is-initial-load.phase-enter,
+.intro-container.is-initial-load.phase-welcome,
 .intro-container.is-initial-load.phase-ribbons {
   background-color: #080808;
 }
 
 /* ===================================================
-   TYPEWRITER PRELOADER STAGE
+   WELCOME SHOWCASE STAGE (SUNFLOWER REFERENCE LAYOUT)
    =================================================== */
 
-.typewriter-stage {
+.welcome-stage {
   position: absolute;
   top: 0;
   left: 0;
@@ -42,64 +41,165 @@
   align-items: center;
   justify-content: center;
   z-index: 20;
-  pointer-events: none;
   opacity: 1;
   transform: scale(1);
   filter: blur(0px);
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #09090b;
 }
 
-.intro-container.phase-ribbons .typewriter-stage,
-.intro-container.phase-exit .typewriter-stage {
+.intro-container.phase-ribbons .welcome-stage,
+.intro-container.phase-exit .welcome-stage,
+.welcome-stage.is-exiting {
   opacity: 0;
-  transform: scale(0.92) translateY(-12px);
+  transform: scale(0.94) translateY(-16px);
   filter: blur(10px);
   pointer-events: none;
 }
 
-.typewriter-wrapper {
+.welcome-glow-ambient {
+  position: absolute;
+  width: clamp(460px, 62vw, 820px);
+  height: clamp(460px, 62vw, 820px);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 45%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(75px);
+  pointer-events: none;
+  animation: welcome-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes welcome-pulse {
+  0% { transform: scale(0.9); opacity: 0.45; }
+  100% { transform: scale(1.12); opacity: 0.85; }
+}
+
+.welcome-card-content {
   position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  max-width: 700px;
+  animation: welcome-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes welcome-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.welcome-avatar-wrapper {
+  position: relative;
+  width: clamp(280px, 38vw, 450px);
+  height: clamp(240px, 33vw, 390px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 3rem;
+  margin-bottom: 1.6rem;
 }
 
-.typewriter-ambient-glow {
+.welcome-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
+  animation: welcome-float 3.5s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes welcome-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.welcome-avatar-aura {
   position: absolute;
-  width: 380px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(40px);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 30px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  filter: blur(14px);
   pointer-events: none;
-  animation: typewriter-breathe 2.4s ease-in-out infinite alternate;
 }
 
-@keyframes typewriter-breathe {
-  0% { transform: scale(0.9); opacity: 0.5; }
-  100% { transform: scale(1.15); opacity: 0.9; }
-}
-
-.typewriter-content {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono, "SF Mono", "Fira Code", monospace);
-  font-size: clamp(1.8rem, 4.5vw, 3rem);
-  font-weight: 600;
+.welcome-name {
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  font-weight: 800;
   color: #ffffff;
-  letter-spacing: 0.12em;
-  text-shadow: 0 0 25px rgba(255, 255, 255, 0.5),
-               0 0 50px rgba(255, 255, 255, 0.2);
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.welcome-role {
+  font-family: var(--font-primary, "Inter", sans-serif);
+  font-size: clamp(0.95rem, 1.45vw, 1.2rem);
+  color: #d4d4d8;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0.85rem 0 0 0;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+
+.welcome-enter-btn {
+  margin-top: 2rem;
+  padding: 16px 40px;
+  background: #ffffff;
+  color: #0a0a0c;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              box-shadow 0.25s ease;
   user-select: none;
 }
 
-.typewriter-text {
-  color: #ffffff;
-  white-space: pre;
+.welcome-enter-btn:hover {
+  background: #f4f4f5;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow:
+    0 12px 38px rgba(255, 255, 255, 0.25),
+    0 6px 20px rgba(0, 0, 0, 0.9);
+}
+
+.welcome-enter-btn:active {
+  transform: scale(0.98);
+}
+
+.welcome-enter-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
 }
 
 .typewriter-cursor {
