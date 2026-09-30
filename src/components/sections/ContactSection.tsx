@@ -118,24 +118,23 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
             </div>
           </div>
 
-          {/* Right Column: GitHub Banner Image (little big at right corner) */}
-          <div className="contact-banner-container">
+          {/* Right Column: Corner Photo (Background removed, no borders, bottom fade) */}
+          <div className="contact-photo-container">
             <a
               href="https://github.com/samjerish"
               target="_blank"
               rel="noreferrer"
-              className="contact-github-banner-card"
+              className="contact-photo-wrapper"
               data-cursor-text="GITHUB"
-              aria-label="Sam Jerish GitHub Profile and Projects"
+              aria-label="Sam Jerish D"
             >
               <img
                 src={githubBannerImg}
-                alt="Sam Jerish GitHub Banner"
-                className="contact-github-banner-img"
+                alt="Sam Jerish D"
+                className="contact-corner-photo"
                 loading="lazy"
                 draggable={false}
               />
-              <div className="contact-banner-glass-glow" aria-hidden="true" />
             </a>
           </div>
         </div>

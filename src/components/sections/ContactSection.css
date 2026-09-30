@@ -46,80 +46,80 @@
 }
 
 /* ===================================================
-   CONTACT MAIN GRID: Left Header + Right GitHub Banner
+   CONTACT MAIN GRID: Left Header + Right Corner Photo
    =================================================== */
 
 .contact-main-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(380px, 560px);
-  gap: clamp(2.5rem, 5vw, 5rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 440px);
+  gap: clamp(3.5rem, 6vw, 7rem);
+  align-items: flex-end;
   justify-content: space-between;
   width: 100%;
 }
 
-.contact-banner-container {
+.contact-photo-container {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
+  position: relative;
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+  box-sizing: border-box;
 }
 
-.contact-github-banner-card {
+.contact-photo-wrapper {
   position: relative;
-  display: block;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
   width: 100%;
-  max-width: 560px;
-  border-radius: 22px;
-  overflow: hidden;
-  background: #0d0e12;
-  border: 1.5px solid rgba(255, 255, 255, 0.16);
-  box-shadow:
-    0 24px 60px -10px rgba(0, 0, 0, 0.95),
-    0 0 45px rgba(0, 0, 0, 0.7),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  transition:
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.3s ease,
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 480px;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   text-decoration: none;
   cursor: pointer;
+
+  /* Seamless fade out towards the bottom into the section background */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 48%,
+    rgba(0, 0, 0, 0.8) 65%,
+    rgba(0, 0, 0, 0.3) 84%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 48%,
+    rgba(0, 0, 0, 0.8) 65%,
+    rgba(0, 0, 0, 0.3) 84%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
 }
 
-.contact-github-banner-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  border-color: rgba(255, 255, 255, 0.42);
-  box-shadow:
-    0 35px 80px -10px rgba(0, 0, 0, 0.98),
-    0 0 55px rgba(255, 255, 255, 0.1),
-    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+.contact-photo-wrapper:hover {
+  transform: translateY(-4px) scale(1.02);
 }
 
-.contact-github-banner-img {
+.contact-corner-photo {
   width: 100%;
   height: auto;
-  aspect-ratio: 2 / 1;
-  object-fit: cover;
+  max-height: 480px;
+  object-fit: contain;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.contact-github-banner-card:hover .contact-github-banner-img {
-  transform: scale(1.025);
-}
-
-.contact-banner-glass-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    transparent 45%
-  );
-  pointer-events: none;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  user-select: none;
+  pointer-events: auto;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.45));
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ===================================================
@@ -326,15 +326,22 @@
 @media (max-width: 900px) {
   .contact-main-grid {
     grid-template-columns: 1fr;
-    gap: 2.2rem;
+    gap: 3rem;
+    align-items: flex-start;
   }
 
-  .contact-banner-container {
-    justify-content: flex-start;
+  .contact-photo-container {
+    justify-content: center;
+    margin-top: 1.8rem;
+    padding-left: 0;
   }
 
-  .contact-github-banner-card {
-    max-width: 100%;
+  .contact-photo-wrapper {
+    max-width: 360px;
+  }
+
+  .contact-corner-photo {
+    max-height: 360px;
   }
 
   .contact-hero-header h1 {
@@ -389,6 +396,14 @@
     justify-content: center;
     padding: 9px 12px;
     font-size: 0.84rem;
+  }
+
+  .contact-photo-wrapper {
+    max-width: 280px;
+  }
+
+  .contact-corner-photo {
+    max-height: 280px;
   }
 
   .contact-bottom-watermark {
