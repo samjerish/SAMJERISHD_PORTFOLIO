@@ -1,0 +1,1044 @@
+/* ==========================================================================
+   AYANESHU.COM 1:1 RECREATION FOR SAM JERISH D
+   Fixed Left Sidebar + Floating Rounded Canvas with 2-Column Hero & Card Photo
+   ========================================================================== */
+
+:root {
+  --ay-page-bg: #0b0c0e;
+  --ay-canvas-bg: #141517;
+  --ay-canvas-inner: #18191c;
+  --ay-sidebar-bg: #0b0c0e;
+  --ay-card-bg: #1e1f24;
+  --ay-card-hover: #25262c;
+  --ay-subcard-bg: #141518;
+  --ay-border-canvas: rgba(255, 255, 255, 0.08);
+  --ay-border-subtle: rgba(255, 255, 255, 0.06);
+  --ay-border-card: #27282e;
+  --ay-border-card-hover: #3a3c46;
+  --ay-text-white: #ffffff;
+  --ay-text-gray: #8f929e;
+  --ay-text-muted: #565964;
+  --ay-text-dim: #3e414b;
+  --ay-accent-green: #00f48d;
+  --ay-green-badge-bg: rgba(0, 244, 141, 0.12);
+  --ay-font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, sans-serif;
+  --ay-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Base Wrapper */
+.ay-screen-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--ay-page-bg);
+  color: var(--ay-text-white);
+  font-family: var(--ay-font-body);
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   LEFT SIDEBAR (Fixed)
+   ========================================================================== */
+
+.ay-sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 36px 24px 28px 32px;
+  background-color: var(--ay-sidebar-bg);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* User Profile Top */
+.ay-sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 36px;
+}
+
+.ay-sidebar-avatar-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: #1e1f24;
+  flex-shrink: 0;
+}
+
+.ay-sidebar-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.ay-sidebar-user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.ay-sidebar-username {
+  font-family: var(--ay-font-display);
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: var(--ay-text-white);
+  line-height: 1.2;
+}
+
+.ay-sidebar-userrole {
+  font-size: 0.76rem;
+  color: var(--ay-text-gray);
+  line-height: 1.3;
+}
+
+/* Section Labels */
+.ay-sidebar-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ay-text-muted);
+  margin-bottom: 12px;
+}
+
+/* Creations Navigation */
+.ay-sidebar-creations {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ay-sidebar-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--ay-text-gray);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.ay-sidebar-nav-btn:hover {
+  color: var(--ay-text-white);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ay-sidebar-nav-btn.active {
+  color: var(--ay-text-white);
+  background: #1c1d22;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.ay-nav-btn-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ay-nav-btn-left svg {
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.ay-badge-new {
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--ay-accent-green);
+  background: var(--ay-green-badge-bg);
+  border: 1px solid rgba(0, 244, 141, 0.25);
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+/* Switch Mode Sidebar Button */
+.ay-sidebar-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: var(--ay-text-gray);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ay-sidebar-switch-btn:hover {
+  background: #ffffff;
+  color: #0b0c0e;
+  border-color: #ffffff;
+}
+
+/* Bottom Socials & Coordinates */
+.ay-sidebar-bottom {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.ay-socials-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, 32px);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.ay-social-icon-link {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ay-text-gray);
+  background: transparent;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ay-social-icon-link:hover {
+  color: var(--ay-text-white);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.ay-sidebar-coords {
+  font-size: 0.72rem;
+  color: var(--ay-text-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   MAIN FLOATING CANVAS (Right Side)
+   ========================================================================== */
+
+.ay-main-scroll {
+  flex-grow: 1;
+  padding: 24px 28px 48px 16px;
+  box-sizing: border-box;
+}
+
+.ay-canvas {
+  background-color: var(--ay-canvas-bg);
+  border: 1px solid var(--ay-border-canvas);
+  border-radius: 28px;
+  padding: 56px 64px;
+  min-height: calc(100vh - 72px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ==========================================================================
+   HERO SECTION (2 COLUMNS: TEXT LEFT + PHOTO RIGHT)
+   ========================================================================== */
+
+.ay-hero-container {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  align-items: start;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--ay-border-subtle);
+}
+
+/* Left Hero Column */
+.ay-hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.ay-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.ay-eyebrow-highlight {
+  color: var(--ay-accent-green);
+}
+
+.ay-eyebrow-divider {
+  color: var(--ay-text-dim);
+}
+
+.ay-eyebrow-muted {
+  color: var(--ay-text-gray);
+}
+
+.ay-hero-heading {
+  font-family: var(--ay-font-display);
+  font-size: clamp(3.2rem, 5.2vw, 4.6rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--ay-text-white);
+  line-height: 1.04;
+  margin: 0 0 24px 0;
+}
+
+.ay-hero-description {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ay-text-gray);
+  max-width: 620px;
+  margin: 0 0 44px 0;
+}
+
+.ay-hero-description strong {
+  color: var(--ay-text-white);
+  font-weight: 600;
+}
+
+/* Companies Strip under bio */
+.ay-companies-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ay-companies-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ay-text-muted);
+}
+
+.ay-companies-logos {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.ay-company-logo-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #7b7e8c;
+  font-family: var(--ay-font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.ay-company-logo-item:hover {
+  color: var(--ay-text-white);
+  transform: translateY(-1px);
+}
+
+.ay-company-inline-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.8);
+  transition: all 0.2s ease;
+}
+
+.ay-company-logo-item:hover .ay-company-inline-icon {
+  filter: grayscale(0%) opacity(1);
+}
+
+/* Right Hero Column: Large Photo Card */
+.ay-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.ay-photo-card-frame {
+  width: 100%;
+  max-width: 370px;
+  background: #111214;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 10px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.ay-photo-card-frame:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.ay-photo-inner {
+  width: 100%;
+  height: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1c1d22;
+  position: relative;
+}
+
+.ay-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  transition: transform 0.5s ease;
+}
+
+.ay-photo-card-frame:hover .ay-photo-img {
+  transform: scale(1.03);
+}
+
+/* Caption under photo frame */
+.ay-photo-caption {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+  padding-right: 4px;
+}
+
+.ay-caption-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ay-text-muted);
+}
+
+.ay-caption-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ay-text-gray);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   WORK SECTION (Matches Screenshot & Ayaneshu Style)
+   ========================================================================== */
+
+.ay-section-block {
+  padding: 56px 0 32px 0;
+  border-bottom: 1px solid var(--ay-border-subtle);
+}
+
+.ay-section-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.ay-section-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ay-section-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #1e1f24;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ay-text-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.ay-section-main-title {
+  font-family: var(--ay-font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--ay-text-white);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.ay-all-projects-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ay-text-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.ay-all-projects-btn:hover {
+  background: #ffffff;
+  color: #0b0c0e;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Projects Grid inside canvas */
+.ay-canvas-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.ay-work-card {
+  background: var(--ay-card-bg);
+  border: 1px solid var(--ay-border-card);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.ay-work-card:hover {
+  background: var(--ay-card-hover);
+  border-color: var(--ay-border-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.ay-work-card-media {
+  width: 100%;
+  height: 220px;
+  background: #0f1012;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ay-border-subtle);
+  position: relative;
+}
+
+.ay-work-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ay-work-card:hover .ay-work-card-media img {
+  transform: scale(1.04);
+}
+
+.ay-work-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.ay-work-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.ay-work-year {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ay-accent-green);
+  letter-spacing: 0.05em;
+}
+
+.ay-work-brand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ay-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.ay-work-title {
+  font-family: var(--ay-font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ay-text-white);
+  letter-spacing: -0.02em;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.ay-work-desc {
+  font-size: 0.9rem;
+  color: var(--ay-text-gray);
+  line-height: 1.55;
+  margin: 0 0 16px 0;
+  flex-grow: 1;
+}
+
+.ay-work-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.ay-tag-pill {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ay-text-gray);
+  background: var(--ay-subcard-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.ay-work-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--ay-border-subtle);
+  padding-top: 16px;
+}
+
+.ay-action-btn-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ay-text-white);
+  background: var(--ay-subcard-bg);
+  border: 1px solid var(--ay-border-card);
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.ay-action-btn-sm:hover {
+  background: #ffffff;
+  color: #0b0c0e;
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   PERSONAL PROJECTS SECTION
+   ========================================================================== */
+
+.ay-personal-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ay-personal-item-card {
+  background: var(--ay-card-bg);
+  border: 1px solid var(--ay-border-card);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.ay-personal-item-card:hover {
+  background: var(--ay-card-hover);
+  border-color: var(--ay-border-card-hover);
+  transform: translateY(-3px);
+}
+
+.ay-personal-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ay-personal-item-title {
+  font-family: var(--ay-font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ay-text-white);
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.ay-personal-item-desc {
+  font-size: 0.86rem;
+  color: var(--ay-text-gray);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   CREATIVE SUITE SECTION
+   ========================================================================== */
+
+.ay-creative-suite-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.ay-suite-card {
+  background: var(--ay-card-bg);
+  border: 1px solid var(--ay-border-card);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ay-suite-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ay-border-card-hover);
+}
+
+.ay-suite-img-frame {
+  width: 100%;
+  height: 180px;
+  background: #0f1012;
+  overflow: hidden;
+}
+
+.ay-suite-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ay-suite-card:hover .ay-suite-img-frame img {
+  transform: scale(1.05);
+}
+
+.ay-suite-caption {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ay-suite-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ay-text-white);
+  margin: 0;
+}
+
+.ay-suite-meta {
+  font-size: 0.74rem;
+  color: var(--ay-text-muted);
+}
+
+/* ==========================================================================
+   WHERE IT ALL STARTED (STORY)
+   ========================================================================== */
+
+.ay-story-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.ay-story-media-box {
+  background: var(--ay-card-bg);
+  border: 1px solid var(--ay-border-card);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ay-story-img-wrap {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ay-story-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ay-story-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ay-story-title {
+  font-family: var(--ay-font-display);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--ay-text-white);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.ay-story-p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ay-text-gray);
+  margin: 0;
+}
+
+.ay-story-p strong {
+  color: var(--ay-text-white);
+}
+
+.ay-story-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   EXPERIENCE SECTION (Professional Pitstops)
+   ========================================================================== */
+
+.ay-pitstops-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ay-pitstop-card {
+  background: var(--ay-card-bg);
+  border: 1px solid var(--ay-border-card);
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  transition: all 0.2s ease;
+}
+
+.ay-pitstop-card:hover {
+  background: var(--ay-card-hover);
+  border-color: var(--ay-border-card-hover);
+}
+
+.ay-pitstop-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ay-pitstop-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--ay-border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ay-pitstop-icon-box img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.ay-pitstop-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ay-pitstop-company {
+  font-family: var(--ay-font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ay-text-white);
+  margin: 0;
+}
+
+.ay-pitstop-role {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ay-accent-green);
+}
+
+.ay-pitstop-desc {
+  font-size: 0.86rem;
+  color: var(--ay-text-gray);
+  line-height: 1.5;
+  margin: 4px 0 0 0;
+  max-width: 650px;
+}
+
+.ay-pitstop-date {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ay-text-muted);
+  background: var(--ay-subcard-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   CANVAS FOOTER
+   ========================================================================== */
+
+.ay-canvas-footer {
+  padding-top: 48px;
+  margin-top: 48px;
+  border-top: 1px solid var(--ay-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.ay-footer-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.ay-footer-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ay-metric-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ay-text-muted);
+}
+
+.ay-metric-val {
+  font-family: var(--ay-font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ay-text-white);
+}
+
+.ay-metric-sub {
+  font-size: 0.78rem;
+  color: var(--ay-text-gray);
+}
+
+.ay-canvas-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--ay-text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVENESS (Laptops, Tablets)
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .ay-hero-container {
+    grid-template-columns: 1fr 320px;
+    gap: 32px;
+  }
+
+  .ay-photo-inner {
+    height: 380px;
+  }
+
+  .ay-canvas-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ay-personal-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ay-creative-suite-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ay-story-container {
+    grid-template-columns: 1fr;
+  }
+
+  .ay-footer-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .ay-screen-layout {
+    flex-direction: column;
+  }
+
+  .ay-sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: relative;
+    padding: 24px 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .ay-main-scroll {
+    padding: 16px;
+  }
+
+  .ay-canvas {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+
+  .ay-hero-container {
+    grid-template-columns: 1fr;
+  }
+
+  .ay-hero-right {
+    align-items: center;
+  }
+}

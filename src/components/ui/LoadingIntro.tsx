@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from "react";
 import "./LoadingIntro.css";
+import { Monitor, Smartphone } from "lucide-react";
 
 interface LoadingIntroProps {
-  onComplete: () => void;
+  onComplete: (mode: "desktop" | "standard") => void;
 }
 
 type Phase = "welcome" | "ribbons" | "exit";
@@ -11,28 +12,30 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
   const [phase, setPhase] = useState<Phase>("welcome");
   const [isExiting, setIsExiting] = useState(false);
 
-  const handleEnter = useCallback(() => {
-    if (isExiting) return;
-    setIsExiting(true);
-    setPhase("ribbons");
+  const handleEnter = useCallback(
+    (mode: "desktop" | "standard") => {
+      if (isExiting) return;
+      setIsExiting(true);
+      setPhase("ribbons");
 
-    // Sequence ribbons parting and revealing the portfolio
-    const exitTimer = setTimeout(() => {
-      setPhase("exit");
-    }, 1100);
+      // Sequence ribbons parting and revealing the portfolio
+      const exitTimer = setTimeout(() => {
+        setPhase("exit");
+      }, 1100);
 
-    const completeTimer = setTimeout(() => {
-      onComplete();
-    }, 2200);
+      const completeTimer = setTimeout(() => {
+        onComplete(mode);
+      }, 2200);
 
-    return () => {
-      clearTimeout(exitTimer);
-      clearTimeout(completeTimer);
-    };
-  }, [isExiting, onComplete]);
+      return () => {
+        clearTimeout(exitTimer);
+        clearTimeout(completeTimer);
+      };
+    },
+    [isExiting, onComplete]
+  );
 
-  // Explicit click required to enter website (auto-enter removed as requested)
-
+  // Explicit click required to enter website
   // Repeat text for marquee ribbons transition
   const marqueeText = "SAM JERISH D. ".repeat(15);
 
@@ -57,15 +60,28 @@ export const LoadingIntro: React.FC<LoadingIntroProps> = ({ onComplete }) => {
           <h1 className="welcome-name">Sam Jerish D</h1>
           <p className="welcome-role">Developer to solve real world problems</p>
 
-          {/* Welcome Call-To-Action Pill Button */}
-          <button
-            type="button"
-            className="welcome-enter-btn"
-            onClick={handleEnter}
-            aria-label="Welcome to my portfolio - Enter site"
-          >
-            <span>Welcome to my portfolio</span>
-          </button>
+          {/* Welcome Call-To-Action Options: Desktop View vs Standard View */}
+          <div className="welcome-actions-group">
+            <button
+              type="button"
+              className="welcome-enter-btn welcome-desktop-btn"
+              onClick={() => handleEnter("desktop")}
+              aria-label="Enter Desktop View"
+            >
+              <Monitor size={18} strokeWidth={2.2} />
+              <span>Enter Desktop View</span>
+            </button>
+
+            <button
+              type="button"
+              className="welcome-enter-btn welcome-standard-btn"
+              onClick={() => handleEnter("standard")}
+              aria-label="Welcome to my portfolio - Enter Standard View"
+            >
+              <Smartphone size={16} strokeWidth={2} />
+              <span>Standard View</span>
+            </button>
+          </div>
         </div>
       </div>
 

@@ -13,9 +13,20 @@ import { ResumePage } from "./components/pages/ResumePage";
 import { DriftWallSection } from "./components/sections/DriftWallSection";
 import { ExperienceSection } from "./components/sections/ExperienceSection";
 import { ContactSection } from "./components/sections/ContactSection";
+import { AyaneshuDesktopView } from "./components/desktop/AyaneshuDesktopView";
+import { MaintenanceAnnouncement } from "./components/ui/MaintenanceAnnouncement";
+import { Monitor } from "lucide-react";
+
+// Maintenance Mode Toggle - set to false when ready to launch the full website
+const IS_MAINTENANCE_MODE = true;
 
 function App() {
   const preview = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("preview") : null;
+  const initialViewParam = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("view") : null;
+
+  const [viewMode, setViewMode] = useState<"desktop" | "standard">(
+    initialViewParam === "standard" ? "standard" : "desktop"
+  );
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState<
     "home" | "media" | "about" | "projects" | "contact" | "resume"
@@ -34,6 +45,8 @@ function App() {
   };
 
   useEffect(() => {
+    if (IS_MAINTENANCE_MODE) return;
+
     const isTouch =
       typeof window !== "undefined" &&
       ("ontouchstart" in window || navigator.maxTouchPoints > 0);
@@ -78,70 +91,109 @@ function App() {
     <>
       <CustomCursor />
 
-      {preview === "drift" && (
-        <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
-          <DriftWallSection />
-        </div>
-      )}
+      {/* Website Under Maintenance Announcement */}
+      {IS_MAINTENANCE_MODE ? (
+        <MaintenanceAnnouncement />
+      ) : (
+        <>
+          {preview === "drift" && (
+            <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
+              <DriftWallSection />
+            </div>
+          )}
 
-      {preview === "experience" && (
-        <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
-          <ExperienceSection />
-        </div>
-      )}
+          {preview === "experience" && (
+            <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
+              <ExperienceSection />
+            </div>
+          )}
 
-      {preview === "contact" && (
-        <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
-          <ContactSection />
-        </div>
-      )}
+          {preview === "contact" && (
+            <div style={{ width: "100%", minHeight: "100vh", background: "#050507", padding: "40px 0" }}>
+              <ContactSection />
+            </div>
+          )}
 
-      {!preview && (
+          {!preview && (
         <>
           {/* Initial Preloader: LatticeLoader + Marquee Ribbons */}
           {!isLoaded && (
-            <LoadingIntro onComplete={() => setIsLoaded(true)} />
-          )}
-
-          {/* Ribbon Transition for all devices */}
-          {isTransitioning && (
-            <RibbonTransition
-              onReveal={handleReveal}
-              onComplete={handleTransitionComplete}
+            <LoadingIntro
+              onComplete={(mode) => {
+                if (mode) setViewMode(mode);
+                setIsLoaded(true);
+              }}
             />
           )}
 
-          {/* Home Page */}
-          <div
-            className="app-home-layer"
-            style={{
-              display: currentPage !== "home" ? "none" : "block",
-            }}
-          >
-            <PortfolioLayout onNavigate={handleNavigate} />
-          </div>
+          {/* Desktop View (Ayaneshu Editorial Experience) */}
+          {isLoaded && viewMode === "desktop" && (
+            <AyaneshuDesktopView
+              onSwitchToStandard={() => setViewMode("standard")}
+              onNavigateToResume={() => {
+                setViewMode("standard");
+                handleNavigate("resume");
+              }}
+            />
+          )}
 
-          {/* Subpages */}
-          {currentPage !== "home" && (
+          {/* Standard 3D / Interactive View */}
+          {isLoaded && viewMode === "standard" && (
             <>
-              {currentPage === "media" && (
-                <MyMediaPage onNavigate={handleNavigate} />
+              {/* Floating Quick Switcher to Desktop View */}
+              <button
+                type="button"
+                className="floating-desktop-switch-btn"
+                onClick={() => setViewMode("desktop")}
+                aria-label="Switch to Desktop View"
+                title="Switch to Desktop View (Ayaneshu Editorial)"
+              >
+                <Monitor size={15} />
+                <span>Desktop View</span>
+              </button>
+
+              {/* Ribbon Transition for all devices */}
+              {isTransitioning && (
+                <RibbonTransition
+                  onReveal={handleReveal}
+                  onComplete={handleTransitionComplete}
+                />
               )}
-              {currentPage === "about" && (
-                <AboutPage onNavigate={handleNavigate} />
-              )}
-              {currentPage === "projects" && (
-                <ProjectsPage onNavigate={handleNavigate} />
-              )}
-              {currentPage === "contact" && (
-                <ContactPage onNavigate={handleNavigate} />
-              )}
-              {currentPage === "resume" && (
-                <ResumePage onNavigate={handleNavigate} />
+
+              {/* Home Page */}
+              <div
+                className="app-home-layer"
+                style={{
+                  display: currentPage !== "home" ? "none" : "block",
+                }}
+              >
+                <PortfolioLayout onNavigate={handleNavigate} />
+              </div>
+
+              {/* Subpages */}
+              {currentPage !== "home" && (
+                <>
+                  {currentPage === "media" && (
+                    <MyMediaPage onNavigate={handleNavigate} />
+                  )}
+                  {currentPage === "about" && (
+                    <AboutPage onNavigate={handleNavigate} />
+                  )}
+                  {currentPage === "projects" && (
+                    <ProjectsPage onNavigate={handleNavigate} />
+                  )}
+                  {currentPage === "contact" && (
+                    <ContactPage onNavigate={handleNavigate} />
+                  )}
+                  {currentPage === "resume" && (
+                    <ResumePage onNavigate={handleNavigate} />
+                  )}
+                </>
               )}
             </>
           )}
-
+        </>
+      )}
         </>
       )}
     </>
